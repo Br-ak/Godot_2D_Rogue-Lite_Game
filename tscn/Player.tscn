@@ -1,9 +1,10 @@
-[gd_scene load_steps=29 format=3 uid="uid://cvo6v6mhmvyv5"]
+[gd_scene load_steps=30 format=3 uid="uid://cvo6v6mhmvyv5"]
 
 [ext_resource type="Script" path="res://tscn/Player.gd" id="1_iqfem"]
 [ext_resource type="Texture2D" uid="uid://3rv0bgb2eikc" path="res://asets/Ball and Chain Bot/idle.png" id="1_j0wmn"]
 [ext_resource type="Texture2D" uid="uid://cxtiaujx3rgrt" path="res://asets/Ball and Chain Bot/attack.png" id="2_qi7yq"]
 [ext_resource type="Texture2D" uid="uid://b20fjqur24yup" path="res://asets/Ball and Chain Bot/run.png" id="3_mqtbk"]
+[ext_resource type="PackedScene" uid="uid://bi4481dlep7tw" path="res://tscn/weapon.tscn" id="5_s5ta8"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5xuh"]
 radius = 7.2
@@ -190,14 +191,20 @@ script = ExtResource("1_iqfem")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_p5xuh")
 
+[node name="Camera2D" type="Camera2D" parent="."]
+zoom = Vector2(3, 3)
+metadata/_edit_lock_ = true
+
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(0, -2)
+scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_x8xrd")
-animation = &"Run"
+animation = &"Idle"
 autoplay = "Idle"
 metadata/_edit_lock_ = true
 
 [node name="Hurtbox" type="Area2D" parent="AnimatedSprite2D"]
+visible = false
 position = Vector2(15, 4.6)
 metadata/_edit_lock_ = true
 
@@ -206,8 +213,8 @@ position = Vector2(15.45, 2.4)
 shape = SubResource("RectangleShape2D_rbxtl")
 disabled = true
 
-[node name="Camera2D" type="Camera2D" parent="."]
-zoom = Vector2(3, 3)
-metadata/_edit_lock_ = true
+[node name="Weapon" parent="." instance=ExtResource("5_s5ta8")]
+position = Vector2(-5, -5)
+scale = Vector2(0.5, 0.5)
 
 [connection signal="body_entered" from="AnimatedSprite2D/Hurtbox" to="." method="_on_hurtbox_body_entered"]

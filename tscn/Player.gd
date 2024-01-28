@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 var speed = 200  # speed in pixels/sec
-@onready var anim = get_node("AnimatedSprite2D")
+@onready var anim = $AnimatedSprite2D
 var frameCount = 0
 var background_tiles = null
 var allow_attack = true
@@ -11,16 +11,12 @@ var attack_type = 1
 func _ready():
 	anim.play("Idle")
 
-
 func _physics_process(_delta):
 	read_inputs()
-	pass
 
 func read_inputs():
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = direction * speed
-	
-		
 	if allow_attack:
 		var attack = Input.is_action_pressed("player_attack")
 		if attack:
@@ -35,9 +31,9 @@ func read_inputs():
 			await anim.animation_finished
 			allow_attack = true
 		else:
-			if direction.x > 0:
+			if get_global_mouse_position().x > position.x:
 				anim.scale.x = 1
-			elif direction.x < 0:
+			elif get_global_mouse_position().x < position.x:
 				anim.scale.x = -1
 			if direction:
 				anim.play("Run")
@@ -45,7 +41,6 @@ func read_inputs():
 				anim.play("Idle")
 	player_hurtbox.disabled = true
 	move_and_slide()
-
 
 func _on_hurtbox_body_entered(body):
 	if body.get_parent().name.contains("Mobs"):

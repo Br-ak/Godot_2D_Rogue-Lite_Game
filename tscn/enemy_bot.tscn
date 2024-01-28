@@ -153,3 +153,5 @@ material = SubResource("CanvasItemMaterial_3npad")
 sprite_frames = SubResource("SpriteFrames_44kvc")
 animation = &"Run"
 autoplay = "Run"
+
+[node name="HealthComponent" type="Node2D" parent="."]
