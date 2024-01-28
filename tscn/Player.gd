@@ -16,7 +16,6 @@ func _physics_process(_delta):
 	read_inputs()
 	pass
 
-
 func read_inputs():
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = direction * speed
