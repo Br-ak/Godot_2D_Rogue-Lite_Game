@@ -27,8 +27,11 @@ func _physics_process(_delta):
 		else:
 			death()
 
-func damage():
-	pass
+func take_damage():
+	health -= 10
+	get_node("AnimatedSprite2D").play("Hurt")
+	await get_node("AnimatedSprite2D").animation_finished
+	get_node("AnimatedSprite2D").play("Run")
 
 func death():
 	hitbox.disabled = true

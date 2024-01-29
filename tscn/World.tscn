@@ -164,7 +164,6 @@ offset_bottom = -85.0
 script = ExtResource("6_ador6")
 
 [node name="Timer" type="Timer" parent="Mobs"]
-wait_time = 5.0
 autostart = true
 
 [connection signal="timeout" from="Mobs/Timer" to="Mobs" method="_on_timer_timeout"]

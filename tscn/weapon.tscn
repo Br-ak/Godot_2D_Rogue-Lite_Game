@@ -1,13 +1,14 @@
-[gd_scene load_steps=5 format=3 uid="uid://bi4481dlep7tw"]
+[gd_scene load_steps=6 format=3 uid="uid://oh21ovpt2srh"]
 
-[ext_resource type="Script" path="res://scripts/Marker2D.gd" id="1_cn26d"]
-[ext_resource type="Texture2D" uid="uid://dxw28gnqmdk2n" path="res://asets/GUNS_V1.00/V1.00/Sprite-sheets/Pistol_V1.00/Weapon/[FULL]PistolV1.01.png" id="2_057ke"]
+[ext_resource type="Script" path="res://tscn/weapon.gd" id="1_ilkyf"]
+[ext_resource type="Script" path="res://scripts/Marker2D.gd" id="1_y7dig"]
+[ext_resource type="Texture2D" uid="uid://dxw28gnqmdk2n" path="res://asets/GUNS_V1.00/V1.00/Sprite-sheets/Pistol_V1.00/Weapon/[FULL]PistolV1.01.png" id="2_cxruf"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mphi"]
-atlas = ExtResource("2_057ke")
+atlas = ExtResource("2_cxruf")
 region = Rect2(0, 0, 32, 32)
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_tyr75"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_vdk7s"]
 animations = [{
 "frames": [{
 "duration": 1.0,
@@ -18,13 +19,18 @@ animations = [{
 "speed": 5.0
 }]
 
-[node name="Weapon" type="Node2D"]
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_ilkyf")
 
 [node name="Marker2D" type="Marker2D" parent="."]
 position = Vector2(10, 10)
-script = ExtResource("1_cn26d")
+script = ExtResource("1_y7dig")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D"]
 position = Vector2(27, 0)
-sprite_frames = SubResource("SpriteFrames_tyr75")
+sprite_frames = SubResource("SpriteFrames_vdk7s")
 animation = &"Idle"
+
+[node name="ShootingPoint" type="Marker2D" parent="Marker2D/AnimatedSprite2D"]
+unique_name_in_owner = true
+position = Vector2(14, -3)
