@@ -24,7 +24,7 @@ func read_inputs():
 			if can_shoot:
 				weapon.shoot()
 				can_shoot = false
-				timer.start(1)
+				timer.start(0.25)
 
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = direction * speed

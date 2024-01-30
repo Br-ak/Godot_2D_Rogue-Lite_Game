@@ -1,0 +1,81 @@
+[gd_scene load_steps=7 format=3 uid="uid://bbt0y6nlmn0ve"]
+
+[ext_resource type="Script" path="res://tscn/follower.gd" id="1_dhohj"]
+[ext_resource type="Texture2D" uid="uid://dcoxqd5gil1xy" path="res://tscn/You otterf__ker!! - Funny.jpg" id="1_mcgcl"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_3ubav"]
+size = Vector2(31.1551, 47.199)
+
+[sub_resource type="Animation" id="Animation_ieccr"]
+resource_name = "Idle"
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(0.0878572, 0.0878572), Vector2(0.0693676, 0.0838585), Vector2(0.0880364, 0.0858016)]
+}
+
+[sub_resource type="Animation" id="Animation_p3tlf"]
+resource_name = "Run"
+length = 2.0
+loop_mode = 1
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Sprite2D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.24, 0.5, 0.75, 1, 1.24, 1.5, 1.75, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(31.25, 41.4721), Vector2(39.37, 34.37), Vector2(39.37, 39.37), Vector2(39.37, 34.37), Vector2(31.25, 41.4721), Vector2(23.25, 33.472), Vector2(23.25, 38.472), Vector2(23.25, 33.472), Vector2(31.25, 41.4721)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Sprite2D:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.23, 0.5, 0.75, 1, 1.24, 1.5, 1.75, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0872665, 0.174533, 0.0872665, 0.0, -0.0872665, -0.174533, -0.0872665, 0.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_dynng"]
+_data = {
+"Idle": SubResource("Animation_ieccr"),
+"Run": SubResource("Animation_p3tlf")
+}
+
+[node name="Follower" type="CharacterBody2D"]
+scale = Vector2(0.145478, 0.145478)
+script = ExtResource("1_dhohj")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(31.25, 41.4721)
+scale = Vector2(0.0878572, 0.0878572)
+texture = ExtResource("1_mcgcl")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(30.9326, 41.2435)
+scale = Vector2(1.98572, 1.74764)
+shape = SubResource("RectangleShape2D_3ubav")
+disabled = true
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "Idle"
+speed_scale = 2.0
+libraries = {
+"": SubResource("AnimationLibrary_dynng")
+}

@@ -1,4 +1,4 @@
-[gd_scene load_steps=31 format=3 uid="uid://cvo6v6mhmvyv5"]
+[gd_scene load_steps=32 format=3 uid="uid://cvo6v6mhmvyv5"]
 
 [ext_resource type="Script" path="res://tscn/Player.gd" id="1_iqfem"]
 [ext_resource type="Texture2D" uid="uid://3rv0bgb2eikc" path="res://asets/Ball and Chain Bot/idle.png" id="1_j0wmn"]
@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://o03vi82d4mx0" path="res://tscn/bullets.tscn" id="2_ytm46"]
 [ext_resource type="Texture2D" uid="uid://b20fjqur24yup" path="res://asets/Ball and Chain Bot/run.png" id="3_mqtbk"]
 [ext_resource type="PackedScene" uid="uid://oh21ovpt2srh" path="res://tscn/weapon.tscn" id="6_8wnax"]
+[ext_resource type="PackedScene" uid="uid://bbt0y6nlmn0ve" path="res://tscn/follower.tscn" id="7_3n04h"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5xuh"]
 radius = 7.2
@@ -220,6 +221,9 @@ scale = Vector2(0.40054, 0.40054)
 
 [node name="Timer" type="Timer" parent="Weapon"]
 wait_time = 0.121
+
+[node name="Follower" parent="." instance=ExtResource("7_3n04h")]
+position = Vector2(-21.8, -5.60001)
 
 [connection signal="body_entered" from="AnimatedSprite2D/Hurtbox" to="." method="_on_hurtbox_body_entered"]
 [connection signal="timeout" from="Weapon/Timer" to="." method="_on_timer_timeout"]
