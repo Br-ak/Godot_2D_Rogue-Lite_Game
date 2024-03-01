@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://scripts/Marker2D.gd" id="1_cn26d"]
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="1_hm2yu"]
-[ext_resource type="Texture2D" uid="uid://dxw28gnqmdk2n" path="res://asets/GUNS_V1.00/V1.00/Sprite-sheets/Pistol_V1.00/Weapon/[FULL]PistolV1.01.png" id="2_057ke"]
+[ext_resource type="Texture2D" uid="uid://dxw28gnqmdk2n" path="res://assets/GUNS_V1.00/V1.00/Sprite-sheets/Pistol_V1.00/Weapon/[FULL]PistolV1.01.png" id="2_057ke"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mphi"]
 atlas = ExtResource("2_057ke")

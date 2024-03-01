@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://b6f7td8ppqlw5"]
 
-[ext_resource type="Texture2D" uid="uid://duuwirov0bb6t" path="res://asets/Pixel Art Top Down - Basic/TX Tileset Grass.png" id="2_1gqwx"]
+[ext_resource type="Texture2D" uid="uid://duuwirov0bb6t" path="res://assets/Pixel Art Top Down - Basic/TX Tileset Grass.png" id="2_1gqwx"]
 [ext_resource type="Script" path="res://scripts/grass_tilemap.gd" id="3_gx15w"]
 [ext_resource type="PackedScene" uid="uid://fjfqn30eukic" path="res://tscn/player_v2.tscn" id="4_e2od2"]
 [ext_resource type="PackedScene" uid="uid://h5o64r5rw0wu" path="res://tscn/FPSmeter.tscn" id="4_vsld6"]
