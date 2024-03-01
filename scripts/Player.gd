@@ -6,7 +6,7 @@ var frameCount = 0
 var background_tiles = null
 var allow_attack = true
 var attack_type = 1
-var can_shoot = true
+var can_attack = true
 @onready var player_hurtbox = $AnimatedSprite2D/Hurtbox/CollisionShape2D
 @export var ammo : PackedScene
 @onready var weapon = $Weapon
@@ -21,11 +21,21 @@ func _physics_process(_delta):
 func read_inputs():
 	if Input.is_action_pressed("shoot"):
 		if weapon.has_method("shoot"):
-			if can_shoot:
+			if can_attack:
 				weapon.shoot()
-				can_shoot = false
+				can_attack = false
 				timer.start(0.25)
-
+		if weapon.has_method("melee"):
+			if can_attack:
+				weapon.melee()
+				can_attack = false
+				timer.start(0.25)
+	
+#	if Input.is_action_pressed("swap_weapon"):
+#		#do something
+#
+	
+	
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	velocity = direction * speed
 	if allow_attack:
@@ -60,6 +70,5 @@ func _on_hurtbox_body_entered(body):
 		body.get_node("AnimatedSprite2D").play("Run")
 		body.health -= 5
 
-
 func _on_timer_timeout():
-	can_shoot = true
+	can_attack = true

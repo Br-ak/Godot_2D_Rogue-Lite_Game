@@ -1,0 +1,27 @@
+[gd_scene load_steps=4 format=3 uid="uid://b1408k7y7a2rw"]
+
+[ext_resource type="Script" path="res://tscn/melee_weapon.gd" id="1_2oud7"]
+[ext_resource type="Texture2D" uid="uid://kqpm1fo21e2h" path="res://assets/1024px-Bryophyta's_staff_(uncharged)_detail.png" id="2_icdjm"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_a18p3"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_icdjm")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_2oud7")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D"]
+position = Vector2(794, 2)
+rotation = 0.785398
+sprite_frames = SubResource("SpriteFrames_a18p3")
+animation = &"Idle"
+autoplay = "Idle"
