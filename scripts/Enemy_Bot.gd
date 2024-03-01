@@ -14,7 +14,8 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
 	frameCount +=1
-	if(frameCount % 3 == 1):
+	if(frameCount % 2 == 1):
+		frameCount = 0
 		var direction = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
 		if health > 0:
 			if direction.x > 0:

@@ -1,6 +1,6 @@
 [gd_scene load_steps=4 format=3 uid="uid://o03vi82d4mx0"]
 
-[ext_resource type="Script" path="res://bullets.gd" id="1_ugjv8"]
+[ext_resource type="Script" path="res://scripts/bullets.gd" id="1_orgx2"]
 [ext_resource type="Texture2D" uid="uid://dcoxqd5gil1xy" path="res://tscn/You otterf__ker!! - Funny.jpg" id="2_ql561"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ytg15"]
@@ -9,7 +9,7 @@ size = Vector2(5, 6)
 [node name="bullets" type="Area2D"]
 top_level = true
 scale = Vector2(2.0421, 2.0421)
-script = ExtResource("1_ugjv8")
+script = ExtResource("1_orgx2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 4.76837e-07)

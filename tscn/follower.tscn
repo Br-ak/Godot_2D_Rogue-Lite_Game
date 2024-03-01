@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=3 uid="uid://bbt0y6nlmn0ve"]
 
-[ext_resource type="Script" path="res://tscn/follower.gd" id="1_dhohj"]
+[ext_resource type="Script" path="res://scripts/follower.gd" id="1_2ikfv"]
 [ext_resource type="Texture2D" uid="uid://dcoxqd5gil1xy" path="res://tscn/You otterf__ker!! - Funny.jpg" id="1_mcgcl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ubav"]
@@ -60,7 +60,7 @@ _data = {
 
 [node name="Follower" type="CharacterBody2D"]
 scale = Vector2(0.145478, 0.145478)
-script = ExtResource("1_dhohj")
+script = ExtResource("1_2ikfv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(31.25, 41.4721)

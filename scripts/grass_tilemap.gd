@@ -9,6 +9,7 @@ var cell = Vector2i()
 var tile_size = Vector2(16,16)
 var bound_buffer = 450 # x / y coord buffer around player
 # about 450 hides the generation from the defualt viewport
+# this will need to be tweaked on the fly based on the resulution chosen
 
 func _ready():
 	pass

@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Auto-Battler"
-run/main_scene="res://tscn/Main.tscn"
+run/main_scene="res://tscn/World.tscn"
 config/features=PackedStringArray("4.1", "Mobile")
 
 [editor]
