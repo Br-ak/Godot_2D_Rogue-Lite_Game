@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var enemy = true
-var SPEED = 0.5
+var SPEED = 50
 var health = 10
 @onready var player = get_parent().get_parent().get_node("Player")
 @onready var hitbox = $CollisionShape2D
@@ -13,17 +13,16 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
-	frameCount +=1
-	if(frameCount % 2 == 1):
+	frameCount += 1
+	if frameCount % 2 == 1:
 		frameCount = 0
-		var direction = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
+		var direction = (player.position - self.position).normalized() # Normalize the direction vector
 		if health > 0:
 			if direction.x > 0:
 				get_node("AnimatedSprite2D").flip_h = false
 			else:
 				get_node("AnimatedSprite2D").flip_h = true
-			velocity.x = direction.x * SPEED
-			velocity.y = direction.y * SPEED
+			velocity = direction * SPEED # Multiply the normalized direction by speed
 			move_and_slide()
 		else:
 			death()

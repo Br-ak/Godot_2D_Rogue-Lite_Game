@@ -13,6 +13,8 @@ func _process(delta):
 	if get_global_mouse_position().x > player.position.x:
 		anim.scale.y = 1
 		anim.scale.x = 1
+		anim.rotation = 45
 	elif get_global_mouse_position().x < player.position.x:
-		anim.scale.y = -1
+		#anim.scale.y = -1
 		anim.scale.x = -1
+		anim.rotation = -225

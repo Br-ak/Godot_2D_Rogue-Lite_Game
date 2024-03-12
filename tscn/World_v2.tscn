@@ -1,13 +1,15 @@
-[gd_scene load_steps=7 format=3 uid="uid://b6f7td8ppqlw5"]
+[gd_scene load_steps=9 format=3 uid="uid://dkt7sfuc2psyg"]
 
-[ext_resource type="Texture2D" uid="uid://duuwirov0bb6t" path="res://assets/Pixel Art Top Down - Basic/TX Tileset Grass.png" id="2_1gqwx"]
-[ext_resource type="Script" path="res://scripts/grass_tilemap.gd" id="3_gx15w"]
-[ext_resource type="PackedScene" uid="uid://fjfqn30eukic" path="res://tscn/player_v2.tscn" id="4_e2od2"]
-[ext_resource type="PackedScene" uid="uid://h5o64r5rw0wu" path="res://tscn/FPSmeter.tscn" id="4_vsld6"]
+[ext_resource type="PackedScene" uid="uid://cmw1f7nk56jt3" path="res://tscn/Player.tscn" id="1_spu0w"]
+[ext_resource type="Texture2D" uid="uid://duuwirov0bb6t" path="res://assets/Pixel Art Top Down - Basic/TX Tileset Grass.png" id="2_r4c2u"]
+[ext_resource type="Script" path="res://scripts/grass_tilemap.gd" id="3_y1lwo"]
+[ext_resource type="PackedScene" uid="uid://h5o64r5rw0wu" path="res://tscn/FPSmeter.tscn" id="4_qxljr"]
+[ext_resource type="Script" path="res://scripts/Mobs.gd" id="5_g4mho"]
+[ext_resource type="PackedScene" uid="uid://bbt0y6nlmn0ve" path="res://tscn/follower.tscn" id="6_ghw8b"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_epafv"]
 resource_name = "grass_tiles"
-texture = ExtResource("2_1gqwx")
+texture = ExtResource("2_r4c2u")
 0:0/0 = 0
 0:1/0 = 0
 0:2/0 = 0
@@ -143,16 +145,29 @@ sources/1 = SubResource("TileSetAtlasSource_epafv")
 
 [node name="World" type="Node2D"]
 
+[node name="Player" parent="." instance=ExtResource("1_spu0w")]
+position = Vector2(0, 0)
+scale = Vector2(1, 1)
+
 [node name="grass_tilemap" type="TileMap" parent="."]
 tile_set = SubResource("TileSet_mqui0")
 format = 2
 layer_0/z_index = -1
-script = ExtResource("3_gx15w")
+script = ExtResource("3_y1lwo")
 
-[node name="Control" parent="." instance=ExtResource("4_vsld6")]
+[node name="Control" parent="." instance=ExtResource("4_qxljr")]
 offset_left = -20.0
 offset_top = -125.0
 offset_right = 20.0
 offset_bottom = -85.0
 
-[node name="Player" parent="." instance=ExtResource("4_e2od2")]
+[node name="Mobs" type="Node2D" parent="."]
+script = ExtResource("5_g4mho")
+
+[node name="Timer" type="Timer" parent="Mobs"]
+autostart = true
+
+[node name="Follower" parent="." instance=ExtResource("6_ghw8b")]
+position = Vector2(-23, -6)
+
+[connection signal="timeout" from="Mobs/Timer" to="Mobs" method="_on_timer_timeout"]

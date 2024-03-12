@@ -8,7 +8,7 @@
 [ext_resource type="PackedScene" uid="uid://b1408k7y7a2rw" path="res://tscn/melee_weapon.tscn" id="7_onf08"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5xuh"]
-radius = 4.6
+radius = 7.2
 height = 20.4
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1q6cy"]
@@ -312,8 +312,10 @@ metadata/_edit_lock_ = true
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(1, 1)
 sprite_frames = SubResource("SpriteFrames_s5cxe")
-animation = &"Side_Idle"
+animation = &"Up_Move"
 autoplay = "Down_Idle"
+frame = 3
+frame_progress = 0.457516
 
 [node name="Melee_Weapon" parent="." instance=ExtResource("7_onf08")]
 visible = false
@@ -322,6 +324,7 @@ scale = Vector2(0.02, 0.02)
 [node name="Timer" type="Timer" parent="Melee_Weapon"]
 
 [node name="Weapon" parent="." instance=ExtResource("6_8wnax")]
+visible = false
 
 [node name="Timer" type="Timer" parent="Weapon"]
 wait_time = 0.108
