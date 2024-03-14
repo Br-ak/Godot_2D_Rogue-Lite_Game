@@ -9,7 +9,8 @@ var attack_type = 1
 var can_attack = true
 @export var ammo : PackedScene
 @onready var weapon = $Weapon
-@onready var timer = $Weapon/Timer
+@onready var melee = $Weapon/Melee
+@onready var timer = $Weapon/Melee/Timer
 
 func _ready():
 	anim.play("Side_Idle")
@@ -19,16 +20,21 @@ func _physics_process(_delta):
 
 func read_inputs():
 	if Input.is_action_pressed("shoot"):
-		if weapon.has_method("shoot"):
-			if can_attack:
-				weapon.shoot()
+		if can_attack:
+				melee.attack()
 				can_attack = false
 				timer.start(0.25)
-		if weapon.has_method("melee"):
-			if can_attack:
-				weapon.melee()
-				can_attack = false
-				timer.start(0.25)
+
+#		if weapon.has_method("shoot"):
+#			if can_attack:
+#				weapon.shoot()
+#				can_attack = false
+#				timer.start(0.25)
+#		if weapon.has_method("melee"):
+#			if can_attack:
+#				weapon.melee()
+#				can_attack = false
+#				timer.start(0.25)
 
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 

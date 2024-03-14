@@ -27,8 +27,8 @@ func _physics_process(_delta):
 		else:
 			death()
 
-func take_damage():
-	health -= 10
+func take_damage(damage):
+	health -= damage
 	get_node("AnimatedSprite2D").play("Hurt")
 	await get_node("AnimatedSprite2D").animation_finished
 	get_node("AnimatedSprite2D").play("Run")
