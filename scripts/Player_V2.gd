@@ -12,6 +12,8 @@ var can_attack = true
 @onready var melee = $Weapon/Melee
 @onready var timer = $Weapon/Melee/Timer
 
+
+
 func _ready():
 	anim.play("Side_Idle")
 
@@ -19,29 +21,15 @@ func _physics_process(_delta):
 	read_inputs()
 
 func read_inputs():
-	if Input.is_action_pressed("shoot"):
-		if can_attack:
-				melee.attack()
-				can_attack = false
-				timer.start(0.25)
-
-#		if weapon.has_method("shoot"):
-#			if can_attack:
-#				weapon.shoot()
-#				can_attack = false
-#				timer.start(0.25)
-#		if weapon.has_method("melee"):
-#			if can_attack:
-#				weapon.melee()
-#				can_attack = false
-#				timer.start(0.25)
-
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-
-		
 	var mousePosition = get_global_mouse_position()
 	var angle = position.angle_to_point(mousePosition)
-
+	
+	if Input.is_action_pressed("shoot") && can_attack:
+			melee.attack()
+			can_attack = false
+			timer.start(0.25)
+	
 	if angle > -0.78 and angle < 0.78: #####looking right
 		anim.scale.x = 1
 		if direction: #player has movement
@@ -66,6 +54,8 @@ func read_inputs():
 			anim.play("Up_Move")
 		else: #No movement
 			anim.play("Up_Idle")
+	else:
+		anim.play("Down_Idle")
 
 
 
@@ -74,4 +64,3 @@ func read_inputs():
 
 func _on_timer_timeout():
 	can_attack = true
-	print("can shoot")

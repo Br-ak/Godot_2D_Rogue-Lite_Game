@@ -1,5 +1,6 @@
 extends Label
 
+var killCounter
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -10,3 +11,4 @@ func _ready():
 func _process(delta):
 	var fps = Engine.get_frames_per_second()
 	text = "FPS: " + str(fps)
+	text = "Kills: " + str(killCounter)

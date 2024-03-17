@@ -12,6 +12,7 @@ var can_attack = true
 @onready var weapon = $Weapon
 @onready var timer = $Weapon/Timer
 
+
 func _ready():
 	anim.play("Idle")
 

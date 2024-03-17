@@ -4,6 +4,14 @@ extends Area2D
 @onready var anim = $Marker2D/AnimatedSprite2D
 @onready var anim_new = $Marker2D/AnimatedSprite2D/AnimationPlayer
 @onready var hitbox = $Marker2D/AnimatedSprite2D/Area2D/CollisionShape2D
+var mousePosition
+
+@onready var hud = get_parent().get_parent().get_parent().get_node("Control")
+
+var killCounter := 0:
+	set(value):
+		killCounter = value
+		hud.killCounter = killCounter
 
 func _ready():
 	hitbox.disabled = true
@@ -11,12 +19,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	look_at(get_global_mouse_position())
-	if get_global_mouse_position().x > player.position.x: ##### looking right
+	
+	mousePosition = get_global_mouse_position()
+	look_at(mousePosition)
+	if mousePosition.x > player.position.x: ##### looking right
 		anim.scale.y = 1
 		anim.scale.x = -1
 		anim.rotation = -45
-	elif get_global_mouse_position().x < player.position.x: ##### looking left
+	elif mousePosition.x < player.position.x: ##### looking left
 		anim.scale.y = -1
 		anim.scale.x = -1
 		anim.rotation = 45
@@ -32,3 +42,9 @@ func _on_area_2d_body_entered(body):
 	if body.get_parent().name.contains("Mobs"):
 		if body.has_method("take_damage"):
 			body.take_damage(5)
+			if body.health < 1:
+				killCounter += 1
+
+
+
+

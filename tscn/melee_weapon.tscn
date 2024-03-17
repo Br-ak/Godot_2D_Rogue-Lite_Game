@@ -56,8 +56,9 @@ script = ExtResource("1_nn1ov")
 position = Vector2(0, -4)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D"]
-position = Vector2(1196.59, -21.1754)
-rotation = -0.620114
+z_index = 1
+position = Vector2(713.991, -21.1754)
+rotation = -0.775143
 scale = Vector2(-1, 1)
 sprite_frames = SubResource("SpriteFrames_a18p3")
 animation = &"Idle"
@@ -76,4 +77,5 @@ rotation = 0.795653
 scale = Vector2(2.06085, 1.247)
 shape = SubResource("RectangleShape2D_ajmwo")
 
+[connection signal="property_list_changed" from="Marker2D/AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_property_list_changed"]
 [connection signal="body_entered" from="Marker2D/AnimatedSprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
