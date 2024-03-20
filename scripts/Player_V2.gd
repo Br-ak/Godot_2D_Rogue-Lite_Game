@@ -1,17 +1,23 @@
 extends CharacterBody2D
 
 var speed = 200  # speed in pixels/sec
-@onready var anim = $AnimatedSprite2D
-var frameCount = 0
-var background_tiles = null
-var allow_attack = true
-var attack_type = 1
 var can_attack = true
-@export var ammo : PackedScene
+
+@onready var anim = $AnimatedSprite2D
 @onready var weapon = $Weapon
 @onready var melee = $Weapon/Melee
 @onready var timer = $Weapon/Melee/Timer
+@onready var hud = get_parent().get_node("Control")
 
+var player_exp := 0:
+	set(value):
+		player_exp = value
+		hud.player_exp = player_exp
+
+var player_level := 1:
+	set(value):
+		player_level = value
+		hud.player_level = player_level
 
 
 func _ready():
@@ -56,11 +62,17 @@ func read_inputs():
 			anim.play("Up_Idle")
 	else:
 		anim.play("Down_Idle")
-
-
-
+	
 	velocity = direction * speed
 	move_and_slide()
 
 func _on_timer_timeout():
 	can_attack = true
+
+func gain_exp(value):
+	player_exp += value
+	if player_exp >= 50:
+		player_level += 1
+		player_exp = 0
+		
+	

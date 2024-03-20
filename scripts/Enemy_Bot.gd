@@ -7,8 +7,6 @@ var health = 10
 @onready var hitbox = $CollisionShape2D
 var frameCount = 0
 
-
-
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	get_node("AnimatedSprite2D").play("Run")
@@ -28,7 +26,6 @@ func _physics_process(_delta):
 			move_and_slide()
 
 func take_damage(damage):
-	#set_deferred("health", health - damage)
 	health -= damage
 	if health > 0:
 		get_node("AnimatedSprite2D").play("Hurt")
@@ -39,7 +36,13 @@ func take_damage(damage):
 
 func death():
 	hitbox.set_deferred("disabled", true)
-	#hitbox.disabled = true
 	get_node("AnimatedSprite2D").play("Death")
+	spawnExp()
 	await get_node("AnimatedSprite2D").animation_finished
 	self.queue_free()
+
+func spawnExp():
+	const EXP = preload("res://tscn/exp.tscn")
+	var new_exp = EXP.instantiate()
+	new_exp.global_position = self.global_position
+	get_parent().call_deferred("add_child", new_exp)

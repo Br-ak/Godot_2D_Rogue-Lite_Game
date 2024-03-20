@@ -1,0 +1,22 @@
+[gd_scene load_steps=4 format=3 uid="uid://n54xpucxts56"]
+
+[ext_resource type="Script" path="res://scripts/exp.gd" id="1_tj1cb"]
+[ext_resource type="Texture2D" uid="uid://dcoxqd5gil1xy" path="res://tscn/You otterf__ker!! - Funny.jpg" id="2_8ij0m"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_sx7fw"]
+size = Vector2(108, 156)
+
+[node name="exp" type="Area2D"]
+scale = Vector2(0.0207248, 0.0207248)
+script = ExtResource("1_tj1cb")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(0, -1.23425)
+shape = SubResource("RectangleShape2D_sx7fw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(1.99997, -1.61716)
+scale = Vector2(0.165714, 0.165714)
+texture = ExtResource("2_8ij0m")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

@@ -18,7 +18,7 @@ func _ready():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	
 	mousePosition = get_global_mouse_position()
 	look_at(mousePosition)

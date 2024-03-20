@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://dkt7sfuc2psyg"]
 
+[ext_resource type="PackedScene" uid="uid://h5o64r5rw0wu" path="res://tscn/Hud.tscn" id="1_dgn2c"]
 [ext_resource type="PackedScene" uid="uid://cmw1f7nk56jt3" path="res://tscn/Player.tscn" id="1_spu0w"]
 [ext_resource type="Texture2D" uid="uid://duuwirov0bb6t" path="res://assets/Pixel Art Top Down - Basic/TX Tileset Grass.png" id="2_r4c2u"]
 [ext_resource type="Script" path="res://scripts/grass_tilemap.gd" id="3_y1lwo"]
-[ext_resource type="PackedScene" uid="uid://h5o64r5rw0wu" path="res://tscn/FPSmeter.tscn" id="4_qxljr"]
 [ext_resource type="Script" path="res://scripts/Mobs.gd" id="5_g4mho"]
 [ext_resource type="PackedScene" uid="uid://bbt0y6nlmn0ve" path="res://tscn/follower.tscn" id="6_ghw8b"]
 
@@ -145,6 +145,8 @@ sources/1 = SubResource("TileSetAtlasSource_epafv")
 
 [node name="World" type="Node2D"]
 
+[node name="Control" parent="." instance=ExtResource("1_dgn2c")]
+
 [node name="Player" parent="." instance=ExtResource("1_spu0w")]
 position = Vector2(0, 0)
 scale = Vector2(1, 1)
@@ -154,12 +156,6 @@ tile_set = SubResource("TileSet_mqui0")
 format = 2
 layer_0/z_index = -1
 script = ExtResource("3_y1lwo")
-
-[node name="Control" parent="." instance=ExtResource("4_qxljr")]
-offset_left = -20.0
-offset_top = -125.0
-offset_right = 20.0
-offset_bottom = -85.0
 
 [node name="Mobs" type="Node2D" parent="."]
 script = ExtResource("5_g4mho")

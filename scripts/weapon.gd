@@ -8,7 +8,7 @@ func _ready():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	look_at(get_global_mouse_position())
 	if get_global_mouse_position().x > player.position.x:
 		anim.scale.y = 1

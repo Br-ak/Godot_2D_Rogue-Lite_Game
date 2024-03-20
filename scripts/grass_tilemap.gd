@@ -14,7 +14,7 @@ var bound_buffer = 450 # x / y coord buffer around player
 func _ready():
 	pass
 
-func _process(delta):
+func _process(_delta):
 	frameCount += 1
 
 	if (frameCount % 15 == 0): # once every second at 60fps

@@ -6,8 +6,7 @@ var SPEED = 5
 var preVelocity = Vector2(0, 0)
 
 
-func _physics_process(delta):
-	var mouse = get_global_mouse_position()
+func _physics_process(_delta):
 	var direction = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
 	if velocity == preVelocity:
 		anim.play("Idle")
