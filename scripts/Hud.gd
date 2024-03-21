@@ -5,7 +5,7 @@ signal _reset_exp_bar
 var XP_BAR_MAX = 50.00
 
 @onready var info = $CanvasLayer/info
-var temp = info
+@onready var exp_bar = $CanvasLayer/ColorRect/TextureRect
 
 @onready var killCounter = $CanvasLayer/kills:
 	set(value):
@@ -13,7 +13,6 @@ var temp = info
 			pass
 		else:
 			killCounter.text = "Kills: " + str(value)
-			
 
 @onready var player_level = $CanvasLayer/level:
 	set(value):
@@ -31,7 +30,13 @@ var temp = info
 			player_exp.text = "Exp: " + str(value)
 			_on_fill_exp_bar(value)
 
-@onready var exp_bar = $CanvasLayer/ColorRect/TextureRect
+@onready var runTimer = $CanvasLayer/timer:
+	set(value):
+		if runTimer == null: # for some reason this is null upon startup for a second
+			pass
+		else:
+			runTimer.text = "Time: " + str(value)
+
 
 
 

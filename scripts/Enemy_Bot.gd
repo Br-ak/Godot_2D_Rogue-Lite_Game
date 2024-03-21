@@ -1,7 +1,7 @@
 extends CharacterBody2D
 
 @onready var enemy = true
-var SPEED = 50
+var SPEED = 25
 var health = 10
 @onready var player = get_parent().get_parent().get_node("Player")
 @onready var hitbox = $CollisionShape2D
