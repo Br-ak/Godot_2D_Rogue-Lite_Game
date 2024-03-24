@@ -10,13 +10,7 @@ func _ready():
 
 func _on_timer_timeout():
 	spawnGroup(10)
-#	for i in range(5):
-#		var enemyTemp = Enemy_Bot.instantiate()
-#		var rng = RandomNumberGenerator.new()
-#		var randx = rng.randi_range(0,400)
-#		var randy = rng.randi_range(0,400)
-#		enemyTemp.position = Vector2(randx, randy)
-#		call_deferred("add_child", enemyTemp)
+
 
 func spawnWave(waveSize):
 	for i in range(waveSize):
