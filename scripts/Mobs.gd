@@ -9,7 +9,7 @@ func _ready():
 	pass
 
 func _on_timer_timeout():
-	spawnGroup(5)
+	spawnGroup(10)
 #	for i in range(5):
 #		var enemyTemp = Enemy_Bot.instantiate()
 #		var rng = RandomNumberGenerator.new()
@@ -26,9 +26,12 @@ func spawnWave(waveSize):
 func spawnGroup(groupSize):
 	playerPOS = player.get_position()
 	var rng = RandomNumberGenerator.new()
-	var randx = rng.randi_range(playerPOS.x + 0,playerPOS.x + 400)
-	var randy = rng.randi_range(playerPOS.y + 0,playerPOS.y + 400)
+	var pinX = rng.randi_range(playerPOS.x + 0,playerPOS.x + 100)
+	var pinY = rng.randi_range(playerPOS.y + 0,playerPOS.y + 100)
+	
 	for i in range(groupSize):
+		var variation = rng.randi_range(0,50)
 		var enemyTemp = Enemy_Bot.instantiate()
-		enemyTemp.position = Vector2(randx + (i * 10), randy)
+		enemyTemp.position = Vector2(pinX + variation, pinY + variation)
 		call_deferred("add_child", enemyTemp)
+		await get_tree().create_timer(0.05).timeout
