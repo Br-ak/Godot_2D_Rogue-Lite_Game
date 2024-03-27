@@ -2,9 +2,10 @@ extends CharacterBody2D
 
 @onready var enemy = true
 var SPEED = 25
-var health = 10
+@onready var health = 10
 @onready var player = get_parent().get_parent().get_node("Player")
 @onready var hitbox = $CollisionShape2D
+@onready var follower = get_parent().get_parent().get_node("Follower")
 var frameCount = 0
 
 # Called when the node enters the scene tree for the first time.
@@ -35,6 +36,7 @@ func take_damage(damage):
 		death()
 
 func death():
+	follower.get("trackingList").erase(self) 
 	hitbox.set_deferred("disabled", true)
 	get_node("AnimatedSprite2D").play("Death")
 	spawnExp()

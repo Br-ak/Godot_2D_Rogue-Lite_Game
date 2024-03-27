@@ -44,7 +44,3 @@ func _on_area_2d_body_entered(body):
 			body.take_damage(5)
 			if body.health < 1:
 				killCounter += 1
-
-
-
-

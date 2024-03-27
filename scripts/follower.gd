@@ -4,7 +4,7 @@ var SPEED = 5
 @onready var player = get_parent().get_node("Player")
 @onready var anim = $AnimationPlayer
 @onready var timer = $Timer
-var reloadTime = 0.5
+var reloadTime = 0.1
 var preDirection = Vector2(0, 0)
 var trackingList = []
 var canShoot = true
@@ -28,6 +28,8 @@ func _physics_process(_delta):
 
 func attack():
 	var closestEnemy
+	var erasedEnemy
+	
 	for b in trackingList: 
 		if b != null:
 			var distance = b.global_position.distance_to(self.global_position)
@@ -36,7 +38,11 @@ func attack():
 			else:
 				if distance < closestEnemy[1]: # compare distances
 					closestEnemy = [b, distance]
-	if closestEnemy != null :
+	
+	if trackingList.size() < 1:
+		closestEnemy = null
+	
+	if closestEnemy != null:
 		shoot(closestEnemy)
 
 
@@ -56,11 +62,6 @@ func _on_range_body_entered(body):
 	if body.get("enemy"):
 		if !trackingList.has(body):
 			trackingList.append(body)
-	for b in trackingList:
-		if hash(b) == hash(null): # object is null
-			pass 
-		elif b == null: # object is free object
-			trackingList.erase(b)
 
 
 func _on_timer_timeout():
