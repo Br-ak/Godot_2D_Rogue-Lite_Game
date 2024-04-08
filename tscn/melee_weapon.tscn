@@ -69,13 +69,14 @@ libraries = {
 "": SubResource("AnimationLibrary_eylyi")
 }
 
-[node name="Area2D" type="Area2D" parent="Marker2D/AnimatedSprite2D"]
+[node name="hitbox" type="Area2D" parent="Marker2D/AnimatedSprite2D"]
 
-[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/AnimatedSprite2D/Area2D"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/AnimatedSprite2D/hitbox"]
 position = Vector2(37.4673, 1.09137)
 rotation = 0.795653
 scale = Vector2(2.06085, 1.247)
 shape = SubResource("RectangleShape2D_ajmwo")
 
+[connection signal="area_entered" from="." to="." method="_on_area_entered"]
 [connection signal="property_list_changed" from="Marker2D/AnimatedSprite2D/AnimationPlayer" to="." method="_on_animation_player_property_list_changed"]
-[connection signal="body_entered" from="Marker2D/AnimatedSprite2D/Area2D" to="." method="_on_area_2d_body_entered"]
+[connection signal="area_entered" from="Marker2D/AnimatedSprite2D/hitbox" to="." method="_on_hitbox_area_entered"]

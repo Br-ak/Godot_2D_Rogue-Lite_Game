@@ -2,6 +2,7 @@ extends Area2D
 
 var travelled_distance = 0
 @onready var SPEED = 500
+var bullet_damage = 10
 
 func _physics_process(delta):
 	
@@ -14,7 +15,12 @@ func _physics_process(delta):
 	if travelled_distance > RANGE:
 		queue_free()
 
-func _on_body_entered(body):
-	if body.has_method("take_damage"):
-		body.take_damage(10)
-		queue_free()
+func _on_hitbox_area_entered(area):
+	if area is HitboxComponent:
+		var hitbox : HitboxComponent = area
+		var attack = Attack.new()
+		
+		attack.attack_damage = 5
+		
+		hitbox.damage(attack)
+		self.queue_free()

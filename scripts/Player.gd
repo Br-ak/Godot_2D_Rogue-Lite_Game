@@ -1,75 +1,78 @@
 extends CharacterBody2D
 
 var speed = 200  # speed in pixels/sec
-@onready var anim = $AnimatedSprite2D
-var frameCount = 0
-var background_tiles = null
-var allow_attack = true
-var attack_type = 1
 var can_attack = true
-@onready var player_hurtbox = $AnimatedSprite2D/Hurtbox/CollisionShape2D
-@export var ammo : PackedScene
+
+@onready var anim = $AnimatedSprite2D
 @onready var weapon = $Weapon
-@onready var timer = $Weapon/Timer
+@onready var melee = $Weapon/Melee
+@onready var timer = $Weapon/Melee/Timer
+@onready var hud = get_parent().get_node("Control")
+
+var player_exp := 0:
+	set(value):
+		player_exp = value
+		hud.player_exp = player_exp
+
+var player_level := 1:
+	set(value):
+		player_level = value
+		hud.player_level = player_level
 
 
 func _ready():
-	anim.play("Idle")
+	anim.play("Side_Idle")
 
 func _physics_process(_delta):
 	read_inputs()
 
 func read_inputs():
-	if Input.is_action_pressed("shoot"):
-		if weapon.has_method("shoot"):
-			if can_attack:
-				weapon.shoot()
-				can_attack = false
-				timer.start(0.25)
-		if weapon.has_method("melee"):
-			if can_attack:
-				weapon.melee()
-				can_attack = false
-				timer.start(0.25)
-	
-#	if Input.is_action_pressed("swap_weapon"):
-#		#do something
-#
-	
-	
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+	var mousePosition = get_global_mouse_position()
+	var angle = position.angle_to_point(mousePosition)
+	
+	if Input.is_action_pressed("shoot") && can_attack:
+			melee.attack()
+			can_attack = false
+			timer.start(0.25)
+	
+	if angle > -0.78 and angle < 0.78: #####looking right
+		anim.scale.x = 1
+		if direction: #player has movement
+			anim.play("Side_Move")
+		else: #No movement
+			anim.play("Side_Idle")
+	elif angle > 2.34 or angle < -2.34: #####looking left
+		anim.scale.x = -1
+		if direction: #player has movement
+			anim.play("Side_Move")
+		else: #No movement
+			anim.play("Side_Idle")
+	elif angle > 0.78 and angle < 2.34: #####looking up
+		anim.scale.x = 1
+		if direction: #player has movement
+			anim.play("Down_Move")
+		else: #No movement
+			anim.play("Down_Idle")
+	elif angle > -2.34 and angle < -0.78: #####looking down
+		anim.scale.x = 1
+		if direction: #player has movement
+			anim.play("Up_Move")
+		else: #No movement
+			anim.play("Up_Idle")
+	else:
+		anim.play("Down_Idle")
+	
 	velocity = direction * speed
-	if allow_attack:
-		var attack = Input.is_action_pressed("player_attack")
-		if attack:
-			player_hurtbox.disabled = false
-			allow_attack = false
-			if attack_type == 1:
-				anim.play("Attack1")
-				attack_type = 2
-			elif attack_type == 2:
-				anim.play("Attack2")
-				attack_type = 1
-			await anim.animation_finished
-			allow_attack = true
-		else:
-			if get_global_mouse_position().x > position.x:
-				anim.scale.x = 1
-			elif get_global_mouse_position().x < position.x:
-				anim.scale.x = -1
-			if direction:
-				anim.play("Run")
-			else:
-				anim.play("Idle")
-	player_hurtbox.disabled = true
 	move_and_slide()
-
-func _on_hurtbox_body_entered(body):
-	if body.get_parent().name.contains("Mobs"):
-		body.get_node("AnimatedSprite2D").play("Hurt")
-		await body.get_node("AnimatedSprite2D").animation_finished
-		body.get_node("AnimatedSprite2D").play("Run")
-		body.health -= 5
 
 func _on_timer_timeout():
 	can_attack = true
+
+func gain_exp(value):
+	player_exp += value
+	if player_exp >= 50:
+		player_level += 1
+		player_exp = 0
+		
+	

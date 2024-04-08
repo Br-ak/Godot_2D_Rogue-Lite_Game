@@ -1,47 +1,38 @@
 extends CharacterBody2D
 
-@onready var enemy = true
-var SPEED = 25
-@onready var health = 10
+@export var hitbox_component : HitboxComponent
+
 @onready var player = get_parent().get_parent().get_node("Player")
-@onready var hitbox = $CollisionShape2D
 @onready var follower = get_parent().get_parent().get_node("Follower")
+@onready var anim = $AnimationComponent/AnimatedSprite2D
+@onready var collision = $CollisionShape2D
+
+var enemy = true
+var SPEED = 25
 var frameCount = 0
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	get_node("AnimatedSprite2D").play("Run")
+	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta):
-	frameCount += 1
-	if frameCount % 2 == 1:
+	frameCount += 1 
+	if frameCount % 5 == 1: # once every 5 frames (multiple of 5)
 		frameCount = 0
 		var direction = (player.position - self.position).normalized() # Normalize the direction vector
-		if health > 0:
+		if anim.get_animation() != "Death" && anim.get_animation() != "Hurt" : # Pauses movement when specific animations are played
 			if direction.x > 0:
-				get_node("AnimatedSprite2D").flip_h = false
+				anim.flip_h = false
 			else:
-				get_node("AnimatedSprite2D").flip_h = true
+				anim.flip_h = true
 			velocity = direction * SPEED # Multiply the normalized direction by speed
 			move_and_slide()
 
-func take_damage(damage):
-	health -= damage
-	if health > 0:
-		get_node("AnimatedSprite2D").play("Hurt")
-		await get_node("AnimatedSprite2D").animation_finished
-		get_node("AnimatedSprite2D").play("Run")
-	else:
-		death()
-
 func death():
 	follower.get("trackingList").erase(self) 
-	hitbox.set_deferred("disabled", true)
-	get_node("AnimatedSprite2D").play("Death")
+	collision.set_deferred("disabled", true)
 	spawnExp()
-	await get_node("AnimatedSprite2D").animation_finished
-	self.queue_free()
 
 func spawnExp():
 	const EXP = preload("res://tscn/exp.tscn")

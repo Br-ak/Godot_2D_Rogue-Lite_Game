@@ -1,6 +1,6 @@
 [gd_scene load_steps=85 format=3 uid="uid://cmw1f7nk56jt3"]
 
-[ext_resource type="Script" path="res://scripts/Player_V2.gd" id="1_cf481"]
+[ext_resource type="Script" path="res://scripts/Player.gd" id="1_pyu0h"]
 [ext_resource type="Texture2D" uid="uid://bpb1v1tmecbg4" path="res://assets/Red Sprite/Side ConsecutiveSlash.png" id="3_cconm"]
 [ext_resource type="Texture2D" uid="uid://3ouywo2331lf" path="res://assets/Red Sprite/Side Movement.png" id="3_f5dop"]
 [ext_resource type="Texture2D" uid="uid://cfhhii6ntyfq6" path="res://assets/Red Sprite/Front Movement.png" id="3_yr8wd"]
@@ -580,9 +580,10 @@ animations = [{
 }]
 
 [node name="Player" type="CharacterBody2D"]
+z_index = 1
 position = Vector2(226, 133)
 scale = Vector2(5, 5)
-script = ExtResource("1_cf481")
+script = ExtResource("1_pyu0h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("CapsuleShape2D_p5xuh")
