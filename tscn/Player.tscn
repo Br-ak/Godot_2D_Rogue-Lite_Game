@@ -583,6 +583,7 @@ animations = [{
 z_index = 1
 position = Vector2(226, 133)
 scale = Vector2(5, 5)
+platform_floor_layers = 4294901761
 script = ExtResource("1_pyu0h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

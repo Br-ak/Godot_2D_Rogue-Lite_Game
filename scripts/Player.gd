@@ -19,6 +19,11 @@ var player_level := 1:
 		player_level = value
 		hud.player_level = player_level
 
+var killCounter := 0:
+	set(value):
+		killCounter = value
+		hud.killCounter = killCounter
+
 
 func _ready():
 	anim.play("Side_Idle")
@@ -75,4 +80,3 @@ func gain_exp(value):
 		player_level += 1
 		player_exp = 0
 		
-	

@@ -6,6 +6,7 @@ class_name HealthComponent
 @export var parent : CharacterBody2D
 @export var MAX_HEALTH := 10.0
 var health : float
+var dead = false
 
 func _ready():
 	health = MAX_HEALTH
@@ -16,6 +17,9 @@ func damage(attack: Attack):
 	if health > 0:
 		animation_component.hurt(attack)
 	elif health <= 0:
-		if parent.has_method("death"):
-			parent.death()
-		animation_component.death(attack)
+		if dead != true:
+			if parent.has_method("death"):
+				parent.death()
+				dead = true
+			animation_component.death(attack)
+			hitbox_component.death(attack)

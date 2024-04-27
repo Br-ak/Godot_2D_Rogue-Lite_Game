@@ -8,6 +8,6 @@ func damage(attack: Attack):
 	if health_component:
 		health_component.damage(attack)
 
-func death():
+func death(attack: Attack):
 	print("here")
 	collision.set_deferred("disabled", true)

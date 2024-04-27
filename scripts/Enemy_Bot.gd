@@ -29,10 +29,15 @@ func _physics_process(_delta):
 			velocity = direction * SPEED # Multiply the normalized direction by speed
 			move_and_slide()
 
+func attack():
+	pass
+
+
 func death():
 	follower.get("trackingList").erase(self) 
 	collision.set_deferred("disabled", true)
 	spawnExp()
+	player.killCounter += 1
 
 func spawnExp():
 	const EXP = preload("res://tscn/exp.tscn")
