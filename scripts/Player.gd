@@ -24,12 +24,12 @@ var killCounter := 0:
 		killCounter = value
 		hud.killCounter = killCounter
 
-
 func _ready():
 	anim.play("Side_Idle")
 
 func _physics_process(_delta):
-	read_inputs()
+	if Engine.time_scale == 1:
+		read_inputs()
 
 func read_inputs():
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -79,4 +79,3 @@ func gain_exp(value):
 	if player_exp >= 50:
 		player_level += 1
 		player_exp = 0
-		

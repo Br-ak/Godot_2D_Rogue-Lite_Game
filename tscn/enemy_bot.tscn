@@ -167,7 +167,6 @@ autoplay = "Run"
 animation_component = NodePath("../AnimationComponent")
 hitbox_component = NodePath("../HitboxComponent")
 parent = NodePath("..")
-MAX_HEALTH = 10.0
 
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_58ok3")]
 health_component = NodePath("../HealthComponent")

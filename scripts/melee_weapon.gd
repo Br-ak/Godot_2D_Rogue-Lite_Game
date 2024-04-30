@@ -12,7 +12,10 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	
+	if Engine.time_scale == 1:
+		getMousePosition()
+
+func getMousePosition():
 	mousePosition = get_global_mouse_position()
 	look_at(mousePosition)
 	if mousePosition.x > player.position.x: ##### looking right
@@ -33,6 +36,6 @@ func attack():
 func _on_hitbox_area_entered(area):
 	if area is HitboxComponent:
 		var hitbox : HitboxComponent = area
-		var attack = Attack.new()
-		attack.attack_damage = 5
-		hitbox.damage(attack)
+		var newAttack = Attack.new()
+		newAttack.attack_damage = 5
+		hitbox.damage(newAttack)

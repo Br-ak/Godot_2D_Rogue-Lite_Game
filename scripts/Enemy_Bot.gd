@@ -32,7 +32,6 @@ func _physics_process(_delta):
 func attack():
 	pass
 
-
 func death():
 	follower.get("trackingList").erase(self) 
 	collision.set_deferred("disabled", true)

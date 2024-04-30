@@ -28,7 +28,6 @@ func _physics_process(_delta):
 
 func attack():
 	var closestEnemy
-	var erasedEnemy
 	
 	for b in trackingList: 
 		if b != null:
