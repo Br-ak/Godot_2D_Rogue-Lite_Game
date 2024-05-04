@@ -7,6 +7,9 @@ extends CharacterBody2D
 @onready var anim = $AnimationComponent/AnimatedSprite2D
 @onready var collision = $CollisionShape2D
 
+const type = "Enemy"
+var baseDamage = 5
+var currentDamage = baseDamage
 var enemy = true
 var SPEED = 25
 var frameCount = 0
@@ -43,3 +46,11 @@ func spawnExp():
 	var new_exp = EXP.instantiate()
 	new_exp.global_position = self.global_position
 	get_parent().call_deferred("add_child", new_exp)
+
+func _on_hitbox_component_area_entered(area):
+	if area is HitboxComponent:
+		if area.get_parent().type == "Player":
+			var hitbox : HitboxComponent = area
+			var newAttack = Attack.new()
+			newAttack.attack_damage = currentDamage
+			hitbox.damage(newAttack)

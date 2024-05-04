@@ -10,7 +10,7 @@ gradient = SubResource("Gradient_5gddr")
 width = 577
 fill_to = Vector2(0.1, 0)
 
-[node name="Control" type="Control"]
+[node name="Hud" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0

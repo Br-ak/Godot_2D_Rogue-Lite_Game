@@ -1,13 +1,14 @@
 extends CharacterBody2D
 
 var speed = 200  # speed in pixels/sec
-var can_attack = true
+const type = "Player"
 
 @onready var anim = $AnimatedSprite2D
 @onready var weapon = $Weapon
-@onready var melee = $Weapon/Melee
-@onready var timer = $Weapon/Melee/Timer
-@onready var hud = get_parent().get_node("Control")
+
+@onready var gameNode = get_parent().get_parent()
+@onready var hud = gameNode.get_node("CanvasLayer").get_node("Hud")
+var equipped_weapon
 
 var player_exp := 0:
 	set(value):
@@ -36,10 +37,15 @@ func read_inputs():
 	var mousePosition = get_global_mouse_position()
 	var angle = position.angle_to_point(mousePosition)
 	
-	if Input.is_action_pressed("shoot") && can_attack:
-			melee.attack()
-			can_attack = false
-			timer.start(0.25)
+	if Input.is_action_pressed("attack"):
+		if equipped_weapon:
+			equipped_weapon.attack()
+	
+	if Input.is_action_pressed("add_weapon_test") :
+		const melee_weapon = preload("res://tscn/weapon.tscn")
+		var new_melee_weapon = melee_weapon.instantiate()
+		weapon.call("add_child", new_melee_weapon)
+		equipped_weapon = $Weapon/Area2D
 	
 	if angle > -0.78 and angle < 0.78: #####looking right
 		anim.scale.x = 1
@@ -71,11 +77,12 @@ func read_inputs():
 	velocity = direction * speed
 	move_and_slide()
 
-func _on_timer_timeout():
-	can_attack = true
-
 func gain_exp(value):
 	player_exp += value
 	if player_exp >= 50:
 		player_level += 1
 		player_exp = 0
+
+func death():
+	if gameNode.has_method("gameOverMenu"):
+		gameNode.gameOverMenu()

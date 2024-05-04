@@ -9,13 +9,14 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	look_at(get_global_mouse_position())
-	if get_global_mouse_position().x > player.position.x:
-		anim.scale.y = 1
-	elif get_global_mouse_position().x < player.position.x:
-		anim.scale.y = -1
-		
-func shoot():
+	if Engine.time_scale == 1:
+		look_at(get_global_mouse_position())
+		if get_global_mouse_position().x > player.position.x:
+			anim.scale.y = 1
+		elif get_global_mouse_position().x < player.position.x:
+			anim.scale.y = -1
+
+func attack():
 	const BULLET = preload("res://tscn/bullets.tscn")
 	var new_bullet = BULLET.instantiate()
 	new_bullet.global_position = %ShootingPoint.global_position

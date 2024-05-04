@@ -17,10 +17,9 @@ func _physics_process(delta):
 
 func _on_hitbox_area_entered(area):
 	if area is HitboxComponent:
-		var hitbox : HitboxComponent = area
-		var attack = Attack.new()
-		
-		attack.attack_damage = 5
-		
-		hitbox.damage(attack)
-		self.queue_free()
+		if area.get_parent().type == "Enemy":
+			var hitbox : HitboxComponent = area
+			var attack = Attack.new()
+			attack.attack_damage = 5
+			hitbox.damage(attack)
+			self.queue_free()

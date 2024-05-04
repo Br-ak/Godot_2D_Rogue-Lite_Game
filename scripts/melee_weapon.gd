@@ -4,7 +4,11 @@ extends Area2D
 @onready var animSprite = $Marker2D/AnimatedSprite2D
 @onready var animPlayer = $Marker2D/AnimatedSprite2D/AnimationPlayer
 @onready var hitbox = $Marker2D/AnimatedSprite2D/hitbox/CollisionShape2D
+@onready var timer = $Timer
 var mousePosition
+var can_attack = true
+var baseDamage = 5
+var currentDamage = baseDamage
 
 func _ready():
 	hitbox.disabled = true
@@ -28,14 +32,22 @@ func getMousePosition():
 		animSprite.rotation = 45
 
 func attack():
-	hitbox.disabled = false
-	animPlayer.play("Side_Attack")
-	await animPlayer.animation_finished
-	hitbox.disabled = true
+	if can_attack:
+		hitbox.disabled = false
+		animPlayer.play("Side_Attack")
+		await animPlayer.animation_finished
+		hitbox.disabled = true
+		can_attack = false
+		timer.start(0.25)
 
 func _on_hitbox_area_entered(area):
 	if area is HitboxComponent:
-		var hitbox : HitboxComponent = area
-		var newAttack = Attack.new()
-		newAttack.attack_damage = 5
-		hitbox.damage(newAttack)
+		if area.get_parent().type == "Enemy":
+			var newHitbox : HitboxComponent = area
+			var newAttack = Attack.new()
+			newAttack.attack_damage = currentDamage
+			newHitbox.damage(newAttack)
+
+
+func _on_timer_timeout():
+	can_attack = true

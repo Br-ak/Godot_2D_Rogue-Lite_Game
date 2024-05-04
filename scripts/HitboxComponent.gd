@@ -2,6 +2,7 @@ extends Area2D
 class_name HitboxComponent
 
 @export var health_component : HealthComponent
+@export var parent : CharacterBody2D
 @onready var hitbox = $CollisionShape2D
 #This collision shape is used only for damage/hit detection
 

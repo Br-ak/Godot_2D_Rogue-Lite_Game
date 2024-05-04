@@ -6,8 +6,8 @@
 [ext_resource type="Texture2D" uid="uid://cfhhii6ntyfq6" path="res://assets/Red Sprite/Front Movement.png" id="3_yr8wd"]
 [ext_resource type="Texture2D" uid="uid://b48v7y0qwv5sd" path="res://assets/Red Sprite/Back Movement.png" id="4_fd1dc"]
 [ext_resource type="Texture2D" uid="uid://ddi6i8lrujw4k" path="res://assets/Red Sprite/Back ConsecutiveSlash.png" id="5_vdqpj"]
-[ext_resource type="PackedScene" uid="uid://oh21ovpt2srh" path="res://tscn/weapon.tscn" id="6_8wnax"]
-[ext_resource type="PackedScene" uid="uid://b1408k7y7a2rw" path="res://tscn/melee_weapon.tscn" id="7_onf08"]
+[ext_resource type="PackedScene" uid="uid://22q253ptx5of" path="res://tscn/hitbox_component.tscn" id="9_rumc1"]
+[ext_resource type="PackedScene" uid="uid://oiicbhvi6ce0" path="res://tscn/health_component.tscn" id="10_y4qyh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5xuh"]
 radius = 4.6
@@ -587,6 +587,7 @@ platform_floor_layers = 4294901761
 script = ExtResource("1_pyu0h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_p5xuh")
 metadata/_edit_lock_ = true
 
@@ -602,13 +603,15 @@ frame_progress = 0.902787
 
 [node name="Weapon" type="Node2D" parent="."]
 
-[node name="Melee" parent="Weapon" instance=ExtResource("7_onf08")]
-position = Vector2(0, -2.59998)
-scale = Vector2(0.021, 0.021)
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "parent") instance=ExtResource("9_rumc1")]
+health_component = NodePath("../HealthComponent")
+parent = NodePath("..")
 
-[node name="Timer" type="Timer" parent="Weapon/Melee"]
+[node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
+scale = Vector2(1, 1)
+shape = SubResource("CapsuleShape2D_p5xuh")
+metadata/_edit_lock_ = true
 
-[node name="Ranged" parent="Weapon" instance=ExtResource("6_8wnax")]
-visible = false
-
-[connection signal="timeout" from="Weapon/Melee/Timer" to="." method="_on_timer_timeout"]
+[node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox_component", "parent") instance=ExtResource("10_y4qyh")]
+hitbox_component = NodePath("../HitboxComponent")
+parent = NodePath("..")

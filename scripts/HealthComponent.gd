@@ -14,12 +14,13 @@ func _ready():
 func damage(attack: Attack):
 	health -= attack.attack_damage
 	
-	if health > 0:
+	if health > 0 && animation_component:
 		animation_component.hurt(attack)
 	elif health <= 0:
 		if dead != true:
 			if parent.has_method("death"):
 				parent.death()
 				dead = true
-			animation_component.death(attack)
+			if animation_component:
+				animation_component.death(attack)
 			hitbox_component.death(attack)

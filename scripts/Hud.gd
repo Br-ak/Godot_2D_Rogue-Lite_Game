@@ -4,6 +4,10 @@ signal _reset_exp_bar
 
 var XP_BAR_MAX = 50.00
 
+#
+## Hud values
+#
+
 @onready var info = $CanvasLayer/info
 @onready var exp_bar = $CanvasLayer/ColorRect/TextureRect
 
@@ -37,6 +41,9 @@ var XP_BAR_MAX = 50.00
 		else:
 			runTimer.text = "Time: " + str(value)
 
+#
+## Functions
+#
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
