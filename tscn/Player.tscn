@@ -587,7 +587,6 @@ platform_floor_layers = 4294901761
 script = ExtResource("1_pyu0h")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_p5xuh")
 metadata/_edit_lock_ = true
 
@@ -608,7 +607,6 @@ health_component = NodePath("../HealthComponent")
 parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
-scale = Vector2(1, 1)
 shape = SubResource("CapsuleShape2D_p5xuh")
 metadata/_edit_lock_ = true
 

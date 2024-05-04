@@ -1,0 +1,46 @@
+[gd_scene load_steps=6 format=3 uid="uid://dt2xfuibf246d"]
+
+[ext_resource type="Script" path="res://Game.gd" id="1_7v6wq"]
+[ext_resource type="PackedScene" uid="uid://dkt7sfuc2psyg" path="res://tscn/World.tscn" id="2_70odr"]
+[ext_resource type="PackedScene" uid="uid://x0qah1ecl6l7" path="res://tscn/pause_menu.tscn" id="3_6cn8u"]
+[ext_resource type="PackedScene" uid="uid://nshi4fwwwnmc" path="res://tscn/game_over_menu.tscn" id="4_ojmfo"]
+[ext_resource type="PackedScene" uid="uid://h5o64r5rw0wu" path="res://tscn/Hud.tscn" id="5_0te5f"]
+
+[node name="Game" type="Node2D"]
+script = ExtResource("1_7v6wq")
+
+[node name="World" parent="." instance=ExtResource("2_70odr")]
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+
+[node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_6cn8u")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -57.0
+offset_top = -55.0
+offset_right = -57.0
+offset_bottom = -55.0
+scale = Vector2(1.695, 1.695)
+
+[node name="Game Over Menu" parent="CanvasLayer" instance=ExtResource("4_ojmfo")]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -82.9999
+offset_top = -77.0
+offset_right = -82.9999
+offset_bottom = -77.0
+scale = Vector2(1.745, 1.745)
+
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("5_0te5f")]
+
+[node name="Timer" type="Timer" parent="."]
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
