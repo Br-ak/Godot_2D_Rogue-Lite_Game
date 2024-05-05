@@ -1,0 +1,14 @@
+{
+	"upgrades": {
+		"upgrade1":{
+			"name":"upgrade1", 
+			"description":"blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah", 
+			"icon":"res://tscn/You otterf__ker!! - Funny.jpg"
+			},
+		"upgrade2":{
+			"name":"upgrade2", 
+			"description":"text text text text text text text text text text text text text text text text ", 
+			"icon":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png"
+			}
+	}
+}

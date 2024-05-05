@@ -1,0 +1,119 @@
+[gd_scene load_steps=3 format=3 uid="uid://co6r0ruevq3ni"]
+
+[ext_resource type="Script" path="res://scripts/level_up_menu.gd" id="1_x2q0k"]
+[ext_resource type="Texture2D" uid="uid://dcoxqd5gil1xy" path="res://tscn/You otterf__ker!! - Funny.jpg" id="1_yp3ty"]
+
+[node name="Level Up Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_x2q0k")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+
+[node name="Level Up!" type="Label" parent="AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+text = "Level Up!"
+horizontal_alignment = 1
+
+[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_constants/h_separation = 20
+theme_override_constants/v_separation = 20
+columns = 3
+
+[node name="TitleA" type="Label" parent="AspectRatioContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Title A"
+horizontal_alignment = 1
+
+[node name="TitleB" type="Label" parent="AspectRatioContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Title B"
+horizontal_alignment = 1
+
+[node name="TitleC" type="Label" parent="AspectRatioContainer/VBoxContainer/GridContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Title C"
+horizontal_alignment = 1
+
+[node name="DescA" type="RichTextLabel" parent="AspectRatioContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 10
+text = "Text A: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah "
+
+[node name="DescB" type="RichTextLabel" parent="AspectRatioContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 10
+text = "Text B: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah "
+
+[node name="DescC" type="RichTextLabel" parent="AspectRatioContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 10
+text = "Text C: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah "
+
+[node name="IconA" type="TextureButton" parent="AspectRatioContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("1_yp3ty")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="IconB" type="TextureButton" parent="AspectRatioContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("1_yp3ty")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="IconC" type="TextureButton" parent="AspectRatioContainer/VBoxContainer/GridContainer"]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("1_yp3ty")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="RerollButton" type="Button" parent="AspectRatioContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 10
+text = "Reroll (?)"
+
+[node name="Exit" type="Button" parent="AspectRatioContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_font_sizes/font_size = 10
+text = "Exit"
+
+[connection signal="pressed" from="AspectRatioContainer/VBoxContainer/RerollButton" to="." method="_on_reroll_button_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

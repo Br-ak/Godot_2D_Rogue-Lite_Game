@@ -57,7 +57,7 @@ position = Vector2(0, -4)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D"]
 z_index = 1
-position = Vector2(713.991, -21.1754)
+position = Vector2(16, 4)
 rotation = -0.775143
 scale = Vector2(-0.02, 0.02)
 sprite_frames = SubResource("SpriteFrames_a18p3")

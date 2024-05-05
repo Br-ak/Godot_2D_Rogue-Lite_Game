@@ -9,6 +9,7 @@ const type = "Player"
 @onready var gameNode = get_parent().get_parent()
 @onready var hud = gameNode.get_node("CanvasLayer").get_node("Hud")
 var equipped_weapon
+var test_weapon_equipped = false
 
 var player_exp := 0:
 	set(value):
@@ -41,7 +42,8 @@ func read_inputs():
 		if equipped_weapon:
 			equipped_weapon.attack()
 	
-	if Input.is_action_pressed("add_weapon_test") :
+	if Input.is_action_pressed("add_weapon_test") && test_weapon_equipped == false:
+		test_weapon_equipped = true
 		const melee_weapon = preload("res://tscn/weapon.tscn")
 		var new_melee_weapon = melee_weapon.instantiate()
 		weapon.call("add_child", new_melee_weapon)
@@ -80,8 +82,12 @@ func read_inputs():
 func gain_exp(value):
 	player_exp += value
 	if player_exp >= 50:
-		player_level += 1
-		player_exp = 0
+		level_up()
+
+func level_up():
+	player_level += 1
+	player_exp = 0
+	
 
 func death():
 	if gameNode.has_method("gameOverMenu"):
