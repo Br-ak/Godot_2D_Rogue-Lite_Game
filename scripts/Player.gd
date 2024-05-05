@@ -8,6 +8,8 @@ const type = "Player"
 
 @onready var gameNode = get_parent().get_parent()
 @onready var hud = gameNode.get_node("CanvasLayer").get_node("Hud")
+@onready var levelUpMenu = gameNode.get_node("CanvasLayer").get_node("Level Up Menu")
+
 var equipped_weapon
 var test_weapon_equipped = false
 
@@ -87,7 +89,7 @@ func gain_exp(value):
 func level_up():
 	player_level += 1
 	player_exp = 0
-	
+	gameNode.levelUpMenu()
 
 func death():
 	if gameNode.has_method("gameOverMenu"):

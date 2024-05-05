@@ -1,11 +1,14 @@
 extends Node
 
 var itemData = {}
+var keybinds = {}
 
-var data_file_path = "res://assets/upgrades.json"
+var upgrades_file_path = "res://resources/upgrades.json"
+var keybinds_file_path = "res://resources/keybinds.json"
 
 func _ready():
-	itemData = load_json_file(data_file_path)
+	itemData = load_json_file(upgrades_file_path)
+	keybinds = load_json_file(keybinds_file_path)
 
 func load_json_file(filePath : String):
 	if FileAccess.file_exists(filePath):

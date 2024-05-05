@@ -1,0 +1,29 @@
+{
+	"keybinds": {
+		"ui_left":{
+			"name":"Move Left", 
+			"description":"Moves the player left", 
+			"assigned_key":"A"
+			},
+		"ui_right":{
+			"name":"Move Right", 
+			"description":"Moves the player right", 
+			"assigned_key":"D"
+			},
+		"ui_up":{
+			"name":"Move Up", 
+			"description":"Moves the player up", 
+			"assigned_key":"W"
+			},
+		"ui_down":{
+			"name":"Move Down", 
+			"description":"Moves the player down", 
+			"assigned_key":"S"
+			},
+		"attack_primary":{
+			"name":"Primary Attack", 
+			"description":"Player's primary attack", 
+			"assigned_key":"Left Mouse Button"
+			},
+	}
+}

@@ -1,0 +1,245 @@
+[gd_scene load_steps=2 format=3 uid="uid://ci0lr4vn5lccr"]
+
+[ext_resource type="Script" path="res://scripts/options_menu.gd" id="1_uqbbr"]
+
+[node name="Options Menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_uqbbr")
+
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -265.5
+offset_right = 250.0
+offset_bottom = 265.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="TabContainer" type="TabContainer" parent="AspectRatioContainer"]
+layout_mode = 2
+tab_alignment = 1
+
+[node name="General" type="Panel" parent="AspectRatioContainer/TabContainer"]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/TabContainer/General"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.5
+offset_top = -31.0
+offset_right = 46.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ExitButton" type="Button" parent="AspectRatioContainer/TabContainer/General/HBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="ApplyButton" type="Button" parent="AspectRatioContainer/TabContainer/General/HBoxContainer"]
+layout_mode = 2
+text = "Apply"
+
+[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer/TabContainer/General"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.5
+offset_top = -67.0
+offset_right = 176.5
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 200
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Label" type="Label" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "General"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Bingus"
+
+[node name="OptionButton2" type="OptionButton" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
+layout_mode = 2
+text = "Bingus"
+vertical_alignment = 1
+
+[node name="OptionButton3" type="OptionButton" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
+layout_mode = 2
+text = "Bingus"
+vertical_alignment = 1
+
+[node name="OptionButton4" type="OptionButton" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+
+[node name="Controls" type="Panel" parent="AspectRatioContainer/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+
+[node name="MarginContainer" type="MarginContainer" parent="AspectRatioContainer/TabContainer/Controls"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/TabContainer/Controls"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.5
+offset_top = -31.0
+offset_right = 46.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ExitButton" type="Button" parent="AspectRatioContainer/TabContainer/Controls/HBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="ApplyButton" type="Button" parent="AspectRatioContainer/TabContainer/Controls/HBoxContainer"]
+layout_mode = 2
+text = "Apply"
+
+[node name="ScrollContainer" type="ScrollContainer" parent="AspectRatioContainer/TabContainer/Controls"]
+custom_minimum_size = Vector2(500, 440)
+layout_mode = 2
+offset_right = 450.0
+offset_bottom = 400.0
+
+[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer/TabContainer/Controls/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/separation = 50
+
+[node name="Sound" type="Panel" parent="AspectRatioContainer/TabContainer"]
+visible = false
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/TabContainer/Sound"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -46.5
+offset_top = -31.0
+offset_right = 46.5
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="ExitButton" type="Button" parent="AspectRatioContainer/TabContainer/Sound/HBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[node name="ApplyButton" type="Button" parent="AspectRatioContainer/TabContainer/Sound/HBoxContainer"]
+layout_mode = 2
+text = "Apply"
+
+[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer/TabContainer/Sound"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.5
+offset_top = -67.0
+offset_right = 176.5
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 200
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Label" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Sound"
+vertical_alignment = 1
+
+[node name="OptionButton" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+
+[node name="Label2" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Bingus"
+
+[node name="OptionButton2" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+
+[node name="Label3" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+layout_mode = 2
+text = "Bingus"
+vertical_alignment = 1
+
+[node name="OptionButton3" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+
+[node name="Label4" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+layout_mode = 2
+text = "Bingus"
+vertical_alignment = 1
+
+[node name="OptionButton4" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+clip_contents = true
+custom_minimum_size = Vector2(100, 25)
+layout_mode = 2
+
+[connection signal="pressed" from="AspectRatioContainer/TabContainer/General/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/TabContainer/General/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/TabContainer/Controls/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/TabContainer/Controls/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/TabContainer/Sound/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/TabContainer/Sound/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]

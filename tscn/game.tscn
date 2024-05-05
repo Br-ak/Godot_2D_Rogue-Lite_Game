@@ -16,10 +16,6 @@ script = ExtResource("1_bkj1u")
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_6cn8u")]
 visible = false
-offset_left = -57.0
-offset_top = -55.0
-offset_right = -57.0
-offset_bottom = -55.0
 scale = Vector2(1.695, 1.695)
 
 [node name="Game Over Menu" parent="CanvasLayer" instance=ExtResource("4_ojmfo")]

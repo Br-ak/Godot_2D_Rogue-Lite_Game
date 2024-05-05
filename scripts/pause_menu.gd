@@ -1,8 +1,7 @@
 extends Control
 @onready var pause_menu = $"."
-@onready var confirm = $Confirm
-@onready var h_box_container = $HBoxContainer
-
+@onready var h_box_container = $AspectRatioContainer/VBoxContainer/HBoxContainer
+@onready var confirm = $AspectRatioContainer/VBoxContainer/Confirm
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -11,6 +10,8 @@ func _process(_delta):
 func _on_resume_pressed():
 	pause_menu.set_visible(false)
 	Engine.time_scale = 1
+	confirm.set_visible(false)
+	h_box_container.set_visible(false)
 
 func _on_quit_pressed():
 	confirm.set_visible(true)
