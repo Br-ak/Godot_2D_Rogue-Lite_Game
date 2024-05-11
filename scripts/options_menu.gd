@@ -2,6 +2,7 @@ class_name SettingsTabContainer
 extends Control
 @onready var tab_container = $AspectRatioContainer/TabContainer as TabContainer
 @onready var CONTROLS_v_box_container = $AspectRatioContainer/TabContainer/Controls/ScrollContainer/VBoxContainer
+@onready var keybindList = StaticData.keybindList
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -9,7 +10,7 @@ func _ready():
 	populate_Keybinds()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func _on_exit_button_pressed():
@@ -27,9 +28,10 @@ func create_Controls_HSeparator():
 func populate_Keybinds():
 	const hotkey_rebind_button = preload("res://tscn/hotkey_rebind_button.tscn")
 	var data = StaticData.keybinds["keybinds"]
-	for key in data:
-		var new_hotkey_rebind_button = hotkey_rebind_button.instantiate()
-		new_hotkey_rebind_button.action_name = key
-		new_hotkey_rebind_button.action_name_formatted = data[key]["name"]
-		new_hotkey_rebind_button.current_keybind = data[key]["assigned_key"]
-		CONTROLS_v_box_container.call("add_child", new_hotkey_rebind_button)
+	for key in keybindList:
+		if key != "attack_primary":
+			var new_hotkey_rebind_button = hotkey_rebind_button.instantiate()
+			new_hotkey_rebind_button.action_name = key
+			new_hotkey_rebind_button.action_name_formatted = data[key]["name"]
+			new_hotkey_rebind_button.current_keybind = data[key]["assigned_key"]
+			CONTROLS_v_box_container.call("add_child", new_hotkey_rebind_button)

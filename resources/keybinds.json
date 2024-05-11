@@ -1,29 +1,34 @@
 {
 	"keybinds": {
-		"ui_left":{
-			"name":"Move Left", 
-			"description":"Moves the player left", 
-			"assigned_key":"A"
-			},
-		"ui_right":{
-			"name":"Move Right", 
-			"description":"Moves the player right", 
-			"assigned_key":"D"
-			},
-		"ui_up":{
-			"name":"Move Up", 
-			"description":"Moves the player up", 
-			"assigned_key":"W"
-			},
-		"ui_down":{
-			"name":"Move Down", 
-			"description":"Moves the player down", 
-			"assigned_key":"S"
-			},
-		"attack_primary":{
-			"name":"Primary Attack", 
-			"description":"Player's primary attack", 
-			"assigned_key":"Left Mouse Button"
-			},
+		"attack_primary": {
+			"assigned_key": "Left Mouse Button",
+			"default_key": "Left Mouse Button",
+			"description": "Player's primary attack",
+			"name": "Primary Attack"
+		},
+		"ui_down": {
+			"assigned_key": "S",
+			"default_key": "S",
+			"description": "Moves the player down",
+			"name": "Move Down"
+		},
+		"ui_left": {
+			"assigned_key": "A",
+			"default_key": "A",
+			"description": "Moves the player left",
+			"name": "Move Left"
+		},
+		"ui_right": {
+			"assigned_key": "D",
+			"default_key": "D",
+			"description": "Moves the player right",
+			"name": "Move Right"
+		},
+		"ui_up": {
+			"assigned_key": "W",
+			"default_key": "W",
+			"description": "Moves the player up",
+			"name": "Move Up"
+		}
 	}
 }

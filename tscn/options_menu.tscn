@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://ci0lr4vn5lccr"]
+[gd_scene load_steps=3 format=3 uid="uid://ci0lr4vn5lccr"]
 
 [ext_resource type="Script" path="res://scripts/options_menu.gd" id="1_uqbbr"]
+[ext_resource type="PackedScene" uid="uid://bncmvkgds1bpr" path="res://tscn/hotkey_rebind_button.tscn" id="2_ljvkk"]
 
 [node name="Options Menu" type="Control"]
 layout_mode = 3
@@ -122,6 +123,23 @@ layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
+[node name="Hotkey_Rebind_Button" parent="AspectRatioContainer/TabContainer/Controls/MarginContainer" instance=ExtResource("2_ljvkk")]
+layout_mode = 2
+tooltip_text = "Cannot be reebound."
+action_name = "Attack"
+action_name_formatted = "Attack"
+current_keybind = "Left Mouse"
+
+[node name="Label" type="Label" parent="AspectRatioContainer/TabContainer/Controls/MarginContainer/Hotkey_Rebind_Button"]
+layout_mode = 2
+offset_left = 148.0
+offset_top = 2.5
+offset_right = 377.0
+offset_bottom = 40.5
+theme_override_font_sizes/font_size = 11
+text = "Cannot be
+rebound currently."
+
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/TabContainer/Controls"]
 layout_mode = 1
 anchors_preset = 7
@@ -138,10 +156,6 @@ grow_vertical = 0
 [node name="ExitButton" type="Button" parent="AspectRatioContainer/TabContainer/Controls/HBoxContainer"]
 layout_mode = 2
 text = "Exit"
-
-[node name="ApplyButton" type="Button" parent="AspectRatioContainer/TabContainer/Controls/HBoxContainer"]
-layout_mode = 2
-text = "Apply"
 
 [node name="ScrollContainer" type="ScrollContainer" parent="AspectRatioContainer/TabContainer/Controls"]
 custom_minimum_size = Vector2(500, 440)
@@ -240,6 +254,5 @@ layout_mode = 2
 [connection signal="pressed" from="AspectRatioContainer/TabContainer/General/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/TabContainer/General/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/TabContainer/Controls/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/TabContainer/Controls/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/TabContainer/Sound/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/TabContainer/Sound/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]

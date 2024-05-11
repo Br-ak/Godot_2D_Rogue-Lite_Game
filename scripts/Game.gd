@@ -6,6 +6,7 @@ extends Node2D
 @onready var timer = $Timer
 @onready var hud = $CanvasLayer/Hud
 
+
 var gameTimer := 0:
 	set(value):
 		gameTimer = value
@@ -47,3 +48,5 @@ func gameOverMenu():
 func _on_timer_timeout():
 	gameTimer += 1
 	timer.start(1) 
+
+

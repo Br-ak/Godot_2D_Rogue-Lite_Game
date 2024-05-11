@@ -2,7 +2,7 @@ extends Node
 
 var itemData = {}
 var keybinds = {}
-
+var keybindList = ["attack_primary", "ui_up", "ui_left", "ui_down", "ui_right"]
 var upgrades_file_path = "res://resources/upgrades.json"
 var keybinds_file_path = "res://resources/keybinds.json"
 
@@ -19,6 +19,12 @@ func load_json_file(filePath : String):
 			return parsedResult
 		else:
 			print("Error Reading File")
-	
 	else:
 		print("File Not Found")
+
+func save_data(key, value):
+	keybinds["keybinds"][key]["assigned_key"] = value
+	var json = JSON.stringify(keybinds, "\t")
+	var file = FileAccess.open(keybinds_file_path, FileAccess.WRITE)
+	file.store_line(json)
+	file.close()

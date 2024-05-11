@@ -7,6 +7,7 @@ extends Control
 @export var action_name : String = ""
 @export var action_name_formatted : String = ""
 @export var current_keybind : String = ""
+var data = StaticData.keybinds["keybinds"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -14,7 +15,7 @@ func _ready():
 	set_info()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _process(delta):
+func _process(_delta):
 	pass
 
 func set_info():
@@ -24,7 +25,12 @@ func set_info():
 func set_text_for_key():
 	var action_events = InputMap.action_get_events(action_name)
 	var action_event = action_events[0]
-	var action_keycode = OS.get_keycode_string(action_event.physical_keycode)
+	var action_keycode
+	if action_event is InputEventMouseButton:
+		action_keycode = action_event.button_index
+		print(action_event.button_index)
+	elif action_event is InputEventKey:
+		action_keycode = OS.get_keycode_string(action_event.physical_keycode)
 	
 	button.text = "%s" % action_keycode
 
@@ -54,6 +60,7 @@ func rebind_action_key(event):
 	InputMap.action_erase_events(action_name)
 	InputMap.action_add_event(action_name, event)
 	
+	StaticData.save_data(action_name, event.as_text())
 	set_process_unhandled_key_input(false)
 	set_text_for_key()
 	set_info()
