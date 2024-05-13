@@ -17,46 +17,53 @@ offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("1_c5o3d")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-
-[node name="info" type="Label" parent="CanvasLayer"]
+[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+layout_mode = 0
 offset_right = 40.0
-offset_bottom = 23.0
+offset_bottom = 40.0
+
+[node name="CanvasLayer" type="CanvasLayer" parent="AspectRatioContainer"]
+
+[node name="info" type="Label" parent="AspectRatioContainer/CanvasLayer"]
+offset_right = 40.0
+offset_bottom = 26.0
 text = "fps: "
 
-[node name="kills" type="Label" parent="CanvasLayer"]
+[node name="kills" type="Label" parent="AspectRatioContainer/CanvasLayer"]
 offset_top = 30.0
-offset_right = 40.0
+offset_right = 50.0
 offset_bottom = 56.0
 text = "Kills: 0"
 
-[node name="level" type="Label" parent="CanvasLayer"]
+[node name="level" type="Label" parent="AspectRatioContainer/CanvasLayer"]
 offset_top = 60.0
-offset_right = 40.0
+offset_right = 58.0
 offset_bottom = 86.0
 text = "Level: 1"
 
-[node name="exp" type="Label" parent="CanvasLayer"]
+[node name="exp" type="Label" parent="AspectRatioContainer/CanvasLayer"]
 offset_top = 90.0
 offset_right = 46.0
 offset_bottom = 116.0
 text = "Exp: 0"
 
-[node name="timer" type="Label" parent="CanvasLayer"]
-offset_left = 437.0
-offset_top = 4.0
-offset_right = 493.0
-offset_bottom = 30.0
-scale = Vector2(2.97205, 2.97205)
+[node name="timer" type="Label" parent="AspectRatioContainer/CanvasLayer"]
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -28.0
+offset_right = 28.0
+offset_bottom = 26.0
+grow_horizontal = 2
 text = "Time: 0"
 
-[node name="ColorRect" type="ColorRect" parent="CanvasLayer"]
+[node name="ColorRect" type="ColorRect" parent="AspectRatioContainer/CanvasLayer"]
 offset_left = 94.0
 offset_top = 594.0
 offset_right = 1094.0
 offset_bottom = 614.0
 
-[node name="ColorRect2" type="ColorRect" parent="CanvasLayer/ColorRect"]
+[node name="ColorRect2" type="ColorRect" parent="AspectRatioContainer/CanvasLayer/ColorRect"]
 z_index = -1
 layout_mode = 0
 offset_left = -2.0
@@ -66,10 +73,25 @@ offset_bottom = 17.0
 scale = Vector2(1.00449, 1.31179)
 color = Color(0, 0, 0, 1)
 
-[node name="TextureRect" type="TextureRect" parent="CanvasLayer/ColorRect"]
+[node name="TextureRect" type="TextureRect" parent="AspectRatioContainer/CanvasLayer/ColorRect"]
 layout_mode = 0
 offset_left = -1.0
 offset_right = 576.0
 offset_bottom = 64.0
 scale = Vector2(1.73435, 0.313608)
 texture = SubResource("GradientTexture2D_mqody")
+
+[node name="TextureProgressBar" type="TextureProgressBar" parent="AspectRatioContainer/CanvasLayer"]
+custom_minimum_size = Vector2(100, 0)
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -50.0
+offset_top = -40.0
+offset_right = 50.0
+grow_horizontal = 2
+grow_vertical = 0
+max_value = 500.0
+value = 500.0

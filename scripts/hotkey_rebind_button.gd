@@ -28,7 +28,6 @@ func set_text_for_key():
 	var action_keycode
 	if action_event is InputEventMouseButton:
 		action_keycode = action_event.button_index
-		print(action_event.button_index)
 	elif action_event is InputEventKey:
 		action_keycode = OS.get_keycode_string(action_event.physical_keycode)
 	

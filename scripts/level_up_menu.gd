@@ -1,34 +1,54 @@
 extends Control
-@onready var exit = $AspectRatioContainer/VBoxContainer/Exit
+@onready var exit = $AspectRatioContainer/VBoxContainer2/Exit
 @onready var level_up_menu = $"."
 
-@onready var title_a = $AspectRatioContainer/VBoxContainer/GridContainer/TitleA
-@onready var title_b = $AspectRatioContainer/VBoxContainer/GridContainer/TitleB
-@onready var title_c = $AspectRatioContainer/VBoxContainer/GridContainer/TitleC
-
-@onready var desc_a = $AspectRatioContainer/VBoxContainer/GridContainer/DescA
-@onready var desc_b = $AspectRatioContainer/VBoxContainer/GridContainer/DescB
-@onready var desc_c = $AspectRatioContainer/VBoxContainer/GridContainer/DescC
-
-@onready var icon_a = $AspectRatioContainer/VBoxContainer/GridContainer/IconA
-@onready var icon_b = $AspectRatioContainer/VBoxContainer/GridContainer/IconB
-@onready var icon_c = $AspectRatioContainer/VBoxContainer/GridContainer/IconC
-
+@onready var upgrade_container = $AspectRatioContainer/VBoxContainer2/HBoxContainer
+var data = StaticData.itemData["upgrades"]
+var upgrade_count = 0
+var upgrade_panel_count = 3
+var displayed_upgrades = []
+var prev_displayed_upgrades = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass # Replace with function body.
+	on_open()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
+
+func on_open():
+	for key in data:
+		upgrade_count += 1
+	init_upgrade_panel()
+
+func init_upgrade_panel():
+	const upgrade_panel = preload("res://tscn/upgrade_panel.tscn")
+	while displayed_upgrades.size() != upgrade_panel_count:
+		var rand_upgrade = str(randi() % upgrade_count + 1)
+		var upgrade_key = "upgrade" + rand_upgrade
+	
+		while displayed_upgrades.has(upgrade_key) || prev_displayed_upgrades.has(upgrade_key): # dont allow duplicates
+			rand_upgrade = str(randi() % upgrade_count + 1)
+			upgrade_key = "upgrade" + rand_upgrade
+		
+		var new_upgrade_panel = upgrade_panel.instantiate()
+		new_upgrade_panel.key = upgrade_key
+		new_upgrade_panel.title = data[upgrade_key]["name"]
+		new_upgrade_panel.description = data[upgrade_key]["description"]
+		new_upgrade_panel.icon_path = data[upgrade_key]["icon"]
+		
+		displayed_upgrades.append(upgrade_key)
+		upgrade_container.call("add_child", new_upgrade_panel)
+	prev_displayed_upgrades = displayed_upgrades
+	displayed_upgrades = []
 
 func _on_exit_pressed():
 	level_up_menu.set_visible(false)
 	Engine.time_scale = 1
 
 func _on_reroll_button_pressed():
-	var data = StaticData.itemData["upgrades"]["upgrade2"]
-	title_a.text = data["name"]
-	desc_a.text = data["description"]
-	var newIcon = load(data["icon"])
-	icon_a.set_texture_normal(newIcon)
+	
+	for object in upgrade_container.get_children():
+		if object is UpgradePanel:
+			object.queue_free()
+	init_upgrade_panel()

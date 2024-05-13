@@ -1,0 +1,31 @@
+[gd_scene load_steps=3 format=3 uid="uid://gcth0oxplel7"]
+
+[ext_resource type="Texture2D" uid="uid://dcoxqd5gil1xy" path="res://tscn/You otterf__ker!! - Funny.jpg" id="1_mjnb0"]
+[ext_resource type="Script" path="res://scripts/upgrade_panel.gd" id="1_n3h3g"]
+
+[node name="Upgrade Panel" type="VBoxContainer"]
+script = ExtResource("1_n3h3g")
+
+[node name="Title" type="Label" parent="."]
+layout_mode = 2
+theme_override_font_sizes/font_size = 15
+text = "Title"
+horizontal_alignment = 1
+
+[node name="Desc" type="RichTextLabel" parent="."]
+custom_minimum_size = Vector2(150, 250)
+layout_mode = 2
+theme_override_font_sizes/normal_font_size = 10
+text = "Description: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah "
+
+[node name="Icon" type="TextureButton" parent="."]
+custom_minimum_size = Vector2(150, 150)
+layout_mode = 2
+disabled = true
+texture_normal = ExtResource("1_mjnb0")
+ignore_texture_size = true
+stretch_mode = 0
+
+[node name="Button" type="Button" parent="."]
+layout_mode = 2
+text = "Select Upgrade"

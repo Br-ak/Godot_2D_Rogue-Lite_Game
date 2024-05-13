@@ -8,17 +8,17 @@ var XP_BAR_MAX = 50.00
 ## Hud values
 #
 
-@onready var info = $CanvasLayer/info
-@onready var exp_bar = $CanvasLayer/ColorRect/TextureRect
+@onready var info = $AspectRatioContainer/CanvasLayer/info
+@onready var exp_bar = $AspectRatioContainer/CanvasLayer/ColorRect/TextureRect
 
-@onready var killCounter = $CanvasLayer/kills:
+@onready var killCounter = $AspectRatioContainer/CanvasLayer/kills:
 	set(value):
 		if killCounter == null: # for some reason this is null upon startup for a second
 			pass
 		else:
 			killCounter.text = "Kills: " + str(value)
 
-@onready var player_level = $CanvasLayer/level:
+@onready var player_level = $AspectRatioContainer/CanvasLayer/level:
 	set(value):
 		if player_level == null: # for some reason this is null upon startup for a second
 			pass
@@ -26,7 +26,7 @@ var XP_BAR_MAX = 50.00
 			_on_reset_exp_bar()
 			player_level.text = "Level: " + str(value)
 
-@onready var player_exp = $CanvasLayer/exp:
+@onready var player_exp = $AspectRatioContainer/CanvasLayer/exp:
 	set(value):
 		if player_exp == null: # for some reason this is null upon startup for a second
 			pass
@@ -34,7 +34,7 @@ var XP_BAR_MAX = 50.00
 			player_exp.text = "Exp: " + str(value)
 			_on_fill_exp_bar(value)
 
-@onready var gameTimer = $CanvasLayer/timer:
+@onready var gameTimer = $AspectRatioContainer/CanvasLayer/timer:
 	set(value):
 		if gameTimer == null: # for some reason this is null upon startup for a second
 			pass
