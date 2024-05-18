@@ -613,3 +613,8 @@ metadata/_edit_lock_ = true
 [node name="HealthComponent" parent="." node_paths=PackedStringArray("hitbox_component", "parent") instance=ExtResource("10_y4qyh")]
 hitbox_component = NodePath("../HitboxComponent")
 parent = NodePath("..")
+MAX_HEALTH = 100.0
+
+[node name="I-Frames" type="Timer" parent="HealthComponent"]
+
+[connection signal="timeout" from="HealthComponent/I-Frames" to="." method="_on_i_frames_timeout"]

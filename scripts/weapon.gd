@@ -4,7 +4,7 @@ extends Area2D
 @onready var anim = $Marker2D/AnimatedSprite2D
 @onready var timer = $Timer
 var can_attack = true
-var attack_wait = 0.25
+var attack_wait = 0.01
 
 func _ready():
 	pass

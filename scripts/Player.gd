@@ -9,9 +9,12 @@ const type = "Player"
 @onready var gameNode = get_parent().get_parent()
 @onready var hud = gameNode.get_node("CanvasLayer").get_node("Hud")
 @onready var levelUpMenu = gameNode.get_node("CanvasLayer").get_node("Level Up Menu")
+@onready var health_component = $HealthComponent
+@onready var invincible_timer = $"HealthComponent/I-Frames"
 
 var equipped_weapon
 var test_weapon_equipped = false
+var invincible_timer_length = 1
 
 var player_exp := 0:
 	set(value):
@@ -28,12 +31,18 @@ var killCounter := 0:
 		killCounter = value
 		hud.killCounter = killCounter
 
+var player_health := 0:
+	set(value):
+		player_health = value
+		hud.playerHealth = player_health
+
 func _ready():
 	anim.play("Side_Idle")
 
 func _physics_process(_delta):
 	if Engine.time_scale == 1:
 		read_inputs()
+	player_health = health_component.health
 
 func read_inputs():
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -41,7 +50,7 @@ func read_inputs():
 	var angle = position.angle_to_point(mousePosition)
 	
 	if Input.is_action_pressed("attack_primary"):
-		if equipped_weapon:
+		if equipped_weapon && equipped_weapon.has_method("attack"):
 			equipped_weapon.attack()
 	
 	if Input.is_action_pressed("add_weapon_test") && test_weapon_equipped == false:
@@ -94,3 +103,10 @@ func level_up():
 func death():
 	if gameNode.has_method("gameOverMenu"):
 		gameNode.gameOverMenu()
+
+func hurt():
+	health_component.INVINCIBLE = true
+	invincible_timer.start(invincible_timer_length)
+
+func _on_i_frames_timeout():
+	health_component.INVINCIBLE = false
