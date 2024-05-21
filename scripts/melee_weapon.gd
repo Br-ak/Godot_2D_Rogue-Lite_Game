@@ -5,10 +5,15 @@ extends Area2D
 @onready var animPlayer = $Marker2D/AnimatedSprite2D/AnimationPlayer
 @onready var hitbox = $Marker2D/AnimatedSprite2D/hitbox/CollisionShape2D
 @onready var timer = $Timer
-var mousePosition
+@onready var marker_2d = $Marker2D
+
+var mousePosition : Vector2
 var can_attack = true
 var baseDamage = 5
 var currentDamage = baseDamage
+var local_mouse_position : Vector2
+var adjusted_mouse_position : Vector2
+var attack_speed_mod = 1
 
 func _ready():
 	hitbox.disabled = true
@@ -17,28 +22,33 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Engine.time_scale == 1:
-		getMousePosition()
+		if can_attack:
+			getMousePosition()
 
 func getMousePosition():
 	mousePosition = get_global_mouse_position()
-	look_at(mousePosition)
+
+	
 	if mousePosition.x > player.position.x: ##### looking right
-		animSprite.scale.y = 1
-		animSprite.scale.x = -1
-		animSprite.rotation = -45
+		marker_2d.scale.x = 1
+		look_at(mousePosition)
 	elif mousePosition.x < player.position.x: ##### looking left
-		animSprite.scale.y = -1
-		animSprite.scale.x = -1
-		animSprite.rotation = 45
+		# adjusted mouse position should return inverted mousePosition
+		# coupled with the marker's x value being inverted it should mirror any animation in the animation player
+		# no need to created 2 animations for each attack
+		local_mouse_position = (mousePosition - global_position)
+		adjusted_mouse_position = global_position - local_mouse_position
+		marker_2d.scale.x = -1
+		look_at(adjusted_mouse_position)
 
 func attack():
 	if can_attack:
+		can_attack = false
 		hitbox.disabled = false
-		animPlayer.play("Side_Attack")
+		animPlayer.play("primary_attack")
 		await animPlayer.animation_finished
 		hitbox.disabled = true
-		can_attack = false
-		timer.start(0.25)
+		timer.start(animPlayer.get_animation("primary_attack").length * attack_speed_mod)
 
 func _on_hitbox_area_entered(area):
 	if area is HitboxComponent:

@@ -1,21 +1,37 @@
-[gd_scene load_steps=7 format=3 uid="uid://b1408k7y7a2rw"]
+[gd_scene load_steps=8 format=3 uid="uid://b1408k7y7a2rw"]
 
 [ext_resource type="Script" path="res://scripts/melee_weapon.gd" id="1_nn1ov"]
-[ext_resource type="Texture2D" uid="uid://kqpm1fo21e2h" path="res://assets/1024px-Bryophyta's_staff_(uncharged)_detail.png" id="2_icdjm"]
+[ext_resource type="Texture2D" uid="uid://23cxau24hamy" path="res://assets/GUNS_V1.00/V1.00/PNG/[NO_BOLT]_Sniper_rifle_[KAR98]_V1.00.png" id="2_sxsqv"]
 
-[sub_resource type="SpriteFrames" id="SpriteFrames_a18p3"]
+[sub_resource type="SpriteFrames" id="SpriteFrames_jygr1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_icdjm")
+"texture": ExtResource("2_sxsqv")
 }],
 "loop": true,
 "name": &"Idle",
 "speed": 5.0
 }]
 
-[sub_resource type="Animation" id="Animation_61ry6"]
-resource_name = "Side_Attack"
+[sub_resource type="Animation" id="Animation_aw3kp"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [2.22704]
+}
+
+[sub_resource type="Animation" id="Animation_snqyk"]
+resource_name = "primary_attack"
+length = 0.5
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -23,10 +39,10 @@ tracks/0/path = NodePath(".:position")
 tracks/0/interp = 1
 tracks/0/loop_wrap = true
 tracks/0/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.8, 1),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [Vector2(713.991, -21.1754), Vector2(3127, -21.1754), Vector2(3127, -21.1754), Vector2(713.991, -21.1754)]
+"values": [Vector2(10, 0), Vector2(60, 28), Vector2(42, 37), Vector2(10, 0)]
 }
 tracks/1/type = "value"
 tracks/1/imported = false
@@ -35,47 +51,43 @@ tracks/1/path = NodePath(".:rotation")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.5, 0.8, 1),
+"times": PackedFloat32Array(0, 0.2, 0.3, 0.5),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 0,
-"values": [-0.775143, 0.0, 5.91667, -0.774926]
+"values": [1.5708, 3.20966, 4.08407, 1.5708]
 }
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_eylyi"]
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_xchi5"]
 _data = {
-"Side_Attack": SubResource("Animation_61ry6")
+"RESET": SubResource("Animation_aw3kp"),
+"primary_attack": SubResource("Animation_snqyk")
 }
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_ajmwo"]
-size = Vector2(663.471, 246.282)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm2xp"]
+size = Vector2(118, 20)
 
 [node name="Area2D" type="Area2D"]
 script = ExtResource("1_nn1ov")
 
 [node name="Marker2D" type="Marker2D" parent="."]
-position = Vector2(0, -4)
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D"]
-z_index = 1
-position = Vector2(16, 4)
-rotation = -0.775143
-scale = Vector2(-0.02, 0.02)
-sprite_frames = SubResource("SpriteFrames_a18p3")
+position = Vector2(10, 0)
+rotation = 2.22704
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_jygr1")
 animation = &"Idle"
-autoplay = "Idle"
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="Marker2D/AnimatedSprite2D"]
 libraries = {
-"": SubResource("AnimationLibrary_eylyi")
+"": SubResource("AnimationLibrary_xchi5")
 }
 
 [node name="hitbox" type="Area2D" parent="Marker2D/AnimatedSprite2D"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Marker2D/AnimatedSprite2D/hitbox"]
-position = Vector2(37.4673, 1.09137)
-rotation = 0.795653
-scale = Vector2(2.06085, 1.247)
-shape = SubResource("RectangleShape2D_ajmwo")
+position = Vector2(-3, 2.84217e-14)
+shape = SubResource("RectangleShape2D_cm2xp")
 
 [node name="Timer" type="Timer" parent="."]
 

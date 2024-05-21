@@ -55,7 +55,8 @@ func read_inputs():
 	
 	if Input.is_action_pressed("add_weapon_test") && test_weapon_equipped == false:
 		test_weapon_equipped = true
-		const melee_weapon = preload("res://tscn/weapon.tscn")
+		const ranged_weapon = preload("res://tscn/weapon.tscn")
+		const melee_weapon = preload("res://tscn/melee_weapon.tscn")
 		var new_melee_weapon = melee_weapon.instantiate()
 		weapon.call("add_child", new_melee_weapon)
 		equipped_weapon = $Weapon/Area2D
