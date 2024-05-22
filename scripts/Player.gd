@@ -52,6 +52,10 @@ func read_inputs():
 	if Input.is_action_pressed("attack_primary"):
 		if equipped_weapon && equipped_weapon.has_method("attack"):
 			equipped_weapon.attack()
+			
+	if Input.is_action_pressed("attack_secondary"):
+		if equipped_weapon && equipped_weapon.has_method("attack_secondary"):
+			equipped_weapon.attack_secondary()
 	
 	if Input.is_action_pressed("add_weapon_test") && test_weapon_equipped == false:
 		test_weapon_equipped = true

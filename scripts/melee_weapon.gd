@@ -6,6 +6,7 @@ extends Area2D
 @onready var hitbox = $Marker2D/AnimatedSprite2D/hitbox/CollisionShape2D
 @onready var timer = $Timer
 @onready var marker_2d = $Marker2D
+@onready var shooting_point = %ShootingPoint
 
 var mousePosition : Vector2
 var can_attack = true
@@ -15,6 +16,8 @@ var local_mouse_position : Vector2
 var adjusted_mouse_position : Vector2
 var attack_speed_mod = 1
 
+const projectile = preload("res://tscn/staff-projectile.tscn")
+
 func _ready():
 	hitbox.disabled = true
 	pass
@@ -22,12 +25,10 @@ func _ready():
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	if Engine.time_scale == 1:
-		if can_attack:
-			getMousePosition()
+		getMousePosition()
 
 func getMousePosition():
 	mousePosition = get_global_mouse_position()
-
 	
 	if mousePosition.x > player.position.x: ##### looking right
 		marker_2d.scale.x = 1
@@ -50,6 +51,22 @@ func attack():
 		hitbox.disabled = true
 		timer.start(animPlayer.get_animation("primary_attack").length * attack_speed_mod)
 
+func attack_secondary():
+	if can_attack:
+		can_attack = false
+		animPlayer.play("secondary_attack")
+		await animPlayer.animation_finished
+		animPlayer.play("secondary_attack_charge")
+		attack_secondary_fire()
+
+func attack_secondary_fire():
+	var new_projectile = projectile.instantiate()
+	new_projectile.global_position = shooting_point.global_position
+	new_projectile.global_rotation = shooting_point.global_rotation
+	get_tree().root.add_child(new_projectile)
+	animSprite.set_visible(false)
+	timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
+
 func _on_hitbox_area_entered(area):
 	if area is HitboxComponent:
 		if area.get_parent().type == "Enemy":
@@ -58,6 +75,8 @@ func _on_hitbox_area_entered(area):
 			newAttack.attack_damage = currentDamage
 			newHitbox.damage(newAttack)
 
-
 func _on_timer_timeout():
 	can_attack = true
+	if !animSprite.is_visible():
+		animPlayer.play("Idle")
+		animSprite.set_visible(true)

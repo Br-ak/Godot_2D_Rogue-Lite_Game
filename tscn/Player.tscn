@@ -596,9 +596,8 @@ metadata/_edit_lock_ = true
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_s5cxe")
-animation = &"Down_Idle"
+animation = &"Side_Idle"
 autoplay = "Down_Idle"
-frame_progress = 0.902787
 
 [node name="Weapon" type="Node2D" parent="."]
 

@@ -1,0 +1,41 @@
+[gd_scene load_steps=6 format=3 uid="uid://bleol8od36u2p"]
+
+[ext_resource type="Script" path="res://tscn/staff-projectile.gd" id="1_rugmr"]
+[ext_resource type="Texture2D" uid="uid://23cxau24hamy" path="res://assets/GUNS_V1.00/V1.00/PNG/[NO_BOLT]_Sniper_rifle_[KAR98]_V1.00.png" id="2_2j51j"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_jygr1"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_2j51j")
+}],
+"loop": true,
+"name": &"Idle",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlk1k"]
+size = Vector2(30, 6)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm2xp"]
+size = Vector2(30, 6)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_rugmr")
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(0.25, 0.25)
+sprite_frames = SubResource("SpriteFrames_jygr1")
+animation = &"Idle"
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_rlk1k")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-0.999998, 1)
+shape = SubResource("RectangleShape2D_cm2xp")
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

@@ -5,6 +5,7 @@ extends Area2D
 @onready var timer = $Timer
 var can_attack = true
 var attack_wait = 0.01
+const BULLET = preload("res://tscn/bullets.tscn")
 
 func _ready():
 	pass
@@ -21,7 +22,6 @@ func _process(_delta):
 func attack():
 	if can_attack:
 		can_attack = false
-		const BULLET = preload("res://tscn/bullets.tscn")
 		var new_bullet = BULLET.instantiate()
 		new_bullet.global_position = %ShootingPoint.global_position
 		new_bullet.global_rotation = %ShootingPoint.global_rotation
