@@ -50,11 +50,11 @@ func read_inputs():
 	var angle = position.angle_to_point(mousePosition)
 	
 	if Input.is_action_pressed("attack_primary"):
-		if equipped_weapon && equipped_weapon.has_method("attack"):
+		if equipped_weapon && equipped_weapon.has_method("attack") && equipped_weapon.can_attack:
 			equipped_weapon.attack()
 			
-	if Input.is_action_pressed("attack_secondary"):
-		if equipped_weapon && equipped_weapon.has_method("attack_secondary"):
+	if Input.is_action_just_pressed("attack_secondary"):
+		if equipped_weapon && equipped_weapon.has_method("attack_secondary") && equipped_weapon.can_attack:
 			equipped_weapon.attack_secondary()
 	
 	if Input.is_action_pressed("add_weapon_test") && test_weapon_equipped == false:

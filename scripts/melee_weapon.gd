@@ -5,8 +5,10 @@ extends Area2D
 @onready var animPlayer = $Marker2D/AnimatedSprite2D/AnimationPlayer
 @onready var hitbox = $Marker2D/AnimatedSprite2D/hitbox/CollisionShape2D
 @onready var timer = $Timer
+@onready var timer_2 = $Timer2
 @onready var marker_2d = $Marker2D
 @onready var shooting_point = %ShootingPoint
+@onready var area_2d = $"."
 
 var mousePosition : Vector2
 var can_attack = true
@@ -15,7 +17,9 @@ var currentDamage = baseDamage
 var local_mouse_position : Vector2
 var adjusted_mouse_position : Vector2
 var attack_speed_mod = 1
-
+var attack_over = false
+var charging = true
+var button_released = false
 const projectile = preload("res://tscn/staff-projectile.tscn")
 
 func _ready():
@@ -26,6 +30,9 @@ func _ready():
 func _process(_delta):
 	if Engine.time_scale == 1:
 		getMousePosition()
+		if Input.is_action_just_released("attack_secondary"):
+			button_released = true
+			print("released")
 
 func getMousePosition():
 	mousePosition = get_global_mouse_position()
@@ -52,12 +59,18 @@ func attack():
 		timer.start(animPlayer.get_animation("primary_attack").length * attack_speed_mod)
 
 func attack_secondary():
-	if can_attack:
+	attack_over = false
+	if can_attack and not animPlayer.is_playing():
+		button_released = false
 		can_attack = false
+		#print("fire start")
 		animPlayer.play("secondary_attack")
 		await animPlayer.animation_finished
 		animPlayer.play("secondary_attack_charge")
-		attack_secondary_fire()
+		await animPlayer.current_animation_length
+		
+		timer_2.start(0.1)
+		#print("fire end")
 
 func attack_secondary_fire():
 	var new_projectile = projectile.instantiate()
@@ -76,7 +89,19 @@ func _on_hitbox_area_entered(area):
 			newHitbox.damage(newAttack)
 
 func _on_timer_timeout():
-	can_attack = true
 	if !animSprite.is_visible():
 		animPlayer.play("Idle")
 		animSprite.set_visible(true)
+	#print("timer end")
+	timer.stop()
+	can_attack = true
+
+func _on_timer_2_timeout():
+	await button_released
+	if button_released && animPlayer.current_animation == "secondary_attack_charge":
+		animPlayer.stop()
+		attack_secondary_fire()
+		button_released = false
+		timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
+	else:
+		timer_2.start(0.1)

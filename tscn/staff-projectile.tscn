@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://bleol8od36u2p"]
 
-[ext_resource type="Script" path="res://tscn/staff-projectile.gd" id="1_rugmr"]
+[ext_resource type="Script" path="res://scripts/staff-projectile.gd" id="1_63rm4"]
 [ext_resource type="Texture2D" uid="uid://23cxau24hamy" path="res://assets/GUNS_V1.00/V1.00/PNG/[NO_BOLT]_Sniper_rifle_[KAR98]_V1.00.png" id="2_2j51j"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jygr1"]
@@ -21,7 +21,7 @@ size = Vector2(30, 6)
 size = Vector2(30, 6)
 
 [node name="Area2D" type="Area2D"]
-script = ExtResource("1_rugmr")
+script = ExtResource("1_63rm4")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(0.25, 0.25)

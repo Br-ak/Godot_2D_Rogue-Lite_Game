@@ -14,6 +14,34 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="Animation" id="Animation_oc7wn"]
+resource_name = "Idle"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(10, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.5708]
+}
+
 [sub_resource type="Animation" id="Animation_aw3kp"]
 length = 0.001
 tracks/0/type = "value"
@@ -85,36 +113,9 @@ tracks/1/keys = {
 "values": [1.5708, 1.08328, 0.0]
 }
 
-[sub_resource type="Animation" id="Animation_oc7wn"]
-resource_name = "Idle"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector2(10, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath(".:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.5708]
-}
-
 [sub_resource type="Animation" id="Animation_1t1fr"]
 resource_name = "secondary_attack_charge"
+loop_mode = 1
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -158,7 +159,7 @@ script = ExtResource("1_nn1ov")
 [node name="Marker2D" type="Marker2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D"]
-position = Vector2(9.53674e-07, -26)
+position = Vector2(9.53674e-07, -22)
 rotation = 1.5708
 scale = Vector2(0.25, 0.25)
 sprite_frames = SubResource("SpriteFrames_jygr1")
@@ -194,5 +195,8 @@ radial_accel_max = 68.8
 
 [node name="Timer" type="Timer" parent="."]
 
+[node name="Timer2" type="Timer" parent="."]
+
 [connection signal="area_entered" from="Marker2D/AnimatedSprite2D/hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
