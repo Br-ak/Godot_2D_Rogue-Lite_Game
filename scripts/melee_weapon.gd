@@ -32,7 +32,6 @@ func _process(_delta):
 		getMousePosition()
 		if Input.is_action_just_released("attack_secondary"):
 			button_released = true
-			print("released")
 
 func getMousePosition():
 	mousePosition = get_global_mouse_position()
@@ -73,10 +72,58 @@ func attack_secondary():
 		#print("fire end")
 
 func attack_secondary_fire():
-	var new_projectile = projectile.instantiate()
-	new_projectile.global_position = shooting_point.global_position
-	new_projectile.global_rotation = shooting_point.global_rotation
-	get_tree().root.add_child(new_projectile)
+	var projectile_count = 3
+	var offset_distance := 10.0
+	var prev_projectile_position : Vector2
+	var prev_projectile_rotation : float
+	var direction_vector : Vector2 #Vector2(0, -) upwards direction, Vector2(0, +) downwards direction
+	var rotation_radians : float
+	var above_direction_variable
+	var below_direction_variable
+	if projectile_count % 2 == 0: # even projectile count
+		above_direction_variable = -0.5
+		below_direction_variable = 0.5
+		for i in range(1, projectile_count + 2):
+			var new_projectile = projectile.instantiate()
+			if !prev_projectile_position:
+				new_projectile.global_position = shooting_point.global_position
+				new_projectile.look_at(get_global_mouse_position())
+				prev_projectile_rotation = new_projectile.rotation_degrees
+				prev_projectile_position = new_projectile.position
+			elif prev_projectile_position:
+				if i % 2 == 0:
+					direction_vector = Vector2(0, above_direction_variable) # Upwards direction
+					above_direction_variable -= 1
+				else:
+					direction_vector = Vector2(0, below_direction_variable) # Downwards direction
+					below_direction_variable += 1
+				rotation_radians = deg_to_rad(prev_projectile_rotation)
+				direction_vector = direction_vector.rotated(rotation_radians)
+				new_projectile.position = prev_projectile_position + direction_vector * offset_distance
+				new_projectile.rotation_degrees = prev_projectile_rotation
+				get_tree().root.add_child(new_projectile)
+	else: # odd projectile count
+		above_direction_variable = -1
+		below_direction_variable = 1
+		for i in range(1, projectile_count + 1):
+			var new_projectile = projectile.instantiate()
+			if !prev_projectile_position:
+				new_projectile.global_position = shooting_point.global_position
+				new_projectile.look_at(get_global_mouse_position())
+				prev_projectile_rotation = new_projectile.rotation_degrees
+				prev_projectile_position = new_projectile.position
+			elif prev_projectile_position:
+				if i % 2 == 0:
+					direction_vector = Vector2(0, above_direction_variable) # Upwards direction
+					above_direction_variable -= 1
+				else:
+					direction_vector = Vector2(0, below_direction_variable) # Downwards direction
+					below_direction_variable += 1
+				rotation_radians = deg_to_rad(prev_projectile_rotation)
+				direction_vector = direction_vector.rotated(rotation_radians)
+				new_projectile.position = prev_projectile_position + direction_vector * offset_distance
+				new_projectile.rotation_degrees = prev_projectile_rotation
+			get_tree().root.add_child(new_projectile)
 	animSprite.set_visible(false)
 	timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
 
@@ -90,14 +137,14 @@ func _on_hitbox_area_entered(area):
 
 func _on_timer_timeout():
 	if !animSprite.is_visible():
-		animPlayer.play("Idle")
+		animPlayer.play_backwards("Idle")
 		animSprite.set_visible(true)
+		animPlayer.play_backwards("Idle")
 	#print("timer end")
 	timer.stop()
 	can_attack = true
 
 func _on_timer_2_timeout():
-	await button_released
 	if button_released && animPlayer.current_animation == "secondary_attack_charge":
 		animPlayer.stop()
 		attack_secondary_fire()
