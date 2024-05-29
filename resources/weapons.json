@@ -1,0 +1,44 @@
+{
+	"weapons": {
+		"staff":{
+			"name":"Empty Wizard's Staff", 
+			"description":"This staff belonged to blah blah blah blah blah blah blah blah blah blah", 
+			"attacks":{
+				"attack1":{
+					"attack_damage": 10,
+					"attack_type": "MELEE",
+					},
+				"attack2":{
+					"attack_damage": 5,
+					"attack_type": "RANGED",
+					"attack_hitcount": 2,
+					},
+				},
+			},
+		"weapon2":{
+			"name":"weapon2", 
+			"description":"text text text text text text text text text text text text text text text text ", 
+			"icon":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png"
+			},
+		"weapon3":{
+			"name":"weapon3", 
+			"description":"wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh", 
+			"icon":"res://assets/GUNS_V1.00/V1.00/PNG/[NO_BOLT]_Sniper_rifle_[KAR98]_V1.00.png"
+			},
+		"weapon4":{
+			"name":"weapon4", 
+			"description":"woop woop woop woop woop woop woop woop woop woop woop woop woop woop woop woop ", 
+			"icon":"res://assets/GUNS_V1.00/V1.00/PNG/[design] Assault_rifle_V1.00.png"
+			},
+		"weapon5":{
+			"name":"weapon5", 
+			"description":"meep meep meep meep meep meep meep meep meep meep meep meep meep meep meep meep ", 
+			"icon":"res://assets/Pixel Art Top Down - Basic/TX Tileset Grass.png"
+			},
+		"weapon6":{
+			"name":"weapon6", 
+			"description":"bing bing bing bing bing bing bing bing bing bing bing bing bing bing bing bing ", 
+			"icon":"res://assets/Pixel Art Top Down - Basic/TX Tileset Stone Ground.png"
+			},
+	}
+}

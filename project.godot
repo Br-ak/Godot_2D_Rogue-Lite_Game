@@ -17,6 +17,7 @@ config/features=PackedStringArray("4.1", "Mobile")
 [autoload]
 
 StaticData="*res://singletons/StaticData.gd"
+SharedFunctions="*res://singletons/SharedFunctions.gd"
 
 [editor]
 

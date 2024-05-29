@@ -1,4 +1,5 @@
 extends Area2D
+const WEAPON_NAME = "staff"
 
 @onready var player = get_parent().get_parent().get_parent().get_node("Player")
 @onready var animSprite = $Marker2D/AnimatedSprite2D
@@ -9,6 +10,7 @@ extends Area2D
 @onready var marker_2d = $Marker2D
 @onready var shooting_point = %ShootingPoint
 @onready var area_2d = $"."
+
 
 var mousePosition : Vector2
 var can_attack = true
@@ -21,8 +23,10 @@ var attack_over = false
 var charging = true
 var button_released = false
 const projectile = preload("res://tscn/staff-projectile.tscn")
-
+var primary_attack
+var secondary_attack
 func _ready():
+	init_attacks()
 	hitbox.disabled = true
 	pass
 
@@ -62,68 +66,16 @@ func attack_secondary():
 	if can_attack and not animPlayer.is_playing():
 		button_released = false
 		can_attack = false
-		#print("fire start")
 		animPlayer.play("secondary_attack")
 		await animPlayer.animation_finished
 		animPlayer.play("secondary_attack_charge")
 		await animPlayer.current_animation_length
-		
 		timer_2.start(0.1)
-		#print("fire end")
 
 func attack_secondary_fire():
-	var projectile_count = 3
-	var offset_distance := 10.0
-	var prev_projectile_position : Vector2
-	var prev_projectile_rotation : float
-	var direction_vector : Vector2 #Vector2(0, -) upwards direction, Vector2(0, +) downwards direction
-	var rotation_radians : float
-	var above_direction_variable
-	var below_direction_variable
-	if projectile_count % 2 == 0: # even projectile count
-		above_direction_variable = -0.5
-		below_direction_variable = 0.5
-		for i in range(1, projectile_count + 2):
-			var new_projectile = projectile.instantiate()
-			if !prev_projectile_position:
-				new_projectile.global_position = shooting_point.global_position
-				new_projectile.look_at(get_global_mouse_position())
-				prev_projectile_rotation = new_projectile.rotation_degrees
-				prev_projectile_position = new_projectile.position
-			elif prev_projectile_position:
-				if i % 2 == 0:
-					direction_vector = Vector2(0, above_direction_variable) # Upwards direction
-					above_direction_variable -= 1
-				else:
-					direction_vector = Vector2(0, below_direction_variable) # Downwards direction
-					below_direction_variable += 1
-				rotation_radians = deg_to_rad(prev_projectile_rotation)
-				direction_vector = direction_vector.rotated(rotation_radians)
-				new_projectile.position = prev_projectile_position + direction_vector * offset_distance
-				new_projectile.rotation_degrees = prev_projectile_rotation
-				get_tree().root.add_child(new_projectile)
-	else: # odd projectile count
-		above_direction_variable = -1
-		below_direction_variable = 1
-		for i in range(1, projectile_count + 1):
-			var new_projectile = projectile.instantiate()
-			if !prev_projectile_position:
-				new_projectile.global_position = shooting_point.global_position
-				new_projectile.look_at(get_global_mouse_position())
-				prev_projectile_rotation = new_projectile.rotation_degrees
-				prev_projectile_position = new_projectile.position
-			elif prev_projectile_position:
-				if i % 2 == 0:
-					direction_vector = Vector2(0, above_direction_variable) # Upwards direction
-					above_direction_variable -= 1
-				else:
-					direction_vector = Vector2(0, below_direction_variable) # Downwards direction
-					below_direction_variable += 1
-				rotation_radians = deg_to_rad(prev_projectile_rotation)
-				direction_vector = direction_vector.rotated(rotation_radians)
-				new_projectile.position = prev_projectile_position + direction_vector * offset_distance
-				new_projectile.rotation_degrees = prev_projectile_rotation
-			get_tree().root.add_child(new_projectile)
+	var attack = Attack.new()
+	#pass attack variables
+	SharedFunctions.fork_projectile(projectile, get_tree().root, shooting_point, get_global_mouse_position(), 3, 10.0)
 	animSprite.set_visible(false)
 	timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
 
@@ -131,8 +83,7 @@ func _on_hitbox_area_entered(area):
 	if area is HitboxComponent:
 		if area.get_parent().type == "Enemy":
 			var newHitbox : HitboxComponent = area
-			var newAttack = Attack.new()
-			newAttack.attack_damage = currentDamage
+			var newAttack = primary_attack
 			newHitbox.damage(newAttack)
 
 func _on_timer_timeout():
@@ -140,7 +91,6 @@ func _on_timer_timeout():
 		animPlayer.play_backwards("Idle")
 		animSprite.set_visible(true)
 		animPlayer.play_backwards("Idle")
-	#print("timer end")
 	timer.stop()
 	can_attack = true
 
@@ -152,3 +102,13 @@ func _on_timer_2_timeout():
 		timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
 	else:
 		timer_2.start(0.1)
+
+func init_attacks():
+	var returned_info = SharedFunctions.init_attacks(WEAPON_NAME)
+	print(returned_info)
+	if returned_info[0] is String: print("No attacks found")
+	elif returned_info.size() == 1: # 1 atttack found
+		primary_attack = returned_info[0]
+	elif returned_info.size() == 2: # 2 atttacks found
+		primary_attack = returned_info[0]
+		secondary_attack = returned_info[1]
