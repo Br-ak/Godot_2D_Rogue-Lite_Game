@@ -11,7 +11,9 @@
 				"attack2":{
 					"attack_damage": 5,
 					"attack_type": "RANGED",
-					"attack_hitcount": 2,
+					"attack_pierce": 3,
+					"attack_projectile_speed": 500,
+					"attack_pattern": "FORK",
 					},
 				},
 			},

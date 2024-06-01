@@ -73,9 +73,10 @@ func attack_secondary():
 		timer_2.start(0.1)
 
 func attack_secondary_fire():
-	var attack = Attack.new()
-	#pass attack variables
-	SharedFunctions.fork_projectile(projectile, get_tree().root, shooting_point, get_global_mouse_position(), 3, 10.0)
+	secondary_attack.attack_projectile_count = 3
+	secondary_attack.attack_projectile_offset = 10.0
+	secondary_attack.attack_pattern = "FORK"
+	SharedFunctions.fire_projectile(projectile, get_tree().root, shooting_point, get_global_mouse_position(), secondary_attack)
 	animSprite.set_visible(false)
 	timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
 
@@ -83,8 +84,7 @@ func _on_hitbox_area_entered(area):
 	if area is HitboxComponent:
 		if area.get_parent().type == "Enemy":
 			var newHitbox : HitboxComponent = area
-			var newAttack = primary_attack
-			newHitbox.damage(newAttack)
+			newHitbox.damage(primary_attack)
 
 func _on_timer_timeout():
 	if !animSprite.is_visible():
@@ -104,11 +104,13 @@ func _on_timer_2_timeout():
 		timer_2.start(0.1)
 
 func init_attacks():
-	var returned_info = SharedFunctions.init_attacks(WEAPON_NAME)
-	print(returned_info)
-	if returned_info[0] is String: print("No attacks found")
-	elif returned_info.size() == 1: # 1 atttack found
-		primary_attack = returned_info[0]
-	elif returned_info.size() == 2: # 2 atttacks found
-		primary_attack = returned_info[0]
-		secondary_attack = returned_info[1]
+	var base_weapon_info = SharedFunctions.init_attacks(WEAPON_NAME)
+	if base_weapon_info[0] is String: print("No attacks found")
+	elif base_weapon_info.size() == 1: # 1 atttack found
+		primary_attack = base_weapon_info[0]
+	elif base_weapon_info.size() == 2: # 2 atttacks found
+		primary_attack = base_weapon_info[0]
+		secondary_attack = base_weapon_info[1]
+
+func update_attacks(attack_to_update, new_attack_stats):
+	pass

@@ -7,7 +7,8 @@ var keybindList = ["attack_primary", "ui_up", "ui_left", "ui_down", "ui_right"]
 var upgrades_file_path = "res://resources/upgrades.json"
 var keybinds_file_path = "res://resources/keybinds.json"
 var weapons_file_path = "res://resources/weapons.json"
-var weapon_stat_list = ["attack_damage", "attack_wait", "attack_hitcount", "attack_type", "attack_origin", "attack_pattern"]
+var weapon_stat_list = ["attack_damage", "attack_wait", "attack_hits", "attack_type", "attack_origin", "attack_pattern", "attack_pierce", 
+"attack_projectile_count", "attack_projectile_offset", "attack_reset_time", "attack_projectile_speed", "attack_range"]
 
 func _ready():
 	itemData = load_json_file(upgrades_file_path)

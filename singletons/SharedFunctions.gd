@@ -15,19 +15,15 @@ func init_attacks(WEAPON_NAME):
 	for attack_info in weapon_data:
 		if attack_info == "attack1":
 			weapon_attack_count += 1
-			
 			for key in StaticData.weapon_stat_list:
 				print(key)
 				if weapon_data["attack1"].has(key): attack1.set(key, weapon_data["attack1"][key])
-				
 		elif attack_info == "attack2":
 			weapon_attack_count += 1
-			
 			for key in StaticData.weapon_stat_list:
 				if weapon_data["attack2"].has(key): attack2.set(key, weapon_data["attack2"][key])
 		else:
 			pass
-		
 	if weapon_attack_count == 0:
 		return ["No attacks found"]
 	elif weapon_attack_count == 1:
@@ -35,18 +31,35 @@ func init_attacks(WEAPON_NAME):
 	elif weapon_attack_count == 2:
 		return [attack1, attack2]
 
-func fork_projectile(projectile_object, root, shooting_point, mouse_position, projectile_count, offset_distance):
+# handles/sorts all projectile types
+func fire_projectile(projectile_object, root, shooting_point, mouse_position, attack):
+	if attack.attack_pattern == "BASIC":
+		basic_projectile(projectile_object, root, shooting_point, mouse_position, attack)
+	elif attack.attack_pattern == "FORK":
+		fork_projectile(projectile_object, root, shooting_point, mouse_position, attack)
+
+# handles basic/single projectile
+func basic_projectile(projectile_object, root, shooting_point, mouse_position, attack):
+	var new_projectile = projectile_object.instantiate()
+	new_projectile.attack = attack
+	new_projectile.global_position = shooting_point.global_position
+	new_projectile.look_at(mouse_position)
+	root.add_child(new_projectile)
+
+# handles projectile forking
+func fork_projectile(projectile_object, root, shooting_point, mouse_position, attack):
 	var prev_projectile_position : Vector2
 	var prev_projectile_rotation : float
 	var direction_vector : Vector2 #Vector2(0, -) upwards direction, Vector2(0, +) downwards direction
 	var rotation_radians : float
 	var above_direction_variable
 	var below_direction_variable
-	if projectile_count % 2 == 0: # even projectile count
+	if attack.attack_projectile_count % 2 == 0: # even projectile count
 		above_direction_variable = -0.5
 		below_direction_variable = 0.5
-		for i in range(1, projectile_count + 2):
+		for i in range(1, attack.attack_projectile_count + 2):
 			var new_projectile = projectile_object.instantiate()
+			new_projectile.attack = attack
 			if !prev_projectile_position:
 				new_projectile.global_position = shooting_point.global_position
 				new_projectile.look_at(mouse_position)
@@ -61,14 +74,15 @@ func fork_projectile(projectile_object, root, shooting_point, mouse_position, pr
 					below_direction_variable += 1
 				rotation_radians = deg_to_rad(prev_projectile_rotation)
 				direction_vector = direction_vector.rotated(rotation_radians)
-				new_projectile.position = prev_projectile_position + direction_vector * offset_distance
+				new_projectile.position = prev_projectile_position + direction_vector * attack.attack_projectile_offset
 				new_projectile.rotation_degrees = prev_projectile_rotation
 				get_tree().root.add_child(new_projectile)
 	else: # odd projectile count
 		above_direction_variable = -1
 		below_direction_variable = 1
-		for i in range(1, projectile_count + 1):
+		for i in range(1, attack.attack_projectile_count + 1):
 			var new_projectile = projectile_object.instantiate()
+			new_projectile.attack = attack
 			if !prev_projectile_position:
 				new_projectile.global_position = shooting_point.global_position
 				new_projectile.look_at(mouse_position)
@@ -83,6 +97,6 @@ func fork_projectile(projectile_object, root, shooting_point, mouse_position, pr
 					below_direction_variable += 1
 				rotation_radians = deg_to_rad(prev_projectile_rotation)
 				direction_vector = direction_vector.rotated(rotation_radians)
-				new_projectile.position = prev_projectile_position + direction_vector * offset_distance
+				new_projectile.position = prev_projectile_position + direction_vector * attack.attack_projectile_offset
 				new_projectile.rotation_degrees = prev_projectile_rotation
 			root.add_child(new_projectile)
