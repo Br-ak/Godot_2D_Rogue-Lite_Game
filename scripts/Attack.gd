@@ -20,6 +20,5 @@ var attack_range := 1200
 #unused currently
 var knockback_force: float
 
-
 func custom_function():
 	pass

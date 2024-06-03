@@ -12,6 +12,7 @@ const WEAPON_NAME = "staff"
 @onready var area_2d = $"."
 
 
+
 var mousePosition : Vector2
 var can_attack = true
 var baseDamage = 5
@@ -25,6 +26,9 @@ var button_released = false
 const projectile = preload("res://tscn/staff-projectile.tscn")
 var primary_attack
 var secondary_attack
+
+
+
 func _ready():
 	init_attacks()
 	hitbox.disabled = true

@@ -8,9 +8,7 @@ var travelled_distance = 0
 @onready var SPEED = attack.attack_projectile_speed
 @onready var RANGE = attack.attack_range
 
-#func _ready():
-#	print(SPEED)
-#	print(RANGE)
+
 
 func _physics_process(delta):
 	var direction = Vector2.RIGHT.rotated(rotation)

@@ -3,8 +3,11 @@ extends Node2D
 @onready var pause_menu = $CanvasLayer/PauseMenu
 @onready var game_over_menu = $"CanvasLayer/Game Over Menu"
 @onready var level_up_menu = $"CanvasLayer/Level Up Menu"
+@onready var inventory_menu = $"CanvasLayer/Inventory Menu"
+
 @onready var timer = $Timer
 @onready var hud = $CanvasLayer/Hud
+@onready var world = $World
 
 
 var gameTimer := 0:
@@ -20,10 +23,12 @@ func _ready():
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
-	if Input.is_action_just_pressed("pause_game") && Engine.time_scale == 1:
+	if Input.is_action_just_pressed("pause_game") && Engine.time_scale == 1 || Input.is_action_just_pressed("pause_game") && pause_menu.is_visible(): 
 		pauseMenu()
-	if Input.is_action_just_pressed("debug_level_up") && Engine.time_scale == 1:
+	if Input.is_action_just_pressed("debug_level_up") && Engine.time_scale == 1 || Input.is_action_just_pressed("debug_level_up") && level_up_menu.is_visible():
 		levelUpMenu()
+	if Input.is_action_just_pressed("debug_inventory") && Engine.time_scale == 1 || Input.is_action_just_pressed("debug_inventory") && inventory_menu.is_visible():
+		inventoryMenu()
 
 func pauseMenu():
 	if pause_menu.is_visible():
@@ -39,6 +44,14 @@ func levelUpMenu():
 		Engine.time_scale = 1
 	else:
 		level_up_menu.set_visible(true)
+		Engine.time_scale = 0
+
+func inventoryMenu():
+	if inventory_menu.is_visible():
+		inventory_menu.set_visible(false)
+		Engine.time_scale = 1
+	else:
+		inventory_menu.set_visible(true)
 		Engine.time_scale = 0
 
 func gameOverMenu():

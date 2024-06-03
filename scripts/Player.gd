@@ -11,7 +11,7 @@ const type = "Player"
 @onready var levelUpMenu = gameNode.get_node("CanvasLayer").get_node("Level Up Menu")
 @onready var health_component = $HealthComponent
 @onready var invincible_timer = $"HealthComponent/I-Frames"
-
+@onready var inventory_menu = gameNode.get_node("CanvasLayer").get_node("Inventory Menu")
 var equipped_weapon
 var test_weapon_equipped = false
 var invincible_timer_length = 1
@@ -64,6 +64,7 @@ func read_inputs():
 		var new_melee_weapon = melee_weapon.instantiate()
 		weapon.call("add_child", new_melee_weapon)
 		equipped_weapon = $Weapon/Area2D
+		inventory_menu.init_weapon_panels()
 	
 	if angle > -0.78 and angle < 0.78: #####looking right
 		anim.scale.x = 1

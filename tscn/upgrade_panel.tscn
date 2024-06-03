@@ -4,6 +4,8 @@
 [ext_resource type="Script" path="res://scripts/upgrade_panel.gd" id="1_n3h3g"]
 
 [node name="Upgrade Panel" type="VBoxContainer"]
+offset_right = 150.0
+offset_bottom = 468.0
 script = ExtResource("1_n3h3g")
 
 [node name="Title" type="Label" parent="."]

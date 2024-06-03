@@ -4,7 +4,7 @@ extends Node
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
-	
+
 func init_attacks(WEAPON_NAME):
 	var weapon_data = StaticData.weapons["weapons"][WEAPON_NAME]["attacks"]
 	
@@ -16,7 +16,6 @@ func init_attacks(WEAPON_NAME):
 		if attack_info == "attack1":
 			weapon_attack_count += 1
 			for key in StaticData.weapon_stat_list:
-				print(key)
 				if weapon_data["attack1"].has(key): attack1.set(key, weapon_data["attack1"][key])
 		elif attack_info == "attack2":
 			weapon_attack_count += 1
