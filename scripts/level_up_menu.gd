@@ -3,7 +3,8 @@ extends Control
 @onready var level_up_menu = $"."
 
 @onready var upgrade_container = $AspectRatioContainer/VBoxContainer2/HBoxContainer
-var data = StaticData.itemData["upgrades"]
+@onready var data = StaticData.upgrades["upgrades"]
+
 var upgrade_count = 0
 var upgrade_panel_count = 3
 var displayed_upgrades = []
@@ -22,25 +23,26 @@ func on_open():
 	init_upgrade_panel()
 
 func init_upgrade_panel():
-	const upgrade_panel = preload("res://tscn/upgrade_panel.tscn")
-	while displayed_upgrades.size() != upgrade_panel_count:
-		var rand_upgrade = str(randi() % upgrade_count + 1)
-		var upgrade_key = "upgrade" + rand_upgrade
-	
-		while displayed_upgrades.has(upgrade_key) || prev_displayed_upgrades.has(upgrade_key): # dont allow duplicates
-			rand_upgrade = str(randi() % upgrade_count + 1)
-			upgrade_key = "upgrade" + rand_upgrade
-		
-		var new_upgrade_panel = upgrade_panel.instantiate()
-		new_upgrade_panel.key = upgrade_key
-		new_upgrade_panel.title = data[upgrade_key]["name"]
-		new_upgrade_panel.description = data[upgrade_key]["description"]
-		new_upgrade_panel.icon_path = data[upgrade_key]["icon"]
-		
-		displayed_upgrades.append(upgrade_key)
-		upgrade_container.call("add_child", new_upgrade_panel)
-	prev_displayed_upgrades = displayed_upgrades
-	displayed_upgrades = []
+	pass
+#	const upgrade_panel = preload("res://tscn/upgrade_panel.tscn")
+#	while displayed_upgrades.size() != upgrade_panel_count:
+#		var rand_upgrade = str(randi() % upgrade_count + 1)
+#		var upgrade_key = "upgrade" + rand_upgrade
+#
+#		while displayed_upgrades.has(upgrade_key) || prev_displayed_upgrades.has(upgrade_key): # dont allow duplicates
+#			rand_upgrade = str(randi() % upgrade_count + 1)
+#			upgrade_key = "upgrade" + rand_upgrade
+#
+#		var new_upgrade_panel = upgrade_panel.instantiate()
+#		new_upgrade_panel.key = upgrade_key
+#		new_upgrade_panel.title = data[upgrade_key]["name"]
+#		new_upgrade_panel.description = data[upgrade_key]["description"]
+#		new_upgrade_panel.icon_path = data[upgrade_key]["image"]
+#
+#		displayed_upgrades.append(upgrade_key)
+#		upgrade_container.call("add_child", new_upgrade_panel)
+#	prev_displayed_upgrades = displayed_upgrades
+#	displayed_upgrades = []
 
 func _on_exit_pressed():
 	level_up_menu.set_visible(false)

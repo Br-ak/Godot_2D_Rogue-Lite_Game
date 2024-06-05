@@ -1,34 +1,39 @@
 {
 	"upgrades": {
-		"upgrade1":{
-			"name":"upgrade1", 
-			"description":"blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah", 
-			"icon":"res://tscn/You otterf__ker!! - Funny.jpg"
+		"damage_increase":{
+			"name":"Damage Increase", 
+			"description":"Increases damage", 
+			"image":"res://tscn/You otterf__ker!! - Funny.jpg",
+			"stats":{
+					"damage": 10,
+					},
 			},
-		"upgrade2":{
-			"name":"upgrade2", 
-			"description":"text text text text text text text text text text text text text text text text ", 
-			"icon":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png"
+		"fork":{
+			"description":"Forks Projectile", 
+			"image":"res://tscn/You otterf__ker!! - Funny.jpg",
+			"stats":{
+					"attack_pattern": "FORK",
+					},
 			},
 		"upgrade3":{
 			"name":"upgrade3", 
 			"description":"wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh", 
-			"icon":"res://assets/GUNS_V1.00/V1.00/PNG/[NO_BOLT]_Sniper_rifle_[KAR98]_V1.00.png"
+			"image":"res://assets/GUNS_V1.00/V1.00/PNG/[NO_BOLT]_Sniper_rifle_[KAR98]_V1.00.png"
 			},
 		"upgrade4":{
 			"name":"upgrade4", 
 			"description":"woop woop woop woop woop woop woop woop woop woop woop woop woop woop woop woop ", 
-			"icon":"res://assets/GUNS_V1.00/V1.00/PNG/[design] Assault_rifle_V1.00.png"
+			"image":"res://assets/GUNS_V1.00/V1.00/PNG/[design] Assault_rifle_V1.00.png"
 			},
 		"upgrade5":{
 			"name":"upgrade5", 
 			"description":"meep meep meep meep meep meep meep meep meep meep meep meep meep meep meep meep ", 
-			"icon":"res://assets/Pixel Art Top Down - Basic/TX Tileset Grass.png"
+			"image":"res://assets/Pixel Art Top Down - Basic/TX Tileset Grass.png"
 			},
 		"upgrade6":{
 			"name":"upgrade6", 
 			"description":"bing bing bing bing bing bing bing bing bing bing bing bing bing bing bing bing ", 
-			"icon":"res://assets/Pixel Art Top Down - Basic/TX Tileset Stone Ground.png"
+			"image":"res://assets/Pixel Art Top Down - Basic/TX Tileset Stone Ground.png"
 			},
 	}
 }

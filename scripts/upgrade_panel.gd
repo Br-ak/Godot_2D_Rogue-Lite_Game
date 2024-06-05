@@ -10,13 +10,13 @@ extends VBoxContainer
 @onready var desc_text = $Desc
 @onready var icon_button = $Icon
 
-@onready var data = StaticData.itemData["upgrades"][key]
+@onready var data = StaticData.upgrades["upgrades"][key]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	title_label.text = title
 	desc_text.text = description
-	var newIcon = load(data["icon"])
+	var newIcon = load(data["image"])
 	icon_button.set_texture_normal(newIcon)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

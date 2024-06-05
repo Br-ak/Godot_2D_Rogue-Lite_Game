@@ -32,6 +32,8 @@ func init_attacks(WEAPON_NAME):
 
 # handles/sorts all projectile types
 func fire_projectile(projectile_object, root, shooting_point, mouse_position, attack):
+	print(attack.attack_damage)
+	print(attack.attack_base_damage)
 	if attack.attack_pattern == "BASIC":
 		basic_projectile(projectile_object, root, shooting_point, mouse_position, attack)
 	elif attack.attack_pattern == "FORK":

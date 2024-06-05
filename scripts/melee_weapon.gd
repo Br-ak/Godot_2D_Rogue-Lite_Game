@@ -79,7 +79,7 @@ func attack_secondary():
 func attack_secondary_fire():
 	secondary_attack.attack_projectile_count = 3
 	secondary_attack.attack_projectile_offset = 10.0
-	secondary_attack.attack_pattern = "FORK"
+	#secondary_attack.attack_pattern = "FORK"
 	SharedFunctions.fire_projectile(projectile, get_tree().root, shooting_point, get_global_mouse_position(), secondary_attack)
 	animSprite.set_visible(false)
 	timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
@@ -116,5 +116,10 @@ func init_attacks():
 		primary_attack = base_weapon_info[0]
 		secondary_attack = base_weapon_info[1]
 
-func update_attacks(attack_to_update, new_attack_stats):
-	pass
+func update_attacks(attack_modification, attack_to_update):
+	if attack_to_update == 2:
+		if attack_modification[0] == "damage_increase":
+			secondary_attack.attack_damage_increase = attack_modification[1]
+			secondary_attack.update_attack_damage()
+		if attack_modification[0] == "fork_attack":
+			secondary_attack.attack_pattern = "FORK"

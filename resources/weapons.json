@@ -6,16 +6,15 @@
 			"attacks":{
 				"attack1":{
 					"name":"Swing",
-					"attack_damage": 10,
+					"attack_base_damage": 10,
 					"attack_type": "MELEE",
 					},
 				"attack2":{
 					"name":"Toss",
-					"attack_damage": 5,
+					"attack_base_damage": 5,
 					"attack_type": "RANGED",
 					"attack_pierce": 3,
 					"attack_projectile_speed": 500,
-					"attack_pattern": "FORK",
 					},
 				},
 			"attack1_base_upgrade_slots":2,

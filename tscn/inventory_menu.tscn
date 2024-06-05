@@ -1,7 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://3pqht14fayf"]
+[gd_scene load_steps=2 format=3 uid="uid://3pqht14fayf"]
 
 [ext_resource type="Script" path="res://scripts/inventory_menu.gd" id="1_0jihj"]
-[ext_resource type="PackedScene" uid="uid://csrmw88osyqr4" path="res://tscn/panel_socket.tscn" id="2_2d6mw"]
 
 [node name="Inventory Menu" type="Control"]
 layout_mode = 3
@@ -64,76 +63,24 @@ grow_horizontal = 0
 grow_vertical = 2
 
 [node name="Panel" type="Panel" parent="AspectRatioContainer2"]
-custom_minimum_size = Vector2(125, 500)
+custom_minimum_size = Vector2(150, 500)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
 [node name="GridContainer" type="GridContainer" parent="AspectRatioContainer2/Panel"]
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -52.5
-offset_right = 47.5
-offset_bottom = 50.0
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = -241.0
+offset_right = 52.0
+offset_bottom = 241.0
 grow_horizontal = 2
-theme_override_constants/h_separation = 55
-theme_override_constants/v_separation = 55
+grow_vertical = 2
 columns = 2
-
-[node name="panel_socket" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket2" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket3" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket4" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket5" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket6" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket7" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket8" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket9" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket10" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket11" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket12" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket13" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket14" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket15" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket16" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket17" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
-
-[node name="panel_socket18" parent="AspectRatioContainer2/Panel/GridContainer" instance=ExtResource("2_2d6mw")]
-layout_mode = 2
 
 [connection signal="pressed" from="AspectRatioContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

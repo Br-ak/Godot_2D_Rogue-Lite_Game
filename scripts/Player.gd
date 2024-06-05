@@ -1,4 +1,5 @@
 extends CharacterBody2D
+signal update_weapon_stats_signal(new_damage)
 
 var speed = 200  # speed in pixels/sec
 const type = "Player"
@@ -116,3 +117,6 @@ func hurt():
 
 func _on_i_frames_timeout():
 	health_component.INVINCIBLE = false
+
+func update_weapon_stats():
+	pass
