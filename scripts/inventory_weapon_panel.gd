@@ -40,5 +40,6 @@ func init_panel(socket_count):
 	pass
 
 func update_weapon_stats(data):
+	print("update_weapon_stats")
 	if inventory_menu.has_method("update_weapon_stats"):
 		inventory_menu.update_weapon_stats(data, attack_number)

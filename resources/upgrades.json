@@ -5,14 +5,16 @@
 			"description":"Increases damage", 
 			"image":"res://tscn/You otterf__ker!! - Funny.jpg",
 			"stats":{
-					"damage": 10,
+					"attack_damage_increase": 10,
 					},
 			},
-		"fork":{
+		"attack_fork":{
 			"description":"Forks Projectile", 
 			"image":"res://tscn/You otterf__ker!! - Funny.jpg",
 			"stats":{
 					"attack_pattern": "FORK",
+					"attack_projectile_count": 3,
+					"attack_damage_multiplier": 0.7,
 					},
 			},
 		"upgrade3":{

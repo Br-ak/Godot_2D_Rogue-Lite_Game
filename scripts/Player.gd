@@ -117,6 +117,3 @@ func hurt():
 
 func _on_i_frames_timeout():
 	health_component.INVINCIBLE = false
-
-func update_weapon_stats():
-	pass

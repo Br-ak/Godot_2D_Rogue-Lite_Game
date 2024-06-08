@@ -9,7 +9,7 @@ extends Control
 @onready var inventory_grid_container = $AspectRatioContainer2/Panel/GridContainer
 
 @onready var data = StaticData.weapons["weapons"]
-@onready var upgrades = StaticData.upgrades["upgrades"]
+#@onready var upgrades = StaticData.upgrades["upgrades"]
 @onready var player = get_parent().get_parent().get_node("World").get_node("Player")
 
 const panel_socket = preload("res://tscn/panel_socket.tscn")
@@ -55,7 +55,7 @@ func init_weapon_panels():
 func init_inventory_panel():
 	for i in range (0, 14):
 		var new_panel_socket = panel_socket.instantiate()
-		new_panel_socket.upgrade = ["fork_attack", 3]
+		new_panel_socket.upgrade = "attack_fork"
 		new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_socket.png"
 		new_panel_socket.socket_type = "INVENTORY"
 		inventory_grid_container.add_child(new_panel_socket)

@@ -3,7 +3,7 @@ extends Control
 @onready var level_up_menu = $"."
 
 @onready var upgrade_container = $AspectRatioContainer/VBoxContainer2/HBoxContainer
-@onready var data = StaticData.upgrades["upgrades"]
+#@onready var data = StaticData.upgrades["upgrades"]
 
 var upgrade_count = 0
 var upgrade_panel_count = 3
@@ -11,16 +11,18 @@ var displayed_upgrades = []
 var prev_displayed_upgrades = []
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	on_open()
+	pass
+	#on_open()
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
 	pass
 
 func on_open():
-	for key in data:
-		upgrade_count += 1
-	init_upgrade_panel()
+	pass
+#	for key in data:
+#		upgrade_count += 1
+#	init_upgrade_panel()
 
 func init_upgrade_panel():
 	pass
