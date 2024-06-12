@@ -131,7 +131,7 @@ func reset_attack(attack) -> Attack:
 
 func update_attacks(upgrade_list, attack_to_update):
 	print("resetting attack to base")
-	reset_attack(attack_to_update)
+	attack_to_update = reset_attack(attack_to_update)
 	print("reapplying upgrades")
 	for attack_modification in upgrade_list:
 		if upgrades.has(attack_modification):

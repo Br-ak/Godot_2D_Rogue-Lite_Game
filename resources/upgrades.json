@@ -21,7 +21,7 @@
 			"description":"Attacks pierce extra enemy", 
 			"image":"res://tscn/You otterf__ker!! - Funny.jpg",
 			"stats":{
-					"attack_pierce": "2",
+					"attack_pierce": 5,
 					},
 			},
 	}

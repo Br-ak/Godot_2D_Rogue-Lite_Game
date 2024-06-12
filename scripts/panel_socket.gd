@@ -13,13 +13,12 @@ var socket_location
 var dropped_on_target := false
 var has_item := false
 var texture_path
+var tooltip_desc
 var texture_empty = preload("res://assets/GUNS_V1.00/V1.00/PNG/test_socket.png")
-var texture_filled = preload("res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png")
 const panel_socket = preload("res://tscn/panel_socket.tscn")
 var icon_texture
 
 func _ready():
-	
 	add_to_group("DRAGGABLE")
 	socket.set_texture(texture_empty)
 	item.set_texture(null)
@@ -27,8 +26,8 @@ func _ready():
 	if self.socket_type == "INVENTORY":
 		if texture_path:
 			icon_texture = load(texture_path)
-		else:
-			icon_texture = texture_filled
+		if tooltip_desc:
+			item.tooltip_text = tooltip_desc
 		item.set_texture(icon_texture)
 		self.has_item = true
 
@@ -56,6 +55,8 @@ func _drop_data(at_position, data):
 		else:
 			if texture_path:
 				icon_texture = load(texture_path)
+			if tooltip_desc:
+				item.tooltip_text = tooltip_desc
 			self.item.set_texture(icon_texture)
 			self.has_item = true
 			self.swap_data(data)
@@ -81,6 +82,8 @@ func remove_item():
 func swap_data(data_to_swap):
 	self.upgrade = data_to_swap.upgrade
 	self.texture_path = data_to_swap.texture_path
+	self.tooltip_desc = data_to_swap.tooltip_desc
+	self.item.tooltip_text = data_to_swap.tooltip_desc
 	icon_texture = load(self.texture_path)
 	self.item.set_texture(icon_texture)
 	for key in data:

@@ -6,7 +6,7 @@
 			"attacks":{
 				"attack1":{
 					"name":"Swing",
-					"attack_base_damage": 10,
+					"attack_base_damage": 5,
 					"attack_type": "MELEE",
 					},
 				"attack2":{

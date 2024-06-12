@@ -59,20 +59,22 @@ func init_inventory_panel():
 	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_fork.png"
 	new_panel_socket.socket_type = "INVENTORY"
 	new_panel_socket.socket_location = 0
+	new_panel_socket.tooltip_desc = "Fork Gem: Forks Projectile"
 	inventory_grid_container.add_child(new_panel_socket)
 	new_panel_socket = panel_socket.instantiate()
 	new_panel_socket.upgrade = "damage_increase"
 	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_damage.png"
 	new_panel_socket.socket_type = "INVENTORY"
 	new_panel_socket.socket_location = 0
+	new_panel_socket.tooltip_desc = "Damage Gem: Increases Damage"
 	inventory_grid_container.add_child(new_panel_socket)
 	new_panel_socket = panel_socket.instantiate()
 	new_panel_socket.upgrade = "attack_pierce"
 	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_pierce.png"
 	new_panel_socket.socket_type = "INVENTORY"
 	new_panel_socket.socket_location = 0
+	new_panel_socket.tooltip_desc = "Pierce Gem: Increases Pierce Amount"
 	inventory_grid_container.add_child(new_panel_socket)
-	
 
 func _on_exit_pressed():
 	inventory_menu.set_visible(false)
