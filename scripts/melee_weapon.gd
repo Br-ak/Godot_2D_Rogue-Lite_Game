@@ -10,7 +10,6 @@ const WEAPON_NAME = "staff"
 @onready var marker_2d = $Marker2D
 @onready var shooting_point = %ShootingPoint
 @onready var area_2d = $"."
-@onready var upgrades = StaticData.upgrades["upgrades"]
 
 
 var mousePosition : Vector2
@@ -76,7 +75,6 @@ func attack_secondary():
 		timer_2.start(0.1)
 
 func attack_secondary_fire():
-	secondary_attack.attack_projectile_count = 3
 	SharedFunctions.fire_projectile(projectile, get_tree().root, shooting_point, get_global_mouse_position(), secondary_attack)
 	animSprite.set_visible(false)
 	timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
@@ -105,33 +103,19 @@ func _on_timer_2_timeout():
 		timer_2.start(0.1)
 
 func init_attacks():
-	var base_weapon_info = SharedFunctions.init_attacks(WEAPON_NAME)
-	if base_weapon_info[0] is String: print("No attacks found")
-	elif base_weapon_info.size() == 1: # 1 atttack found
-		primary_attack = base_weapon_info[0]
-	elif base_weapon_info.size() == 2: # 2 atttacks found
-		primary_attack = base_weapon_info[0]
-		secondary_attack = base_weapon_info[1]
-	primary_attack.update_attack_damage()
-	secondary_attack.update_attack_damage()
+	var attack_list = SharedFunctions.init_attacks(WEAPON_NAME)
+	if attack_list[0] is String: print("No attacks found")
+	elif attack_list.size() == 1: # 1 atttack found
+		primary_attack = attack_list[0]
+		primary_attack.update_attack_damage()
+	elif attack_list.size() == 2: # 2 atttacks found
+		primary_attack = attack_list[0]
+		secondary_attack = attack_list[1]
+		primary_attack.update_attack_damage()
+		secondary_attack.update_attack_damage()
 
-func update_attacks(attack_modification, attack_to_update):
-	# should run, elsewhere, programatically every time an item is added or removed
-	# run through list of sockets and apply info 
-	# order should not matter, make sure it updates values correctly
+func update_attacks(upgrade_list, attack_to_update):
 	if attack_to_update == 1:
-		if upgrades.has(attack_modification):
-				print("key: ", attack_modification)
-				for changes in upgrades[attack_modification]["stats"]:
-					if upgrades[attack_modification]["stats"].has(changes): 
-						primary_attack.set(changes, upgrades[attack_modification]["stats"])
-						print("change: ", upgrades[attack_modification]["stats"][changes])
-				primary_attack.update_attack_damage()
+		primary_attack = SharedFunctions.update_attacks(upgrade_list, primary_attack)
 	elif attack_to_update == 2:
-		if upgrades.has(attack_modification):
-				print("key: ", attack_modification)
-				for changes in upgrades[attack_modification]["stats"]:
-					if upgrades[attack_modification]["stats"].has(changes): 
-						secondary_attack.set(changes, upgrades[attack_modification]["stats"][changes])
-						print(changes, ": ", upgrades[attack_modification]["stats"][changes])
-				secondary_attack.update_attack_damage()
+		secondary_attack = SharedFunctions.update_attacks(upgrade_list, secondary_attack)

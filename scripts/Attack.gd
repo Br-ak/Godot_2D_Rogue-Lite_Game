@@ -3,7 +3,7 @@ class_name Attack
 #attack variables
 var weapon_stat_list = ["attack_damage", "attack_wait", "attack_hits", "attack_type", "attack_origin", "attack_pattern", "attack_pierce", 
 "attack_projectile_count", "attack_projectile_offset", "attack_reset_time", "attack_projectile_speed", "attack_range", "attack_base_damage",
-"attack_damage_increase", "attack_damage_multiplier"]
+"attack_damage_increase", "attack_damage_multiplier", "WEAPON_NAME", "ATTACK_NUMBER"]
 
 var attack_damage : float
 var attack_base_damage : float
@@ -20,6 +20,9 @@ var attack_projectile_speed : int
 var attack_range := 1200
 var attack_damage_increase := 0
 var attack_damage_multiplier := 1.0
+
+var WEAPON_NAME 
+var ATTACK_NUMBER := 0
 
 #unused currently
 var knockback_force: float

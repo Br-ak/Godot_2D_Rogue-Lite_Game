@@ -16,6 +16,7 @@ const panel_socket = preload("res://tscn/panel_socket.tscn")
 const weapon_panel_object = preload("res://tscn/inventory_weapon_panel.tscn")
 
 
+
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	init_inventory_panel()
@@ -53,18 +54,30 @@ func init_weapon_panels():
 			h_box_container.call("add_child", attack2_weapon_panel)
 
 func init_inventory_panel():
-	for i in range (0, 14):
-		var new_panel_socket = panel_socket.instantiate()
-		new_panel_socket.upgrade = "attack_fork"
-		new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_socket.png"
-		new_panel_socket.socket_type = "INVENTORY"
-		inventory_grid_container.add_child(new_panel_socket)
+	var new_panel_socket = panel_socket.instantiate()
+	new_panel_socket.upgrade = "attack_fork"
+	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_fork.png"
+	new_panel_socket.socket_type = "INVENTORY"
+	new_panel_socket.socket_location = 0
+	inventory_grid_container.add_child(new_panel_socket)
+	new_panel_socket = panel_socket.instantiate()
+	new_panel_socket.upgrade = "damage_increase"
+	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_damage.png"
+	new_panel_socket.socket_type = "INVENTORY"
+	new_panel_socket.socket_location = 0
+	inventory_grid_container.add_child(new_panel_socket)
+	new_panel_socket = panel_socket.instantiate()
+	new_panel_socket.upgrade = "attack_pierce"
+	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_pierce.png"
+	new_panel_socket.socket_type = "INVENTORY"
+	new_panel_socket.socket_location = 0
+	inventory_grid_container.add_child(new_panel_socket)
+	
 
 func _on_exit_pressed():
 	inventory_menu.set_visible(false)
 	Engine.time_scale = 1
 
-func update_weapon_stats(data, attack_num):
-	print("im really high up")
+func update_weapon_stats(upgrade_list, attack_num):
 	if player.equipped_weapon.has_method("update_attacks"):
-		player.equipped_weapon.update_attacks(data, attack_num)
+		player.equipped_weapon.update_attacks(upgrade_list, attack_num)

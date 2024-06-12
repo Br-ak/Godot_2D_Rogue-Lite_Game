@@ -1,11 +1,12 @@
 extends Node
 
+@onready var upgrades = StaticData.upgrades["upgrades"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
 
-func init_attacks(WEAPON_NAME):
+func get_attack_info(WEAPON_NAME):
 	var weapon_data = StaticData.weapons["weapons"][WEAPON_NAME]["attacks"]
 	
 	var weapon_attack_count = 0
@@ -17,10 +18,14 @@ func init_attacks(WEAPON_NAME):
 			weapon_attack_count += 1
 			for key in StaticData.weapon_stat_list:
 				if weapon_data["attack1"].has(key): attack1.set(key, weapon_data["attack1"][key])
+			attack1.WEAPON_NAME = WEAPON_NAME
+			attack1.ATTACK_NUMBER = 1
 		elif attack_info == "attack2":
 			weapon_attack_count += 1
 			for key in StaticData.weapon_stat_list:
 				if weapon_data["attack2"].has(key): attack2.set(key, weapon_data["attack2"][key])
+			attack2.WEAPON_NAME = WEAPON_NAME
+			attack2.ATTACK_NUMBER = 2
 		else:
 			pass
 	if weapon_attack_count == 0:
@@ -32,9 +37,7 @@ func init_attacks(WEAPON_NAME):
 
 # handles/sorts all projectile types
 func fire_projectile(projectile_object, root, shooting_point, mouse_position, attack):
-	print(attack.attack_damage)
-	print(attack.attack_base_damage)
-	print(attack.attack_pattern)
+	# handle attack patterns
 	if attack.attack_pattern == "BASIC":
 		basic_projectile(projectile_object, root, shooting_point, mouse_position, attack)
 	elif attack.attack_pattern == "FORK":
@@ -102,3 +105,38 @@ func fork_projectile(projectile_object, root, shooting_point, mouse_position, at
 				new_projectile.position = prev_projectile_position + direction_vector * attack.attack_projectile_offset
 				new_projectile.rotation_degrees = prev_projectile_rotation
 			root.add_child(new_projectile)
+
+func init_attacks(WEAPON_NAME):
+	var primary_attack = Attack.new()
+	var secondary_attack = Attack.new()
+	if primary_attack:
+		var base_weapon_info = get_attack_info(WEAPON_NAME)
+		if base_weapon_info[0] is String: print("No attacks found")
+		elif base_weapon_info.size() == 1 && base_weapon_info[0] is Attack: # 1 atttack found
+			primary_attack = base_weapon_info[0]
+			primary_attack.update_attack_damage()
+			return [primary_attack]
+		elif base_weapon_info.size() == 2 && base_weapon_info[1] is Attack: # 2 atttacks found
+			primary_attack = base_weapon_info[0]
+			secondary_attack = base_weapon_info[1]
+			primary_attack.update_attack_damage()
+			secondary_attack.update_attack_damage()
+			return [primary_attack, secondary_attack]
+
+func reset_attack(attack) -> Attack:
+	var base_weapon_info = get_attack_info(attack.WEAPON_NAME)
+	attack = base_weapon_info[attack.ATTACK_NUMBER - 1]
+	attack.update_attack_damage() # might not be needed
+	return attack
+
+func update_attacks(upgrade_list, attack_to_update):
+	print("resetting attack to base")
+	reset_attack(attack_to_update)
+	print("reapplying upgrades")
+	for attack_modification in upgrade_list:
+		if upgrades.has(attack_modification):
+				for changes in upgrades[attack_modification]["stats"]:
+					if upgrades[attack_modification]["stats"].has(changes): 
+						attack_to_update.set(changes, upgrades[attack_modification]["stats"][changes])
+				attack_to_update.update_attack_damage()
+	return attack_to_update
