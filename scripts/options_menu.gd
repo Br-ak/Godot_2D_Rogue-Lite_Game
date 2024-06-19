@@ -34,4 +34,5 @@ func populate_Keybinds():
 			new_hotkey_rebind_button.action_name = key
 			new_hotkey_rebind_button.action_name_formatted = data[key]["name"]
 			new_hotkey_rebind_button.current_keybind = data[key]["assigned_key"]
+			#new_hotkey_rebind_button.alternate_key = data[key]["alternate_key"]
 			CONTROLS_v_box_container.call("add_child", new_hotkey_rebind_button)

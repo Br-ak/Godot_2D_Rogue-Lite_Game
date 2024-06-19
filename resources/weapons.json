@@ -21,30 +21,19 @@
 			"attack2_base_upgrade_slots":4,
 			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/[design]_Sniper_rifle_[KAR98]_V1.00.png",
 			},
-		"weapon2":{
-			"name":"weapon2", 
-			"description":"text text text text text text text text text text text text text text text text ", 
-			"icon":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png"
-			},
-		"weapon3":{
-			"name":"weapon3", 
-			"description":"wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh wagh", 
-			"icon":"res://assets/GUNS_V1.00/V1.00/PNG/[NO_BOLT]_Sniper_rifle_[KAR98]_V1.00.png"
-			},
-		"weapon4":{
-			"name":"weapon4", 
-			"description":"woop woop woop woop woop woop woop woop woop woop woop woop woop woop woop woop ", 
-			"icon":"res://assets/GUNS_V1.00/V1.00/PNG/[design] Assault_rifle_V1.00.png"
-			},
-		"weapon5":{
-			"name":"weapon5", 
-			"description":"meep meep meep meep meep meep meep meep meep meep meep meep meep meep meep meep ", 
-			"icon":"res://assets/Pixel Art Top Down - Basic/TX Tileset Grass.png"
-			},
-		"weapon6":{
-			"name":"weapon6", 
-			"description":"bing bing bing bing bing bing bing bing bing bing bing bing bing bing bing bing ", 
-			"icon":"res://assets/Pixel Art Top Down - Basic/TX Tileset Stone Ground.png"
+		"gun":{
+			"name":"Wizard's Gun", 
+			"description":"This is a gun", 
+			"attacks":{
+				"attack1":{
+					"name":"Shoot",
+					"attack_base_damage": 5,
+					"attack_type": "GUN",
+					"attack_projectile_speed": 500,
+					},
+				},
+			"attack1_base_upgrade_slots":2,
+			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png",
 			},
 	}
 }

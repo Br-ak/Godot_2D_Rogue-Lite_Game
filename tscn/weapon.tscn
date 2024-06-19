@@ -24,13 +24,14 @@ script = ExtResource("1_qlrfd")
 [node name="Marker2D" type="Marker2D" parent="."]
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D"]
-position = Vector2(27, 0)
+position = Vector2(21, 0)
+scale = Vector2(0.695, 0.695)
 sprite_frames = SubResource("SpriteFrames_vdk7s")
 animation = &"Idle"
 
 [node name="ShootingPoint" type="Marker2D" parent="Marker2D/AnimatedSprite2D"]
 unique_name_in_owner = true
-position = Vector2(14, -3)
+position = Vector2(17.2662, -2.8777)
 
 [node name="Timer" type="Timer" parent="."]
 

@@ -581,7 +581,6 @@ animations = [{
 
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
-position = Vector2(226, 133)
 scale = Vector2(5, 5)
 platform_floor_layers = 4294901761
 script = ExtResource("1_pyu0h")
@@ -601,6 +600,8 @@ autoplay = "Down_Idle"
 
 [node name="Weapon" type="Node2D" parent="."]
 
+[node name="Swap Timer" type="Timer" parent="Weapon"]
+
 [node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "parent") instance=ExtResource("9_rumc1")]
 health_component = NodePath("../HealthComponent")
 parent = NodePath("..")
@@ -616,4 +617,5 @@ MAX_HEALTH = 100.0
 
 [node name="I-Frames" type="Timer" parent="HealthComponent"]
 
+[connection signal="timeout" from="Weapon/Swap Timer" to="." method="_on_swap_timer_timeout"]
 [connection signal="timeout" from="HealthComponent/I-Frames" to="." method="_on_i_frames_timeout"]

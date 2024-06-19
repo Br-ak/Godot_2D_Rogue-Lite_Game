@@ -41,7 +41,7 @@ func attack():
 	if trackingList.size() < 1:
 		closestEnemy = null
 	
-	if closestEnemy != null:
+	if closestEnemy != null && Engine.time_scale == 1:
 		shoot(closestEnemy)
 
 

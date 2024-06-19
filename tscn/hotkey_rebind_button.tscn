@@ -23,7 +23,7 @@ grow_vertical = 2
 alignment = 1
 
 [node name="Label" type="Label" parent="HBoxContainer"]
-custom_minimum_size = Vector2(200, 30)
+custom_minimum_size = Vector2(150, 30)
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 15
@@ -33,10 +33,19 @@ horizontal_alignment = 1
 [node name="VSeparator" type="VSeparator" parent="HBoxContainer"]
 layout_mode = 2
 size_flags_horizontal = 2
-theme_override_constants/separation = 100
+theme_override_constants/separation = 50
 
 [node name="Button" type="Button" parent="HBoxContainer"]
-custom_minimum_size = Vector2(150, 0)
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_horizontal = 2
+theme_override_font_sizes/font_size = 15
+toggle_mode = true
+text = "KEYBIND_KEY"
+
+[node name="Button2" type="Button" parent="HBoxContainer"]
+visible = false
+custom_minimum_size = Vector2(100, 0)
 layout_mode = 2
 size_flags_horizontal = 2
 theme_override_font_sizes/font_size = 15
@@ -44,3 +53,4 @@ toggle_mode = true
 text = "KEYBIND_KEY"
 
 [connection signal="toggled" from="HBoxContainer/Button" to="." method="_on_button_toggled"]
+[connection signal="toggled" from="HBoxContainer/Button2" to="." method="_on_button_2_toggled"]

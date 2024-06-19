@@ -1,13 +1,13 @@
 [gd_scene load_steps=11 format=3 uid="uid://b1408k7y7a2rw"]
 
 [ext_resource type="Script" path="res://scripts/melee_weapon.gd" id="1_nn1ov"]
-[ext_resource type="Texture2D" uid="uid://23cxau24hamy" path="res://assets/GUNS_V1.00/V1.00/PNG/[NO_BOLT]_Sniper_rifle_[KAR98]_V1.00.png" id="2_sxsqv"]
+[ext_resource type="Texture2D" uid="uid://d1slq4w2tuos2" path="res://assets/GUNS_V1.00/V1.00/PNG/[design]_Sniper_rifle_[KAR98]_V1.00.png" id="2_sfh23"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jygr1"]
 animations = [{
 "frames": [{
 "duration": 1.0,
-"texture": ExtResource("2_sxsqv")
+"texture": ExtResource("2_sfh23")
 }],
 "loop": true,
 "name": &"Idle",

@@ -68,14 +68,14 @@ offset_right = 176.5
 offset_bottom = 67.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 200
+theme_override_constants/h_separation = 100
 theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="Label" type="Label" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-text = "General"
+text = "Placeholder"
 vertical_alignment = 1
 
 [node name="OptionButton" type="OptionButton" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
@@ -86,7 +86,7 @@ layout_mode = 2
 [node name="Label2" type="Label" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-text = "Bingus"
+text = "Placeholder"
 
 [node name="OptionButton2" type="OptionButton" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
 clip_contents = true
@@ -95,17 +95,17 @@ layout_mode = 2
 
 [node name="Label3" type="Label" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
 layout_mode = 2
-text = "Bingus"
+text = "Placeholder"
 vertical_alignment = 1
 
 [node name="OptionButton3" type="OptionButton" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(100, 25)
+custom_minimum_size = Vector2(150, 25)
 layout_mode = 2
 
 [node name="Label4" type="Label" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
 layout_mode = 2
-text = "Bingus"
+text = "Placeholder"
 vertical_alignment = 1
 
 [node name="OptionButton4" type="OptionButton" parent="AspectRatioContainer/TabContainer/General/GridContainer"]
@@ -206,14 +206,14 @@ offset_right = 176.5
 offset_bottom = 67.0
 grow_horizontal = 2
 grow_vertical = 2
-theme_override_constants/h_separation = 200
+theme_override_constants/h_separation = 100
 theme_override_constants/v_separation = 10
 columns = 2
 
 [node name="Label" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-text = "Sound"
+text = "Placeholder"
 vertical_alignment = 1
 
 [node name="OptionButton" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
@@ -224,7 +224,7 @@ layout_mode = 2
 [node name="Label2" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
 custom_minimum_size = Vector2(0, 25)
 layout_mode = 2
-text = "Bingus"
+text = "Placeholder"
 
 [node name="OptionButton2" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
 clip_contents = true
@@ -233,17 +233,17 @@ layout_mode = 2
 
 [node name="Label3" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
 layout_mode = 2
-text = "Bingus"
+text = "Placeholder"
 vertical_alignment = 1
 
 [node name="OptionButton3" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
 clip_contents = true
-custom_minimum_size = Vector2(100, 25)
+custom_minimum_size = Vector2(150, 25)
 layout_mode = 2
 
 [node name="Label4" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
 layout_mode = 2
-text = "Bingus"
+text = "Placeholder"
 vertical_alignment = 1
 
 [node name="OptionButton4" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]

@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bbt0y6nlmn0ve"]
 
 [ext_resource type="Script" path="res://scripts/follower.gd" id="1_2ikfv"]
-[ext_resource type="Texture2D" uid="uid://dcoxqd5gil1xy" path="res://tscn/You otterf__ker!! - Funny.jpg" id="1_mcgcl"]
+[ext_resource type="Texture2D" uid="uid://cb2ercshc0qmb" path="res://assets/GUNS_V1.00/V1.00/PNG/test_follower.png" id="2_llkhl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ubav"]
 size = Vector2(31.1551, 47.199)
@@ -19,7 +19,7 @@ tracks/0/keys = {
 "times": PackedFloat32Array(0, 0.5, 1),
 "transitions": PackedFloat32Array(1, 1, 1),
 "update": 0,
-"values": [Vector2(0.0878572, 0.0878572), Vector2(0.0693676, 0.0838585), Vector2(0.0880364, 0.0858016)]
+"values": [Vector2(1.5, 1.5), Vector2(1, 1), Vector2(1.5, 1.5)]
 }
 
 [sub_resource type="Animation" id="Animation_p3tlf"]
@@ -66,10 +66,9 @@ scale = Vector2(0.145478, 0.145478)
 script = ExtResource("1_2ikfv")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(39.37, 38.0793)
-rotation = 0.15284
-scale = Vector2(0.0784607, 0.0848049)
-texture = ExtResource("1_mcgcl")
+position = Vector2(31.25, 41.4721)
+scale = Vector2(1.5, 1.5)
+texture = ExtResource("2_llkhl")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(30.9326, 41.2435)

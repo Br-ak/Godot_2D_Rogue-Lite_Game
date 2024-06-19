@@ -48,7 +48,11 @@ func basic_projectile(projectile_object, root, shooting_point, mouse_position, a
 	var new_projectile = projectile_object.instantiate()
 	new_projectile.attack = attack
 	new_projectile.global_position = shooting_point.global_position
-	new_projectile.look_at(mouse_position)
+	if attack.attack_type == "GUN":
+		new_projectile.global_position = shooting_point.global_position
+		new_projectile.global_rotation = shooting_point.global_rotation
+	else:
+		new_projectile.look_at(mouse_position)
 	root.add_child(new_projectile)
 
 # handles projectile forking
@@ -67,7 +71,11 @@ func fork_projectile(projectile_object, root, shooting_point, mouse_position, at
 			new_projectile.attack = attack
 			if !prev_projectile_position:
 				new_projectile.global_position = shooting_point.global_position
-				new_projectile.look_at(mouse_position)
+				if attack.attack_type == "GUN":
+					new_projectile.global_position = shooting_point.global_position
+					new_projectile.global_rotation = shooting_point.global_rotation
+				else:
+					new_projectile.look_at(mouse_position)
 				prev_projectile_rotation = new_projectile.rotation_degrees
 				prev_projectile_position = new_projectile.position
 			elif prev_projectile_position:
@@ -90,7 +98,11 @@ func fork_projectile(projectile_object, root, shooting_point, mouse_position, at
 			new_projectile.attack = attack
 			if !prev_projectile_position:
 				new_projectile.global_position = shooting_point.global_position
-				new_projectile.look_at(mouse_position)
+				if attack.attack_type == "GUN":
+					new_projectile.global_position = shooting_point.global_position
+					new_projectile.global_rotation = shooting_point.global_rotation
+				else:
+					new_projectile.look_at(mouse_position)
 				prev_projectile_rotation = new_projectile.rotation_degrees
 				prev_projectile_position = new_projectile.position
 			elif prev_projectile_position:
@@ -140,3 +152,11 @@ func update_attacks(upgrade_list, attack_to_update):
 						attack_to_update.set(changes, upgrades[attack_modification]["stats"][changes])
 				attack_to_update.update_attack_damage()
 	return attack_to_update
+
+func is_mouse_between_points(mouse_pos: Vector2, point_a: Vector2, point_b: Vector2) -> bool:
+	var min_x = min(point_a.x, point_b.x)
+	var max_x = max(point_a.x, point_b.x)
+	var min_y = min(point_a.y, point_b.y)
+	var max_y = max(point_a.y, point_b.y)
+	
+	return mouse_pos.x >= min_x and mouse_pos.x <= max_x and mouse_pos.y >= min_y and mouse_pos.y <= max_y

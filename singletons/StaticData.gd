@@ -3,7 +3,7 @@ extends Node
 var upgrades = {}
 var keybinds = {}
 var weapons = {}
-var keybindList = ["attack_primary", "ui_up", "ui_left", "ui_down", "ui_right"]
+var keybindList = ["attack_primary", "ui_up", "ui_left", "ui_down", "ui_right", "debug_inventory", "weapon_swap"]
 var upgrades_file_path = "res://resources/upgrades.json"
 var keybinds_file_path = "res://resources/keybinds.json"
 var weapons_file_path = "res://resources/weapons.json"

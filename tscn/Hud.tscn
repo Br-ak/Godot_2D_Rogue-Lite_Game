@@ -1,6 +1,7 @@
-[gd_scene load_steps=4 format=3 uid="uid://h5o64r5rw0wu"]
+[gd_scene load_steps=5 format=3 uid="uid://h5o64r5rw0wu"]
 
 [ext_resource type="Script" path="res://scripts/Hud.gd" id="1_c5o3d"]
+[ext_resource type="PackedScene" uid="uid://d13bfvinq877y" path="res://tscn/weapon_swap.tscn" id="2_bpg0x"]
 
 [sub_resource type="Gradient" id="Gradient_5gddr"]
 colors = PackedColorArray(0, 0.6, 0, 1, 1, 1, 1, 0.509804)
@@ -114,3 +115,13 @@ offset_bottom = -30.0
 grow_horizontal = 2
 grow_vertical = 0
 max_value = 0.0
+
+[node name="Weapon Swap" parent="AspectRatioContainer/CanvasLayer" instance=ExtResource("2_bpg0x")]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 20.0
+offset_top = -60.0
+offset_right = 60.0
+offset_bottom = -20.0
+grow_vertical = 0

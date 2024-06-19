@@ -3,14 +3,15 @@
 		"damage_increase":{
 			"name":"Damage Increase", 
 			"description":"Increases damage", 
-			"image":"res://tscn/You otterf__ker!! - Funny.jpg",
+			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_damage.png",
 			"stats":{
 					"attack_damage_increase": 10,
 					},
 			},
 		"attack_fork":{
+			"name":"Attack Fork",
 			"description":"Forks Projectile", 
-			"image":"res://tscn/You otterf__ker!! - Funny.jpg",
+			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_fork.png",
 			"stats":{
 					"attack_pattern": "FORK",
 					"attack_projectile_count": 3,
@@ -18,10 +19,43 @@
 					},
 			},
 		"attack_pierce":{
+			"name":"Attack Pierce",
 			"description":"Attacks pierce extra enemy", 
-			"image":"res://tscn/You otterf__ker!! - Funny.jpg",
+			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_pierce.png",
 			"stats":{
 					"attack_pierce": 5,
+					},
+			},
+		"attack_speed":{
+			"name":"Attack Speed",
+			"description":"Increase attack speed", 
+			"image":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png",
+			"stats":{
+					"attack_reset_time": 0.5,
+					},
+			},
+		"attack_test1":{
+			"name":"Attack test",
+			"description":"test test test", 
+			"image":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png",
+			"stats":{
+					"attack_reset_time": 0.5,
+					},
+			},
+		"attack_test2":{
+			"name":"Attack test",
+			"description":"test test test", 
+			"image":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png",
+			"stats":{
+					"attack_reset_time": 0.5,
+					},
+			},
+		"attack_test3":{
+			"name":"Attack test",
+			"description":"test test test", 
+			"image":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png",
+			"stats":{
+					"attack_reset_time": 0.5,
 					},
 			},
 	}

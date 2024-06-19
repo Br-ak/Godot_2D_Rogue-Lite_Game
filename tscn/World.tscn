@@ -147,7 +147,6 @@ sources/1 = SubResource("TileSetAtlasSource_epafv")
 script = ExtResource("1_oo31q")
 
 [node name="Player" parent="." instance=ExtResource("1_tqmbx")]
-position = Vector2(0, 0)
 scale = Vector2(1, 1)
 
 [node name="grass_tilemap" type="TileMap" parent="."]

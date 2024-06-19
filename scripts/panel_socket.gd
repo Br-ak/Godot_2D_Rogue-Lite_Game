@@ -31,7 +31,7 @@ func _ready():
 		item.set_texture(icon_texture)
 		self.has_item = true
 
-func _get_drag_data(at_position):
+func _get_drag_data(_at_position):
 	if not dropped_on_target && has_item:
 		set_drag_preview(get_preview_control())
 		return self
@@ -39,16 +39,16 @@ func _get_drag_data(at_position):
 func get_preview_control() -> Control:
 	var preview = TextureRect.new()
 	preview.set_texture(icon_texture)
-	var modulate = Color(1, 1, 1, 0.5)
-	preview.set_modulate(modulate)
+	var modulate_alpha = Color(1, 1, 1, 0.5)
+	preview.set_modulate(modulate_alpha)
 	preview.set_rotation(.1)
 	return preview
 
-func _can_drop_data(at_position, data) -> bool:
+func _can_drop_data(_at_position, data) -> bool:
 	var can_drop: bool = data is Node and data.is_in_group("DRAGGABLE")
 	return can_drop
 
-func _drop_data(at_position, data):
+func _drop_data(_at_position, data):
 	if data.item != null:
 		if self.has_item:
 			print("item already here")

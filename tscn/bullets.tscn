@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://o03vi82d4mx0"]
 
 [ext_resource type="Script" path="res://scripts/bullets.gd" id="1_orgx2"]
-[ext_resource type="Texture2D" uid="uid://dcoxqd5gil1xy" path="res://tscn/You otterf__ker!! - Funny.jpg" id="2_ql561"]
+[ext_resource type="Texture2D" uid="uid://c0tkfij8wn7ic" path="res://assets/GUNS_V1.00/V1.00/PNG/test_fireball.png" id="2_om7hu"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ytg15"]
 size = Vector2(5, 6)
@@ -16,8 +16,8 @@ script = ExtResource("1_orgx2")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 position = Vector2(0, 4.76837e-07)
-scale = Vector2(0.00714286, 0.00626876)
-texture = ExtResource("2_ql561")
+scale = Vector2(0.15, 0.15)
+texture = ExtResource("2_om7hu")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_ytg15")

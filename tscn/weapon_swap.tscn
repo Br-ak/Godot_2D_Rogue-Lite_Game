@@ -1,0 +1,23 @@
+[gd_scene load_steps=3 format=3 uid="uid://d13bfvinq877y"]
+
+[ext_resource type="Script" path="res://Weapon_swap.gd" id="1_46htv"]
+[ext_resource type="Texture2D" uid="uid://dmr7pnxych8i0" path="res://assets/GUNS_V1.00/V1.00/PNG/test_swap.png" id="4_s21ye"]
+
+[node name="Weapon Swap" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+script = ExtResource("1_46htv")
+
+[node name="Holstered Item" type="Sprite2D" parent="."]
+modulate = Color(1, 1, 1, 0.698039)
+position = Vector2(0, -15)
+
+[node name="Equipped Item" type="Sprite2D" parent="."]
+offset = Vector2(40, 5)
+
+[node name="Swap Icon" type="Sprite2D" parent="."]
+scale = Vector2(0.5, 0.5)
+texture = ExtResource("4_s21ye")
+offset = Vector2(120, -50)

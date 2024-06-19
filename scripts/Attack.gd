@@ -16,7 +16,7 @@ var attack_pierce := 0
 var attack_projectile_count := 1
 var attack_projectile_offset := 10
 var attack_reset_time := 1
-var attack_projectile_speed : int
+var attack_projectile_speed := 500
 var attack_range := 1200
 var attack_damage_increase := 0
 var attack_damage_multiplier := 1.0
@@ -32,6 +32,3 @@ func _ready():
 
 func update_attack_damage():
 	attack_damage = (attack_base_damage + attack_damage_increase) * attack_damage_multiplier
-
-func merge_attacks(attack_to_merge):
-	pass

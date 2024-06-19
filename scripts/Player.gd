@@ -3,6 +3,10 @@ signal update_weapon_stats_signal(new_damage)
 
 var speed = 200  # speed in pixels/sec
 const type = "Player"
+const ranged_weapon = preload("res://tscn/weapon.tscn")
+const melee_weapon = preload("res://tscn/melee_weapon.tscn")
+var new_melee_weapon
+var new_holstered_weapon
 
 @onready var anim = $AnimatedSprite2D
 @onready var weapon = $Weapon
@@ -13,8 +17,12 @@ const type = "Player"
 @onready var health_component = $HealthComponent
 @onready var invincible_timer = $"HealthComponent/I-Frames"
 @onready var inventory_menu = gameNode.get_node("CanvasLayer").get_node("Inventory Menu")
+@onready var swap_timer = $"Weapon/Swap Timer"
+
 var equipped_weapon
+var holstered_weapon
 var test_weapon_equipped = false
+var weapon_swappable = false
 var invincible_timer_length = 1
 
 var player_exp := 0:
@@ -60,12 +68,33 @@ func read_inputs():
 	
 	if Input.is_action_pressed("add_weapon_test") && test_weapon_equipped == false:
 		test_weapon_equipped = true
-		const ranged_weapon = preload("res://tscn/weapon.tscn")
-		const melee_weapon = preload("res://tscn/melee_weapon.tscn")
-		var new_melee_weapon = melee_weapon.instantiate()
+		new_melee_weapon = melee_weapon.instantiate()
+		new_holstered_weapon = ranged_weapon.instantiate()
 		weapon.call("add_child", new_melee_weapon)
-		equipped_weapon = $Weapon/Area2D
+		#weapon.call("add_child", new_holstered_weapon)
+		equipped_weapon = new_melee_weapon
+		holstered_weapon = new_holstered_weapon
 		inventory_menu.init_weapon_panels()
+		hud.weapon_swap.init()
+		weapon_swappable = true
+	
+	if Input.is_action_pressed("weapon_swap") && weapon_swappable:
+		weapon_swappable = false
+		var new_weapon
+		if equipped_weapon.WEAPON_NAME == "gun":
+			new_weapon = melee_weapon
+		elif equipped_weapon.WEAPON_NAME == "staff":
+			new_weapon = ranged_weapon
+		
+		var temp_weapon = equipped_weapon
+		var new_equipped_weapon = new_weapon.instantiate()
+		weapon.call("add_child", new_equipped_weapon)
+		equipped_weapon.queue_free()
+		equipped_weapon = new_equipped_weapon
+		holstered_weapon = temp_weapon
+		inventory_menu.swap_weapons()
+		hud.weapon_swap.init()
+		swap_timer.start(1)
 	
 	if angle > -0.78 and angle < 0.78: #####looking right
 		anim.scale.x = 1
@@ -117,3 +146,9 @@ func hurt():
 
 func _on_i_frames_timeout():
 	health_component.INVINCIBLE = false
+
+
+
+
+func _on_swap_timer_timeout():
+	weapon_swappable = true

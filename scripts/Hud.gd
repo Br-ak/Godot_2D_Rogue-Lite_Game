@@ -10,6 +10,7 @@ var HP_BAR_MAX = 100
 #
 
 @onready var info = $AspectRatioContainer/CanvasLayer/info
+@onready var weapon_swap = $"AspectRatioContainer/CanvasLayer/Weapon Swap"
 
 #Old EXP BAR
 #@onready var exp_bar = $AspectRatioContainer/CanvasLayer/ColorRect/TextureRect

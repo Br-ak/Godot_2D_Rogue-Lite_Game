@@ -23,7 +23,7 @@ func _process(_delta):
 		var TL_bound = player.position + Vector2((-1 * bound_buffer),bound_buffer)
 		var TR_bound = player.position + Vector2(bound_buffer,bound_buffer)
 		var BL_bound = player.position + Vector2((-1 * bound_buffer),(-1 * bound_buffer))
-		var BR_bound = player.position + Vector2(bound_buffer,(-1 * bound_buffer))
+		var _BR_bound = player.position + Vector2(bound_buffer,(-1 * bound_buffer))
 		frameCount = 0
 		
 		for x in range((TL_bound.x / tile_size.x), (TR_bound.x / tile_size.x)):

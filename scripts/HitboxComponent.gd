@@ -10,5 +10,5 @@ func damage(attack: Attack):
 	if health_component:
 		health_component.damage(attack)
 
-func death(attack: Attack):
+func death(_attack: Attack):
 	hitbox.set_deferred("disabled", true)

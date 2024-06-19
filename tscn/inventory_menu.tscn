@@ -11,7 +11,7 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_0jihj")
 
-[node name="AspectRatioContainer" type="AspectRatioContainer" parent="."]
+[node name="Weapon Panel Container" type="AspectRatioContainer" parent="."]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -25,31 +25,31 @@ offset_bottom = 250.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="Weapon Panel Container"]
 layout_mode = 2
 
-[node name="Label" type="Label" parent="AspectRatioContainer/VBoxContainer"]
-layout_mode = 2
-text = "Inventory"
-horizontal_alignment = 1
-
-[node name="Label2" type="Label" parent="AspectRatioContainer/VBoxContainer"]
+[node name="Label" type="Label" parent="Weapon Panel Container/VBoxContainer"]
 layout_mode = 2
 text = "Inventory"
 horizontal_alignment = 1
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/VBoxContainer"]
+[node name="Label2" type="Label" parent="Weapon Panel Container/VBoxContainer"]
+layout_mode = 2
+text = "Inventory"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Weapon Panel Container/VBoxContainer"]
 layout_mode = 2
 alignment = 1
 
-[node name="Exit" type="Button" parent="AspectRatioContainer/VBoxContainer"]
+[node name="Exit" type="Button" parent="Weapon Panel Container/VBoxContainer"]
 custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
 size_flags_horizontal = 4
 theme_override_font_sizes/font_size = 10
 text = "Exit"
 
-[node name="AspectRatioContainer2" type="AspectRatioContainer" parent="."]
+[node name="Inventory Panel Container" type="AspectRatioContainer" parent="."]
 layout_mode = 1
 anchors_preset = 6
 anchor_left = 1.0
@@ -62,13 +62,13 @@ offset_bottom = 250.0
 grow_horizontal = 0
 grow_vertical = 2
 
-[node name="Panel" type="Panel" parent="AspectRatioContainer2"]
+[node name="Panel" type="Panel" parent="Inventory Panel Container"]
 custom_minimum_size = Vector2(150, 500)
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 6
 
-[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer2/Panel"]
+[node name="GridContainer" type="GridContainer" parent="Inventory Panel Container/Panel"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -83,4 +83,4 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 2
 
-[connection signal="pressed" from="AspectRatioContainer/VBoxContainer/Exit" to="." method="_on_exit_pressed"]
+[connection signal="pressed" from="Weapon Panel Container/VBoxContainer/Exit" to="." method="_on_exit_pressed"]

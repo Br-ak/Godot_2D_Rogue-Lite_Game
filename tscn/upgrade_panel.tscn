@@ -15,7 +15,7 @@ text = "Title"
 horizontal_alignment = 1
 
 [node name="Desc" type="RichTextLabel" parent="."]
-custom_minimum_size = Vector2(150, 250)
+custom_minimum_size = Vector2(150, 150)
 layout_mode = 2
 theme_override_font_sizes/normal_font_size = 10
 text = "Description: blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah "
@@ -31,3 +31,5 @@ stretch_mode = 0
 [node name="Button" type="Button" parent="."]
 layout_mode = 2
 text = "Select Upgrade"
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]

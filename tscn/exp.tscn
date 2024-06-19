@@ -1,10 +1,9 @@
 [gd_scene load_steps=4 format=3 uid="uid://n54xpucxts56"]
 
 [ext_resource type="Script" path="res://scripts/exp.gd" id="1_tj1cb"]
-[ext_resource type="Texture2D" uid="uid://dcoxqd5gil1xy" path="res://tscn/You otterf__ker!! - Funny.jpg" id="2_8ij0m"]
+[ext_resource type="Texture2D" uid="uid://b00dppgbpcdnq" path="res://assets/GUNS_V1.00/V1.00/PNG/test_xp.png" id="2_pj5vu"]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_sx7fw"]
-size = Vector2(108, 156)
+[sub_resource type="CircleShape2D" id="CircleShape2D_pvbwm"]
 
 [node name="exp" type="Area2D"]
 scale = Vector2(0.0207248, 0.0207248)
@@ -12,11 +11,11 @@ script = ExtResource("1_tj1cb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 position = Vector2(0, -1.23425)
-shape = SubResource("RectangleShape2D_sx7fw")
+scale = Vector2(15.925, 15.925)
+shape = SubResource("CircleShape2D_pvbwm")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
-position = Vector2(1.99997, -1.61716)
-scale = Vector2(0.165714, 0.165714)
-texture = ExtResource("2_8ij0m")
+scale = Vector2(2.05, 2.05)
+texture = ExtResource("2_pj5vu")
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]

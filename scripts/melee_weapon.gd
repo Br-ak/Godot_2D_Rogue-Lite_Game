@@ -26,7 +26,6 @@ const projectile = preload("res://tscn/staff-projectile.tscn")
 var primary_attack
 var secondary_attack
 
-
 func _ready():
 	init_attacks()
 	hitbox.disabled = true
@@ -119,3 +118,4 @@ func update_attacks(upgrade_list, attack_to_update):
 		primary_attack = SharedFunctions.update_attacks(upgrade_list, primary_attack)
 	elif attack_to_update == 2:
 		secondary_attack = SharedFunctions.update_attacks(upgrade_list, secondary_attack)
+	
