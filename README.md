@@ -8,7 +8,7 @@ After about 6 months of work in between classwork and group projects, the game i
 Recently I redesigned some of the base features to utilize composition and inheritance to easily implement new versions of the same features later on, such as enemies and weapons. 
 
 
-There is a playable early development demo (as of 06/12/2024) hosted on my Itch.io page here:
+There is a playable early development demo (as of 06/19/2024) hosted on my Itch.io page here:
 [Itch.io Link](https://brak145.itch.io/outofmana)
 
 It may require this password to view: auto-brakler
