@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt2xfuibf246d"]
+[gd_scene load_steps=9 format=3 uid="uid://dt2xfuibf246d"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_bkj1u"]
 [ext_resource type="PackedScene" uid="uid://dkt7sfuc2psyg" path="res://tscn/World.tscn" id="2_70odr"]
@@ -7,6 +7,7 @@
 [ext_resource type="PackedScene" uid="uid://h5o64r5rw0wu" path="res://tscn/Hud.tscn" id="5_0te5f"]
 [ext_resource type="PackedScene" uid="uid://co6r0ruevq3ni" path="res://tscn/level_up_menu.tscn" id="6_sdn3w"]
 [ext_resource type="PackedScene" uid="uid://3pqht14fayf" path="res://tscn/inventory_menu.tscn" id="7_8o5rw"]
+[ext_resource type="AudioStream" uid="uid://dnlrkxt0nmnjn" path="res://assets/audio/Goblins_Dance_(Battle).ogg" id="8_fasvu"]
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_bkj1u")
@@ -41,5 +42,8 @@ visible = false
 visible = false
 
 [node name="Timer" type="Timer" parent="."]
+
+[node name="BGM" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("8_fasvu")
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

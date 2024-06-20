@@ -1,7 +1,9 @@
-[gd_scene load_steps=11 format=3 uid="uid://b1408k7y7a2rw"]
+[gd_scene load_steps=13 format=3 uid="uid://b1408k7y7a2rw"]
 
 [ext_resource type="Script" path="res://scripts/melee_weapon.gd" id="1_nn1ov"]
 [ext_resource type="Texture2D" uid="uid://d1slq4w2tuos2" path="res://assets/GUNS_V1.00/V1.00/PNG/[design]_Sniper_rifle_[KAR98]_V1.00.png" id="2_sfh23"]
+[ext_resource type="AudioStream" uid="uid://kkxokjjs7fcr" path="res://assets/audio/swipe.wav" id="3_4s15v"]
+[ext_resource type="AudioStream" uid="uid://tdgmvd5fkp2j" path="res://assets/audio/toss.wav" id="4_j1bgu"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_jygr1"]
 animations = [{
@@ -196,6 +198,14 @@ shape = SubResource("RectangleShape2D_cm2xp")
 [node name="Timer" type="Timer" parent="."]
 
 [node name="Timer2" type="Timer" parent="."]
+
+[node name="primary_attack_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_4s15v")
+volume_db = -6.073
+
+[node name="secondary_attack_sfx" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_j1bgu")
+volume_db = -6.832
 
 [connection signal="area_entered" from="Marker2D/AnimatedSprite2D/hitbox" to="." method="_on_hitbox_area_entered"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

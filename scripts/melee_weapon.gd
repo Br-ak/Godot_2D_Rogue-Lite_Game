@@ -10,6 +10,8 @@ const WEAPON_NAME = "staff"
 @onready var marker_2d = $Marker2D
 @onready var shooting_point = %ShootingPoint
 @onready var area_2d = $"."
+@onready var primary_attack_sfx = $primary_attack_sfx
+@onready var secondary_attack_sfx = $secondary_attack_sfx
 
 
 var mousePosition : Vector2
@@ -58,6 +60,7 @@ func attack():
 		can_attack = false
 		hitbox.disabled = false
 		animPlayer.play("primary_attack")
+		primary_attack_sfx.play()
 		await animPlayer.animation_finished
 		hitbox.disabled = true
 		timer.start(animPlayer.get_animation("primary_attack").length * attack_speed_mod)
@@ -75,6 +78,7 @@ func attack_secondary():
 
 func attack_secondary_fire():
 	SharedFunctions.fire_projectile(projectile, get_tree().root, shooting_point, get_global_mouse_position(), secondary_attack)
+	secondary_attack_sfx.play()
 	animSprite.set_visible(false)
 	timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
 

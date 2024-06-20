@@ -6,6 +6,8 @@ extends CharacterBody2D
 @onready var follower = get_parent().get_parent().get_node("Follower")
 @onready var anim = $AnimationComponent/AnimatedSprite2D
 @onready var collision = $CollisionShape2D
+@onready var death_sfx = $death_sfx
+@onready var hurt_sfx = $hurt_sfx
 
 const type = "Enemy"
 var baseDamage = 5
@@ -35,11 +37,16 @@ func _physics_process(_delta):
 func attack():
 	pass
 
+func hurt():
+	hurt_sfx.play()
+
 func death():
+	hurt_sfx.play()
 	follower.get("trackingList").erase(self) 
 	collision.set_deferred("disabled", true)
 	spawnExp()
 	player.killCounter += 1
+	death_sfx.play()
 
 func spawnExp():
 	const EXP = preload("res://tscn/exp.tscn")

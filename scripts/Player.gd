@@ -18,6 +18,7 @@ var new_holstered_weapon
 @onready var invincible_timer = $"HealthComponent/I-Frames"
 @onready var inventory_menu = gameNode.get_node("CanvasLayer").get_node("Inventory Menu")
 @onready var swap_timer = $"Weapon/Swap Timer"
+@onready var move_sfx = $move_sfx
 
 var equipped_weapon
 var holstered_weapon
@@ -57,6 +58,11 @@ func read_inputs():
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var mousePosition = get_global_mouse_position()
 	var angle = position.angle_to_point(mousePosition)
+	if direction && !move_sfx.is_playing() && Engine.time_scale == 1:
+		move_sfx.play()
+	elif !direction || Engine.time_scale != 1:
+		move_sfx.stop()
+	
 	
 	if Input.is_action_pressed("attack_primary"):
 		if equipped_weapon && equipped_weapon.has_method("attack") && equipped_weapon.can_attack:

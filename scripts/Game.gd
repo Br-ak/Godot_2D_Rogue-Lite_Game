@@ -8,6 +8,7 @@ extends Node2D
 @onready var timer = $Timer
 @onready var hud = $CanvasLayer/Hud
 @onready var world = $World
+@onready var bgm = $BGM
 
 
 var gameTimer := 0:
@@ -17,6 +18,7 @@ var gameTimer := 0:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	bgm.play()
 	timer.start(1) 
 	if Engine.time_scale != 1:
 		Engine.time_scale = 1

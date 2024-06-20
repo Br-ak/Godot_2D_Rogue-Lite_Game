@@ -4,6 +4,7 @@ extends Area2D
 @onready var anim = $Marker2D/AnimatedSprite2D
 @onready var timer = $Timer
 @onready var shooting_point = %ShootingPoint
+@onready var primary_attack_sfx = $primary_attack_sfx
 
 var can_attack = true
 var attack_wait = 0.20
@@ -29,6 +30,7 @@ func attack():
 		can_attack = false
 		var mouse_pos = get_global_mouse_position()
 		SharedFunctions.fire_projectile(BULLET, get_tree().root, shooting_point, mouse_pos, primary_attack)
+		primary_attack_sfx.play()
 		timer.start(attack_wait)
 
 func _on_timer_timeout():
