@@ -2,7 +2,7 @@ extends Control
 signal _fill_exp_bar
 signal _reset_exp_bar
 
-var XP_BAR_MAX = 50.00
+var XP_BAR_MAX = 100.00
 var HP_BAR_MAX = 100
 
 #
@@ -14,7 +14,8 @@ var HP_BAR_MAX = 100
 
 #Old EXP BAR
 #@onready var exp_bar = $AspectRatioContainer/CanvasLayer/ColorRect/TextureRect
-@onready var exp_bar = $"AspectRatioContainer/CanvasLayer/XP Bar"
+@onready var exp_bar = $"AspectRatioContainer/CanvasLayer/VBoxContainer2/XP Bar"
+
 @onready var resource_bar = $"AspectRatioContainer/CanvasLayer/VBoxContainer/Resource Bar"
 
 @onready var playerHealth = $"AspectRatioContainer/CanvasLayer/VBoxContainer/Health Bar":

@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://h5o64r5rw0wu"]
+[gd_scene load_steps=8 format=3 uid="uid://h5o64r5rw0wu"]
 
 [ext_resource type="Script" path="res://scripts/Hud.gd" id="1_c5o3d"]
 [ext_resource type="PackedScene" uid="uid://d13bfvinq877y" path="res://tscn/weapon_swap.tscn" id="2_bpg0x"]
@@ -10,6 +10,21 @@ colors = PackedColorArray(0, 0.6, 0, 1, 1, 1, 1, 0.509804)
 gradient = SubResource("Gradient_5gddr")
 width = 577
 fill_to = Vector2(0.1, 0)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7y1y"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4nbs"]
+bg_color = Color(0, 0, 0, 0.533333)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_0oxcs"]
+bg_color = Color(0, 0.592157, 0, 1)
 
 [node name="Hud" type="Control"]
 layout_mode = 3
@@ -90,38 +105,55 @@ offset_top = 10.0
 offset_right = 260.0
 offset_bottom = 68.0
 
+[node name="Label" type="Label" parent="AspectRatioContainer/CanvasLayer/VBoxContainer"]
+layout_mode = 2
+text = "Health"
+horizontal_alignment = 1
+
 [node name="Health Bar" type="ProgressBar" parent="AspectRatioContainer/CanvasLayer/VBoxContainer"]
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_x7y1y")
 max_value = 0.0
 
 [node name="Resource Bar" type="ProgressBar" parent="AspectRatioContainer/CanvasLayer/VBoxContainer"]
+visible = false
 custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 max_value = 300.0
 value = 300.0
 
-[node name="XP Bar" type="ProgressBar" parent="AspectRatioContainer/CanvasLayer"]
-custom_minimum_size = Vector2(250, 0)
+[node name="VBoxContainer2" type="VBoxContainer" parent="AspectRatioContainer/CanvasLayer"]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
 anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = -375.0
-offset_top = -57.0
-offset_right = 375.0
-offset_bottom = -30.0
+offset_left = -350.0
+offset_top = -73.08
+offset_right = 350.0
+offset_bottom = -20.08
 grow_horizontal = 2
 grow_vertical = 0
+
+[node name="Label2" type="Label" parent="AspectRatioContainer/CanvasLayer/VBoxContainer2"]
+layout_mode = 2
+text = "Experience"
+horizontal_alignment = 1
+
+[node name="XP Bar" type="ProgressBar" parent="AspectRatioContainer/CanvasLayer/VBoxContainer2"]
+custom_minimum_size = Vector2(700, 0)
+layout_mode = 2
+theme_override_styles/background = SubResource("StyleBoxFlat_p4nbs")
+theme_override_styles/fill = SubResource("StyleBoxFlat_0oxcs")
 max_value = 0.0
 
 [node name="Weapon Swap" parent="AspectRatioContainer/CanvasLayer" instance=ExtResource("2_bpg0x")]
 anchors_preset = 2
 anchor_top = 1.0
 anchor_bottom = 1.0
-offset_left = 20.0
-offset_top = -60.0
-offset_right = 60.0
-offset_bottom = -20.0
+offset_left = 75.0
+offset_top = -98.0
+offset_right = 115.0
+offset_bottom = -58.0
 grow_vertical = 0

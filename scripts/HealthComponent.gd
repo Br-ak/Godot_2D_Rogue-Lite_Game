@@ -26,6 +26,7 @@ func damage(attack: Attack):
 				if parent.has_method("death"):
 					parent.death()
 					dead = true
+				if hitbox_component.has_method("death"):
+					hitbox_component.death(attack)
 				if animation_component:
 					animation_component.death(attack)
-				hitbox_component.death(attack)

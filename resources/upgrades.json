@@ -2,7 +2,7 @@
 	"upgrades": {
 		"damage_increase":{
 			"name":"Damage Increase", 
-			"description":"Increases damage", 
+			"description":"Damage Gem: Increases Damage", 
 			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_damage.png",
 			"stats":{
 					"attack_damage_increase": 10,
@@ -10,7 +10,7 @@
 			},
 		"attack_fork":{
 			"name":"Attack Fork",
-			"description":"Forks Projectile", 
+			"description":"Fork Gem: Forks Projectile", 
 			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_fork.png",
 			"stats":{
 					"attack_pattern": "FORK",
@@ -20,7 +20,7 @@
 			},
 		"attack_pierce":{
 			"name":"Attack Pierce",
-			"description":"Attacks pierce extra enemy", 
+			"description":"Pierce Gem: Increases Pierce Amount", 
 			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_pierce.png",
 			"stats":{
 					"attack_pierce": 5,
@@ -28,10 +28,10 @@
 			},
 		"attack_speed":{
 			"name":"Attack Speed",
-			"description":"Increase attack speed", 
+			"description":"Attack Speed Gem: Increase attack speed", 
 			"image":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png",
 			"stats":{
-					"attack_reset_time": 0.5,
+					"attack_reset_time_multiplier": 0.5,
 					},
 			},
 		"attack_test1":{

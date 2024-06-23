@@ -6,7 +6,7 @@
 [sub_resource type="CircleShape2D" id="CircleShape2D_pvbwm"]
 
 [node name="exp" type="Area2D"]
-scale = Vector2(0.0207248, 0.0207248)
+scale = Vector2(0.05, 0.05)
 script = ExtResource("1_tj1cb")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]

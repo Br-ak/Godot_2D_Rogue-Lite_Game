@@ -8,11 +8,8 @@ var travelled_distance = 0
 @onready var SPEED = attack.attack_projectile_speed
 @onready var RANGE = attack.attack_range
 
-
-
 func _physics_process(delta):
 	var direction = Vector2.RIGHT.rotated(rotation)
-	
 	position += direction * SPEED * delta # delta means time dependent rather than frame dependent
 	travelled_distance += SPEED * delta
 	if travelled_distance > RANGE:

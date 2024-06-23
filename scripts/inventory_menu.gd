@@ -35,9 +35,9 @@ func init_weapon_panels():
 	var equipped_weapon_key = player.equipped_weapon.WEAPON_NAME
 	equipped_weapon_name = player.equipped_weapon.WEAPON_NAME
 	label_2.text = data[equipped_weapon_key]["name"]
-	var attack1_base_upgrade_slots = -1
-	var attack2_base_upgrade_slots = -1
-
+	var attack1_base_upgrade_slots
+	var attack2_base_upgrade_slots
+	
 	for obj in data[equipped_weapon_key]:
 		if obj == "attack1_base_upgrade_slots":
 			attack1_base_upgrade_slots = data[equipped_weapon_key][obj]

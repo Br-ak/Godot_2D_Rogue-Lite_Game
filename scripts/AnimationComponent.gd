@@ -2,6 +2,7 @@ extends Node2D
 class_name AnimationComponent
 
 @onready var anim = $AnimatedSprite2D
+@export var health_component : HealthComponent
 
 func _ready():
 	anim.play("Run")

@@ -10,7 +10,6 @@ extends Node2D
 @onready var world = $World
 @onready var bgm = $BGM
 
-
 var gameTimer := 0:
 	set(value):
 		gameTimer = value

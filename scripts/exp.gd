@@ -15,5 +15,5 @@ func _process(_delta):
 
 func _on_body_entered(body):
 	if body.has_method("gain_exp"):
-		body.gain_exp(1)
+		body.gain_exp(10)
 		queue_free()

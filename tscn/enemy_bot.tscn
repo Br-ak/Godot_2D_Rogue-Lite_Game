@@ -150,6 +150,7 @@ size = Vector2(16, 22)
 
 [node name="Enemy_Bot" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component")]
 position = Vector2(7, 0)
+motion_mode = 1
 script = ExtResource("1_2rm6a")
 hitbox_component = NodePath("HitboxComponent")
 
@@ -157,7 +158,8 @@ hitbox_component = NodePath("HitboxComponent")
 position = Vector2(-7, 0)
 shape = SubResource("RectangleShape2D_5egun")
 
-[node name="AnimationComponent" parent="." instance=ExtResource("2_1y5gj")]
+[node name="AnimationComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("2_1y5gj")]
+health_component = NodePath("../HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimationComponent"]
 material = SubResource("CanvasItemMaterial_y1e3f")
@@ -172,8 +174,9 @@ hitbox_component = NodePath("../HitboxComponent")
 parent = NodePath("..")
 MAX_HEALTH = 10.0
 
-[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component") instance=ExtResource("6_58ok3")]
+[node name="HitboxComponent" parent="." node_paths=PackedStringArray("health_component", "parent") instance=ExtResource("6_58ok3")]
 health_component = NodePath("../HealthComponent")
+parent = NodePath("..")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="HitboxComponent"]
 position = Vector2(-7, 0)
@@ -187,4 +190,7 @@ volume_db = -15.314
 stream = ExtResource("9_bqbpd")
 volume_db = -20.0
 
+[node name="Off Screen Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
+[connection signal="timeout" from="Off Screen Timer" to="." method="_on_off_screen_timer_timeout"]

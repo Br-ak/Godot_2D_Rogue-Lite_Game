@@ -3,7 +3,9 @@ class_name Attack
 #attack variables
 var weapon_stat_list = ["attack_damage", "attack_wait", "attack_hits", "attack_type", "attack_origin", "attack_pattern", "attack_pierce", 
 "attack_projectile_count", "attack_projectile_offset", "attack_reset_time", "attack_projectile_speed", "attack_range", "attack_base_damage",
-"attack_damage_increase", "attack_damage_multiplier", "WEAPON_NAME", "ATTACK_NUMBER"]
+"attack_damage_increase", "attack_damage_multiplier", "attack_reset_time_multiplier", "WEAPON_NAME", "ATTACK_NUMBER"]
+#add all changes to res://singletons/StaticData.gd
+
 
 var attack_damage : float
 var attack_base_damage : float
@@ -16,8 +18,9 @@ var attack_pierce := 0
 var attack_projectile_count := 1
 var attack_projectile_offset := 10
 var attack_reset_time := 1
+var attack_reset_time_multiplier := 1.0
 var attack_projectile_speed := 500
-var attack_range := 1200
+var attack_range := 300
 var attack_damage_increase := 0
 var attack_damage_multiplier := 1.0
 

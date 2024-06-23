@@ -17,10 +17,11 @@ const WEAPON_NAME = "staff"
 var mousePosition : Vector2
 var can_attack = true
 var baseDamage = 5
+@onready var primary_attack_base_wait = animPlayer.get_animation("primary_attack").length
+@onready var secondary_attack_base_wait = animPlayer.get_animation("secondary_attack").length
 var currentDamage = baseDamage
 var local_mouse_position : Vector2
 var adjusted_mouse_position : Vector2
-var attack_speed_mod = 1
 var attack_over = false
 var charging = true
 var button_released = false
@@ -63,7 +64,7 @@ func attack():
 		primary_attack_sfx.play()
 		await animPlayer.animation_finished
 		hitbox.disabled = true
-		timer.start(animPlayer.get_animation("primary_attack").length * attack_speed_mod)
+		timer.start(primary_attack_base_wait * primary_attack.attack_reset_time_multiplier)
 
 func attack_secondary():
 	attack_over = false
@@ -80,7 +81,7 @@ func attack_secondary_fire():
 	SharedFunctions.fire_projectile(projectile, get_tree().root, shooting_point, get_global_mouse_position(), secondary_attack)
 	secondary_attack_sfx.play()
 	animSprite.set_visible(false)
-	timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
+	timer.start(secondary_attack_base_wait * secondary_attack.attack_reset_time_multiplier)
 
 func _on_hitbox_area_entered(area):
 	if area is HitboxComponent:
@@ -101,7 +102,7 @@ func _on_timer_2_timeout():
 		animPlayer.stop()
 		attack_secondary_fire()
 		button_released = false
-		timer.start(animPlayer.get_animation("secondary_attack").length * attack_speed_mod)
+		timer.start(secondary_attack_base_wait * secondary_attack.attack_reset_time_multiplier)
 	else:
 		timer_2.start(0.1)
 

@@ -7,11 +7,11 @@ extends Area2D
 @onready var primary_attack_sfx = $primary_attack_sfx
 
 var can_attack = true
-var attack_wait = 0.20
+var attack_base_wait = 0.50
 const BULLET = preload("res://tscn/bullets.tscn")
 const WEAPON_NAME = "gun"
 var primary_attack : Attack
-var secondary_attack : Attack
+var secondary_attack : Attack # not in use
 
 func _ready():
 	init_attacks()
@@ -31,7 +31,7 @@ func attack():
 		var mouse_pos = get_global_mouse_position()
 		SharedFunctions.fire_projectile(BULLET, get_tree().root, shooting_point, mouse_pos, primary_attack)
 		primary_attack_sfx.play()
-		timer.start(attack_wait)
+		timer.start(attack_base_wait * primary_attack.attack_reset_time_multiplier)
 
 func _on_timer_timeout():
 	can_attack = true

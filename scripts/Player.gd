@@ -19,6 +19,10 @@ var new_holstered_weapon
 @onready var inventory_menu = gameNode.get_node("CanvasLayer").get_node("Inventory Menu")
 @onready var swap_timer = $"Weapon/Swap Timer"
 @onready var move_sfx = $move_sfx
+@onready var hurt_sfx = $hurt_sfx
+
+@onready var visible_range_area = $visible_range_area
+@onready var visible_range_shape = $visible_range_area/visible_range_shape
 
 var equipped_weapon
 var holstered_weapon
@@ -47,6 +51,10 @@ var player_health := 0:
 		hud.playerHealth = player_health
 
 func _ready():
+	var new_range = RectangleShape2D.new()
+	new_range.size.x = get_viewport().size.x + (get_viewport().size.x * 0.10)
+	new_range.size.y = get_viewport().size.y + (get_viewport().size.y * 0.10)
+	visible_range_shape.shape = new_range
 	anim.play("Side_Idle")
 
 func _physics_process(_delta):
@@ -72,12 +80,11 @@ func read_inputs():
 		if equipped_weapon && equipped_weapon.has_method("attack_secondary") && equipped_weapon.can_attack:
 			equipped_weapon.attack_secondary()
 	
-	if Input.is_action_pressed("add_weapon_test") && test_weapon_equipped == false:
+	if test_weapon_equipped == false:
 		test_weapon_equipped = true
 		new_melee_weapon = melee_weapon.instantiate()
 		new_holstered_weapon = ranged_weapon.instantiate()
 		weapon.call("add_child", new_melee_weapon)
-		#weapon.call("add_child", new_holstered_weapon)
 		equipped_weapon = new_melee_weapon
 		holstered_weapon = new_holstered_weapon
 		inventory_menu.init_weapon_panels()
@@ -134,7 +141,7 @@ func read_inputs():
 
 func gain_exp(value):
 	player_exp += value
-	if player_exp >= 50:
+	if player_exp >= 100:
 		level_up()
 
 func level_up():
@@ -147,14 +154,20 @@ func death():
 		gameNode.gameOverMenu()
 
 func hurt():
+	hurt_sfx.play()
 	health_component.INVINCIBLE = true
 	invincible_timer.start(invincible_timer_length)
 
 func _on_i_frames_timeout():
 	health_component.INVINCIBLE = false
 
-
-
-
 func _on_swap_timer_timeout():
 	weapon_swappable = true
+
+func _on_visible_range_area_body_entered(body):
+	if body is CharacterBody2D:
+		if body.type == "Enemy":
+			if !body.is_visible():
+				body.set_visible(true)
+			if body.collision && body.collision.is_disabled():
+				body.collision.set_disabled(false)
