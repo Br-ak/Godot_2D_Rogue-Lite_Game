@@ -2,6 +2,7 @@ extends Control
 @onready var data = StaticData.keybinds["keybinds"]
 @onready var keybindList = StaticData.keybindList
 
+
 func _ready():
 	_bind_user_keys()
 

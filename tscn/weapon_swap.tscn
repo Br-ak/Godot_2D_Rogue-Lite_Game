@@ -1,6 +1,6 @@
 [gd_scene load_steps=3 format=3 uid="uid://d13bfvinq877y"]
 
-[ext_resource type="Script" path="res://Weapon_swap.gd" id="1_46htv"]
+[ext_resource type="Script" path="res://scripts/Weapon_swap.gd" id="1_46htv"]
 [ext_resource type="Texture2D" uid="uid://dmr7pnxych8i0" path="res://assets/GUNS_V1.00/V1.00/PNG/test_swap.png" id="4_s21ye"]
 
 [node name="Weapon Swap" type="Control"]

@@ -6,7 +6,7 @@ class_name Draggable
 @onready var item = $Item
 
 var data = []
-var upgrade = []
+var upgrade = null
 var socket_type
 var socket_location
 
@@ -19,6 +19,9 @@ const panel_socket = preload("res://tscn/panel_socket.tscn")
 var icon_texture
 
 func _ready():
+	init()
+
+func init():
 	add_to_group("DRAGGABLE")
 	socket.set_texture(texture_empty)
 	item.set_texture(null)
@@ -70,7 +73,6 @@ func _drop_data(_at_position, data):
 			if self.socket_type == "WEAPON" && weapon_inventory.has_method("update_weapon_stats"):
 				weapon_inventory.update_weapon_stats(upgrade, "add")
 			data.remove_item()
-
 
 func remove_item():
 	self.has_item = false

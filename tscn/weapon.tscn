@@ -1,8 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://oh21ovpt2srh"]
+[gd_scene load_steps=5 format=3 uid="uid://oh21ovpt2srh"]
 
 [ext_resource type="Script" path="res://scripts/weapon.gd" id="1_qlrfd"]
 [ext_resource type="Texture2D" uid="uid://dxw28gnqmdk2n" path="res://assets/GUNS_V1.00/V1.00/Sprite-sheets/Pistol_V1.00/Weapon/[FULL]PistolV1.01.png" id="2_4krl1"]
-[ext_resource type="AudioStream" uid="uid://baopvtr0cpm4t" path="res://assets/audio/hit (2).wav" id="3_5onpt"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_7mphi"]
 atlas = ExtResource("2_4krl1")
@@ -35,9 +34,5 @@ unique_name_in_owner = true
 position = Vector2(17.2662, -2.8777)
 
 [node name="Timer" type="Timer" parent="."]
-
-[node name="primary_attack_sfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_5onpt")
-volume_db = -6.073
 
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

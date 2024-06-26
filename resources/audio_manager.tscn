@@ -1,0 +1,55 @@
+[gd_scene load_steps=10 format=3 uid="uid://ck24ttfoawloe"]
+
+[ext_resource type="Script" path="res://scripts/Audio Manager.gd" id="1_6oo87"]
+[ext_resource type="AudioStream" uid="uid://dnlrkxt0nmnjn" path="res://assets/audio/Goblins_Dance_(Battle).ogg" id="2_h37pc"]
+[ext_resource type="AudioStream" uid="uid://ck1lfca0lpxbo" path="res://assets/audio/step_grass.ogg" id="3_r2xl3"]
+[ext_resource type="AudioStream" uid="uid://j32jc6ce2pn" path="res://assets/audio/hitHurt.wav" id="4_j1076"]
+[ext_resource type="AudioStream" uid="uid://b2x1i5rflsdu5" path="res://assets/audio/explosion.wav" id="5_xw5dl"]
+[ext_resource type="AudioStream" uid="uid://dp7kxmlfx4qg" path="res://assets/audio/death (5).wav" id="6_vncn7"]
+[ext_resource type="AudioStream" uid="uid://kkxokjjs7fcr" path="res://assets/audio/swipe.wav" id="7_puj16"]
+[ext_resource type="AudioStream" uid="uid://tdgmvd5fkp2j" path="res://assets/audio/toss.wav" id="8_ss8gg"]
+[ext_resource type="AudioStream" uid="uid://baopvtr0cpm4t" path="res://assets/audio/hit (2).wav" id="9_63wlk"]
+
+[node name="Audio Manager" type="Node"]
+script = ExtResource("1_6oo87")
+
+[node name="Music" type="Node" parent="."]
+
+[node name="BGM" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("2_h37pc")
+
+[node name="Player Sounds" type="Node" parent="."]
+
+[node name="move" type="AudioStreamPlayer" parent="Player Sounds"]
+stream = ExtResource("3_r2xl3")
+volume_db = -9.11
+
+[node name="hurt" type="AudioStreamPlayer" parent="Player Sounds"]
+stream = ExtResource("4_j1076")
+volume_db = -9.869
+
+[node name="Bot Sounds" type="Node" parent="."]
+
+[node name="hurt" type="AudioStreamPlayer" parent="Bot Sounds"]
+stream = ExtResource("5_xw5dl")
+volume_db = -20.0
+
+[node name="death" type="AudioStreamPlayer" parent="Bot Sounds"]
+stream = ExtResource("6_vncn7")
+volume_db = -15.314
+
+[node name="Staff Sounds" type="Node" parent="."]
+
+[node name="primary_attack" type="AudioStreamPlayer" parent="Staff Sounds"]
+stream = ExtResource("7_puj16")
+volume_db = -6.073
+
+[node name="secondary_attack" type="AudioStreamPlayer" parent="Staff Sounds"]
+stream = ExtResource("8_ss8gg")
+volume_db = -6.832
+
+[node name="Gun Sounds" type="Node" parent="."]
+
+[node name="primary_attack" type="AudioStreamPlayer" parent="Gun Sounds"]
+stream = ExtResource("9_63wlk")
+volume_db = -6.073

@@ -17,7 +17,7 @@
 					"attack_projectile_speed": 500,
 					},
 				},
-			"attack1_base_upgrade_slots":2,
+			"attack1_base_upgrade_slots":4,
 			"attack2_base_upgrade_slots":4,
 			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/[design]_Sniper_rifle_[KAR98]_V1.00.png",
 			},
@@ -32,7 +32,7 @@
 					"attack_projectile_speed": 500,
 					},
 				},
-			"attack1_base_upgrade_slots":2,
+			"attack1_base_upgrade_slots":4,
 			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png",
 			},
 	}

@@ -1,53 +1,53 @@
 {
 	"keybinds": {
 		"attack_primary": {
+			"alternate_key": "",
 			"assigned_key": "Left Mouse Button",
 			"default_key": "Left Mouse Button",
-			"alternate_key": "",
 			"description": "Player's primary attack",
 			"name": "Primary Attack"
 		},
+		"debug_inventory": {
+			"alternate_key": "",
+			"assigned_key": "Tab",
+			"default_key": "R",
+			"description": "Opens the inventory",
+			"name": "Open Inventory"
+		},
 		"ui_down": {
+			"alternate_key": "",
 			"assigned_key": "S",
 			"default_key": "S",
-			"alternate_key": "",
 			"description": "Moves the player down",
 			"name": "Move Down"
 		},
 		"ui_left": {
+			"alternate_key": "",
 			"assigned_key": "A",
 			"default_key": "A",
-			"alternate_key": "",
 			"description": "Moves the player left",
 			"name": "Move Left"
 		},
 		"ui_right": {
+			"alternate_key": "",
 			"assigned_key": "D",
 			"default_key": "D",
-			"alternate_key": "",
 			"description": "Moves the player right",
 			"name": "Move Right"
 		},
 		"ui_up": {
+			"alternate_key": "",
 			"assigned_key": "W",
 			"default_key": "W",
-			"alternate_key": "",
 			"description": "Moves the player up",
 			"name": "Move Up"
 		},
-		"debug_inventory": {
-			"assigned_key": "R",
-			"default_key": "R",
-			"alternate_key": "",
-			"description": "Opens the inventory",
-			"name": "Open Inventory"
-		},
 		"weapon_swap": {
+			"alternate_key": "",
 			"assigned_key": "Q",
 			"default_key": "Q",
-			"alternate_key": "",
 			"description": "Swaps Weapons",
 			"name": "Weapon Swap"
-		},
+		}
 	}
 }

@@ -172,6 +172,79 @@ visible = false
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 
+[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer/TabContainer/Sound"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -176.5
+offset_top = -67.0
+offset_right = 176.5
+offset_bottom = 67.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 100
+theme_override_constants/v_separation = 10
+columns = 2
+
+[node name="Master Volume" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Master Volume"
+vertical_alignment = 1
+
+[node name="Master Volume Slider" type="HSlider" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+metadata/key = "master_volume"
+
+[node name="Music Volume" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Music Volume"
+vertical_alignment = 1
+
+[node name="Music Volume Slider" type="HSlider" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+metadata/key = "music_volume"
+
+[node name="Sfx Volume" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Sfx Volume"
+vertical_alignment = 1
+
+[node name="Sfx Volume Slider" type="HSlider" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+metadata/key = "sfx_volume"
+
+[node name="Menu Volume" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+custom_minimum_size = Vector2(0, 25)
+layout_mode = 2
+text = "Menu Volume"
+vertical_alignment = 1
+
+[node name="Menu Volume Slider" type="HSlider" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
+custom_minimum_size = Vector2(150, 0)
+layout_mode = 2
+max_value = 1.0
+step = 0.001
+value = 1.0
+metadata/key = "menu_volume"
+
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/TabContainer/Sound"]
 layout_mode = 1
 anchors_preset = 7
@@ -192,64 +265,6 @@ text = "Exit"
 [node name="ApplyButton" type="Button" parent="AspectRatioContainer/TabContainer/Sound/HBoxContainer"]
 layout_mode = 2
 text = "Apply"
-
-[node name="GridContainer" type="GridContainer" parent="AspectRatioContainer/TabContainer/Sound"]
-layout_mode = 1
-anchors_preset = 8
-anchor_left = 0.5
-anchor_top = 0.5
-anchor_right = 0.5
-anchor_bottom = 0.5
-offset_left = -176.5
-offset_top = -67.0
-offset_right = 176.5
-offset_bottom = 67.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_constants/h_separation = 100
-theme_override_constants/v_separation = 10
-columns = 2
-
-[node name="Label" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-text = "Placeholder"
-vertical_alignment = 1
-
-[node name="OptionButton" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 25)
-layout_mode = 2
-
-[node name="Label2" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
-custom_minimum_size = Vector2(0, 25)
-layout_mode = 2
-text = "Placeholder"
-
-[node name="OptionButton2" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 25)
-layout_mode = 2
-
-[node name="Label3" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
-layout_mode = 2
-text = "Placeholder"
-vertical_alignment = 1
-
-[node name="OptionButton3" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(150, 25)
-layout_mode = 2
-
-[node name="Label4" type="Label" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
-layout_mode = 2
-text = "Placeholder"
-vertical_alignment = 1
-
-[node name="OptionButton4" type="OptionButton" parent="AspectRatioContainer/TabContainer/Sound/GridContainer"]
-clip_contents = true
-custom_minimum_size = Vector2(100, 25)
-layout_mode = 2
 
 [connection signal="pressed" from="AspectRatioContainer/TabContainer/General/HBoxContainer/ExitButton" to="." method="_on_exit_button_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/TabContainer/General/HBoxContainer/ApplyButton" to="." method="_on_apply_button_pressed"]

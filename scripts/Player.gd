@@ -18,17 +18,19 @@ var new_holstered_weapon
 @onready var invincible_timer = $"HealthComponent/I-Frames"
 @onready var inventory_menu = gameNode.get_node("CanvasLayer").get_node("Inventory Menu")
 @onready var swap_timer = $"Weapon/Swap Timer"
-@onready var move_sfx = $move_sfx
-@onready var hurt_sfx = $hurt_sfx
 
 @onready var visible_range_area = $visible_range_area
 @onready var visible_range_shape = $visible_range_area/visible_range_shape
 
+@onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
+
+var sound_info = ["Player Sounds"]
 var equipped_weapon
 var holstered_weapon
 var test_weapon_equipped = false
 var weapon_swappable = false
 var invincible_timer_length = 1
+var level_ups = 0
 
 var player_exp := 0:
 	set(value):
@@ -66,10 +68,11 @@ func read_inputs():
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	var mousePosition = get_global_mouse_position()
 	var angle = position.angle_to_point(mousePosition)
-	if direction && !move_sfx.is_playing() && Engine.time_scale == 1:
-		move_sfx.play()
+	
+	if direction && !audio_manager.sound_is_playing("move", sound_info) && Engine.time_scale == 1:
+		audio_manager.play_sound("move", sound_info)
 	elif !direction || Engine.time_scale != 1:
-		move_sfx.stop()
+		audio_manager.stop_sound("move", sound_info)
 	
 	
 	if Input.is_action_pressed("attack_primary"):
@@ -92,6 +95,7 @@ func read_inputs():
 		weapon_swappable = true
 	
 	if Input.is_action_pressed("weapon_swap") && weapon_swappable:
+		audio_manager.play_sound("hurt", sound_info)
 		weapon_swappable = false
 		var new_weapon
 		if equipped_weapon.WEAPON_NAME == "gun":
@@ -147,14 +151,16 @@ func gain_exp(value):
 func level_up():
 	player_level += 1
 	player_exp = 0
-	gameNode.levelUpMenu()
+	level_ups += 1
+	if Engine.time_scale == 1:
+		gameNode.levelUpMenu()
 
 func death():
 	if gameNode.has_method("gameOverMenu"):
 		gameNode.gameOverMenu()
 
 func hurt():
-	hurt_sfx.play()
+	audio_manager.play_sound("hurt", sound_info)
 	health_component.INVINCIBLE = true
 	invincible_timer.start(invincible_timer_length)
 

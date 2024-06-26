@@ -12,7 +12,7 @@ dest_files=["res://.godot/imported/step_grass.ogg-a9787dee98de5c95947ed7a8488c5d
 
 [params]
 
-loop=true
+loop=false
 loop_offset=0.0
 bpm=0.0
 beat_count=0

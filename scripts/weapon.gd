@@ -4,8 +4,9 @@ extends Area2D
 @onready var anim = $Marker2D/AnimatedSprite2D
 @onready var timer = $Timer
 @onready var shooting_point = %ShootingPoint
-@onready var primary_attack_sfx = $primary_attack_sfx
+@onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
 
+var sound_info = ["Gun Sounds"]
 var can_attack = true
 var attack_base_wait = 0.50
 const BULLET = preload("res://tscn/bullets.tscn")
@@ -30,7 +31,7 @@ func attack():
 		can_attack = false
 		var mouse_pos = get_global_mouse_position()
 		SharedFunctions.fire_projectile(BULLET, get_tree().root, shooting_point, mouse_pos, primary_attack)
-		primary_attack_sfx.play()
+		audio_manager.play_sound("primary_attack", sound_info)
 		timer.start(attack_base_wait * primary_attack.attack_reset_time_multiplier)
 
 func _on_timer_timeout():

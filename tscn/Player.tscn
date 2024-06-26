@@ -1,4 +1,4 @@
-[gd_scene load_steps=87 format=3 uid="uid://cmw1f7nk56jt3"]
+[gd_scene load_steps=85 format=3 uid="uid://cmw1f7nk56jt3"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_pyu0h"]
 [ext_resource type="Texture2D" uid="uid://bpb1v1tmecbg4" path="res://assets/Red Sprite/Side ConsecutiveSlash.png" id="3_cconm"]
@@ -7,8 +7,6 @@
 [ext_resource type="Texture2D" uid="uid://b48v7y0qwv5sd" path="res://assets/Red Sprite/Back Movement.png" id="4_fd1dc"]
 [ext_resource type="Texture2D" uid="uid://ddi6i8lrujw4k" path="res://assets/Red Sprite/Back ConsecutiveSlash.png" id="5_vdqpj"]
 [ext_resource type="PackedScene" uid="uid://22q253ptx5of" path="res://tscn/hitbox_component.tscn" id="9_rumc1"]
-[ext_resource type="AudioStream" uid="uid://ck1lfca0lpxbo" path="res://assets/audio/step_grass.ogg" id="9_ul3t8"]
-[ext_resource type="AudioStream" uid="uid://xqlqgwddqsgn" path="res://assets/audio/11_human_damage_3.wav" id="10_4vliw"]
 [ext_resource type="PackedScene" uid="uid://oiicbhvi6ce0" path="res://tscn/health_component.tscn" id="10_y4qyh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5xuh"]
@@ -625,14 +623,6 @@ metadata/_edit_lock_ = true
 
 [node name="visible_range_shape" type="CollisionShape2D" parent="visible_range_area"]
 position = Vector2(-1.3, -0.3)
-
-[node name="move_sfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("9_ul3t8")
-volume_db = -9.11
-
-[node name="hurt_sfx" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("10_4vliw")
-volume_db = -9.869
 
 [connection signal="timeout" from="Weapon/Swap Timer" to="." method="_on_swap_timer_timeout"]
 [connection signal="timeout" from="HealthComponent/I-Frames" to="." method="_on_i_frames_timeout"]

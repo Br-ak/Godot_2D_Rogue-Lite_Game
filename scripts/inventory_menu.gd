@@ -17,6 +17,8 @@ const weapon_panel_object = preload("res://tscn/inventory_weapon_panel.tscn")
 
 var equipped_weapon_name
 var holstered_weapon_name
+var inventory_panel_max_size = 14
+var inventory_objects = []
 
 
 # Called when the node enters the scene tree for the first time.
@@ -59,27 +61,19 @@ func init_weapon_panels():
 			weapon_panel_container.call("add_child", attack2_weapon_panel)
 
 func init_inventory_panel():
-	var new_panel_socket = panel_socket.instantiate()
-	new_panel_socket.upgrade = "attack_fork"
-	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_fork.png"
-	new_panel_socket.socket_type = "INVENTORY"
-	new_panel_socket.socket_location = 0
-	new_panel_socket.tooltip_desc = "Fork Gem: Forks Projectile"
-	inventory_grid_container.add_child(new_panel_socket)
-	new_panel_socket = panel_socket.instantiate()
-	new_panel_socket.upgrade = "damage_increase"
-	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_damage.png"
-	new_panel_socket.socket_type = "INVENTORY"
-	new_panel_socket.socket_location = 0
-	new_panel_socket.tooltip_desc = "Damage Gem: Increases Damage"
-	inventory_grid_container.add_child(new_panel_socket)
-	new_panel_socket = panel_socket.instantiate()
-	new_panel_socket.upgrade = "attack_pierce"
-	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_pierce.png"
-	new_panel_socket.socket_type = "INVENTORY"
-	new_panel_socket.socket_location = 0
-	new_panel_socket.tooltip_desc = "Pierce Gem: Increases Pierce Amount"
-	inventory_grid_container.add_child(new_panel_socket)
+	for i in range(inventory_panel_max_size):
+		var new_panel_socket = panel_socket.instantiate()
+		inventory_grid_container.add_child(new_panel_socket)
+		inventory_objects.append(new_panel_socket)
+		
+#	var new_panel_socket = panel_socket.instantiate()
+#	new_panel_socket.upgrade = "attack_fork"
+#	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_fork.png"
+#	new_panel_socket.socket_type = "INVENTORY"
+#	new_panel_socket.socket_location = 0
+#	new_panel_socket.tooltip_desc = "Fork Gem: Forks Projectile"
+#	inventory_grid_container.add_child(new_panel_socket)
+
 
 func _on_exit_pressed():
 	inventory_menu.set_visible(false)
@@ -91,14 +85,17 @@ func update_weapon_stats(upgrade_list, attack_num):
 
 func add_upgrade_to_inventory(key):
 	print("adding upgrade to inventory key: ", key)
-	#var new_upgrade = upgrades[key]
-	var new_panel_socket = panel_socket.instantiate()
-	new_panel_socket.upgrade = key
-	new_panel_socket.texture_path = upgrades[key]["image"]
-	new_panel_socket.socket_type = "INVENTORY"
-	new_panel_socket.socket_location = 0
-	new_panel_socket.tooltip_desc = upgrades[key]["description"]
-	inventory_grid_container.add_child(new_panel_socket)
+	for socket in inventory_objects:
+		if socket.upgrade == null:
+			socket.upgrade = key
+			socket.texture_path = upgrades[key]["image"]
+			socket.socket_type = "INVENTORY"
+			socket.socket_location = 0
+			socket.tooltip_desc = upgrades[key]["description"]
+			socket.texture_path = upgrades[key]["image"]
+			socket.has_item = true
+			socket.init()
+			break
 
 func swap_weapons():
 	# remove (hide) current inventory panel(s)

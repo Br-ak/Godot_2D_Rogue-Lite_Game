@@ -33,9 +33,20 @@ layout_mode = 2
 text = "Level Up!"
 horizontal_alignment = 1
 
+[node name="Label" type="Label" parent="AspectRatioContainer/VBoxContainer2"]
+layout_mode = 2
+horizontal_alignment = 1
+
 [node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/VBoxContainer2"]
 layout_mode = 2
 alignment = 1
+
+[node name="Error Message" type="Label" parent="AspectRatioContainer/VBoxContainer2"]
+visible = false
+layout_mode = 2
+theme_override_colors/font_color = Color(1, 0, 0, 1)
+text = "Error Message"
+horizontal_alignment = 1
 
 [node name="RerollButton" type="Button" parent="AspectRatioContainer/VBoxContainer2"]
 custom_minimum_size = Vector2(100, 25)

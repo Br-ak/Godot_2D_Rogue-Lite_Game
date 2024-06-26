@@ -59,7 +59,7 @@ func rebind_action_key(event):
 	InputMap.action_erase_events(action_name)
 	InputMap.action_add_event(action_name, event)
 	
-	StaticData.save_data(action_name, event.as_text())
+	StaticData.save_keybind_data(action_name, event.as_text())
 	set_process_unhandled_key_input(false)
 	set_text_for_key()
 	set_info()

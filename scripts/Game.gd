@@ -4,11 +4,12 @@ extends Node2D
 @onready var game_over_menu = $"CanvasLayer/Game Over Menu"
 @onready var level_up_menu = $"CanvasLayer/Level Up Menu"
 @onready var inventory_menu = $"CanvasLayer/Inventory Menu"
-
+@onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
 @onready var timer = $Timer
 @onready var hud = $CanvasLayer/Hud
 @onready var world = $World
-@onready var bgm = $BGM
+
+var music_data = ["Music"]
 
 var gameTimer := 0:
 	set(value):
@@ -17,7 +18,7 @@ var gameTimer := 0:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	bgm.play()
+	audio_manager.play_music("BGM", music_data)
 	timer.start(1) 
 	if Engine.time_scale != 1:
 		Engine.time_scale = 1
@@ -41,9 +42,10 @@ func pauseMenu():
 
 func levelUpMenu():
 	if level_up_menu.is_visible():
-		level_up_menu.set_visible(false)
+		level_up_menu._on_exit_pressed()
 		Engine.time_scale = 1
 	else:
+		level_up_menu.on_open()
 		level_up_menu.set_visible(true)
 		Engine.time_scale = 0
 
@@ -56,8 +58,8 @@ func inventoryMenu():
 		Engine.time_scale = 0
 
 func gameOverMenu():
-	game_over_menu.set_visible(true)
 	Engine.time_scale = 0
+	game_over_menu.set_visible(true)
 
 func _on_timer_timeout():
 	gameTimer += 1

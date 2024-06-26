@@ -1,0 +1,24 @@
+{
+	"sound_settings": {
+		"master_volume": {
+			"name": "Master Volume Slider",
+			"defult_volume": 1,
+			"assigned_volume": 1,
+		},
+		"music_volume": {
+			"name": "Music Volume Slider",
+			"defult_volume": 1,
+			"assigned_volume": 1,
+		},
+		"sfx_volume": {
+			"name": "Sfx Volume Slider",
+			"defult_volume": 1,
+			"assigned_volume": 1,
+		},
+		"menu_volume": {
+			"name": "Menu Volume Slider",
+			"defult_volume": 1,
+			"assigned_volume": 1,
+		},
+	},
+}

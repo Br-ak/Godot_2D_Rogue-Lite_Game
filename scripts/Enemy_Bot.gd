@@ -5,10 +5,11 @@ extends CharacterBody2D
 @onready var player = get_parent().get_parent().get_node("Player")
 @onready var anim = $AnimationComponent/AnimatedSprite2D
 @onready var collision = $CollisionShape2D
-@onready var death_sfx = $death_sfx
-@onready var hurt_sfx = $hurt_sfx
 @onready var off_screen_timer = $"Off Screen Timer"
 
+@onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
+
+var sound_info = ["Bot Sounds"]
 const type = "Enemy"
 var baseDamage = 5
 var currentDamage = baseDamage
@@ -49,11 +50,11 @@ func attack():
 	pass
 
 func hurt():
-	hurt_sfx.play()
+	audio_manager.play_sound("hurt", sound_info)
 
 func death():
 	collision.set_deferred("disabled", true)
-	hurt_sfx.play()
+	audio_manager.play_sound("hurt", sound_info)
 	var follower = get_parent().get_parent().get_node("Follower")
 	if follower:
 		follower.get("trackingList").erase(self) 
@@ -63,7 +64,7 @@ func death():
 		spawnExp()
 	player.killCounter += 1
 	player.gain_exp(1)
-	death_sfx.play()
+	audio_manager.play_sound("death", sound_info)
 
 func spawnExp():
 	const EXP = preload("res://tscn/exp.tscn")

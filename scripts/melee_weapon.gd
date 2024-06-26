@@ -10,15 +10,14 @@ const WEAPON_NAME = "staff"
 @onready var marker_2d = $Marker2D
 @onready var shooting_point = %ShootingPoint
 @onready var area_2d = $"."
-@onready var primary_attack_sfx = $primary_attack_sfx
-@onready var secondary_attack_sfx = $secondary_attack_sfx
+@onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
+@onready var primary_attack_base_wait = animPlayer.get_animation("primary_attack").length
+@onready var secondary_attack_base_wait = animPlayer.get_animation("secondary_attack").length
 
-
+var sound_info = ["Staff Sounds"]
 var mousePosition : Vector2
 var can_attack = true
 var baseDamage = 5
-@onready var primary_attack_base_wait = animPlayer.get_animation("primary_attack").length
-@onready var secondary_attack_base_wait = animPlayer.get_animation("secondary_attack").length
 var currentDamage = baseDamage
 var local_mouse_position : Vector2
 var adjusted_mouse_position : Vector2
@@ -61,7 +60,7 @@ func attack():
 		can_attack = false
 		hitbox.disabled = false
 		animPlayer.play("primary_attack")
-		primary_attack_sfx.play()
+		audio_manager.play_sound("primary_attack", sound_info)
 		await animPlayer.animation_finished
 		hitbox.disabled = true
 		timer.start(primary_attack_base_wait * primary_attack.attack_reset_time_multiplier)
@@ -79,7 +78,7 @@ func attack_secondary():
 
 func attack_secondary_fire():
 	SharedFunctions.fire_projectile(projectile, get_tree().root, shooting_point, get_global_mouse_position(), secondary_attack)
-	secondary_attack_sfx.play()
+	audio_manager.play_sound("secondary_attack", sound_info)
 	animSprite.set_visible(false)
 	timer.start(secondary_attack_base_wait * secondary_attack.attack_reset_time_multiplier)
 
