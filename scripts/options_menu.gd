@@ -66,7 +66,6 @@ func populate_sound_settings():
 			if sound_slider is HSlider:
 				sound_slider.value = data[key]["assigned_volume"]
 				sound_settings.append(data[key]["assigned_volume"])
-		print(sound_settings)
 
 func populate_Keybinds():
 	const hotkey_rebind_button = preload("res://tscn/hotkey_rebind_button.tscn")

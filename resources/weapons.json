@@ -6,11 +6,13 @@
 			"attacks":{
 				"attack1":{
 					"name":"Swing",
+					"description": "",
 					"attack_base_damage": 5,
 					"attack_type": "MELEE",
 					},
 				"attack2":{
-					"name":"Toss",
+					"name":"Toss - Charge",
+					"description": "Holding down the attack button will increase the pierce and damage values",
 					"attack_base_damage": 5,
 					"attack_type": "RANGED",
 					"attack_pierce": 3,
@@ -27,6 +29,7 @@
 			"attacks":{
 				"attack1":{
 					"name":"Shoot",
+					"description": "",
 					"attack_base_damage": 5,
 					"attack_type": "GUN",
 					"attack_projectile_speed": 500,
@@ -34,6 +37,23 @@
 				},
 			"attack1_base_upgrade_slots":4,
 			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png",
+			},
+		"magic components":{
+			"name":"Magical Components", 
+			"description":"Old, unused, and broken magical components. Not much use except as ammo...", 
+			"attacks":{
+				"attack1":{
+					"name":"Toss - Charge",
+					"description": "Holding down the attack button will increase the amount of projectiles and range of the attack.",
+					"attack_base_damage": 5,
+					"attack_pattern": "SPREAD",
+					"attack_projectile_speed": 500,
+					"attack_projectile_count": 3,
+					"attack_range": 75,
+					},
+				},
+			"attack1_base_upgrade_slots":4,
+			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/magic_satchel.png",
 			},
 	}
 }

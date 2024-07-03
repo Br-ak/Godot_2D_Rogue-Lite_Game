@@ -34,12 +34,14 @@
 					"attack_reset_time_multiplier": 0.5,
 					},
 			},
-		"attack_test1":{
-			"name":"Attack test",
-			"description":"test test test", 
+		"attack_spread":{
+			"name":"Attack Spread",
+			"description":"Spread Gem: Adds spread to attack", 
 			"image":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png",
 			"stats":{
-					"attack_reset_time": 0.5,
+					"attack_pattern": "SPREAD",
+					"attack_projectile_count": 3,
+					"attack_damage_multiplier": 0.7,
 					},
 			},
 		"attack_test2":{

@@ -1,7 +1,184 @@
-[gd_scene load_steps=8 format=3 uid="uid://h5o64r5rw0wu"]
+[gd_scene load_steps=13 format=3 uid="uid://h5o64r5rw0wu"]
 
 [ext_resource type="Script" path="res://scripts/Hud.gd" id="1_c5o3d"]
 [ext_resource type="PackedScene" uid="uid://d13bfvinq877y" path="res://tscn/weapon_swap.tscn" id="2_bpg0x"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3im7g"]
+bg_color = Color(0.6, 0.6, 0.6, 0.247059)
+corner_radius_top_left = 7
+corner_radius_top_right = 7
+corner_radius_bottom_right = 7
+corner_radius_bottom_left = 7
+expand_margin_left = 10.0
+expand_margin_top = 5.0
+expand_margin_right = 10.0
+expand_margin_bottom = 5.0
+shadow_color = Color(0, 0, 0, 0.211765)
+shadow_size = 1
+
+[sub_resource type="Animation" id="Animation_p8r7h"]
+resource_name = "alert"
+length = 2.0
+step = 0.01
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0436332, 0.0, 0.0436332, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.025, 1.025), Vector2(1, 1), Vector2(1.025, 1.025), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.01, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(401, 75), Vector2(401, 75), Vector2(401, 75), Vector2(401, 75), Vector2(401, 75)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0.02, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_avcbs"]
+resource_name = "alert_fade_in"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0436332, 0.0, 0.0436332, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.025, 1.025), Vector2(1, 1), Vector2(1.025, 1.025), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.01, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(401, 75), Vector2(401, 75), Vector2(401, 75), Vector2(401, 75), Vector2(401, 75)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 1, 2),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_4ej0q"]
+resource_name = "alert_fade_out"
+length = 2.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.0436332, 0.0, 0.0436332, 0.0]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:scale")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.025, 1.025), Vector2(1, 1), Vector2(1.025, 1.025), Vector2(1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = false
+tracks/2/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:position")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0.01, 0.5, 1, 1.5, 2),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [Vector2(401, 75), Vector2(401, 75), Vector2(401, 75), Vector2(401, 75), Vector2(401, 75)]
+}
+tracks/3/type = "value"
+tracks/3/imported = false
+tracks/3/enabled = true
+tracks/3/path = NodePath("AspectRatioContainer/CanvasLayer/Message Control/Message:modulate")
+tracks/3/interp = 1
+tracks/3/loop_wrap = true
+tracks/3/keys = {
+"times": PackedFloat32Array(0, 2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_hl7tk"]
+_data = {
+"alert": SubResource("Animation_p8r7h"),
+"alert_fade_in": SubResource("Animation_avcbs"),
+"alert_fade_out": SubResource("Animation_4ej0q")
+}
 
 [sub_resource type="Gradient" id="Gradient_5gddr"]
 colors = PackedColorArray(0, 0.6, 0, 1, 1, 1, 1, 0.509804)
@@ -39,6 +216,38 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="AspectRatioContainer"]
+
+[node name="Message Control" type="Control" parent="AspectRatioContainer/CanvasLayer"]
+layout_mode = 3
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+grow_horizontal = 2
+
+[node name="Message" type="Label" parent="AspectRatioContainer/CanvasLayer/Message Control"]
+visible = false
+custom_minimum_size = Vector2(350, 35)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -175.0
+offset_top = 45.0
+offset_right = 175.0
+offset_bottom = 80.0
+grow_horizontal = 2
+pivot_offset = Vector2(175, 17)
+theme_override_styles/normal = SubResource("StyleBoxFlat_3im7g")
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="AspectRatioContainer/CanvasLayer/Message Control/Message"]
+root_node = NodePath("../../../../..")
+autoplay = "alert"
+libraries = {
+"": SubResource("AnimationLibrary_hl7tk")
+}
 
 [node name="info" type="Label" parent="AspectRatioContainer/CanvasLayer"]
 offset_top = 75.0

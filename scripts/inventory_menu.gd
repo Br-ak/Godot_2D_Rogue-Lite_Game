@@ -45,6 +45,7 @@ func init_weapon_panels():
 			attack1_base_upgrade_slots = data[equipped_weapon_key][obj]
 			var attack1_weapon_panel = weapon_panel_object.instantiate()
 			attack1_weapon_panel.title = data[equipped_weapon_key]["attacks"]["attack1"]["name"]
+			attack1_weapon_panel.description = data[equipped_weapon_key]["attacks"]["attack1"]["description"]
 			attack1_weapon_panel.weapon_image_path = data[equipped_weapon_key]["asset_path"]
 			attack1_weapon_panel.socket_count = data[equipped_weapon_key][obj]
 			attack1_weapon_panel.attack_number = 1
@@ -54,6 +55,7 @@ func init_weapon_panels():
 			attack2_base_upgrade_slots = data[equipped_weapon_key][obj]
 			var attack2_weapon_panel = weapon_panel_object.instantiate()
 			attack2_weapon_panel.title = data[equipped_weapon_key]["attacks"]["attack2"]["name"]
+			attack2_weapon_panel.description = data[equipped_weapon_key]["attacks"]["attack2"]["description"]
 			attack2_weapon_panel.weapon_image_path = data[equipped_weapon_key]["asset_path"]
 			attack2_weapon_panel.socket_count = data[equipped_weapon_key][obj]
 			attack2_weapon_panel.attack_number = 2
@@ -65,15 +67,6 @@ func init_inventory_panel():
 		var new_panel_socket = panel_socket.instantiate()
 		inventory_grid_container.add_child(new_panel_socket)
 		inventory_objects.append(new_panel_socket)
-		
-#	var new_panel_socket = panel_socket.instantiate()
-#	new_panel_socket.upgrade = "attack_fork"
-#	new_panel_socket.texture_path = "res://assets/GUNS_V1.00/V1.00/PNG/test_fork.png"
-#	new_panel_socket.socket_type = "INVENTORY"
-#	new_panel_socket.socket_location = 0
-#	new_panel_socket.tooltip_desc = "Fork Gem: Forks Projectile"
-#	inventory_grid_container.add_child(new_panel_socket)
-
 
 func _on_exit_pressed():
 	inventory_menu.set_visible(false)

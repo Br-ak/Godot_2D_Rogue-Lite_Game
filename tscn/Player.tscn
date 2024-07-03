@@ -1,4 +1,4 @@
-[gd_scene load_steps=85 format=3 uid="uid://cmw1f7nk56jt3"]
+[gd_scene load_steps=86 format=3 uid="uid://cmw1f7nk56jt3"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_pyu0h"]
 [ext_resource type="Texture2D" uid="uid://bpb1v1tmecbg4" path="res://assets/Red Sprite/Side ConsecutiveSlash.png" id="3_cconm"]
@@ -10,8 +10,8 @@
 [ext_resource type="PackedScene" uid="uid://oiicbhvi6ce0" path="res://tscn/health_component.tscn" id="10_y4qyh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5xuh"]
-radius = 5.6
-height = 20.4
+radius = 4.0
+height = 16.8
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_1q6cy"]
 atlas = ExtResource("3_yr8wd")
@@ -579,6 +579,11 @@ animations = [{
 "speed": 5.0
 }]
 
+[sub_resource type="NavigationPolygon" id="NavigationPolygon_4dq51"]
+vertices = PackedVector2Array(-804.2, -673.6, 990, -656.6, 977.2, 607.8, -817, 595)
+polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
+outlines = Array[PackedVector2Array]([PackedVector2Array(-804.2, -673.6, 990, -656.6, 977.2, 607.8, -817, 595)])
+
 [node name="Player" type="CharacterBody2D"]
 z_index = 1
 scale = Vector2(5, 5)
@@ -618,12 +623,15 @@ MAX_HEALTH = 100.0
 
 [node name="I-Frames" type="Timer" parent="HealthComponent"]
 
-[node name="visible_range_area" type="Area2D" parent="."]
+[node name="Sound Timer" type="Timer" parent="."]
+
+[node name="NavigationRegion2D" type="NavigationRegion2D" parent="."]
+navigation_polygon = SubResource("NavigationPolygon_4dq51")
 metadata/_edit_lock_ = true
 
-[node name="visible_range_shape" type="CollisionShape2D" parent="visible_range_area"]
-position = Vector2(-1.3, -0.3)
+[node name="Timer" type="Timer" parent="NavigationRegion2D"]
 
 [connection signal="timeout" from="Weapon/Swap Timer" to="." method="_on_swap_timer_timeout"]
 [connection signal="timeout" from="HealthComponent/I-Frames" to="." method="_on_i_frames_timeout"]
-[connection signal="body_entered" from="visible_range_area" to="." method="_on_visible_range_area_body_entered"]
+[connection signal="timeout" from="Sound Timer" to="." method="_on_sound_timer_timeout"]
+[connection signal="timeout" from="NavigationRegion2D/Timer" to="." method="_on_timer_timeout"]

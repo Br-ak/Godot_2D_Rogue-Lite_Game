@@ -42,6 +42,8 @@ func fire_projectile(projectile_object, root, shooting_point, mouse_position, at
 		basic_projectile(projectile_object, root, shooting_point, mouse_position, attack)
 	elif attack.attack_pattern == "FORK":
 		fork_projectile(projectile_object, root, shooting_point, mouse_position, attack)
+	elif attack.attack_pattern == "SPREAD":
+		spread_projectile(projectile_object, root, shooting_point, mouse_position, attack)
 
 # handles basic/single projectile
 func basic_projectile(projectile_object, root, shooting_point, mouse_position, attack):
@@ -54,6 +56,27 @@ func basic_projectile(projectile_object, root, shooting_point, mouse_position, a
 	else:
 		new_projectile.look_at(mouse_position)
 	root.add_child(new_projectile)
+
+func spread_projectile(projectile_object, root, shooting_point, mouse_position, attack):
+	var spread_angle
+	
+	spread_angle = 45
+	var projectile_count = attack.attack_projectile_count # The number of projectiles to spawn
+	var angle_step = spread_angle / (projectile_count - 1) # Calculate the angle between each projectile
+	
+	for i in range(projectile_count):
+		var new_projectile = projectile_object.instantiate()
+		new_projectile.attack = attack
+		new_projectile.global_position = shooting_point.global_position
+		
+		# Calculate the angle for the current projectile
+		var angle_offset = -spread_angle / 2 + i * angle_step
+		var direction = (mouse_position - shooting_point.global_position).normalized()
+		var rotation = direction.angle() + deg_to_rad(angle_offset)
+		
+		new_projectile.rotation = rotation
+		root.add_child(new_projectile)
+
 
 # handles projectile forking
 func fork_projectile(projectile_object, root, shooting_point, mouse_position, attack):
@@ -142,9 +165,7 @@ func reset_attack(attack) -> Attack:
 	return attack
 
 func update_attacks(upgrade_list, attack_to_update):
-	print("resetting attack to base")
 	attack_to_update = reset_attack(attack_to_update)
-	print("reapplying upgrades")
 	for attack_modification in upgrade_list:
 		if upgrades.has(attack_modification):
 				for changes in upgrades[attack_modification]["stats"]:

@@ -12,6 +12,11 @@ var HP_BAR_MAX = 100
 @onready var info = $AspectRatioContainer/CanvasLayer/info
 @onready var weapon_swap = $"AspectRatioContainer/CanvasLayer/Weapon Swap"
 
+# alert message
+@onready var message_control = $"AspectRatioContainer/CanvasLayer/Message Control"
+@onready var message = $"AspectRatioContainer/CanvasLayer/Message Control/Message"
+@onready var message_animation_player = $"AspectRatioContainer/CanvasLayer/Message Control/Message/AnimationPlayer"
+
 #Old EXP BAR
 #@onready var exp_bar = $AspectRatioContainer/CanvasLayer/ColorRect/TextureRect
 @onready var exp_bar = $"AspectRatioContainer/CanvasLayer/VBoxContainer2/XP Bar"
@@ -71,13 +76,17 @@ func _process(_delta):
 		var fps = Engine.get_frames_per_second()
 		info.text = "FPS: " + str(fps)
 
-#old xp bar functions
-#func on_fill_exp_bar(value):
-#	if value != 0:
-#		var percentage_to_fill = float(value / XP_BAR_MAX)
-#		exp_bar.texture.set_fill_from(Vector2 (percentage_to_fill, 0))
-#		exp_bar.texture.set_fill_to(Vector2 (percentage_to_fill + 0.1, 0))
-#
-#func on_reset_exp_bar():
-#	exp_bar.texture.set_fill_from(Vector2 (0, 0))
-#	exp_bar.texture.set_fill_to(Vector2 (0.1, 0))
+# static length currently
+# displays animated message on ui
+func alert_message(new_message):
+	if !message.is_visible():
+		message.set_visible(true)
+	message.text = new_message
+	message_animation_player.play("alert_fade_in")
+	await message_animation_player.animation_finished
+	message_animation_player.play("alert")
+	message_animation_player.play("alert")
+	message_animation_player.play("alert_fade_out")
+	await message_animation_player.animation_finished
+	message.set_visible(false)
+	message_animation_player.stop()

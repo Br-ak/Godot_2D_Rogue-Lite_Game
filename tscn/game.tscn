@@ -15,6 +15,8 @@ script = ExtResource("1_bkj1u")
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
+[node name="Hud" parent="CanvasLayer" instance=ExtResource("5_0te5f")]
+
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("3_6cn8u")]
 visible = false
 scale = Vector2(1.695, 1.695)
@@ -31,8 +33,6 @@ offset_top = -77.0
 offset_right = -82.9999
 offset_bottom = -77.0
 scale = Vector2(1.745, 1.745)
-
-[node name="Hud" parent="CanvasLayer" instance=ExtResource("5_0te5f")]
 
 [node name="Level Up Menu" parent="CanvasLayer" instance=ExtResource("6_sdn3w")]
 visible = false

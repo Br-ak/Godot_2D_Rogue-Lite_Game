@@ -3,33 +3,37 @@ extends CharacterBody2D
 @export var hitbox_component : HitboxComponent
 
 @onready var player = get_parent().get_parent().get_node("Player")
+@onready var mobs = get_parent()
 @onready var anim = $AnimationComponent/AnimatedSprite2D
 @onready var collision = $CollisionShape2D
 @onready var off_screen_timer = $"Off Screen Timer"
-
 @onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
+@onready var navigation_agent_2d = $NavigationAgent2D
+@onready var timer = $NavigationAgent2D/Timer
 
 var sound_info = ["Bot Sounds"]
 const type = "Enemy"
 var baseDamage = 5
 var currentDamage = baseDamage
 var enemy = true
-var SPEED = 25
+var SPEED = 65
+var acceleration = 7
 var ON_SCREEN = true
+#var direction
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
-func _physics_process(_delta):
+func _physics_process(delta):
 	# handle off screen logic
 	if is_off_screen(global_position):
 		if collision != null:
 			collision.set_deferred("disabled", true)
 		set_visible(false)
 		if off_screen_timer.is_stopped():
-			off_screen_timer.start(10)
+			off_screen_timer.start(4)
 	else:
 		set_visible(true)
 		if collision != null:
@@ -37,14 +41,26 @@ func _physics_process(_delta):
 		if off_screen_timer:
 			off_screen_timer.stop()
 	
-	var direction = (player.position - self.position).normalized() # Normalize the direction vector
+	#var direction = (player.position - self.position).normalized() # Normalize the direction vector
+	var direction = Vector2.ZERO
+	direction = navigation_agent_2d.get_next_path_position() - global_position
+	direction = direction.normalized()
+	
+	
 	if anim.get_animation() != "Death" && anim.get_animation() != "Hurt" : # Pauses movement when specific animations are played
 		if direction.x > 0:
 			anim.flip_h = false
 		else:
 			anim.flip_h = true
-		velocity = direction * SPEED # Multiply the normalized direction by speed
+		velocity = velocity.lerp(direction * SPEED, acceleration * delta)
 		move_and_slide()
+
+func create_path():
+	navigation_agent_2d.target_position = player.global_position
+
+func _on_timer_timeout():
+	create_path()
+
 
 func attack():
 	pass
@@ -100,4 +116,4 @@ func is_off_screen(enemy_position: Vector2) -> bool:
 
 func _on_off_screen_timer_timeout():
 	# may be wise to simply move enemy to a closer area instead
-	self.queue_free()
+	mobs.relocateEnemy(self)

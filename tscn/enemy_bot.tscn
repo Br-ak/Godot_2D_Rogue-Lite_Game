@@ -149,6 +149,7 @@ size = Vector2(16, 22)
 [node name="Enemy_Bot" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component")]
 position = Vector2(7, 0)
 motion_mode = 1
+wall_min_slide_angle = 0.0
 script = ExtResource("1_2rm6a")
 hitbox_component = NodePath("HitboxComponent")
 
@@ -161,6 +162,7 @@ health_component = NodePath("../HealthComponent")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="AnimationComponent"]
 material = SubResource("CanvasItemMaterial_y1e3f")
+position = Vector2(-7, 0)
 sprite_frames = SubResource("SpriteFrames_iftlu")
 animation = &"Run"
 autoplay = "Run"
@@ -182,5 +184,14 @@ shape = SubResource("RectangleShape2D_xqjj4")
 
 [node name="Off Screen Timer" type="Timer" parent="."]
 
+[node name="NavigationAgent2D" type="NavigationAgent2D" parent="."]
+avoidance_enabled = true
+radius = 48.17
+
+[node name="Timer" type="Timer" parent="NavigationAgent2D"]
+wait_time = 0.1
+autostart = true
+
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
 [connection signal="timeout" from="Off Screen Timer" to="." method="_on_off_screen_timer_timeout"]
+[connection signal="timeout" from="NavigationAgent2D/Timer" to="." method="_on_timer_timeout"]

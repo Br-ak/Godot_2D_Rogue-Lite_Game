@@ -1,14 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://ck24ttfoawloe"]
+[gd_scene load_steps=16 format=3 uid="uid://ck24ttfoawloe"]
 
 [ext_resource type="Script" path="res://scripts/Audio Manager.gd" id="1_6oo87"]
 [ext_resource type="AudioStream" uid="uid://dnlrkxt0nmnjn" path="res://assets/audio/Goblins_Dance_(Battle).ogg" id="2_h37pc"]
+[ext_resource type="AudioStream" uid="uid://btvop1gtk2naa" path="res://assets/audio/04_step_grass_1.wav" id="3_5sh3f"]
 [ext_resource type="AudioStream" uid="uid://ck1lfca0lpxbo" path="res://assets/audio/step_grass.ogg" id="3_r2xl3"]
+[ext_resource type="AudioStream" uid="uid://drihnarl8bl8i" path="res://assets/audio/04_step_grass_2.wav" id="4_6gp4p"]
 [ext_resource type="AudioStream" uid="uid://j32jc6ce2pn" path="res://assets/audio/hitHurt.wav" id="4_j1076"]
 [ext_resource type="AudioStream" uid="uid://b2x1i5rflsdu5" path="res://assets/audio/explosion.wav" id="5_xw5dl"]
+[ext_resource type="AudioStream" uid="uid://cslmw0adt51u0" path="res://assets/audio/04_step_grass_3.wav" id="5_y5ba8"]
 [ext_resource type="AudioStream" uid="uid://dp7kxmlfx4qg" path="res://assets/audio/death (5).wav" id="6_vncn7"]
 [ext_resource type="AudioStream" uid="uid://kkxokjjs7fcr" path="res://assets/audio/swipe.wav" id="7_puj16"]
 [ext_resource type="AudioStream" uid="uid://tdgmvd5fkp2j" path="res://assets/audio/toss.wav" id="8_ss8gg"]
 [ext_resource type="AudioStream" uid="uid://baopvtr0cpm4t" path="res://assets/audio/hit (2).wav" id="9_63wlk"]
+[ext_resource type="AudioStream" uid="uid://c53idfv8m7krs" path="res://assets/audio/comp_charge.ogg" id="10_52mmw"]
+[ext_resource type="AudioStream" uid="uid://ugftw588w33y" path="res://assets/audio/comp_toss.ogg" id="10_e6il1"]
+[ext_resource type="AudioStream" uid="uid://cnbv0ikucv0g1" path="res://assets/audio/comp_charge_tick.ogg" id="12_qnc2e"]
 
 [node name="Audio Manager" type="Node"]
 script = ExtResource("1_6oo87")
@@ -20,7 +26,16 @@ stream = ExtResource("2_h37pc")
 
 [node name="Player Sounds" type="Node" parent="."]
 
-[node name="move" type="AudioStreamPlayer" parent="Player Sounds"]
+[node name="move1" type="AudioStreamPlayer" parent="Player Sounds"]
+stream = ExtResource("3_5sh3f")
+
+[node name="move2" type="AudioStreamPlayer" parent="Player Sounds"]
+stream = ExtResource("4_6gp4p")
+
+[node name="move3" type="AudioStreamPlayer" parent="Player Sounds"]
+stream = ExtResource("5_y5ba8")
+
+[node name="legacy move" type="AudioStreamPlayer" parent="Player Sounds"]
 stream = ExtResource("3_r2xl3")
 volume_db = -9.11
 
@@ -48,8 +63,25 @@ volume_db = -6.073
 stream = ExtResource("8_ss8gg")
 volume_db = -6.832
 
+[node name="secondary_charge" type="AudioStreamPlayer" parent="Staff Sounds"]
+stream = ExtResource("10_52mmw")
+
+[node name="secondary_charge_tick" type="AudioStreamPlayer" parent="Staff Sounds"]
+stream = ExtResource("12_qnc2e")
+
 [node name="Gun Sounds" type="Node" parent="."]
 
 [node name="primary_attack" type="AudioStreamPlayer" parent="Gun Sounds"]
 stream = ExtResource("9_63wlk")
 volume_db = -6.073
+
+[node name="Magic Components Sounds" type="Node" parent="."]
+
+[node name="primary_charge" type="AudioStreamPlayer" parent="Magic Components Sounds"]
+stream = ExtResource("10_52mmw")
+
+[node name="primary_toss" type="AudioStreamPlayer" parent="Magic Components Sounds"]
+stream = ExtResource("10_e6il1")
+
+[node name="primary_charge_tick" type="AudioStreamPlayer" parent="Magic Components Sounds"]
+stream = ExtResource("12_qnc2e")

@@ -1,0 +1,156 @@
+[gd_scene load_steps=10 format=3 uid="uid://cmo0b7xbht4yf"]
+
+[ext_resource type="Script" path="res://scripts/magic_components_weapon.gd" id="1_0gbj5"]
+[ext_resource type="Texture2D" uid="uid://cttnxj2qp1n7f" path="res://assets/GUNS_V1.00/V1.00/PNG/magic_satchel.png" id="2_uuayi"]
+[ext_resource type="Texture2D" uid="uid://kcdu4x777ldw" path="res://assets/GUNS_V1.00/V1.00/PNG/magic_satchel_hand.png" id="2_vlmtp"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_suu15"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vlmtp")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[sub_resource type="Animation" id="Animation_m14il"]
+resource_name = "primary_charge"
+length = 0.4
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker2D/AnimatedSprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector2(-3, 0), Vector2(-3, -2), Vector2(-3, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker2D/AnimatedSprite2D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2, 0.4),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.0, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_ogmju"]
+resource_name = "primary_start"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker2D/AnimatedSprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(9, -6), Vector2(-3, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker2D/AnimatedSprite2D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [-1.92061, 0.0]
+}
+
+[sub_resource type="Animation" id="Animation_li3qf"]
+resource_name = "primary_toss"
+length = 0.2
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Marker2D/AnimatedSprite2D2:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Vector2(-3, 0), Vector2(9, -9)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Marker2D/AnimatedSprite2D2:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.2),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.0, -2.13271]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eu1m5"]
+_data = {
+"primary_charge": SubResource("Animation_m14il"),
+"primary_start": SubResource("Animation_ogmju"),
+"primary_toss": SubResource("Animation_li3qf")
+}
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_j6t2r"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_uuayi")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_0gbj5")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="AnimatedSprite2D2" type="AnimatedSprite2D" parent="Marker2D"]
+position = Vector2(9, -9)
+rotation = -2.13271
+scale = Vector2(0.295, -0.295)
+sprite_frames = SubResource("SpriteFrames_suu15")
+
+[node name="ShootingPoint" type="Marker2D" parent="Marker2D/AnimatedSprite2D2"]
+unique_name_in_owner = true
+position = Vector2(0.0985603, -10.169)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Marker2D/AnimatedSprite2D2"]
+root_node = NodePath("../../..")
+libraries = {
+"": SubResource("AnimationLibrary_eu1m5")
+}
+
+[node name="Timer" type="Timer" parent="."]
+
+[node name="Timer2" type="Timer" parent="."]
+
+[node name="Timer3" type="Timer" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+position = Vector2(-4, 4)
+rotation = 0.328122
+scale = Vector2(0.195, 0.195)
+sprite_frames = SubResource("SpriteFrames_j6t2r")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="Timer2" to="." method="_on_timer_2_timeout"]
+[connection signal="timeout" from="Timer3" to="." method="_on_timer_3_timeout"]
