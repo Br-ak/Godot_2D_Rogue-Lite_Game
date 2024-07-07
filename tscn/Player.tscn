@@ -1,4 +1,4 @@
-[gd_scene load_steps=86 format=3 uid="uid://cmw1f7nk56jt3"]
+[gd_scene load_steps=87 format=3 uid="uid://cmw1f7nk56jt3"]
 
 [ext_resource type="Script" path="res://scripts/Player.gd" id="1_pyu0h"]
 [ext_resource type="Texture2D" uid="uid://bpb1v1tmecbg4" path="res://assets/Red Sprite/Side ConsecutiveSlash.png" id="3_cconm"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://b48v7y0qwv5sd" path="res://assets/Red Sprite/Back Movement.png" id="4_fd1dc"]
 [ext_resource type="Texture2D" uid="uid://ddi6i8lrujw4k" path="res://assets/Red Sprite/Back ConsecutiveSlash.png" id="5_vdqpj"]
 [ext_resource type="PackedScene" uid="uid://22q253ptx5of" path="res://tscn/hitbox_component.tscn" id="9_rumc1"]
+[ext_resource type="PackedScene" uid="uid://c7s3o3cdpgy3i" path="res://tscn/arrow_pointer.tscn" id="9_y726v"]
 [ext_resource type="PackedScene" uid="uid://oiicbhvi6ce0" path="res://tscn/health_component.tscn" id="10_y4qyh"]
 
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_p5xuh"]
@@ -631,7 +632,16 @@ metadata/_edit_lock_ = true
 
 [node name="Timer" type="Timer" parent="NavigationRegion2D"]
 
+[node name="DEBUG TIMER" type="Timer" parent="."]
+
+[node name="DEBUG TIMER2" type="Timer" parent="."]
+autostart = true
+
+[node name="arrow_pointer" parent="." instance=ExtResource("9_y726v")]
+
 [connection signal="timeout" from="Weapon/Swap Timer" to="." method="_on_swap_timer_timeout"]
 [connection signal="timeout" from="HealthComponent/I-Frames" to="." method="_on_i_frames_timeout"]
 [connection signal="timeout" from="Sound Timer" to="." method="_on_sound_timer_timeout"]
 [connection signal="timeout" from="NavigationRegion2D/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="DEBUG TIMER" to="." method="_on_debug_timer_timeout"]
+[connection signal="timeout" from="DEBUG TIMER2" to="." method="_on_debug_timer_2_timeout"]

@@ -1,9 +1,11 @@
 extends Control
 @onready var data = StaticData.keybinds["keybinds"]
 @onready var keybindList = StaticData.keybindList
-
+@onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
+var music_data = ["Music"]
 
 func _ready():
+	audio_manager.play_music("BGM_menu", music_data)
 	_bind_user_keys()
 
 func _on_start_button_pressed():

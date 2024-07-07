@@ -41,12 +41,23 @@ func _process(_delta):
 		if Input.is_action_just_released("attack_primary"): 
 			button_released = true
 		
-		if player.direction_facing == "right" && anim.position.x > 0 || player.direction_facing == "down" && anim.position.x > 0:
+		if player.direction_facing == "right" && anim.position.x > 0:
 			anim.position.x *= -1
 			anim.rotation *= -1
-		elif player.direction_facing == "left" && anim.position.x < 0 || player.direction_facing == "up" && anim.position.x < 0:
+			
+		elif player.direction_facing == "left" && anim.position.x < 0:
 			anim.position.x *= -1
 			anim.rotation *= -1
+			
+		if player.direction_facing == "down":
+				anim.z_index = -1
+				anim2.z_index = -1
+		else:
+				anim.z_index = 1
+				anim2.z_index = 1
+			
+
+		
 		
 		getMousePosition()
 

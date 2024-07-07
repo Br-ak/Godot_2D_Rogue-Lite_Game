@@ -2,53 +2,82 @@ extends Node2D
 
 var Enemy_Bot = preload("res://tscn/enemy_bot.tscn")
 @onready var player = get_parent().get_node("Player")
+@onready var scenery = get_parent().get_node("scenery")
 @onready var game = self.get_tree().get_root().get_node("Game")
 @onready var hud = game.get_node("CanvasLayer").get_node("Hud")
 @onready var timer = $Timer
 @onready var timer_2 = $Timer2
+@onready var timer_3 = $Timer3
+@onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
 
 var playerPOS
 var boss_spawned = false
 var counter = 0
-var BOSS_SPAWN_COUNT = 75
+var BOSS_SPAWN_COUNT = 15
 var new_location
-
-
+var boss_location : Vector2
+var boss_wave = false
 
 
 func _ready():
 	timer.start(2)
+	timer_2.start(2)
 
 
 
 func _on_timer_timeout():
-	spawnWave(10)
-	# every 100 enemies spawn a boss
-	if player.killCounter > counter + BOSS_SPAWN_COUNT:
-		counter += BOSS_SPAWN_COUNT
-		boss_spawned =  true
-		var new_location = get_location()
-		var enemyTemp = Enemy_Bot.instantiate()
-		enemyTemp.position = Vector2(new_location[0], new_location[1])
-		enemyTemp.scale *= 3
-		var enemyTemp_health_comp = enemyTemp.get_node("HealthComponent")
-		enemyTemp_health_comp.MAX_HEALTH = 100
-		call_deferred("add_child", enemyTemp)
-		hud.alert_message("Boss Spawned!")
+	if !audio_manager.sound_is_playing("BGM_battle", ["Music"]):
+		audio_manager.play_music("BGM_battle", ["Music"])
+	
+	if !boss_wave: 
+		if player.killCounter > counter + BOSS_SPAWN_COUNT:
+			counter += BOSS_SPAWN_COUNT
+			bossWave()
+		else:
+			spawnWave(5)
+
+func bossWave():
+	boss_wave = true
+	print("boss wave...")
+	timer.stop()
+	timer_2.stop()
+	hud.alert_message("Boss Incoming!")
+	audio_manager.play_music("BGM_boss", ["Music"])
+	boss_location = player.global_position
+	scenery.spawn_boss_arena()
+	timer_3.start(5)
+
+func spawnBoss():
+	timer_3.stop()
+	boss_spawned =  true
+	var enemyTemp = Enemy_Bot.instantiate()
+	enemyTemp.position = boss_location
+	enemyTemp.scale *= 3
+	enemyTemp.SPEED = 50
+	enemyTemp.boss = true
+	var enemyTemp_health_comp = enemyTemp.get_node("HealthComponent")
+	enemyTemp_health_comp.MAX_HEALTH = 200
+	call_deferred("add_child", enemyTemp)
+	hud.alert_message("Boss Spawned!")
+
+func bossSlain():
+	audio_manager.stop_sound("BGM_boss", ["Music"])
+	timer.start(2)
+	timer_2.start(2)
+	boss_spawned = false
+	boss_wave = false
 
 func spawnWave(waveSize):
 	hud.alert_message("Wave Spawned!")
 	for i in range(waveSize):
-		new_location = get_location()
-		spawnGroupInClump(2, new_location[0], new_location[1])
+		new_location = SharedFunctions.get_location()
+		spawnGroupInClump(5, new_location[0], new_location[1])
 	timer.start(25)
 
 func spawnGroup(groupSize, location):
 	for i in range(groupSize):
-		#var new_location = get_location()
 		var enemyTemp = Enemy_Bot.instantiate()
 		enemyTemp.global_position = Vector2(location[0] + (i), location[1])
-		#enemyTemp.global_position = Vector2(new_location[0], new_location[1])
 		call_deferred("add_child", enemyTemp)
 
 func spawnGroupInClump(groupSize, x, y, min_distance = 2, max_distance = 5):
@@ -60,10 +89,11 @@ func spawnGroupInClump(groupSize, x, y, min_distance = 2, max_distance = 5):
 func spawnEnemy(position):
 	var enemyTemp = Enemy_Bot.instantiate()
 	enemyTemp.global_position = position
+	enemyTemp.SPEED = randi_range(55, 65)
 	call_deferred("add_child", enemyTemp)
 
 func relocateEnemy(enemy):
-	new_location = get_location()
+	new_location = SharedFunctions.get_location()
 	
 	enemy.global_position = Vector2(new_location[0], new_location[1])
 
@@ -74,42 +104,18 @@ func get_random_offset(min_distance, max_distance):
 	return Vector2(cos(angle), sin(angle)) * distance
 
 
-func get_location():
-	playerPOS = player.get_global_position()
-	var viewport_size = get_viewport().size
-	var half_width = viewport_size.x / 2
-	var half_height = viewport_size.y / 2
-	var screen_left = playerPOS.x - half_width
-	var screen_right = playerPOS.x + half_width
-	var screen_top = playerPOS.y - half_height
-	var screen_bottom = playerPOS.y + half_height
-	
-	var rng = RandomNumberGenerator.new()
-	var variation_x
-	var variation_y
-	var variation_side = rng.randi_range(1,4)
-	var weighted_rng = rng.randi_range(1, 3)
-	if weighted_rng == 1: # 1/5 chance to spawn enemy in players movement direction
-		var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
-		if direction.x > 1: variation_side = 2
-		elif direction.x < 1: variation_side = 1
-		elif direction.y > 1: variation_side = 4
-		elif direction.y < 1: variation_side = 3
-	
-	if variation_side == 1:   # left
-		#print("left")
-		variation_x = rng.randi_range(screen_left, screen_left - 10) 
-		variation_y = rng.randi_range(screen_bottom + 10,screen_top + 10)
-	elif variation_side == 2: # right
-		#print("right")
-		variation_x = rng.randi_range(screen_right , screen_right + 10) 
-		variation_y = rng.randi_range(screen_bottom + 10,screen_top + 10)
-	elif variation_side == 3: # top
-		print("top")
-		variation_x = rng.randi_range(screen_left - 10, screen_right + 10) 
-		variation_y = rng.randi_range(screen_top, screen_top + 10) 
-	elif variation_side == 4: # bottom
-		variation_x = rng.randi_range(screen_left - 10, screen_right + 10)
-		variation_y = rng.randi_range(screen_bottom, screen_bottom - 10) 
-	
-	return [variation_x, variation_y]
+
+
+
+func _on_timer_2_timeout():
+	#trickle smaller amounts of enemies constantly for variety
+	for i in range(0, 1):
+		new_location = SharedFunctions.get_location()
+		new_location = Vector2(new_location[0], new_location[1])
+		spawnEnemy(new_location)
+	timer_2.start(1)
+
+
+
+func _on_timer_3_timeout():
+	spawnBoss()

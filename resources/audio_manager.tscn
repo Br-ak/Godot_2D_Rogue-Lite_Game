@@ -1,11 +1,13 @@
-[gd_scene load_steps=16 format=3 uid="uid://ck24ttfoawloe"]
+[gd_scene load_steps=18 format=3 uid="uid://ck24ttfoawloe"]
 
 [ext_resource type="Script" path="res://scripts/Audio Manager.gd" id="1_6oo87"]
-[ext_resource type="AudioStream" uid="uid://dnlrkxt0nmnjn" path="res://assets/audio/Goblins_Dance_(Battle).ogg" id="2_h37pc"]
+[ext_resource type="AudioStream" uid="uid://cgajfanjkfdei" path="res://assets/audio/Title Screen.ogg" id="2_pjrcy"]
 [ext_resource type="AudioStream" uid="uid://btvop1gtk2naa" path="res://assets/audio/04_step_grass_1.wav" id="3_5sh3f"]
+[ext_resource type="AudioStream" uid="uid://drmu5ioc87i1v" path="res://assets/audio/Regular Battle.ogg" id="3_gbrqt"]
 [ext_resource type="AudioStream" uid="uid://ck1lfca0lpxbo" path="res://assets/audio/step_grass.ogg" id="3_r2xl3"]
 [ext_resource type="AudioStream" uid="uid://drihnarl8bl8i" path="res://assets/audio/04_step_grass_2.wav" id="4_6gp4p"]
 [ext_resource type="AudioStream" uid="uid://j32jc6ce2pn" path="res://assets/audio/hitHurt.wav" id="4_j1076"]
+[ext_resource type="AudioStream" uid="uid://c7tu35o8iggtu" path="res://assets/audio/Regular Boss.ogg" id="4_mfvb0"]
 [ext_resource type="AudioStream" uid="uid://b2x1i5rflsdu5" path="res://assets/audio/explosion.wav" id="5_xw5dl"]
 [ext_resource type="AudioStream" uid="uid://cslmw0adt51u0" path="res://assets/audio/04_step_grass_3.wav" id="5_y5ba8"]
 [ext_resource type="AudioStream" uid="uid://dp7kxmlfx4qg" path="res://assets/audio/death (5).wav" id="6_vncn7"]
@@ -21,8 +23,14 @@ script = ExtResource("1_6oo87")
 
 [node name="Music" type="Node" parent="."]
 
-[node name="BGM" type="AudioStreamPlayer" parent="Music"]
-stream = ExtResource("2_h37pc")
+[node name="BGM_menu" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("2_pjrcy")
+
+[node name="BGM_battle" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("3_gbrqt")
+
+[node name="BGM_boss" type="AudioStreamPlayer" parent="Music"]
+stream = ExtResource("4_mfvb0")
 
 [node name="Player Sounds" type="Node" parent="."]
 

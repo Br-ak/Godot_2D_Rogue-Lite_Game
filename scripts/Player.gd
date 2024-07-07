@@ -12,6 +12,7 @@ var new_holstered_weapon
 @onready var anim = $AnimatedSprite2D
 @onready var weapon = $Weapon
 @onready var sound_timer = $"Sound Timer"
+@onready var arrow_pointer = $arrow_pointer
 
 @onready var gameNode = get_parent().get_parent()
 @onready var hud = gameNode.get_node("CanvasLayer").get_node("Hud")
@@ -20,10 +21,12 @@ var new_holstered_weapon
 @onready var invincible_timer = $"HealthComponent/I-Frames"
 @onready var inventory_menu = gameNode.get_node("CanvasLayer").get_node("Inventory Menu")
 @onready var swap_timer = $"Weapon/Swap Timer"
+@onready var scenery = get_parent().get_node("scenery")
 
 @onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
 @onready var navigation_region_2d = $NavigationRegion2D
 @onready var timer = $NavigationRegion2D/Timer
+@onready var debug_timer = $"DEBUG TIMER"
 
 var sound_info = ["Player Sounds"]
 var equipped_weapon
@@ -36,6 +39,14 @@ var direction_facing = ""
 var sound_rng
 var sound_string = "move1"
 var sound_playable = true
+
+
+
+
+var debug_avail = true
+
+
+
 
 var player_exp := 0:
 	set(value):
@@ -66,6 +77,14 @@ func _physics_process(_delta):
 	player_health = health_component.health
 
 func read_inputs():
+	if Input.is_action_just_pressed("add_weapon_test") && debug_avail:
+		scenery.spawn_boss_arena()
+		debug_avail = false
+		debug_timer.start(1)
+	
+	
+	
+	
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	#print(direction)
 	var mousePosition = get_global_mouse_position()
@@ -183,6 +202,12 @@ func _on_swap_timer_timeout():
 func _on_sound_timer_timeout():
 	sound_playable = true
 
-
 func _on_timer_timeout():
 	pass
+
+func _on_debug_timer_timeout():
+	debug_avail = true
+
+func _on_debug_timer_2_timeout():
+	pass
+	#print("player pos: ", global_position)

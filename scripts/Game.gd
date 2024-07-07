@@ -18,7 +18,8 @@ var gameTimer := 0:
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	audio_manager.play_music("BGM", music_data)
+	SharedFunctions.init_variables()
+	audio_manager.play_music("BGM_battle", music_data)
 	timer.start(1) 
 	if Engine.time_scale != 1:
 		Engine.time_scale = 1

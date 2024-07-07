@@ -11,8 +11,11 @@ extends CharacterBody2D
 @onready var navigation_agent_2d = $NavigationAgent2D
 @onready var timer = $NavigationAgent2D/Timer
 
+@onready var scenery = get_parent().get_parent().get_node("scenery")
+
 var sound_info = ["Bot Sounds"]
 const type = "Enemy"
+var boss := false
 var baseDamage = 5
 var currentDamage = baseDamage
 var enemy = true
@@ -69,6 +72,8 @@ func hurt():
 	audio_manager.play_sound("hurt", sound_info)
 
 func death():
+	if boss == true:
+		mobs.bossSlain()
 	collision.set_deferred("disabled", true)
 	audio_manager.play_sound("hurt", sound_info)
 	var follower = get_parent().get_parent().get_node("Follower")

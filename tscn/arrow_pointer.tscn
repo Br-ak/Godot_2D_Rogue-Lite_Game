@@ -1,0 +1,28 @@
+[gd_scene load_steps=4 format=3 uid="uid://c7s3o3cdpgy3i"]
+
+[ext_resource type="Script" path="res://scripts/arrow_pointer.gd" id="1_as53c"]
+[ext_resource type="Texture2D" uid="uid://cknuhcvfco2yj" path="res://assets/GUNS_V1.00/V1.00/PNG/arrow_pointer.png" id="2_67k1q"]
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_u08cs"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_67k1q")
+}],
+"loop": true,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_as53c")
+
+[node name="Marker2D" type="Marker2D" parent="."]
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="Marker2D"]
+position = Vector2(22, -9.09495e-13)
+rotation = 1.5708
+scale = Vector2(0.305, 0.305)
+sprite_frames = SubResource("SpriteFrames_u08cs")
+
+[node name="Timer" type="Timer" parent="."]

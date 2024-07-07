@@ -1,10 +1,18 @@
 extends Node
 
 @onready var upgrades = StaticData.upgrades["upgrades"]
+var game
+var world
+var player
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	pass # Replace with function body.
+
+func init_variables():
+	game = self.get_tree().get_root().get_node("Game")
+	world = game.get_node("World")
+	player = world.get_node("Player")
 
 func get_attack_info(WEAPON_NAME):
 	var weapon_data = StaticData.weapons["weapons"][WEAPON_NAME]["attacks"]
@@ -181,3 +189,43 @@ func is_mouse_between_points(mouse_pos: Vector2, point_a: Vector2, point_b: Vect
 	var max_y = max(point_a.y, point_b.y)
 	
 	return mouse_pos.x >= min_x and mouse_pos.x <= max_x and mouse_pos.y >= min_y and mouse_pos.y <= max_y
+
+func get_location():
+	var playerPOS = player.get_global_position()
+	var viewport_size = get_viewport().size
+	var half_width = viewport_size.x / 2
+	var half_height = viewport_size.y / 2
+	var screen_left = playerPOS.x - half_width
+	var screen_right = playerPOS.x + half_width
+	var screen_top = playerPOS.y - half_height
+	var screen_bottom = playerPOS.y + half_height
+	
+	var rng = RandomNumberGenerator.new()
+	var variation_x
+	var variation_y
+	var variation_side = rng.randi_range(1,4)
+	var weighted_rng = rng.randi_range(1, 3)
+	if weighted_rng == 1: # 1/5 chance to spawn enemy in players movement direction
+		var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
+		if direction.x > 1: variation_side = 2
+		elif direction.x < 1: variation_side = 1
+		elif direction.y > 1: variation_side = 4
+		elif direction.y < 1: variation_side = 3
+	
+	if variation_side == 1:   # left
+		#print("left")
+		variation_x = rng.randi_range(screen_left, screen_left - 10) 
+		variation_y = rng.randi_range(screen_bottom + 10,screen_top + 10)
+	elif variation_side == 2: # right
+		#print("right")
+		variation_x = rng.randi_range(screen_right , screen_right + 10) 
+		variation_y = rng.randi_range(screen_bottom + 10,screen_top + 10)
+	elif variation_side == 3: # top
+		#print("top")
+		variation_x = rng.randi_range(screen_left - 10, screen_right + 10) 
+		variation_y = rng.randi_range(screen_top, screen_top + 10) 
+	elif variation_side == 4: # bottom
+		variation_x = rng.randi_range(screen_left - 10, screen_right + 10)
+		variation_y = rng.randi_range(screen_bottom, screen_bottom - 10) 
+	
+	return [variation_x, variation_y]
