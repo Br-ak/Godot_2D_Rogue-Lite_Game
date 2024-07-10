@@ -43,21 +43,21 @@ func change_audio_level(audio_data):
 # Want to keep separate in case music is handled differently later
 func play_music(music_name: String, music_data):
 	pass
-#	if audio_manager.has_node(music_data[0]):
-#		var sound_node_group = self.get_node(music_data[0])
-#		if sound_node_group.has_node(music_name):
-#			var sound_node = sound_node_group.get_node(music_name)
-#			if sound_node is AudioStreamPlayer:
-#
-#				# stop other playing music nodes
-#				for music_node in sound_node_group.get_children():
-#					if music_node != null && music_node.is_playing():
-#						music_node.stop()
-#				sound_node.play()
-#		else:
-#			print("Error: Music not found - " + music_name)
-#	else:
-#		print("Error: Group not found")
+	if audio_manager.has_node(music_data[0]):
+		var sound_node_group = self.get_node(music_data[0])
+		if sound_node_group.has_node(music_name):
+			var sound_node = sound_node_group.get_node(music_name)
+			if sound_node is AudioStreamPlayer:
+
+				# stop other playing music nodes
+				for music_node in sound_node_group.get_children():
+					if music_node != null && music_node.is_playing():
+						music_node.stop()
+				sound_node.play()
+		else:
+			print("Error: Music not found - " + music_name)
+	else:
+		print("Error: Group not found")
 
 
 #sound_data = [group name, ]

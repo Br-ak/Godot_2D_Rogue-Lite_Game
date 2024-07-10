@@ -5,7 +5,7 @@ extends Node2D
 @onready var objects_lower = $objects_lower
 @onready var mobs = get_parent().get_node("Mobs")
 @onready var player = get_parent().get_node("Player")
-@onready var boss_arena_location = $boss_arena_location
+@onready var boss_arena = $boss_arena
 
 var rand1
 var rand2
@@ -17,6 +17,9 @@ var tile_size = Vector2(16,16)
 var bound_buffer = 450 
 var tile_gen_count = 0
 var pattern_index := 0
+
+var arena_min_dist = 500
+var arena_max_dist = 1000
 
 #var pattern = floor.tile_set.get_pattern(3)
 #
@@ -30,6 +33,7 @@ var pattern_index := 0
 
 func _ready():
 	pass
+	
 
 func _process(_delta):
 	frameCount += 1
@@ -37,6 +41,7 @@ func _process(_delta):
 	if (frameCount % 15 == 0): # once every second at 60fps
 		frameCount = 0
 		gen_terrain()
+
 
 func gen_terrain():
 	var TL_bound = player.position + Vector2((-1 * bound_buffer),bound_buffer)
@@ -70,8 +75,6 @@ func gen_object(tile_pos, type):
 		tile_gen_count = 0
 	
 	if objects.tile_set.get_pattern(rand) != null: # pattern index exists
-		# Get the size of the pattern
-		var pattern_size = objects.tile_set.get_pattern(rand).get_size()
 		var pattern_cells_a = objects.tile_set.get_pattern(rand).get_used_cells()
 		var pattern_cells_b = shadow.tile_set.get_pattern(rand).get_used_cells()
 		
@@ -98,47 +101,70 @@ func gen_object(tile_pos, type):
 		if can_place_pattern:
 			shadow.set_pattern(0, tile_pos, shadow.tile_set.get_pattern(rand))
 			objects.set_pattern(0, tile_pos, objects.tile_set.get_pattern(rand))
-			
-
-
-func check_for_passable():
-	var cell = objects.get_cell_tile_data(0, player.position)
-	var test_cell
-	var test_cell_coords : Vector2
-	var range = 3
-	
-	if cell != null && cell.custom_data_0 == true:
-			for i in range(-range, range):
-				for j in range(-range, range):
-					test_cell_coords.x = player.position.x + i
-					test_cell_coords.y = player.position.y + j
-					test_cell = objects.get_cell_tile_data(0, test_cell_coords)
-					if test_cell != null && test_cell.custom_data_0 == true:
-						test_cell.set_modulate(Color(1,1,1,0.5))
 
 func spawn_boss_arena():
-	print("Spawning arena...")
+	#print("Spawning arena...")
 	var tile_pos
 	var tile_size = 16
+	var location_found = false
 	
-	# Check if the patterns exist before setting them
+	# Check if the pattern exists
 	if objects_lower.tile_set.get_pattern(9) != null and objects.tile_set.get_pattern(10) != null:
-		print("Pattern found")
+		#print("Pattern found")
 		var lower_pattern_size = objects_lower.tile_set.get_pattern(9).get_size()
 		var upper_pattern_size = objects.tile_set.get_pattern(10).get_size()
+		var pattern_cells = floor.tile_set.get_pattern(2).get_used_cells()
+		
 		var lower_offset = Vector2i(lower_pattern_size.x / 2, lower_pattern_size.y / 2)
 		var upper_offset = Vector2i(upper_pattern_size.x / 2, upper_pattern_size.y / 2)
 		
 		var player_pos = player.get_global_position()
-		var new_pos_x = randi_range(player_pos.x + 500, player_pos.x + 1500)
-		var new_pos_y = randi_range(player_pos.y + 500, player_pos.y + 1500)
-		tile_pos = Vector2(new_pos_x, new_pos_y)
+		var mod
+		var mod2
+		var new_pos_x
+		var new_pos_y
+		var tilemap_pos
+		var lower_tile_pos
+		var upper_tile_pos
+		var temp_pos
+		var conflict
 		
-		var tilemap_pos = Vector2i(tile_pos.x / tile_size, tile_pos.y / tile_size)
-		var lower_tile_pos = tilemap_pos - lower_offset
-		var upper_tile_pos = tilemap_pos - upper_offset
-		boss_arena_location.global_position = tile_pos
+		while not location_found:
+			conflict = false
+			#print("Checking location...")
+			mod = randi_range(0, 1)
+			mod2 = randi_range(0, 1)
+			if mod == 0: mod = -1
+			if mod2 == 0: mod2 = -1
+			
+			new_pos_x = randi_range(player_pos.x + arena_min_dist, player_pos.x + arena_max_dist) * mod
+			new_pos_y = randi_range(player_pos.y + arena_min_dist, player_pos.y + arena_max_dist) * mod2
+			tile_pos = Vector2(new_pos_x, new_pos_y)
+			tilemap_pos = Vector2i(tile_pos.x / tile_size, tile_pos.y / tile_size)
+			lower_tile_pos = tilemap_pos - lower_offset
+			upper_tile_pos = tilemap_pos - upper_offset
+			
+			# Check for conflicts with existing tiles in the pattern
+			for pattern_cell in pattern_cells:
+				var test_cell_coords = lower_tile_pos + pattern_cell
+				var test_cell_floor = floor.get_cell_tile_data(0, test_cell_coords)
+				var test_cell_shadow = shadow.get_cell_tile_data(0, test_cell_coords)
+				var test_cell_objects_lower = objects_lower.get_cell_tile_data(0, test_cell_coords)
+				var test_cell_objects = objects.get_cell_tile_data(0, test_cell_coords)
+				
+				if test_cell_floor != null or test_cell_shadow != null or test_cell_objects_lower != null or test_cell_objects != null:
+					conflict = true
+					break
+			
+			if conflict:
+				#print("Conflict found, increasing search distance.")
+				arena_min_dist += 250
+				arena_max_dist += 250
+			else:
+				location_found = true
 		
+		#print("Setting patterns at:", lower_tile_pos, upper_tile_pos)
+		boss_arena.init(tile_pos)
 		floor.set_pattern(0, lower_tile_pos, floor.tile_set.get_pattern(2))
 		shadow.set_pattern(0, lower_tile_pos, shadow.tile_set.get_pattern(9))
 		objects_lower.set_pattern(0, lower_tile_pos, objects_lower.tile_set.get_pattern(9))
@@ -146,3 +172,5 @@ func spawn_boss_arena():
 		player.arrow_pointer.init_pointer()
 	else:
 		print("Pattern not found")
+
+

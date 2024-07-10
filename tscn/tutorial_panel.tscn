@@ -1,0 +1,29 @@
+[gd_scene load_steps=3 format=3 uid="uid://c8gsfo2dklpxg"]
+
+[ext_resource type="Script" path="res://tscn/tutorial_panel.gd" id="1_2t1f0"]
+[ext_resource type="Texture2D" uid="uid://dsd442we8f0dm" path="res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png" id="1_scdbt"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+script = ExtResource("1_2t1f0")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="."]
+layout_mode = 0
+offset_right = 632.0
+offset_bottom = 128.0
+alignment = 1
+
+[node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+texture = ExtResource("1_scdbt")
+stretch_mode = 5
+
+[node name="Label" type="Label" parent="HBoxContainer"]
+custom_minimum_size = Vector2(500, 0)
+layout_mode = 2
+size_flags_vertical = 1
+text = "Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus Bingus "
+vertical_alignment = 1
+autowrap_mode = 3

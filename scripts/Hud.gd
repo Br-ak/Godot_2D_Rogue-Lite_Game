@@ -23,6 +23,19 @@ var HP_BAR_MAX = 100
 
 @onready var resource_bar = $"AspectRatioContainer/CanvasLayer/VBoxContainer/Resource Bar"
 
+@onready var boss_health_bar_control = $"AspectRatioContainer/CanvasLayer/Boss Health Bar Control"
+@onready var boss_name = $"AspectRatioContainer/CanvasLayer/Boss Health Bar Control/Boss Name"
+@onready var boss_health = $"AspectRatioContainer/CanvasLayer/Boss Health Bar Control/Boss Health":
+	set(value):
+		if boss_health == null: # for some reason this is null upon startup for a second
+			pass
+		else:
+			boss_health.value = value
+
+
+
+
+
 @onready var playerHealth = $"AspectRatioContainer/CanvasLayer/VBoxContainer/Health Bar":
 	set(value):
 		if playerHealth == null: # for some reason this is null upon startup for a second
@@ -68,6 +81,7 @@ var HP_BAR_MAX = 100
 func _ready():
 	exp_bar.set_max(XP_BAR_MAX)
 	playerHealth.set_max(HP_BAR_MAX)
+	boss_health.set_max(200)
 	pass # Replace with function body.
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.

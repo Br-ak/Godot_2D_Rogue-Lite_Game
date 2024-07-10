@@ -10,8 +10,17 @@ extends CharacterBody2D
 @onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
 @onready var navigation_agent_2d = $NavigationAgent2D
 @onready var timer = $NavigationAgent2D/Timer
+@onready var boss_sfx_timer = $boss_sfx_Timer
+@onready var health_component = $HealthComponent
 
 @onready var scenery = get_parent().get_parent().get_node("scenery")
+@onready var game = self.get_tree().get_root().get_node("Game")
+@onready var hud = game.get_node("CanvasLayer").get_node("Hud")
+
+var boss_health := 0:
+	set(value):
+		boss_health = value
+		hud.boss_health = boss_health
 
 var sound_info = ["Bot Sounds"]
 const type = "Enemy"
@@ -22,14 +31,19 @@ var enemy = true
 var SPEED = 65
 var acceleration = 7
 var ON_SCREEN = true
+var bad_spawn = false
 #var direction
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	pass
+	if boss:
+		hud.boss_health_bar_control.set_visible(true)
+		boss_sfx_timer.start(1)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(delta):
+	if boss:
+		boss_health = health_component.health
 	# handle off screen logic
 	if is_off_screen(global_position):
 		if collision != null:
@@ -64,7 +78,6 @@ func create_path():
 func _on_timer_timeout():
 	create_path()
 
-
 func attack():
 	pass
 
@@ -72,26 +85,45 @@ func hurt():
 	audio_manager.play_sound("hurt", sound_info)
 
 func death():
+	audio_manager.play_sound("hurt", sound_info)
 	if boss == true:
 		mobs.bossSlain()
+		audio_manager.play_sound("boss death", sound_info)
+		hud.boss_health_bar_control.set_visible(false)
+	else:
+		audio_manager.play_sound("death", sound_info)
+		
 	collision.set_deferred("disabled", true)
-	audio_manager.play_sound("hurt", sound_info)
 	var follower = get_parent().get_parent().get_node("Follower")
 	if follower:
 		follower.get("trackingList").erase(self) 
 	var rng = RandomNumberGenerator.new()
 	var xp_rng = rng.randi_range(0,100)
-	if xp_rng % 5 == 0: # 20% spawn rate for xp drop
+	if xp_rng % 5 == 0 || boss: # 20% spawn rate for xp drop
 		spawnExp()
+	else:
+		var health_pot_rng = rng.randi_range(0,200)
+		if health_pot_rng % 5 == 0 || boss: # 20% spawn rate for health drop if no xp drop
+			spawnHealthPotion()
 	player.killCounter += 1
 	player.gain_exp(1)
-	audio_manager.play_sound("death", sound_info)
+	
 
 func spawnExp():
 	const EXP = preload("res://tscn/exp.tscn")
 	var new_exp = EXP.instantiate()
 	new_exp.global_position = self.global_position
+	
 	get_parent().call_deferred("add_child", new_exp)
+	if boss:
+		new_exp.xp_gain = 100
+
+func spawnHealthPotion():
+	const HEALTH = preload("res://tscn/health_potion.tscn")
+	var new_health = HEALTH.instantiate()
+	new_health.global_position = self.global_position
+	get_parent().call_deferred("add_child", new_health)
+	
 
 func _on_hitbox_component_area_entered(area):
 	if area is HitboxComponent:
@@ -122,3 +154,9 @@ func is_off_screen(enemy_position: Vector2) -> bool:
 func _on_off_screen_timer_timeout():
 	# may be wise to simply move enemy to a closer area instead
 	mobs.relocateEnemy(self)
+
+
+func _on_boss_sfx_timer_timeout():
+	audio_manager.play_sound("boss growl", sound_info)
+	var sound_timer = randi_range(3, 7)
+	boss_sfx_timer.start(sound_timer)

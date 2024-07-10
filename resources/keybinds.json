@@ -48,6 +48,20 @@
 			"default_key": "Q",
 			"description": "Swaps Weapons",
 			"name": "Weapon Swap"
-		}
+		},
+		"player_interact": {
+			"alternate_key": "",
+			"assigned_key": "E",
+			"default_key": "E",
+			"description": "Interacts with objects/npcs",
+			"name": "Interact"
+		},
+		"debug_level_up": {
+			"alternate_key": "",
+			"assigned_key": "G",
+			"default_key": "G",
+			"description": "Opens the level up menu",
+			"name": "Upgrade Menu"
+		},
 	}
 }

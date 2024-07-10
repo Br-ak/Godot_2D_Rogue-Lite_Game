@@ -586,7 +586,8 @@ polygons = Array[PackedInt32Array]([PackedInt32Array(0, 1, 2, 3)])
 outlines = Array[PackedVector2Array]([PackedVector2Array(-804.2, -673.6, 990, -656.6, 977.2, 607.8, -817, 595)])
 
 [node name="Player" type="CharacterBody2D"]
-z_index = 1
+visibility_layer = 4
+z_index = 3
 scale = Vector2(5, 5)
 motion_mode = 1
 platform_floor_layers = 4294901761

@@ -1,0 +1,53 @@
+[gd_scene load_steps=9 format=3 uid="uid://k0s17oni8d7e"]
+
+[ext_resource type="Texture2D" uid="uid://j1xp75e318k5" path="res://assets/Pixel Art Top Down - Basic/TX Props.png" id="1_pyrak"]
+[ext_resource type="Script" path="res://scripts/boss_arena.gd" id="1_xkqss"]
+[ext_resource type="PackedScene" uid="uid://dhhaidg4u7lw6" path="res://tscn/interact_icon.tscn" id="2_0xltn"]
+[ext_resource type="Texture2D" uid="uid://bw75doy0cg0w7" path="res://assets/Pixel Art Top Down - Basic/TX Shadow.png" id="4_1dyqg"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_4o6sn"]
+atlas = ExtResource("1_pyrak")
+region = Rect2(227.088, 182.434, 26.6996, 39.118)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_w2sjv"]
+size = Vector2(26, 38)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_m5kym"]
+atlas = ExtResource("4_1dyqg")
+region = Rect2(285.295, 249.885, 42.3779, 35.368)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_im3k0"]
+size = Vector2(1201, 811)
+
+[node name="boss_arena" type="Node2D"]
+script = ExtResource("1_xkqss")
+
+[node name="boss_arena_location" type="Marker2D" parent="."]
+
+[node name="boss_interactable" type="Sprite2D" parent="boss_arena_location"]
+visible = false
+visibility_layer = 2
+z_index = 2
+texture = SubResource("AtlasTexture_4o6sn")
+
+[node name="Interact Icon" parent="boss_arena_location/boss_interactable" instance=ExtResource("2_0xltn")]
+
+[node name="StaticBody2D" type="StaticBody2D" parent="boss_arena_location/boss_interactable"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boss_arena_location/boss_interactable/StaticBody2D"]
+shape = SubResource("RectangleShape2D_w2sjv")
+
+[node name="shadow" type="Sprite2D" parent="boss_arena_location/boss_interactable"]
+z_index = -1
+position = Vector2(4, -3)
+scale = Vector2(0.903279, 1.67138)
+texture = SubResource("AtlasTexture_m5kym")
+
+[node name="no_spawn_zone" type="Area2D" parent="boss_arena_location"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="boss_arena_location/no_spawn_zone"]
+position = Vector2(592, -33)
+shape = SubResource("RectangleShape2D_im3k0")
+
+[connection signal="area_entered" from="boss_arena_location/no_spawn_zone" to="." method="_on_no_spawn_zone_area_entered"]
+[connection signal="area_exited" from="boss_arena_location/no_spawn_zone" to="." method="_on_no_spawn_zone_area_exited"]

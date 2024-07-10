@@ -3,6 +3,15 @@
 [ext_resource type="Script" path="res://scripts/Hud.gd" id="1_c5o3d"]
 [ext_resource type="PackedScene" uid="uid://d13bfvinq877y" path="res://tscn/weapon_swap.tscn" id="2_bpg0x"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7y1y"]
+bg_color = Color(1, 0, 0, 1)
+border_width_left = 5
+border_width_top = 5
+border_width_right = 5
+border_width_bottom = 5
+border_color = Color(0, 0, 0, 1)
+border_blend = true
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3im7g"]
 bg_color = Color(0.6, 0.6, 0.6, 0.247059)
 corner_radius_top_left = 7
@@ -188,15 +197,6 @@ gradient = SubResource("Gradient_5gddr")
 width = 577
 fill_to = Vector2(0.1, 0)
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_x7y1y"]
-bg_color = Color(1, 0, 0, 1)
-border_width_left = 5
-border_width_top = 5
-border_width_right = 5
-border_width_bottom = 5
-border_color = Color(0, 0, 0, 1)
-border_blend = true
-
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_p4nbs"]
 bg_color = Color(0, 0, 0, 0.533333)
 
@@ -217,6 +217,47 @@ offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="AspectRatioContainer"]
 
+[node name="Boss Health Bar Control" type="Control" parent="AspectRatioContainer/CanvasLayer"]
+visible = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -137.115
+offset_right = 350.0
+offset_bottom = -84.1149
+grow_horizontal = 2
+grow_vertical = 0
+mouse_filter = 1
+
+[node name="Boss Name" type="Label" parent="AspectRatioContainer/CanvasLayer/Boss Health Bar Control"]
+layout_mode = 0
+offset_left = 1.0
+offset_top = 6.11501
+offset_right = 97.0
+offset_bottom = 32.115
+text = "Big Bot Greg"
+
+[node name="Boss Health" type="ProgressBar" parent="AspectRatioContainer/CanvasLayer/Boss Health Bar Control"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -350.0
+offset_top = -18.0001
+offset_right = 350.0
+offset_bottom = -0.00012207
+grow_horizontal = 2
+grow_vertical = 0
+theme_override_styles/background = SubResource("StyleBoxFlat_x7y1y")
+max_value = 0.0
+show_percentage = false
+
 [node name="Message Control" type="Control" parent="AspectRatioContainer/CanvasLayer"]
 layout_mode = 3
 anchors_preset = 5
@@ -232,11 +273,16 @@ anchors_preset = 5
 anchor_left = 0.5
 anchor_right = 0.5
 offset_left = -175.0
-offset_top = 45.0
+offset_top = 100.0
 offset_right = 175.0
-offset_bottom = 80.0
+offset_bottom = 135.0
 grow_horizontal = 2
 pivot_offset = Vector2(175, 17)
+theme_override_colors/font_color = Color(0.435294, 0.74902, 0.835294, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_colors/font_outline_color = Color(0.0196078, 0.270588, 0.337255, 1)
+theme_override_constants/outline_size = 1
+theme_override_constants/shadow_outline_size = 3
 theme_override_styles/normal = SubResource("StyleBoxFlat_3im7g")
 horizontal_alignment = 1
 vertical_alignment = 1

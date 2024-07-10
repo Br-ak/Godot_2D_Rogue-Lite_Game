@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://ck24ttfoawloe"]
+[gd_scene load_steps=21 format=3 uid="uid://ck24ttfoawloe"]
 
 [ext_resource type="Script" path="res://scripts/Audio Manager.gd" id="1_6oo87"]
 [ext_resource type="AudioStream" uid="uid://cgajfanjkfdei" path="res://assets/audio/Title Screen.ogg" id="2_pjrcy"]
@@ -17,6 +17,9 @@
 [ext_resource type="AudioStream" uid="uid://c53idfv8m7krs" path="res://assets/audio/comp_charge.ogg" id="10_52mmw"]
 [ext_resource type="AudioStream" uid="uid://ugftw588w33y" path="res://assets/audio/comp_toss.ogg" id="10_e6il1"]
 [ext_resource type="AudioStream" uid="uid://cnbv0ikucv0g1" path="res://assets/audio/comp_charge_tick.ogg" id="12_qnc2e"]
+[ext_resource type="AudioStream" uid="uid://b4pcsea3pi8ds" path="res://assets/audio/bigDeath.wav" id="12_wa88h"]
+[ext_resource type="AudioStream" uid="uid://bw4w8jplp144d" path="res://assets/audio/growl.wav" id="13_b5ygw"]
+[ext_resource type="AudioStream" uid="uid://b4ws737ecsqtp" path="res://assets/audio/explosion (2).wav" id="18_gnf3y"]
 
 [node name="Audio Manager" type="Node"]
 script = ExtResource("1_6oo87")
@@ -61,6 +64,12 @@ volume_db = -20.0
 stream = ExtResource("6_vncn7")
 volume_db = -15.314
 
+[node name="boss death" type="AudioStreamPlayer" parent="Bot Sounds"]
+stream = ExtResource("12_wa88h")
+
+[node name="boss growl" type="AudioStreamPlayer" parent="Bot Sounds"]
+stream = ExtResource("13_b5ygw")
+
 [node name="Staff Sounds" type="Node" parent="."]
 
 [node name="primary_attack" type="AudioStreamPlayer" parent="Staff Sounds"]
@@ -93,3 +102,8 @@ stream = ExtResource("10_e6il1")
 
 [node name="primary_charge_tick" type="AudioStreamPlayer" parent="Magic Components Sounds"]
 stream = ExtResource("12_qnc2e")
+
+[node name="Arena Sounds" type="Node" parent="."]
+
+[node name="interact" type="AudioStreamPlayer" parent="Arena Sounds"]
+stream = ExtResource("18_gnf3y")

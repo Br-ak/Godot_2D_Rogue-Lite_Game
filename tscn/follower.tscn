@@ -62,6 +62,7 @@ _data = {
 radius = 948.821
 
 [node name="Follower" type="CharacterBody2D"]
+z_index = 6
 scale = Vector2(0.145478, 0.145478)
 script = ExtResource("1_2ikfv")
 

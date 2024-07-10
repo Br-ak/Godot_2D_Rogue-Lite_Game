@@ -1,9 +1,11 @@
 extends Node
 
 @onready var upgrades = StaticData.upgrades["upgrades"]
+
 var game
 var world
 var player
+var scenery
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -13,6 +15,7 @@ func init_variables():
 	game = self.get_tree().get_root().get_node("Game")
 	world = game.get_node("World")
 	player = world.get_node("Player")
+	scenery = world.get_node("scenery")
 
 func get_attack_info(WEAPON_NAME):
 	var weapon_data = StaticData.weapons["weapons"][WEAPON_NAME]["attacks"]
@@ -69,7 +72,7 @@ func spread_projectile(projectile_object, root, shooting_point, mouse_position, 
 	var spread_angle
 	
 	spread_angle = 45
-	var projectile_count = attack.attack_projectile_count # The number of projectiles to spawn
+	var projectile_count = attack.attack_projectile_count + attack.attack_projectile_count_incerase # The number of projectiles to spawn
 	var angle_step = spread_angle / (projectile_count - 1) # Calculate the angle between each projectile
 	
 	for i in range(projectile_count):
@@ -94,10 +97,11 @@ func fork_projectile(projectile_object, root, shooting_point, mouse_position, at
 	var rotation_radians : float
 	var above_direction_variable
 	var below_direction_variable
-	if attack.attack_projectile_count % 2 == 0: # even projectile count
+	var projectile_count = attack.attack_projectile_count + attack.attack_projectile_count_incerase
+	if projectile_count % 2 == 0: # even projectile count
 		above_direction_variable = -0.5
 		below_direction_variable = 0.5
-		for i in range(1, attack.attack_projectile_count + 2):
+		for i in range(1, projectile_count + 2):
 			var new_projectile = projectile_object.instantiate()
 			new_projectile.attack = attack
 			if !prev_projectile_position:
@@ -124,7 +128,7 @@ func fork_projectile(projectile_object, root, shooting_point, mouse_position, at
 	else: # odd projectile count
 		above_direction_variable = -1
 		below_direction_variable = 1
-		for i in range(1, attack.attack_projectile_count + 1):
+		for i in range(1, projectile_count + 1):
 			var new_projectile = projectile_object.instantiate()
 			new_projectile.attack = attack
 			if !prev_projectile_position:
@@ -228,4 +232,16 @@ func get_location():
 		variation_x = rng.randi_range(screen_left - 10, screen_right + 10)
 		variation_y = rng.randi_range(screen_bottom, screen_bottom - 10) 
 	
+	
 	return [variation_x, variation_y]
+
+func is_conflicting(tile_pos):
+		if scenery != null:
+			var tile = Vector2i(tile_pos[0], tile_pos[1])
+			var cell1 = scenery.objects.get_cell_tile_data(0, tile)
+			var cell2 = scenery.objects_lower.get_cell_tile_data(0, tile)
+			if cell1 == null && cell2 == null:
+				return false
+			else:
+				return true
+

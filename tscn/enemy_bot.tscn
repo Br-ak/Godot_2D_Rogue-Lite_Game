@@ -144,9 +144,11 @@ animations = [{
 }]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_xqjj4"]
-size = Vector2(16, 22)
+size = Vector2(30, 22)
 
 [node name="Enemy_Bot" type="CharacterBody2D" node_paths=PackedStringArray("hitbox_component")]
+visibility_layer = 8
+z_index = 2
 position = Vector2(7, 0)
 motion_mode = 1
 wall_min_slide_angle = 0.0
@@ -192,6 +194,9 @@ radius = 48.17
 wait_time = 0.1
 autostart = true
 
+[node name="boss_sfx_Timer" type="Timer" parent="."]
+
 [connection signal="area_entered" from="HitboxComponent" to="." method="_on_hitbox_component_area_entered"]
 [connection signal="timeout" from="Off Screen Timer" to="." method="_on_off_screen_timer_timeout"]
 [connection signal="timeout" from="NavigationAgent2D/Timer" to="." method="_on_timer_timeout"]
+[connection signal="timeout" from="boss_sfx_Timer" to="." method="_on_boss_sfx_timer_timeout"]

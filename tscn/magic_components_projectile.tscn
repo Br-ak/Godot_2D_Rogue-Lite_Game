@@ -10,10 +10,12 @@ size = Vector2(4.89692, 5.8763)
 
 [node name="bullets" type="Area2D"]
 top_level = true
+z_index = 6
 scale = Vector2(2.0421, 2.0421)
 script = ExtResource("1_wpovl")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 5
 position = Vector2(0, 4.76837e-07)
 scale = Vector2(0.15, 0.15)
 

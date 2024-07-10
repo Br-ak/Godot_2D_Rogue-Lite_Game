@@ -1,7 +1,7 @@
 extends CharacterBody2D
 signal update_weapon_stats_signal(new_damage)
 
-var speed = 150  # speed in pixels/sec
+var speed = 200  # speed in pixels/sec
 const type = "Player"
 const ranged_weapon = preload("res://tscn/weapon.tscn")
 const melee_weapon = preload("res://tscn/melee_weapon.tscn")
@@ -28,6 +28,10 @@ var new_holstered_weapon
 @onready var timer = $NavigationRegion2D/Timer
 @onready var debug_timer = $"DEBUG TIMER"
 
+@onready var game = self.get_tree().get_root().get_node("Game")
+@onready var world = game.get_node("World")
+@onready var mobs = world.get_node("Mobs")
+
 var sound_info = ["Player Sounds"]
 var equipped_weapon
 var holstered_weapon
@@ -39,9 +43,7 @@ var direction_facing = ""
 var sound_rng
 var sound_string = "move1"
 var sound_playable = true
-
-
-
+var player_levelup_xp := 100
 
 var debug_avail = true
 
@@ -74,15 +76,13 @@ func _ready():
 func _physics_process(_delta):
 	if Engine.time_scale == 1:
 		read_inputs()
-	player_health = health_component.health
+		player_health = health_component.health
 
 func read_inputs():
-	if Input.is_action_just_pressed("add_weapon_test") && debug_avail:
-		scenery.spawn_boss_arena()
-		debug_avail = false
-		debug_timer.start(1)
-	
-	
+#	if Input.is_action_just_pressed("add_weapon_test") && debug_avail:
+#		mobs.bossWave()
+#		debug_avail = false
+#		debug_timer.start(1)
 	
 	
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
@@ -174,8 +174,21 @@ func read_inputs():
 
 func gain_exp(value):
 	player_exp += value
-	if player_exp >= 100:
+	if player_exp >= player_levelup_xp:
+		player_levelup_xp += (player_levelup_xp * 0.3)
+		hud.XP_BAR_MAX = player_levelup_xp
+		hud.exp_bar.set_max(player_levelup_xp)
 		level_up()
+
+func gain_health(value):
+	if player_health + value > health_component.MAX_HEALTH:
+		health_component.health = health_component.MAX_HEALTH
+		player_health = health_component.MAX_HEALTH
+	else:
+		health_component.health += value
+		player_health += value
+	
+
 
 func level_up():
 	player_level += 1
@@ -210,4 +223,5 @@ func _on_debug_timer_timeout():
 
 func _on_debug_timer_2_timeout():
 	pass
+	#print("player health: ", player_health)
 	#print("player pos: ", global_position)
