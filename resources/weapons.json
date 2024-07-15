@@ -55,5 +55,28 @@
 			"attack1_base_upgrade_slots":4,
 			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/magic_satchel.png",
 			},
+		"spell book":{
+			"name":"Old Spell Book", 
+			"description":"An old spell book", 
+			"attacks":{
+				"attack1":{
+					"name":"Swing",
+					"description": "",
+					"attack_base_damage": 5,
+					"attack_type": "MELEE",
+					},
+				"attack2":{
+					"name":"Toss",
+					"description": "Toss a crumpled paper at your foes!",
+					"attack_base_damage": 5,
+					"attack_type": "RANGED",
+					"attack_pierce": 1,
+					"attack_projectile_speed": 300,
+					},
+				},
+			"attack1_base_upgrade_slots":3,
+			"attack2_base_upgrade_slots":4,
+			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/spell_book.png",
+			},
 	}
 }

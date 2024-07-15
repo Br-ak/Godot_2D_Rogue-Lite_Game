@@ -1,8 +1,8 @@
 extends Area2D
 
-@onready var game = self.get_tree().get_root().get_node("Game")
-@onready var world = game.get_node("World")
-@onready var scenery = world.get_node("scenery")
+var game
+var world
+var scenery
 @onready var boss_arena_location
 
 var pointer_active = false
@@ -26,6 +26,12 @@ func _process(delta):
 			self.set_visible(false)
 
 func init_pointer():
+	for node in self.get_tree().get_root().get_children():
+		if node.name == "Hub World": world = node
+		elif node.name == "Game": 
+			game = node
+			world = game.get_node("World")
+	scenery = world.get_node("scenery")
 	pointer_active = true
 	boss_arena_location = scenery.boss_arena.boss_arena_location.global_position
 	if boss_arena_location != null:

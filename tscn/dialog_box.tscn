@@ -1,0 +1,91 @@
+[gd_scene load_steps=7 format=3 uid="uid://7smuhdyol5qo"]
+
+[ext_resource type="Texture2D" uid="uid://dywm3cfh0rmts" path="res://assets/GUNS_V1.00/V1.00/PNG/missing_portrait.png" id="1_41uak"]
+[ext_resource type="Script" path="res://tscn/dialog_box.gd" id="1_vi88b"]
+[ext_resource type="Texture2D" uid="uid://oj5s0xes1ums" path="res://assets/GUNS_V1.00/V1.00/PNG/text_background_ninepatch.png" id="2_hls2p"]
+[ext_resource type="Texture2D" uid="uid://cfcdptl0fqg12" path="res://assets/GUNS_V1.00/V1.00/PNG/portrait_frame.png" id="2_klvbc"]
+[ext_resource type="Texture2D" uid="uid://dxb0u1qh0kh1o" path="res://assets/GUNS_V1.00/V1.00/PNG/text_box_arrow.png" id="4_6md2u"]
+[ext_resource type="Texture2D" uid="uid://281gr4mj30eq" path="res://assets/GUNS_V1.00/V1.00/PNG/portrait_backing.png" id="4_puqh1"]
+
+[node name="Dialog Box" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+scale = Vector2(4, 4)
+script = ExtResource("1_vi88b")
+
+[node name="frame" type="TextureRect" parent="."]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("2_klvbc")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+z_index = -1
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("1_41uak")
+
+[node name="back" type="TextureRect" parent="."]
+z_index = -2
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+texture = ExtResource("4_puqh1")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 0
+offset_left = 40.0
+offset_right = 190.0
+offset_bottom = 40.0
+texture = ExtResource("2_hls2p")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 8
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="speaker" type="Label" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 7.49999
+offset_top = 3.5
+offset_right = 54.5
+offset_bottom = 29.5
+scale = Vector2(0.380575, 0.380575)
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(0.596078, 0.596078, 0.596078, 1)
+theme_override_colors/font_outline_color = Color(1, 1, 1, 1)
+text = "Name"
+
+[node name="message" type="Label" parent="NinePatchRect"]
+custom_minimum_size = Vector2(650, 114)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -63.25
+offset_top = -7.25
+offset_right = 586.75
+offset_bottom = 106.75
+grow_horizontal = 2
+grow_vertical = 2
+scale = Vector2(0.19, 0.19)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.34902)
+theme_override_font_sizes/font_size = 25
+text = "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest"
+autowrap_mode = 3
+
+[node name="Timer" type="Timer" parent="NinePatchRect/message"]
+
+[node name="next_button" type="TextureButton" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 137.0
+offset_top = 8.75
+offset_right = 177.0
+offset_bottom = 48.75
+scale = Vector2(0.680941, 0.680941)
+texture_normal = ExtResource("4_6md2u")
+
+[connection signal="pressed" from="NinePatchRect/next_button" to="." method="_on_next_button_pressed"]

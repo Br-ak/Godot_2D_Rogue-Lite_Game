@@ -7,7 +7,7 @@ extends Control
 @export var action_name : String = ""
 @export var action_name_formatted : String = ""
 @export var current_keybind : String = ""
-var data = StaticData.keybinds["keybinds"]
+@onready var data = StaticData.keybinds["keybinds"]
 
 # Called when the node enters the scene tree for the first time.
 func _ready():

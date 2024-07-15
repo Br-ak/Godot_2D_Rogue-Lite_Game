@@ -216,6 +216,7 @@ offset_right = 40.0
 offset_bottom = 40.0
 
 [node name="CanvasLayer" type="CanvasLayer" parent="AspectRatioContainer"]
+visible = false
 
 [node name="Boss Health Bar Control" type="Control" parent="AspectRatioContainer/CanvasLayer"]
 visible = false

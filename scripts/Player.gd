@@ -4,7 +4,8 @@ signal update_weapon_stats_signal(new_damage)
 var speed = 200  # speed in pixels/sec
 const type = "Player"
 const ranged_weapon = preload("res://tscn/weapon.tscn")
-const melee_weapon = preload("res://tscn/melee_weapon.tscn")
+#const melee_weapon = preload("res://tscn/melee_weapon.tscn")
+const melee_weapon = preload("res://tscn/spell_book.tscn")
 const magic_component_weapon = preload("res://tscn/magic_components_weapon.tscn")
 var new_active_weapon
 var new_holstered_weapon
@@ -14,23 +15,23 @@ var new_holstered_weapon
 @onready var sound_timer = $"Sound Timer"
 @onready var arrow_pointer = $arrow_pointer
 
-@onready var gameNode = get_parent().get_parent()
-@onready var hud = gameNode.get_node("CanvasLayer").get_node("Hud")
-@onready var levelUpMenu = gameNode.get_node("CanvasLayer").get_node("Level Up Menu")
+@onready var gameNode
+@onready var hud
+@onready var levelUpMenu 
 @onready var health_component = $HealthComponent
 @onready var invincible_timer = $"HealthComponent/I-Frames"
-@onready var inventory_menu = gameNode.get_node("CanvasLayer").get_node("Inventory Menu")
+@onready var inventory_menu
 @onready var swap_timer = $"Weapon/Swap Timer"
-@onready var scenery = get_parent().get_node("scenery")
+@onready var scenery
 
-@onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
+@onready var audio_manager
 @onready var navigation_region_2d = $NavigationRegion2D
 @onready var timer = $NavigationRegion2D/Timer
 @onready var debug_timer = $"DEBUG TIMER"
 
-@onready var game = self.get_tree().get_root().get_node("Game")
-@onready var world = game.get_node("World")
-@onready var mobs = world.get_node("Mobs")
+@onready var game
+@onready var world
+@onready var mobs
 
 var sound_info = ["Player Sounds"]
 var equipped_weapon
@@ -46,8 +47,8 @@ var sound_playable = true
 var player_levelup_xp := 100
 
 var debug_avail = true
-
-
+var location := "game"
+var playable := true
 
 
 var player_exp := 0:
@@ -73,12 +74,62 @@ var player_health := 0:
 func _ready():
 	anim.play("Side_Idle")
 
+func init_for_hub():
+	playable = false
+	anim = $AnimatedSprite2D
+	weapon = $Weapon
+	sound_timer = $"Sound Timer"
+	#arrow_pointer = $a
+	gameNode = get_parent()
+	hud = gameNode.get_node("CanvasLayer").get_node("Hud")
+	inventory_menu = gameNode.get_node("CanvasLayer").get_node("Inventory Menu")
+	swap_timer = $"Weapon/Swap Timer"
+	#scenery = get_parent().get_node("scenery")
+	audio_manager = self.get_tree().get_root().get_node("AudioManager")
+	navigation_region_2d = $NavigationRegion2D
+	world = self
+
+
+func init_for_game():
+	anim = $AnimatedSprite2D
+	weapon = $Weapon
+	sound_timer = $"Sound Timer"
+	arrow_pointer = $a
+	gameNode = get_parent().get_parent()
+	hud = gameNode.get_node("CanvasLayer").get_node("Hud")
+	levelUpMenu = gameNode.get_node("CanvasLayer").get_node("Level Up Menu")
+	health_component = $HealthComponent
+	invincible_timer = $"HealthComponent/I-Frames"
+	inventory_menu = gameNode.get_node("CanvasLayer").get_node("Inventory Menu")
+	swap_timer = $"Weapon/Swap Timer"
+	scenery = get_parent().get_node("scenery")
+	audio_manager = self.get_tree().get_root().get_node("AudioManager")
+	navigation_region_2d = $NavigationRegion2D
+	timer = $NavigationRegion2D/Timer
+	debug_timer = $"DEBUG TIMER"
+	game = self.get_tree().get_root().get_node("Game")
+	world = game.get_node("World")
+	mobs = world.get_node("Mobs")
+	
+	if test_weapon_equipped == false:
+		test_weapon_equipped = true
+		new_active_weapon = magic_component_weapon.instantiate()
+		new_holstered_weapon = ranged_weapon.instantiate()
+		weapon.call("add_child", new_active_weapon)
+		equipped_weapon = new_active_weapon
+		holstered_weapon = new_holstered_weapon
+		inventory_menu.init_weapon_panels()
+		hud.weapon_swap.init()
+		weapon_swappable = true
+
+
 func _physics_process(_delta):
-	if Engine.time_scale == 1:
+	if Engine.time_scale == 1 && playable:
 		read_inputs()
 		player_health = health_component.health
 
 func read_inputs():
+
 #	if Input.is_action_just_pressed("add_weapon_test") && debug_avail:
 #		mobs.bossWave()
 #		debug_avail = false
@@ -87,8 +138,7 @@ func read_inputs():
 	
 	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	#print(direction)
-	var mousePosition = get_global_mouse_position()
-	var angle = position.angle_to_point(mousePosition)
+	direction_check()
 	
 	if direction && !audio_manager.sound_is_playing(sound_string, sound_info) && Engine.time_scale == 1 && sound_playable:
 		sound_rng = randi_range(1, 3)
@@ -108,24 +158,13 @@ func read_inputs():
 		if equipped_weapon && equipped_weapon.has_method("attack_secondary") && equipped_weapon.can_attack:
 			equipped_weapon.attack_secondary()
 	
-	if test_weapon_equipped == false:
-		test_weapon_equipped = true
-		new_active_weapon = magic_component_weapon.instantiate()
-		new_holstered_weapon = ranged_weapon.instantiate()
-		weapon.call("add_child", new_active_weapon)
-		equipped_weapon = new_active_weapon
-		holstered_weapon = new_holstered_weapon
-		inventory_menu.init_weapon_panels()
-		hud.weapon_swap.init()
-		weapon_swappable = true
-	
 	if Input.is_action_pressed("weapon_swap") && weapon_swappable:
 		audio_manager.play_sound("hurt", sound_info)
 		weapon_swappable = false
 		var new_weapon
 		if equipped_weapon.WEAPON_NAME == "magic components":
 			new_weapon = melee_weapon
-		elif equipped_weapon.WEAPON_NAME == "staff":
+		elif equipped_weapon.WEAPON_NAME == "spell book":
 			new_weapon = magic_component_weapon
 		
 		var temp_weapon = equipped_weapon
@@ -138,7 +177,15 @@ func read_inputs():
 		hud.weapon_swap.init()
 		swap_timer.start(1)
 	
+	velocity = direction * speed
+	move_and_slide()
+
+func direction_check():
+	var mousePosition = get_global_mouse_position()
+	var angle = global_position.angle_to_point(mousePosition)
+	var direction = Input.get_vector("ui_left", "ui_right", "ui_up", "ui_down")
 	if angle > -0.78 and angle < 0.78: #####looking right
+		
 		direction_facing = "right"
 		anim.scale.x = 1
 		if direction: #player has movement
@@ -168,9 +215,6 @@ func read_inputs():
 			anim.play("Up_Idle")
 	else:
 		anim.play("Down_Idle")
-	
-	velocity = direction * speed
-	move_and_slide()
 
 func gain_exp(value):
 	player_exp += value

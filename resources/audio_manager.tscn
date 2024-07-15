@@ -1,4 +1,4 @@
-[gd_scene load_steps=21 format=3 uid="uid://ck24ttfoawloe"]
+[gd_scene load_steps=26 format=3 uid="uid://ck24ttfoawloe"]
 
 [ext_resource type="Script" path="res://scripts/Audio Manager.gd" id="1_6oo87"]
 [ext_resource type="AudioStream" uid="uid://cgajfanjkfdei" path="res://assets/audio/Title Screen.ogg" id="2_pjrcy"]
@@ -20,6 +20,11 @@
 [ext_resource type="AudioStream" uid="uid://b4pcsea3pi8ds" path="res://assets/audio/bigDeath.wav" id="12_wa88h"]
 [ext_resource type="AudioStream" uid="uid://bw4w8jplp144d" path="res://assets/audio/growl.wav" id="13_b5ygw"]
 [ext_resource type="AudioStream" uid="uid://b4ws737ecsqtp" path="res://assets/audio/explosion (2).wav" id="18_gnf3y"]
+[ext_resource type="AudioStream" uid="uid://dcbvy75isrtpv" path="res://assets/audio/book_swipe.wav" id="21_fm30v"]
+[ext_resource type="AudioStream" uid="uid://c8iystbl8sp2g" path="res://assets/audio/paper_ball.wav" id="22_kndue"]
+[ext_resource type="AudioStream" uid="uid://bebg4vyxuskmx" path="res://assets/audio/paper_plane_sfx.wav" id="23_d5vhb"]
+[ext_resource type="AudioStream" uid="uid://b1nkbayqmyk77" path="res://assets/audio/smiffy_talk_1.wav" id="24_xqtfc"]
+[ext_resource type="AudioStream" uid="uid://du2paarm6rbca" path="res://assets/audio/seer_talk_1.wav" id="25_76vpa"]
 
 [node name="Audio Manager" type="Node"]
 script = ExtResource("1_6oo87")
@@ -107,3 +112,23 @@ stream = ExtResource("12_qnc2e")
 
 [node name="interact" type="AudioStreamPlayer" parent="Arena Sounds"]
 stream = ExtResource("18_gnf3y")
+
+[node name="Magic Book Sounds" type="Node" parent="."]
+
+[node name="primary_attack" type="AudioStreamPlayer" parent="Magic Book Sounds"]
+stream = ExtResource("21_fm30v")
+
+[node name="secondary_attack_1" type="AudioStreamPlayer" parent="Magic Book Sounds"]
+stream = ExtResource("22_kndue")
+
+[node name="secondary_attack_2" type="AudioStreamPlayer" parent="Magic Book Sounds"]
+stream = ExtResource("23_d5vhb")
+
+[node name="Npc Sounds" type="Node" parent="."]
+
+[node name="Smiffy_talk_1" type="AudioStreamPlayer" parent="Npc Sounds"]
+stream = ExtResource("24_xqtfc")
+pitch_scale = 1.52
+
+[node name="Seer_talk_1" type="AudioStreamPlayer" parent="Npc Sounds"]
+stream = ExtResource("25_76vpa")

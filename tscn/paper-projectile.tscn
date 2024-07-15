@@ -1,0 +1,30 @@
+[gd_scene load_steps=5 format=3 uid="uid://bqpbv1mjt1yrs"]
+
+[ext_resource type="Script" path="res://scripts/paper-projectile.gd" id="1_34omw"]
+[ext_resource type="Texture2D" uid="uid://jxk314kw7fyb" path="res://assets/GUNS_V1.00/V1.00/PNG/paper_plane_projectile.png" id="2_xkg34"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_rlk1k"]
+size = Vector2(23, 18.5)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_cm2xp"]
+size = Vector2(23, 18)
+
+[node name="Area2D" type="Area2D"]
+script = ExtResource("1_34omw")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+rotation = 1.15192
+scale = Vector2(0.35, 0.35)
+texture = ExtResource("2_xkg34")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(-1, 1)
+shape = SubResource("RectangleShape2D_rlk1k")
+
+[node name="hitbox" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="hitbox"]
+position = Vector2(-1.5, 1)
+shape = SubResource("RectangleShape2D_cm2xp")
+
+[connection signal="area_entered" from="hitbox" to="." method="_on_hitbox_area_entered"]

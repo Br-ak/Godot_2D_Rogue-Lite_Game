@@ -8,6 +8,7 @@ var HP_BAR_MAX = 100
 #
 ## Hud values
 #
+@onready var canvas_layer = $AspectRatioContainer/CanvasLayer
 
 @onready var info = $AspectRatioContainer/CanvasLayer/info
 @onready var weapon_swap = $"AspectRatioContainer/CanvasLayer/Weapon Swap"
@@ -31,10 +32,6 @@ var HP_BAR_MAX = 100
 			pass
 		else:
 			boss_health.value = value
-
-
-
-
 
 @onready var playerHealth = $"AspectRatioContainer/CanvasLayer/VBoxContainer/Health Bar":
 	set(value):
@@ -89,6 +86,9 @@ func _process(_delta):
 	if Engine.time_scale == 1:
 		var fps = Engine.get_frames_per_second()
 		info.text = "FPS: " + str(fps)
+
+func focus_gained():
+	canvas_layer.set_visible(true)
 
 # static length currently
 # displays animated message on ui

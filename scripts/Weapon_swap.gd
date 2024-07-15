@@ -4,9 +4,10 @@ extends Control
 @onready var holstered_item = $"Holstered Item"
 @onready var equipped_item = $"Equipped Item"
 @onready var swap_icon = $"Swap Icon"
-@onready var game = get_node("../../../../..")
-@onready var world = game.get_node("World")
-@onready var player = world.get_node("Player")
+var game
+var world
+var player
+
 
 @onready var weapon_data = StaticData.weapons["weapons"]
 
@@ -20,6 +21,13 @@ func _process(delta):
 	pass
 
 func init():
+	
+	for node in self.get_tree().get_root().get_children():
+		if node.name == "Hub World": world = node
+		elif node.name == "Game": 
+			game = node
+			world = game.get_node("World")
+	player = world.get_node("Player")
 	var weapon_info
 	if player.equipped_weapon:
 		weapon_info = weapon_data[player.equipped_weapon.WEAPON_NAME]

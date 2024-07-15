@@ -1,13 +1,13 @@
 extends Node2D
 @onready var interact_icon = $"."
 @onready var sprite_2d = $Sprite2D
-@onready var player = self.get_tree().get_root().get_node("Game").get_node("World").get_node("Player")
+
 @onready var area_2d = $Area2D
 @onready var collision_shape_2d = $Area2D/CollisionShape2D
 
 var icon_active = false
 var player_interactable = false
-
+var interact_data
 
 
 # Called when the node enters the scene tree for the first time.

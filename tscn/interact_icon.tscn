@@ -12,6 +12,7 @@ scale = Vector2(0.625, 0.625)
 script = ExtResource("1_swkus")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
+z_index = 10
 texture = ExtResource("2_01tdp")
 offset = Vector2(0, -50)
 

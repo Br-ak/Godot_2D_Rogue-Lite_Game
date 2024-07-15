@@ -1,6 +1,7 @@
-[gd_scene load_steps=2 format=3 uid="uid://x0qah1ecl6l7"]
+[gd_scene load_steps=3 format=3 uid="uid://x0qah1ecl6l7"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_fpac0"]
+[ext_resource type="PackedScene" uid="uid://ci0lr4vn5lccr" path="res://tscn/options_menu.tscn" id="2_wwoed"]
 
 [node name="Pause Menu" type="Control"]
 layout_mode = 3
@@ -27,36 +28,45 @@ offset_bottom = 33.0
 grow_horizontal = 2
 grow_vertical = 2
 
-[node name="VBoxContainer" type="VBoxContainer" parent="AspectRatioContainer"]
+[node name="Pause Menu Selections" type="VBoxContainer" parent="AspectRatioContainer"]
 layout_mode = 2
 
-[node name="Resume" type="Button" parent="AspectRatioContainer/VBoxContainer"]
+[node name="Resume" type="Button" parent="AspectRatioContainer/Pause Menu Selections"]
 layout_mode = 2
 text = "Resume"
 
-[node name="Quit" type="Button" parent="AspectRatioContainer/VBoxContainer"]
+[node name="Options" type="Button" parent="AspectRatioContainer/Pause Menu Selections"]
+layout_mode = 2
+text = "Options"
+
+[node name="Quit" type="Button" parent="AspectRatioContainer/Pause Menu Selections"]
 layout_mode = 2
 text = "Quit"
 
-[node name="Confirm" type="Label" parent="AspectRatioContainer/VBoxContainer"]
+[node name="Confirm" type="Label" parent="AspectRatioContainer/Pause Menu Selections"]
 visible = false
 layout_mode = 2
 text = "Are you Sure?"
 
-[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/VBoxContainer"]
+[node name="HBoxContainer" type="HBoxContainer" parent="AspectRatioContainer/Pause Menu Selections"]
 visible = false
 layout_mode = 2
 size_flags_horizontal = 4
 
-[node name="Yes" type="Button" parent="AspectRatioContainer/VBoxContainer/HBoxContainer"]
+[node name="Yes" type="Button" parent="AspectRatioContainer/Pause Menu Selections/HBoxContainer"]
 layout_mode = 2
 text = "Yes"
 
-[node name="No" type="Button" parent="AspectRatioContainer/VBoxContainer/HBoxContainer"]
+[node name="No" type="Button" parent="AspectRatioContainer/Pause Menu Selections/HBoxContainer"]
 layout_mode = 2
 text = "No"
 
-[connection signal="pressed" from="AspectRatioContainer/VBoxContainer/Resume" to="." method="_on_resume_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/VBoxContainer/Quit" to="." method="_on_quit_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/VBoxContainer/HBoxContainer/Yes" to="." method="_on_yes_pressed"]
-[connection signal="pressed" from="AspectRatioContainer/VBoxContainer/HBoxContainer/No" to="." method="_on_no_pressed"]
+[node name="Options Menu" parent="AspectRatioContainer" instance=ExtResource("2_wwoed")]
+visible = false
+layout_mode = 2
+
+[connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/Resume" to="." method="_on_resume_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/Quit" to="." method="_on_quit_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/HBoxContainer/Yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/HBoxContainer/No" to="." method="_on_no_pressed"]
