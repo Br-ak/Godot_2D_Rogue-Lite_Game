@@ -4,8 +4,8 @@ var attack = Attack.new()
 
 var hit_count = 0
 var travelled_distance = 0
-const proj_1 = preload("res://assets/GUNS_V1.00/V1.00/PNG/magic_comp_proj_2.png")
-const proj_2 = preload("res://assets/GUNS_V1.00/V1.00/PNG/paper_plane_projectile.png")
+const proj_1 = preload("res://assets/visual/weapon/magic_comp_proj_2.png")
+const proj_2 = preload("res://assets/visual/weapon/paper_plane_projectile.png")
 
 @onready var SPEED = attack.attack_projectile_speed
 @onready var RANGE = attack.attack_range

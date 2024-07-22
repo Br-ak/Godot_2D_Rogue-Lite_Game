@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://4bhydubk0qwo"]
 
-[ext_resource type="Script" path="res://tscn/health_potion.gd" id="1_s6wwv"]
-[ext_resource type="Texture2D" uid="uid://b0vd18w76vond" path="res://assets/GUNS_V1.00/V1.00/PNG/health_potion.png" id="2_brkcc"]
+[ext_resource type="Script" path="res://scripts/health_potion.gd" id="1_s6wwv"]
+[ext_resource type="Texture2D" uid="uid://b0vd18w76vond" path="res://assets/visual/misc/health_potion.png" id="2_brkcc"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_pvbwm"]
 radius = 10.0471

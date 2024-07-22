@@ -1,0 +1,99 @@
+[gd_scene load_steps=6 format=3 uid="uid://ke31v1gu4y5s"]
+
+[ext_resource type="Script" path="res://menu_listing.gd" id="1_iq6hi"]
+[ext_resource type="Texture2D" uid="uid://dywm3cfh0rmts" path="res://assets/visual/misc/missing_portrait.png" id="2_f35qy"]
+[ext_resource type="Texture2D" uid="uid://yvxwoa5305ke" path="res://assets/visual/misc/sold_icon.png" id="2_nm5jn"]
+[ext_resource type="Texture2D" uid="uid://cfcdptl0fqg12" path="res://assets/visual/misc/portrait_frame.png" id="3_xqt81"]
+[ext_resource type="Texture2D" uid="uid://281gr4mj30eq" path="res://assets/visual/misc/portrait_backing.png" id="4_alqgl"]
+
+[node name="menu_listing" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_iq6hi")
+
+[node name="TextureRect3" type="TextureRect" parent="."]
+visible = false
+z_index = 2
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_left = -20.0
+offset_top = 98.0
+offset_right = 108.0
+offset_bottom = 226.0
+rotation = -0.436326
+texture = ExtResource("2_nm5jn")
+
+[node name="TextureRect2" type="TextureRect" parent="."]
+z_index = 1
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_top = 63.0
+offset_right = 128.0
+offset_bottom = 191.0
+texture = ExtResource("3_xqt81")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_top = 63.0
+offset_right = 128.0
+offset_bottom = 191.0
+texture = ExtResource("2_f35qy")
+
+[node name="Button" type="Button" parent="TextureRect"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -27.0
+offset_top = 34.0
+offset_right = 27.0
+offset_bottom = 65.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="Label" type="Label" parent="TextureRect"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = -57.0
+offset_right = 64.0
+offset_bottom = -31.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="desc" type="Label" parent="TextureRect"]
+custom_minimum_size = Vector2(128, 0)
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -64.0
+offset_top = 131.0
+offset_right = 64.0
+offset_bottom = 157.0
+grow_horizontal = 2
+horizontal_alignment = 1
+autowrap_mode = 3
+
+[node name="TextureRect3" type="TextureRect" parent="TextureRect"]
+show_behind_parent = true
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 0
+offset_right = 128.0
+offset_bottom = 128.0
+texture = ExtResource("4_alqgl")
+
+[connection signal="pressed" from="TextureRect/Button" to="." method="_on_button_pressed"]

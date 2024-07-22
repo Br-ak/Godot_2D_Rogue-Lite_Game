@@ -1,0 +1,66 @@
+[gd_scene load_steps=3 format=3 uid="uid://cefjck4ceye2p"]
+
+[ext_resource type="Texture2D" uid="uid://oj5s0xes1ums" path="res://assets/visual/misc/text_background_ninepatch.png" id="2_rqqia"]
+[ext_resource type="Texture2D" uid="uid://bmve4xg4maqeu" path="res://assets/visual/misc/text_exit.png" id="3_6rx1w"]
+
+[node name="seer_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -252.0
+offset_top = -252.0
+offset_right = 252.0
+offset_bottom = 252.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_rqqia")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="menu_title" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 18.0
+offset_right = 20.0
+offset_bottom = 41.0
+grow_horizontal = 2
+text = "Menu Title"
+
+[node name="GridContainer" type="GridContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 38.0
+offset_top = 18.0
+offset_right = -38.0
+offset_bottom = -86.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/h_separation = 150
+theme_override_constants/v_separation = 200
+columns = 3
+
+[node name="TextureButton" type="TextureButton" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 484.0
+offset_top = -11.0
+offset_right = 518.0
+offset_bottom = 21.0
+texture_normal = ExtResource("3_6rx1w")

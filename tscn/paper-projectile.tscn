@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://bqpbv1mjt1yrs"]
 
 [ext_resource type="Script" path="res://scripts/paper-projectile.gd" id="1_34omw"]
-[ext_resource type="Texture2D" uid="uid://jxk314kw7fyb" path="res://assets/GUNS_V1.00/V1.00/PNG/paper_plane_projectile.png" id="2_xkg34"]
+[ext_resource type="Texture2D" uid="uid://jxk314kw7fyb" path="res://assets/visual/weapon/paper_plane_projectile.png" id="2_xkg34"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_rlk1k"]
 size = Vector2(23, 18.5)

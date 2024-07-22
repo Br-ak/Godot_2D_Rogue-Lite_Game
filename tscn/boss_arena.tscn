@@ -1,9 +1,9 @@
 [gd_scene load_steps=9 format=3 uid="uid://k0s17oni8d7e"]
 
-[ext_resource type="Texture2D" uid="uid://j1xp75e318k5" path="res://assets/Pixel Art Top Down - Basic/TX Props.png" id="1_pyrak"]
+[ext_resource type="Texture2D" uid="uid://j1xp75e318k5" path="res://assets/visual/Pixel Art Top Down - Basic/TX Props.png" id="1_pyrak"]
 [ext_resource type="Script" path="res://scripts/boss_arena.gd" id="1_xkqss"]
 [ext_resource type="PackedScene" uid="uid://dhhaidg4u7lw6" path="res://tscn/interact_icon.tscn" id="2_0xltn"]
-[ext_resource type="Texture2D" uid="uid://bw75doy0cg0w7" path="res://assets/Pixel Art Top Down - Basic/TX Shadow.png" id="4_1dyqg"]
+[ext_resource type="Texture2D" uid="uid://bw75doy0cg0w7" path="res://assets/visual/Pixel Art Top Down - Basic/TX Shadow.png" id="4_1dyqg"]
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_4o6sn"]
 atlas = ExtResource("1_pyrak")

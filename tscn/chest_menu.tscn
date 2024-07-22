@@ -1,0 +1,194 @@
+[gd_scene load_steps=4 format=3 uid="uid://cnma6h0ofjkmh"]
+
+[ext_resource type="Script" path="res://chest menu.gd" id="1_e4x8w"]
+[ext_resource type="Texture2D" uid="uid://oj5s0xes1ums" path="res://assets/visual/misc/text_background_ninepatch.png" id="2_aroit"]
+[ext_resource type="Texture2D" uid="uid://bmve4xg4maqeu" path="res://assets/visual/misc/text_exit.png" id="3_k0p5u"]
+
+[node name="chest_menu" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_e4x8w")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(500, 500)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -250.0
+offset_top = -250.0
+offset_right = 250.0
+offset_bottom = 250.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_aroit")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="menu_title" type="Label" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -47.0
+offset_top = 17.0
+offset_right = 35.0
+offset_bottom = 43.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Menu Title"
+
+[node name="TextureButton" type="TextureButton" parent="NinePatchRect"]
+layout_mode = 0
+offset_left = 484.0
+offset_top = -11.0
+offset_right = 518.0
+offset_bottom = 21.0
+texture_normal = ExtResource("3_k0p5u")
+
+[node name="ScrollContainer" type="ScrollContainer" parent="NinePatchRect"]
+custom_minimum_size = Vector2(450, 400)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -225.0
+offset_top = -200.0
+offset_right = 225.0
+offset_bottom = 200.0
+grow_horizontal = 2
+grow_vertical = 2
+vertical_scroll_mode = 2
+
+[node name="GridContainer" type="GridContainer" parent="NinePatchRect/ScrollContainer"]
+custom_minimum_size = Vector2(450, 600)
+layout_mode = 2
+theme_override_constants/h_separation = 150
+theme_override_constants/v_separation = 300
+columns = 3
+
+[node name="info box" type="NinePatchRect" parent="."]
+visible = false
+z_index = 3
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -206.0
+offset_top = -196.0
+offset_right = 203.0
+offset_bottom = 197.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_aroit")
+region_rect = Rect2(0, 0, 32, 32)
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="title" type="Label" parent="info box"]
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -52.5
+offset_top = 7.0
+offset_right = 52.5
+offset_bottom = 33.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Weapon Info"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="icon" type="TextureRect" parent="info box"]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -64.0
+offset_top = -182.5
+offset_right = 64.0
+offset_bottom = -54.5
+grow_horizontal = 2
+grow_vertical = 2
+stretch_mode = 5
+
+[node name="VBoxContainer" type="VBoxContainer" parent="info box"]
+custom_minimum_size = Vector2(300, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -150.0
+offset_top = -54.5
+offset_right = 150.0
+offset_bottom = 145.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="name" type="Label" parent="info box/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="desc" type="Label" parent="info box/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="attacks" type="Label" parent="info box/VBoxContainer"]
+layout_mode = 2
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="selections" type="HBoxContainer" parent="info box"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -52.0
+offset_top = 149.5
+offset_right = 52.0
+offset_bottom = 189.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="yes" type="Button" parent="info box/selections"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "Equip"
+
+[node name="no" type="Button" parent="info box/selections"]
+custom_minimum_size = Vector2(50, 0)
+layout_mode = 2
+text = "Back"
+
+[connection signal="pressed" from="NinePatchRect/TextureButton" to="." method="_on_texture_button_pressed"]
+[connection signal="pressed" from="info box/selections/yes" to="." method="_on_yes_pressed"]
+[connection signal="pressed" from="info box/selections/no" to="." method="_on_no_pressed"]

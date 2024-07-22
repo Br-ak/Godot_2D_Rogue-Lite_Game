@@ -3,7 +3,7 @@
 		"damage_increase":{
 			"name":"Damage Increase", 
 			"description":"Damage Gem: Increases Damage", 
-			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_damage.png",
+			"image":"res://assets/visual/upgrades/test_damage.png",
 			"stats":{
 					"attack_damage_increase": 10,
 					},
@@ -11,7 +11,7 @@
 		"attack_fork":{
 			"name":"Attack Fork",
 			"description":"Fork Gem: Forks Projectile", 
-			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_fork.png",
+			"image":"res://assets/visual/upgrades/test_fork.png",
 			"stats":{
 					"attack_pattern": "FORK",
 					"attack_projectile_count": 3,
@@ -21,7 +21,7 @@
 		"attack_pierce":{
 			"name":"Attack Pierce",
 			"description":"Pierce Gem: Increases Pierce Amount", 
-			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_pierce.png",
+			"image":"res://assets/visual/upgrades/test_pierce.png",
 			"stats":{
 					"attack_pierce": 5,
 					},
@@ -29,7 +29,7 @@
 		"attack_speed":{
 			"name":"Attack Speed",
 			"description":"Attack Speed Gem: Increase attack speed", 
-			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_speed.png",
+			"image":"res://assets/visual/upgrades/test_speed.png",
 			"stats":{
 					"attack_reset_time_multiplier": 0.5,
 					},
@@ -37,7 +37,7 @@
 		"attack_spread":{
 			"name":"Attack Spread",
 			"description":"Spread Gem: Adds spread to attack (Overwrites existing pattern modifier when applied)", 
-			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_spread.png",
+			"image":"res://assets/visual/upgrades/test_spread.png",
 			"stats":{
 					"attack_pattern": "SPREAD",
 					"attack_projectile_count": 3,
@@ -47,7 +47,7 @@
 		"attack_projectile_increase":{
 			"name":"Attack Projectile Increase",
 			"description":"Projectile Count Gem: Increases the amount of projectiles ONLY for weapons with pattern modifiers (Spread, Fork, etc)", 
-			"image":"res://assets/GUNS_V1.00/V1.00/PNG/test_proj_inc.png",
+			"image":"res://assets/visual/upgrades/test_proj_inc.png",
 			"stats":{
 					"attack_projectile_count_incerase": 3,
 					},

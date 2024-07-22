@@ -1,0 +1,68 @@
+[gd_scene load_steps=3 format=3 uid="uid://csy1y7js043fd"]
+
+[ext_resource type="Texture2D" uid="uid://oj5s0xes1ums" path="res://assets/visual/misc/text_background_ninepatch.png" id="1_5v85u"]
+[ext_resource type="Script" path="res://scripts/context_menu.gd" id="1_qbtks"]
+
+[node name="Control" type="Control"]
+layout_mode = 3
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_qbtks")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+custom_minimum_size = Vector2(200, 200)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -100.0
+offset_top = -100.0
+offset_right = 100.0
+offset_bottom = 100.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("1_5v85u")
+region_rect = Rect2(0, 0, 32, 33)
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="NinePatchRect"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_constants/separation = 15
+alignment = 1
+
+[node name="Button" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+text = "Talk"
+
+[node name="Button2" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+text = "Buy/Sell"
+
+[node name="Button3" type="Button" parent="NinePatchRect/VBoxContainer"]
+layout_mode = 2
+text = "Exit"
+
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Button" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
+[connection signal="pressed" from="NinePatchRect/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]

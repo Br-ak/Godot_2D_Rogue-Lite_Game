@@ -8,11 +8,11 @@ var travelled_distance = 0
 @onready var SPEED = attack.attack_projectile_speed
 @onready var RANGE = attack.attack_range
 
-const proj_1 = preload("res://assets/GUNS_V1.00/V1.00/PNG/magic_comp_proj_1.png")
-const proj_2 = preload("res://assets/GUNS_V1.00/V1.00/PNG/magic_comp_proj_2.png")
-const proj_3 = preload("res://assets/GUNS_V1.00/V1.00/PNG/magic_comp_proj_3.png")
-const proj_4 = preload("res://assets/GUNS_V1.00/V1.00/PNG/magic_comp_proj_4.png")
-const proj_5 = preload("res://assets/GUNS_V1.00/V1.00/PNG/magic_comp_proj_5.png")
+const proj_1 = preload("res://assets/visual/weapon/magic_comp_proj_1.png")
+const proj_2 = preload("res://assets/visual/weapon/magic_comp_proj_2.png")
+const proj_3 = preload("res://assets/visual/weapon/magic_comp_proj_3.png")
+const proj_4 = preload("res://assets/visual/weapon/magic_comp_proj_4.png")
+const proj_5 = preload("res://assets/visual/weapon/magic_comp_proj_5.png")
 
 func _ready():
 	var rng = RandomNumberGenerator.new()

@@ -21,9 +21,9 @@ func _process(delta):
 	pass
 
 func init():
-	
 	for node in self.get_tree().get_root().get_children():
-		if node.name == "Hub World": world = node
+		if node.name == "Hub World": 
+			world = node
 		elif node.name == "Game": 
 			game = node
 			world = game.get_node("World")
@@ -31,13 +31,13 @@ func init():
 	var weapon_info
 	if player.equipped_weapon:
 		weapon_info = weapon_data[player.equipped_weapon.WEAPON_NAME]
-		var texture_path = weapon_info["asset_path"]
+		var texture_path = weapon_info["listing_icon_path"]
 		var icon_texture = load(texture_path)
 		equipped_item.set_texture(icon_texture)
 		equipped_item.set_visible(true)
 	if player.holstered_weapon:
 		weapon_info = weapon_data[player.holstered_weapon.WEAPON_NAME]
-		var texture_path = weapon_info["asset_path"]
+		var texture_path = weapon_info["listing_icon_path"]
 		var icon_texture = load(texture_path)
 		holstered_item.set_texture(icon_texture)
 		swap_icon.set_visible(true)

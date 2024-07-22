@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://dhhaidg4u7lw6"]
 
 [ext_resource type="Script" path="res://Interact Icon.gd" id="1_swkus"]
-[ext_resource type="Texture2D" uid="uid://b223yeceiwwe2" path="res://assets/GUNS_V1.00/V1.00/PNG/interact_icon.png" id="2_01tdp"]
+[ext_resource type="Texture2D" uid="uid://b223yeceiwwe2" path="res://assets/visual/misc/interact_icon.png" id="2_01tdp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8bmgw"]
 radius = 73.6

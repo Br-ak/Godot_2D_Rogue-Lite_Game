@@ -1,8 +1,8 @@
 [gd_scene load_steps=11 format=3 uid="uid://cmo0b7xbht4yf"]
 
 [ext_resource type="Script" path="res://scripts/magic_components_weapon.gd" id="1_0gbj5"]
-[ext_resource type="Texture2D" uid="uid://cttnxj2qp1n7f" path="res://assets/GUNS_V1.00/V1.00/PNG/magic_satchel.png" id="2_uuayi"]
-[ext_resource type="Texture2D" uid="uid://kcdu4x777ldw" path="res://assets/GUNS_V1.00/V1.00/PNG/magic_satchel_hand.png" id="2_vlmtp"]
+[ext_resource type="Texture2D" uid="uid://cttnxj2qp1n7f" path="res://assets/visual/weapon/magic_satchel.png" id="2_uuayi"]
+[ext_resource type="Texture2D" uid="uid://kcdu4x777ldw" path="res://assets/visual/weapon/magic_satchel_hand.png" id="2_vlmtp"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_suu15"]
 animations = [{

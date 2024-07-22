@@ -13,6 +13,29 @@ var HP_BAR_MAX = 100
 @onready var info = $AspectRatioContainer/CanvasLayer/info
 @onready var weapon_swap = $"AspectRatioContainer/CanvasLayer/Weapon Swap"
 
+#
+## Currency
+#
+@onready var currency = $AspectRatioContainer/CanvasLayer/currency
+@onready var h_box_container = $AspectRatioContainer/CanvasLayer/currency/HBoxContainer
+@onready var gold_texture_rect = $AspectRatioContainer/CanvasLayer/currency/HBoxContainer/TextureRect
+
+@onready var h_box_container_2 = $AspectRatioContainer/CanvasLayer/currency/HBoxContainer2
+@onready var crystal_texture_rect = $AspectRatioContainer/CanvasLayer/currency/HBoxContainer2/TextureRect
+@onready var player_crystal = $AspectRatioContainer/CanvasLayer/currency/HBoxContainer2/currency_crystal:
+	set(value):
+		if player_crystal == null: # for some reason this is null upon startup for a second
+			pass
+		else:
+			player_crystal.text = "Crystal: " + str(value)
+@onready var player_coins = $AspectRatioContainer/CanvasLayer/currency/HBoxContainer/currency_gold:
+	set(value):
+		if player_coins == null: # for some reason this is null upon startup for a second
+			pass
+		else:
+			player_coins.text = "Coins: " + str(value)
+
+
 # alert message
 @onready var message_control = $"AspectRatioContainer/CanvasLayer/Message Control"
 @onready var message = $"AspectRatioContainer/CanvasLayer/Message Control/Message"

@@ -1,7 +1,7 @@
 [gd_scene load_steps=11 format=3 uid="uid://dxbdr5y6i2tae"]
 
-[ext_resource type="Script" path="res://tscn/spell_book.gd" id="1_2rxye"]
-[ext_resource type="Texture2D" uid="uid://ciuag1q5d6rhx" path="res://assets/GUNS_V1.00/V1.00/PNG/spell_book.png" id="2_sfym3"]
+[ext_resource type="Script" path="res://scripts/spell_book.gd" id="1_2rxye"]
+[ext_resource type="Texture2D" uid="uid://ciuag1q5d6rhx" path="res://assets/visual/weapon/spell_book.png" id="2_sfym3"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_5rjc5"]
 animations = [{

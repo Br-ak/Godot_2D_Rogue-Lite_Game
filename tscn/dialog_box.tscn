@@ -1,44 +1,44 @@
-[gd_scene load_steps=7 format=3 uid="uid://7smuhdyol5qo"]
+[gd_scene load_steps=7 format=3 uid="uid://cxjghgxk356x4"]
 
-[ext_resource type="Texture2D" uid="uid://dywm3cfh0rmts" path="res://assets/GUNS_V1.00/V1.00/PNG/missing_portrait.png" id="1_41uak"]
-[ext_resource type="Script" path="res://tscn/dialog_box.gd" id="1_vi88b"]
-[ext_resource type="Texture2D" uid="uid://oj5s0xes1ums" path="res://assets/GUNS_V1.00/V1.00/PNG/text_background_ninepatch.png" id="2_hls2p"]
-[ext_resource type="Texture2D" uid="uid://cfcdptl0fqg12" path="res://assets/GUNS_V1.00/V1.00/PNG/portrait_frame.png" id="2_klvbc"]
-[ext_resource type="Texture2D" uid="uid://dxb0u1qh0kh1o" path="res://assets/GUNS_V1.00/V1.00/PNG/text_box_arrow.png" id="4_6md2u"]
-[ext_resource type="Texture2D" uid="uid://281gr4mj30eq" path="res://assets/GUNS_V1.00/V1.00/PNG/portrait_backing.png" id="4_puqh1"]
+[ext_resource type="Script" path="res://scripts/dialog_box.gd" id="1_l2nt7"]
+[ext_resource type="Texture2D" uid="uid://cfcdptl0fqg12" path="res://assets/visual/misc/portrait_frame.png" id="2_r7axp"]
+[ext_resource type="Texture2D" uid="uid://dywm3cfh0rmts" path="res://assets/visual/misc/missing_portrait.png" id="3_8jrtr"]
+[ext_resource type="Texture2D" uid="uid://281gr4mj30eq" path="res://assets/visual/misc/portrait_backing.png" id="4_f5via"]
+[ext_resource type="Texture2D" uid="uid://oj5s0xes1ums" path="res://assets/visual/misc/text_background_ninepatch.png" id="5_lud6m"]
+[ext_resource type="Texture2D" uid="uid://dxb0u1qh0kh1o" path="res://assets/visual/misc/text_box_arrow.png" id="6_g7b4m"]
 
 [node name="Dialog Box" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 scale = Vector2(4, 4)
-script = ExtResource("1_vi88b")
+script = ExtResource("1_l2nt7")
 
 [node name="frame" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("2_klvbc")
+texture = ExtResource("2_r7axp")
 
 [node name="TextureRect" type="TextureRect" parent="."]
 z_index = -1
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("1_41uak")
+texture = ExtResource("3_8jrtr")
 
 [node name="back" type="TextureRect" parent="."]
 z_index = -2
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("4_puqh1")
+texture = ExtResource("4_f5via")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 layout_mode = 0
 offset_left = 40.0
 offset_right = 190.0
 offset_bottom = 40.0
-texture = ExtResource("2_hls2p")
+texture = ExtResource("5_lud6m")
 region_rect = Rect2(0, 0, 32, 32)
 patch_margin_left = 8
 patch_margin_top = 9
@@ -72,7 +72,8 @@ offset_bottom = 106.75
 grow_horizontal = 2
 grow_vertical = 2
 scale = Vector2(0.19, 0.19)
-theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.34902)
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.698039)
 theme_override_font_sizes/font_size = 25
 text = "TestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTestTest"
 autowrap_mode = 3
@@ -80,12 +81,13 @@ autowrap_mode = 3
 [node name="Timer" type="Timer" parent="NinePatchRect/message"]
 
 [node name="next_button" type="TextureButton" parent="NinePatchRect"]
+visible = false
 layout_mode = 0
 offset_left = 137.0
 offset_top = 8.75
 offset_right = 177.0
 offset_bottom = 48.75
 scale = Vector2(0.680941, 0.680941)
-texture_normal = ExtResource("4_6md2u")
+texture_normal = ExtResource("6_g7b4m")
 
 [connection signal="pressed" from="NinePatchRect/next_button" to="." method="_on_next_button_pressed"]

@@ -3,10 +3,11 @@ signal update_weapon_stats_signal(new_damage)
 
 var speed = 200  # speed in pixels/sec
 const type = "Player"
-const ranged_weapon = preload("res://tscn/weapon.tscn")
-#const melee_weapon = preload("res://tscn/melee_weapon.tscn")
-const melee_weapon = preload("res://tscn/spell_book.tscn")
+const staff_weapon = preload("res://tscn/melee_weapon.tscn")
 const magic_component_weapon = preload("res://tscn/magic_components_weapon.tscn")
+const spell_book_weapon = preload("res://tscn/spell_book.tscn")
+const gun_weapon = preload("res://tscn/weapon.tscn")
+
 var new_active_weapon
 var new_holstered_weapon
 
@@ -49,7 +50,7 @@ var player_levelup_xp := 100
 var debug_avail = true
 var location := "game"
 var playable := true
-
+var weapons_purchased = []
 
 var player_exp := 0:
 	set(value):
@@ -71,6 +72,16 @@ var player_health := 0:
 		player_health = value
 		hud.playerHealth = player_health
 
+var player_coins := 0:
+	set(value):
+		player_coins = value
+		hud.player_coins = player_coins
+
+var player_crystal := 0:
+	set(value):
+		player_crystal = value
+		hud.player_crystal = player_crystal
+
 func _ready():
 	anim.play("Side_Idle")
 
@@ -78,6 +89,7 @@ func init_for_hub():
 	playable = false
 	anim = $AnimatedSprite2D
 	weapon = $Weapon
+	weapon.set_visible(false)
 	sound_timer = $"Sound Timer"
 	#arrow_pointer = $a
 	gameNode = get_parent()
@@ -88,6 +100,9 @@ func init_for_hub():
 	audio_manager = self.get_tree().get_root().get_node("AudioManager")
 	navigation_region_2d = $NavigationRegion2D
 	world = self
+	location = "hub"
+	player_coins = 5000
+	player_crystal = 100
 
 
 func init_for_game():
@@ -114,7 +129,7 @@ func init_for_game():
 	if test_weapon_equipped == false:
 		test_weapon_equipped = true
 		new_active_weapon = magic_component_weapon.instantiate()
-		new_holstered_weapon = ranged_weapon.instantiate()
+		new_holstered_weapon = spell_book_weapon.instantiate()
 		weapon.call("add_child", new_active_weapon)
 		equipped_weapon = new_active_weapon
 		holstered_weapon = new_holstered_weapon
@@ -127,6 +142,9 @@ func _physics_process(_delta):
 	if Engine.time_scale == 1 && playable:
 		read_inputs()
 		player_health = health_component.health
+
+
+
 
 func read_inputs():
 
@@ -149,33 +167,17 @@ func read_inputs():
 	elif !direction || Engine.time_scale != 1:
 		audio_manager.stop_sound(sound_string, sound_info)
 	
-	
-	if Input.is_action_pressed("attack_primary"):
-		if equipped_weapon && equipped_weapon.has_method("attack") && equipped_weapon.can_attack:
-			equipped_weapon.attack()
-			
-	if Input.is_action_just_pressed("attack_secondary"):
-		if equipped_weapon && equipped_weapon.has_method("attack_secondary") && equipped_weapon.can_attack:
-			equipped_weapon.attack_secondary()
-	
-	if Input.is_action_pressed("weapon_swap") && weapon_swappable:
-		audio_manager.play_sound("hurt", sound_info)
-		weapon_swappable = false
-		var new_weapon
-		if equipped_weapon.WEAPON_NAME == "magic components":
-			new_weapon = melee_weapon
-		elif equipped_weapon.WEAPON_NAME == "spell book":
-			new_weapon = magic_component_weapon
+	if location == "game":
+		if Input.is_action_pressed("attack_primary"):
+			if equipped_weapon && equipped_weapon.has_method("attack") && equipped_weapon.can_attack:
+				equipped_weapon.attack()
+				
+		if Input.is_action_just_pressed("attack_secondary"):
+			if equipped_weapon && equipped_weapon.has_method("attack_secondary") && equipped_weapon.can_attack:
+				equipped_weapon.attack_secondary()
 		
-		var temp_weapon = equipped_weapon
-		var new_equipped_weapon = new_weapon.instantiate()
-		weapon.call("add_child", new_equipped_weapon)
-		equipped_weapon.queue_free()
-		equipped_weapon = new_equipped_weapon
-		holstered_weapon = temp_weapon
-		inventory_menu.swap_weapons()
-		hud.weapon_swap.init()
-		swap_timer.start(1)
+		if Input.is_action_pressed("weapon_swap") && weapon_swappable:
+			weapon_swap()
 	
 	velocity = direction * speed
 	move_and_slide()
@@ -249,6 +251,32 @@ func hurt():
 	audio_manager.play_sound("hurt", sound_info)
 	health_component.INVINCIBLE = true
 	invincible_timer.start(invincible_timer_length)
+
+func weapon_add(weapon_type):
+	if weapon_type:
+		var new_equipped_weapon
+		if weapon_type == "Empty Wizard's Staff": new_equipped_weapon = staff_weapon.instantiate()
+		elif weapon_type == "Magical Components": new_equipped_weapon = magic_component_weapon.instantiate()
+		elif weapon_type == "Old Spell Book":     new_equipped_weapon = spell_book_weapon.instantiate()
+		elif weapon_type == "Wizard's Gun":       new_equipped_weapon = gun_weapon.instantiate()
+		weapon.call("add_child", new_equipped_weapon)
+		equipped_weapon = new_equipped_weapon
+	else: print("Weapon Not Found!")
+
+func weapon_swap():
+	audio_manager.play_sound("hurt", sound_info)
+	weapon_swappable = false
+	var new_weapon
+	if holstered_weapon:
+		var temp_weapon = equipped_weapon
+		var new_equipped_weapon = holstered_weapon.instantiate()
+		weapon.call("add_child", new_equipped_weapon)
+		equipped_weapon.queue_free()
+		equipped_weapon = new_equipped_weapon
+		holstered_weapon = temp_weapon
+		inventory_menu.swap_weapons()
+		hud.weapon_swap.init()
+		swap_timer.start(1)
 
 func _on_i_frames_timeout():
 	health_component.INVINCIBLE = false

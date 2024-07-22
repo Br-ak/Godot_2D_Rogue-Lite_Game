@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://c8gsfo2dklpxg"]
 
-[ext_resource type="Script" path="res://tscn/tutorial_panel.gd" id="1_2t1f0"]
-[ext_resource type="Texture2D" uid="uid://dsd442we8f0dm" path="res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png" id="1_scdbt"]
+[ext_resource type="Script" path="res://scripts/tutorial_panel.gd" id="1_2t1f0"]
+[ext_resource type="Texture2D" uid="uid://dsd442we8f0dm" path="res://assets/visual/weapon/GUN_01_[square_frame]_01_V1.00.png" id="1_scdbt"]
 
 [node name="Control" type="Control"]
 layout_mode = 3

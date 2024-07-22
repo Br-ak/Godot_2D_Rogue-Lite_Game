@@ -11,7 +11,7 @@ extends Control
 var weapon_name
 var weapon_image_path
 var newImage
-var temp_image_path = "res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png"
+var temp_image_path = "res://assets/visual/weapon/GUN_01_[square_frame]_01_V1.00.png"
 var socket_count
 const panel_socket = preload("res://tscn/panel_socket.tscn")
 var title

@@ -50,7 +50,6 @@ func _on_apply_button_pressed():
 					print("node.value: ", node.value)
 					StaticData.save_sound_data(key, node.value)
 		if changes:
-			print("changes")
 			audio_manager.change_audio_level(new_sound_settings)
 
 func create_Controls_HSeparator():

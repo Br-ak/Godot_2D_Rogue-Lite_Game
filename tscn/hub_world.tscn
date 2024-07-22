@@ -1,40 +1,43 @@
-[gd_scene load_steps=58 format=3 uid="uid://ymb4pe2g0dve"]
+[gd_scene load_steps=64 format=3 uid="uid://ymb4pe2g0dve"]
 
-[ext_resource type="Script" path="res://tscn/hub_world.gd" id="1_8q3g2"]
-[ext_resource type="Texture2D" uid="uid://bm7an0gmjxkvv" path="res://assets/Pixel Art Top Down - Basic/TX Tileset Stone Ground.png" id="1_e13hw"]
-[ext_resource type="Texture2D" uid="uid://duuwirov0bb6t" path="res://assets/Pixel Art Top Down - Basic/TX Tileset Grass.png" id="2_yu6dh"]
-[ext_resource type="Texture2D" uid="uid://cst02xx3iegd1" path="res://assets/Pixel Art Top Down - Basic/TX Struct.png" id="3_8y5gb"]
-[ext_resource type="Texture2D" uid="uid://j1xp75e318k5" path="res://assets/Pixel Art Top Down - Basic/TX Props.png" id="4_hfl7w"]
-[ext_resource type="Texture2D" uid="uid://b4u1tqntght52" path="res://assets/Pixel Art Top Down - Basic/TX Tileset Wall.png" id="5_q7f2n"]
+[ext_resource type="Script" path="res://scripts/hub_world.gd" id="1_axvlv"]
+[ext_resource type="Texture2D" uid="uid://bm7an0gmjxkvv" path="res://assets/visual/Pixel Art Top Down - Basic/TX Tileset Stone Ground.png" id="2_btvg4"]
+[ext_resource type="Texture2D" uid="uid://duuwirov0bb6t" path="res://assets/visual/Pixel Art Top Down - Basic/TX Tileset Grass.png" id="3_jrxmw"]
+[ext_resource type="Texture2D" uid="uid://cst02xx3iegd1" path="res://assets/visual/Pixel Art Top Down - Basic/TX Struct.png" id="4_h8y56"]
+[ext_resource type="Texture2D" uid="uid://j1xp75e318k5" path="res://assets/visual/Pixel Art Top Down - Basic/TX Props.png" id="5_hyjjf"]
+[ext_resource type="Texture2D" uid="uid://b4u1tqntght52" path="res://assets/visual/Pixel Art Top Down - Basic/TX Tileset Wall.png" id="6_n46bh"]
 [ext_resource type="PackedScene" uid="uid://fcw4037ylefa" path="res://tscn/main_menu.tscn" id="6_pfsv2"]
-[ext_resource type="Texture2D" uid="uid://bw75doy0cg0w7" path="res://assets/Pixel Art Top Down - Basic/TX Shadow.png" id="7_nu0kp"]
+[ext_resource type="Texture2D" uid="uid://bw75doy0cg0w7" path="res://assets/visual/Pixel Art Top Down - Basic/TX Shadow.png" id="7_ptu5i"]
 [ext_resource type="PackedScene" uid="uid://cmw1f7nk56jt3" path="res://tscn/Player.tscn" id="7_usk3o"]
 [ext_resource type="PackedScene" uid="uid://h5o64r5rw0wu" path="res://tscn/Hud.tscn" id="9_hsvg2"]
 [ext_resource type="PackedScene" uid="uid://x0qah1ecl6l7" path="res://tscn/pause_menu.tscn" id="10_3g6e2"]
 [ext_resource type="PackedScene" uid="uid://3pqht14fayf" path="res://tscn/inventory_menu.tscn" id="11_gq1ev"]
-[ext_resource type="PackedScene" uid="uid://7smuhdyol5qo" path="res://tscn/dialog_box.tscn" id="13_5x4qq"]
-[ext_resource type="Texture2D" uid="uid://cklm21pjritf1" path="res://assets/Lively NPC_ blacksmith/animations/spritesheets/all_animations.png" id="13_8uks7"]
+[ext_resource type="PackedScene" uid="uid://cxjghgxk356x4" path="res://tscn/dialog_box.tscn" id="13_5x4qq"]
+[ext_resource type="PackedScene" uid="uid://dksgjjd2ovuuj" path="res://tscn/smith_menu.tscn" id="14_0kuef"]
 [ext_resource type="PackedScene" uid="uid://dhhaidg4u7lw6" path="res://tscn/interact_icon.tscn" id="14_kxa66"]
-[ext_resource type="Texture2D" uid="uid://bp5oeo4p0hc27" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0000.png" id="14_pwad8"]
-[ext_resource type="Texture2D" uid="uid://x6wddspt4e8k" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0001.png" id="15_y6d3x"]
-[ext_resource type="Texture2D" uid="uid://b5h550nk0jq2e" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0002.png" id="16_u6m55"]
-[ext_resource type="Texture2D" uid="uid://c4xbemie25ugl" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0003.png" id="17_t0emm"]
-[ext_resource type="Texture2D" uid="uid://dij6xomct07ty" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0004.png" id="18_dqhsp"]
-[ext_resource type="Texture2D" uid="uid://bvybaj0of7lba" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0005.png" id="19_5sdvg"]
-[ext_resource type="Texture2D" uid="uid://6fs1q50epqlu" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0006.png" id="20_xseu8"]
-[ext_resource type="Texture2D" uid="uid://dx71k5jc25s0k" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0007.png" id="21_ugmn3"]
-[ext_resource type="Texture2D" uid="uid://bwf4foy7hac7o" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0008.png" id="22_ae6m5"]
-[ext_resource type="Texture2D" uid="uid://twlwva7elcaq" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0009.png" id="23_aa2e3"]
-[ext_resource type="Texture2D" uid="uid://2li28fow22lm" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0010.png" id="24_tyt3q"]
-[ext_resource type="Texture2D" uid="uid://b1jh4e2x21wlb" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0011.png" id="25_ok1p1"]
-[ext_resource type="Texture2D" uid="uid://dy78o03t2tuqt" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0012.png" id="26_kn21p"]
-[ext_resource type="Texture2D" uid="uid://vuelerge5rl7" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0013.png" id="27_kvatw"]
-[ext_resource type="Texture2D" uid="uid://drsvxvkimf8dp" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0014.png" id="28_gm2p5"]
-[ext_resource type="Texture2D" uid="uid://chgon3rw6fvc2" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0015.png" id="29_br3pn"]
-[ext_resource type="Texture2D" uid="uid://jxtdcwylbanm" path="res://assets/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0016.png" id="30_q8lgn"]
+[ext_resource type="PackedScene" uid="uid://cnma6h0ofjkmh" path="res://tscn/chest_menu.tscn" id="15_2gn8e"]
+[ext_resource type="Texture2D" uid="uid://cklm21pjritf1" path="res://assets/visual/npc/Lively NPC_ blacksmith/animations/spritesheets/all_animations.png" id="15_phnua"]
+[ext_resource type="PackedScene" uid="uid://csy1y7js043fd" path="res://tscn/context_menu.tscn" id="16_gmulb"]
+[ext_resource type="Texture2D" uid="uid://bp5oeo4p0hc27" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0000.png" id="17_m037y"]
+[ext_resource type="Texture2D" uid="uid://x6wddspt4e8k" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0001.png" id="18_tkgim"]
+[ext_resource type="Texture2D" uid="uid://b5h550nk0jq2e" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0002.png" id="19_wj84r"]
+[ext_resource type="Texture2D" uid="uid://c4xbemie25ugl" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0003.png" id="20_an7x8"]
+[ext_resource type="Texture2D" uid="uid://dij6xomct07ty" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0004.png" id="21_0sy6g"]
+[ext_resource type="Texture2D" uid="uid://bvybaj0of7lba" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0005.png" id="22_om5ck"]
+[ext_resource type="Texture2D" uid="uid://6fs1q50epqlu" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0006.png" id="23_a7j7u"]
+[ext_resource type="Texture2D" uid="uid://dx71k5jc25s0k" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0007.png" id="24_6n05c"]
+[ext_resource type="Texture2D" uid="uid://bwf4foy7hac7o" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0008.png" id="25_ka128"]
+[ext_resource type="Texture2D" uid="uid://twlwva7elcaq" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0009.png" id="26_k6hnh"]
+[ext_resource type="Texture2D" uid="uid://2li28fow22lm" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0010.png" id="27_eqokw"]
+[ext_resource type="Texture2D" uid="uid://b1jh4e2x21wlb" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0011.png" id="28_55b32"]
+[ext_resource type="Texture2D" uid="uid://dy78o03t2tuqt" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0012.png" id="29_xtsys"]
+[ext_resource type="Texture2D" uid="uid://vuelerge5rl7" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0013.png" id="30_shsqe"]
+[ext_resource type="Texture2D" uid="uid://drsvxvkimf8dp" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0014.png" id="31_5oyoc"]
+[ext_resource type="Texture2D" uid="uid://chgon3rw6fvc2" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0015.png" id="32_hrxae"]
+[ext_resource type="Texture2D" uid="uid://jxtdcwylbanm" path="res://assets/visual/npc/Moonstone_Keeper Eldermoon_Grove - By SUCART/SUCART-MoonstoneKeeper (Idle)/No BG/frame0016.png" id="33_8haia"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_oyfr7"]
-texture = ExtResource("1_e13hw")
+texture = ExtResource("2_btvg4")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -637,7 +640,7 @@ texture = ExtResource("1_e13hw")
 15:15/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_rvusn"]
-texture = ExtResource("2_yu6dh")
+texture = ExtResource("3_jrxmw")
 0:0/0 = 0
 0:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 0:0/0/physics_layer_0/angular_velocity = 0.0
@@ -1408,7 +1411,7 @@ texture = ExtResource("2_yu6dh")
 15:15/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_afdxd"]
-texture = ExtResource("3_8y5gb")
+texture = ExtResource("4_h8y56")
 25:1/0 = 0
 25:1/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 25:1/0/physics_layer_0/angular_velocity = 0.0
@@ -2029,7 +2032,7 @@ texture = ExtResource("3_8y5gb")
 28:4/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_xvl1d"]
-texture = ExtResource("4_hfl7w")
+texture = ExtResource("5_hyjjf")
 14:0/0 = 0
 14:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 14:0/0/physics_layer_0/angular_velocity = 0.0
@@ -3091,7 +3094,7 @@ texture = ExtResource("4_hfl7w")
 19:31/0/physics_layer_0/angular_velocity = 0.0
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_inccw"]
-texture = ExtResource("5_q7f2n")
+texture = ExtResource("6_n46bh")
 2:2/0 = 0
 2:2/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 2:2/0/physics_layer_0/angular_velocity = 0.0
@@ -3748,7 +3751,7 @@ texture = ExtResource("5_q7f2n")
 11:21/0/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 8, -8, 8, 8, -8, 8)
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_4nbhb"]
-texture = ExtResource("7_nu0kp")
+texture = ExtResource("7_ptu5i")
 24:0/0 = 0
 24:0/0/physics_layer_0/linear_velocity = Vector2(0, 0)
 24:0/0/physics_layer_0/angular_velocity = 0.0
@@ -4726,63 +4729,63 @@ sources/4 = SubResource("TileSetAtlasSource_inccw")
 sources/5 = SubResource("TileSetAtlasSource_4nbhb")
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_thomk"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(0, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_mn5fy"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(32, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_vc07g"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(64, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_niul2"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(96, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_xd1rr"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(128, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ru2et"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(160, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_um5on"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(192, 0, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_6qo1g"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(0, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_ls0my"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(32, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_x7iw5"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(64, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_jnn2o"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(96, 32, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_p83wk"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(96, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pm7cj"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(128, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_pm11s"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(160, 96, 32, 32)
 
 [sub_resource type="AtlasTexture" id="AtlasTexture_nvnwe"]
-atlas = ExtResource("13_8uks7")
+atlas = ExtResource("15_phnua")
 region = Rect2(192, 96, 32, 32)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_wrfd8"]
@@ -4838,71 +4841,81 @@ animations = [{
 "speed": 5.0
 }]
 
-[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bxy3"]
-size = Vector2(27.3626, 71)
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_520j6"]
+size = Vector2(20, 52.7471)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iqdlt"]
+atlas = ExtResource("5_hyjjf")
+region = Rect2(95, 29, 34, 34)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_j7qyf"]
+size = Vector2(31.6482, 32.3515)
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_vlkxs"]
 animations = [{
 "frames": [{
 "duration": 0.5,
-"texture": ExtResource("14_pwad8")
+"texture": ExtResource("17_m037y")
 }, {
 "duration": 1.0,
-"texture": ExtResource("15_y6d3x")
+"texture": ExtResource("18_tkgim")
 }, {
 "duration": 1.0,
-"texture": ExtResource("16_u6m55")
+"texture": ExtResource("19_wj84r")
 }, {
 "duration": 1.0,
-"texture": ExtResource("17_t0emm")
+"texture": ExtResource("20_an7x8")
 }, {
 "duration": 1.0,
-"texture": ExtResource("18_dqhsp")
+"texture": ExtResource("21_0sy6g")
 }, {
 "duration": 1.0,
-"texture": ExtResource("19_5sdvg")
+"texture": ExtResource("22_om5ck")
 }, {
 "duration": 1.0,
-"texture": ExtResource("20_xseu8")
+"texture": ExtResource("23_a7j7u")
 }, {
 "duration": 1.0,
-"texture": ExtResource("21_ugmn3")
+"texture": ExtResource("24_6n05c")
 }, {
 "duration": 1.0,
-"texture": ExtResource("22_ae6m5")
+"texture": ExtResource("25_ka128")
 }, {
 "duration": 1.0,
-"texture": ExtResource("23_aa2e3")
+"texture": ExtResource("26_k6hnh")
 }, {
 "duration": 1.0,
-"texture": ExtResource("24_tyt3q")
+"texture": ExtResource("27_eqokw")
 }, {
 "duration": 1.0,
-"texture": ExtResource("25_ok1p1")
+"texture": ExtResource("28_55b32")
 }, {
 "duration": 1.0,
-"texture": ExtResource("26_kn21p")
+"texture": ExtResource("29_xtsys")
 }, {
 "duration": 1.0,
-"texture": ExtResource("27_kvatw")
+"texture": ExtResource("30_shsqe")
 }, {
 "duration": 1.0,
-"texture": ExtResource("28_gm2p5")
+"texture": ExtResource("31_5oyoc")
 }, {
 "duration": 1.0,
-"texture": ExtResource("29_br3pn")
+"texture": ExtResource("32_hrxae")
 }, {
 "duration": 1.0,
-"texture": ExtResource("30_q8lgn")
+"texture": ExtResource("33_8haia")
 }],
 "loop": true,
 "name": &"Idle",
 "speed": 10.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_2bxy3"]
+size = Vector2(27.3626, 71)
+
 [node name="Hub World" type="Node2D"]
 position = Vector2(577, 327)
-script = ExtResource("1_8q3g2")
+script = ExtResource("1_axvlv")
 
 [node name="scenery" type="TileMap" parent="."]
 position = Vector2(-48, -14)
@@ -4939,7 +4952,6 @@ scale = Vector2(1, 1)
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource("9_hsvg2")]
-visible = false
 
 [node name="PauseMenu" parent="CanvasLayer" instance=ExtResource("10_3g6e2")]
 visible = false
@@ -4964,13 +4976,21 @@ offset_top = -160.0
 offset_bottom = -160.0
 grow_vertical = 0
 
+[node name="smith_menu" parent="CanvasLayer" instance=ExtResource("14_0kuef")]
+visible = false
+
+[node name="chest_menu" parent="CanvasLayer" instance=ExtResource("15_2gn8e")]
+visible = false
+
+[node name="context_menu" parent="CanvasLayer" instance=ExtResource("16_gmulb")]
+visible = false
+
 [node name="Blacksmith" type="AnimatedSprite2D" parent="."]
 position = Vector2(-231, -267)
 scale = Vector2(1.42188, 1.42188)
 sprite_frames = SubResource("SpriteFrames_wrfd8")
 animation = &"Idle"
 autoplay = "Idle"
-frame_progress = 0.117506
 
 [node name="Interact Icon" parent="Blacksmith" instance=ExtResource("14_kxa66")]
 position = Vector2(-0.703278, -3.51648)
@@ -4979,8 +4999,22 @@ scale = Vector2(0.445, 0.445)
 [node name="StaticBody2D" type="StaticBody2D" parent="Blacksmith"]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Blacksmith/StaticBody2D"]
-position = Vector2(-1.68129, -0.35165)
-shape = SubResource("RectangleShape2D_2bxy3")
+position = Vector2(-1.68129, -10.9011)
+shape = SubResource("RectangleShape2D_520j6")
+
+[node name="Chest" type="Sprite2D" parent="."]
+position = Vector2(-450, -245)
+texture = SubResource("AtlasTexture_iqdlt")
+
+[node name="Interact Icon" parent="Chest" instance=ExtResource("14_kxa66")]
+position = Vector2(-0.703278, -3.51648)
+scale = Vector2(0.445, 0.445)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="Chest"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Chest/StaticBody2D"]
+position = Vector2(0.351646, -0.703285)
+shape = SubResource("RectangleShape2D_j7qyf")
 
 [node name="Seer" type="AnimatedSprite2D" parent="."]
 position = Vector2(-17, -257)

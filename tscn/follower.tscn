@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://bbt0y6nlmn0ve"]
 
 [ext_resource type="Script" path="res://scripts/follower.gd" id="1_2ikfv"]
-[ext_resource type="Texture2D" uid="uid://cb2ercshc0qmb" path="res://assets/GUNS_V1.00/V1.00/PNG/test_follower.png" id="2_llkhl"]
+[ext_resource type="Texture2D" uid="uid://cb2ercshc0qmb" path="res://assets/visual/weapon/test_follower.png" id="2_llkhl"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_3ubav"]
 size = Vector2(31.1551, 47.199)

@@ -21,11 +21,13 @@
 				},
 			"attack1_base_upgrade_slots":4,
 			"attack2_base_upgrade_slots":4,
-			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/[design]_Sniper_rifle_[KAR98]_V1.00.png",
+			"asset_path":"res://assets/visual/weapon/[design]_Sniper_rifle_[KAR98]_V1.00.png",
+			"listing_icon_path":"res://assets/visual/weapon/portrait_staff.png",
+			"listing_cost":"500",
 			},
 		"gun":{
 			"name":"Wizard's Gun", 
-			"description":"This is a gun", 
+			"description":"This is a gun.", 
 			"attacks":{
 				"attack1":{
 					"name":"Shoot",
@@ -36,7 +38,9 @@
 					},
 				},
 			"attack1_base_upgrade_slots":4,
-			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/GUN_01_[square_frame]_01_V1.00.png",
+			"asset_path":"res://assets/visual/weapon/GUN_01_[square_frame]_01_V1.00.png",
+			"listing_icon_path":"res://assets/visual/weapon/portrait_gun.png",
+			"listing_cost":"3500",
 			},
 		"magic components":{
 			"name":"Magical Components", 
@@ -53,7 +57,9 @@
 					},
 				},
 			"attack1_base_upgrade_slots":4,
-			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/magic_satchel.png",
+			"asset_path":"res://assets/visual/weapon/magic_satchel.png",
+			"listing_icon_path":"res://assets/visual/weapon/portrait_components.png",
+			"listing_cost":"500",
 			},
 		"spell book":{
 			"name":"Old Spell Book", 
@@ -76,7 +82,9 @@
 				},
 			"attack1_base_upgrade_slots":3,
 			"attack2_base_upgrade_slots":4,
-			"asset_path":"res://assets/GUNS_V1.00/V1.00/PNG/spell_book.png",
+			"asset_path":"res://assets/visual/weapon/spell_book.png",
+			"listing_icon_path":"res://assets/visual/weapon/portrait_book.png",
+			"listing_cost":"500",
 			},
 	}
 }

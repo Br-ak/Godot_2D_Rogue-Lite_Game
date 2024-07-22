@@ -14,7 +14,7 @@ var dropped_on_target := false
 var has_item := false
 var texture_path
 var tooltip_desc
-var texture_empty = preload("res://assets/GUNS_V1.00/V1.00/PNG/test_socket.png")
+var texture_empty = preload("res://assets/visual/upgrades/test_socket.png")
 const panel_socket = preload("res://tscn/panel_socket.tscn")
 var icon_texture
 
