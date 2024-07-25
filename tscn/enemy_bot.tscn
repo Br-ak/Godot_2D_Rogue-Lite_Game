@@ -2,9 +2,9 @@
 
 [ext_resource type="Script" path="res://scripts/Enemy_Bot.gd" id="1_2rm6a"]
 [ext_resource type="PackedScene" uid="uid://ojiiwcj8jct6" path="res://tscn/animation_component.tscn" id="2_1y5gj"]
-[ext_resource type="Texture2D" uid="uid://bu73a65p2wlus" path="res://assets/Bot Wheel/move with FX.png" id="2_h5n5w"]
-[ext_resource type="Texture2D" uid="uid://dtrkwabr43yrd" path="res://assets/Bot Wheel/death.png" id="2_m185e"]
-[ext_resource type="Texture2D" uid="uid://b8l16jdpwvt8x" path="res://assets/Bot Wheel/damaged.png" id="3_cfo15"]
+[ext_resource type="Texture2D" uid="uid://bu73a65p2wlus" path="res://assets/visual/enemy/Bot Wheel/move with FX.png" id="2_h5n5w"]
+[ext_resource type="Texture2D" uid="uid://dtrkwabr43yrd" path="res://assets/visual/enemy/Bot Wheel/death.png" id="2_m185e"]
+[ext_resource type="Texture2D" uid="uid://b8l16jdpwvt8x" path="res://assets/visual/enemy/Bot Wheel/damaged.png" id="3_cfo15"]
 [ext_resource type="PackedScene" uid="uid://oiicbhvi6ce0" path="res://tscn/health_component.tscn" id="5_eelgr"]
 [ext_resource type="PackedScene" uid="uid://22q253ptx5of" path="res://tscn/hitbox_component.tscn" id="6_58ok3"]
 

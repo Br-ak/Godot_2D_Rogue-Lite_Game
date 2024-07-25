@@ -4,7 +4,7 @@
 [ext_resource type="Texture2D" uid="uid://b223yeceiwwe2" path="res://assets/visual/misc/interact_icon.png" id="2_01tdp"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_8bmgw"]
-radius = 73.6
+radius = 119.8
 
 [node name="Interact Icon" type="Node2D"]
 visible = false

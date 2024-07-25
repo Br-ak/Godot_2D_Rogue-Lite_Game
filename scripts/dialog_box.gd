@@ -59,12 +59,20 @@ func write_text_animated(text):
 	button_pressable = false
 	message.text = ""
 	for letter in text:
-		message.text += letter
-		audio_manager.play_sound(talk1_name, sound_info)
-		await get_tree().create_timer(delay).timeout
 		if menu_closed == true:
 			button_pressable = true
+			text_remaining = ""
+			text_to_display = ""
 			break
+		message.text += letter
+		if speaker_name == "Satyr Steve":
+			if !audio_manager.sound_is_playing("Satyr_talk_1", sound_info) && !audio_manager.sound_is_playing("Satyr_talk_2", sound_info) && !audio_manager.sound_is_playing("Satyr_talk_3", sound_info):
+				var rand = randi_range(1,3)
+				audio_manager.play_sound("Satyr_talk_" + str(rand), sound_info)
+		else:
+			audio_manager.play_sound(talk1_name, sound_info)
+		await get_tree().create_timer(delay).timeout
+		
 	button_pressable = true
 
 func find_last_word(text):

@@ -1,18 +1,18 @@
 [gd_scene load_steps=5 format=3 uid="uid://dksgjjd2ovuuj"]
 
-[ext_resource type="Script" path="res://scripts/smith_menu.gd" id="1_4iqso"]
+[ext_resource type="Script" path="res://scripts/shop_menu.gd" id="1_iqjif"]
 [ext_resource type="Texture2D" uid="uid://oj5s0xes1ums" path="res://assets/visual/misc/text_background_ninepatch.png" id="2_jjf0g"]
 [ext_resource type="Texture2D" uid="uid://bmve4xg4maqeu" path="res://assets/visual/misc/text_exit.png" id="3_rkqyv"]
 [ext_resource type="Texture2D" uid="uid://b7kv1m7p0k2ka" path="res://assets/visual/upgrades/currency_coin.png" id="4_06mci"]
 
-[node name="smith_menu" type="Control"]
+[node name="shop_menu" type="Control"]
 layout_mode = 3
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-script = ExtResource("1_4iqso")
+script = ExtResource("1_iqjif")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
 custom_minimum_size = Vector2(500, 500)

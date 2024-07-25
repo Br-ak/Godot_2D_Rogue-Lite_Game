@@ -1,4 +1,4 @@
-[gd_scene load_steps=26 format=3 uid="uid://ck24ttfoawloe"]
+[gd_scene load_steps=29 format=3 uid="uid://ck24ttfoawloe"]
 
 [ext_resource type="Script" path="res://scripts/Audio Manager.gd" id="1_6oo87"]
 [ext_resource type="AudioStream" uid="uid://cgajfanjkfdei" path="res://assets/audio/Title Screen.ogg" id="2_pjrcy"]
@@ -25,6 +25,9 @@
 [ext_resource type="AudioStream" uid="uid://bebg4vyxuskmx" path="res://assets/audio/paper_plane_sfx.wav" id="23_d5vhb"]
 [ext_resource type="AudioStream" uid="uid://b1nkbayqmyk77" path="res://assets/audio/smiffy_talk_1.wav" id="24_xqtfc"]
 [ext_resource type="AudioStream" uid="uid://du2paarm6rbca" path="res://assets/audio/seer_talk_1.wav" id="25_76vpa"]
+[ext_resource type="AudioStream" uid="uid://c5qudyvhfl4nr" path="res://assets/audio/satyr_talk_1.wav" id="26_mdcmu"]
+[ext_resource type="AudioStream" uid="uid://bog7ansm6rro8" path="res://assets/audio/satyr_talk_2.wav" id="27_fgljb"]
+[ext_resource type="AudioStream" uid="uid://beuw5e2taeq4p" path="res://assets/audio/satyr_talk_3.wav" id="28_td3la"]
 
 [node name="Audio Manager" type="Node"]
 script = ExtResource("1_6oo87")
@@ -132,3 +135,12 @@ pitch_scale = 1.52
 
 [node name="Seer_talk_1" type="AudioStreamPlayer" parent="Npc Sounds"]
 stream = ExtResource("25_76vpa")
+
+[node name="Satyr_talk_1" type="AudioStreamPlayer" parent="Npc Sounds"]
+stream = ExtResource("26_mdcmu")
+
+[node name="Satyr_talk_2" type="AudioStreamPlayer" parent="Npc Sounds"]
+stream = ExtResource("27_fgljb")
+
+[node name="Satyr_talk_3" type="AudioStreamPlayer" parent="Npc Sounds"]
+stream = ExtResource("28_td3la")

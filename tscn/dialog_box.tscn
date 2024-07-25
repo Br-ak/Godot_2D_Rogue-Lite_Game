@@ -34,6 +34,7 @@ offset_bottom = 40.0
 texture = ExtResource("4_f5via")
 
 [node name="NinePatchRect" type="NinePatchRect" parent="."]
+self_modulate = Color(0.74902, 0.74902, 0.74902, 1)
 layout_mode = 0
 offset_left = 40.0
 offset_right = 190.0

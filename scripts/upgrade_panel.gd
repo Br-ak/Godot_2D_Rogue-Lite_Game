@@ -17,6 +17,7 @@ extends VBoxContainer
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	add_to_group("TOOLTIP_ENABLED")
 	title_label.text = title
 	desc_text.text = description
 	var newIcon = load(data["image"])

@@ -75,8 +75,9 @@ func _on_exit_pressed():
 	Engine.time_scale = 1
 
 func update_weapon_stats(upgrade_list, attack_num):
-	if player.equipped_weapon.has_method("update_attacks"):
-		player.equipped_weapon.update_attacks(upgrade_list, attack_num)
+	if player.equipped_weapon:
+		if player.equipped_weapon.has_method("update_attacks"):
+			player.equipped_weapon.update_attacks(upgrade_list, attack_num)
 
 func add_upgrade_to_inventory(key):
 	print("adding upgrade to inventory key: ", key)

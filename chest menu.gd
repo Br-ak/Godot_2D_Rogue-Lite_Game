@@ -49,6 +49,7 @@ func init_listings():
 		new_menu_listing.init_listing()
 		if data[weapon]["name"] in player.weapons_purchased && player.equipped_weapon.WEAPON_NAME != weapon:
 			new_menu_listing.button.set_visible(true)
+			new_menu_listing.button.text = "Equip"
 		else:
 			new_menu_listing.button.set_visible(false)
 			new_menu_listing.texture_rect.set_modulate(Color(1, 1, 1, 0.25))
@@ -87,7 +88,7 @@ func _on_yes_pressed():
 		if node != selected_weapon && node.listing_info[0] in player.weapons_purchased:
 				node.button.set_visible(true)
 	
-	player.weapon_add(temp_listing_info[0])
+	player.weapon_add(temp_listing_info[0], 1)
 	player.weapons_purchased.append(temp_listing_info[0])
 	player.player_coins -= int(temp_listing_info[1])
 	weapon_swap_hud.init()

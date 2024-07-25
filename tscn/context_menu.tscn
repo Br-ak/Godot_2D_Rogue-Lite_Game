@@ -63,6 +63,23 @@ text = "Buy/Sell"
 layout_mode = 2
 text = "Exit"
 
+[node name="Label" type="Label" parent="NinePatchRect"]
+visible = false
+layout_mode = 1
+anchors_preset = 5
+anchor_left = 0.5
+anchor_right = 0.5
+offset_left = -20.0
+offset_top = 12.0
+offset_right = 20.0
+offset_bottom = 35.0
+grow_horizontal = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Begin your search?"
+horizontal_alignment = 1
+vertical_alignment = 1
+
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Button" to="." method="_on_button_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Button2" to="." method="_on_button_2_pressed"]
 [connection signal="pressed" from="NinePatchRect/VBoxContainer/Button3" to="." method="_on_button_3_pressed"]

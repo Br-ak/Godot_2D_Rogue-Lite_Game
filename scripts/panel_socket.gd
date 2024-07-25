@@ -23,6 +23,7 @@ func _ready():
 
 func init():
 	add_to_group("DRAGGABLE")
+	add_to_group("TOOLTIP_ENABLED")
 	socket.set_texture(texture_empty)
 	item.set_texture(null)
 	self.has_item = false
@@ -63,7 +64,6 @@ func _drop_data(_at_position, data):
 			self.item.set_texture(icon_texture)
 			self.has_item = true
 			self.swap_data(data)
-			
 			
 			print("_drop_data: ", upgrade)
 			if data.socket_location == self.socket_location:

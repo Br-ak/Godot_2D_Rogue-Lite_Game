@@ -7,15 +7,20 @@ extends Control
 @onready var button_2 = $NinePatchRect/VBoxContainer/Button2
 @onready var button_3 = $NinePatchRect/VBoxContainer/Button3
 @onready var hub = get_parent().get_parent()
+@onready var label = $NinePatchRect/Label
 
 var button1_text := "Talk"
 var button2_text := "Buy/Sell"
 var button3_text := "Exit"
 
 func init():
+	label.text = ""
 	button_1.text = button1_text
 	button_2.text = button2_text
 	button_3.text = button3_text
+	button_1.set_visible(true)
+	button_2.set_visible(true)
+	button_3.set_visible(true)
 
 # talk option
 func _on_button_pressed():

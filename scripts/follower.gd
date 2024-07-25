@@ -9,6 +9,8 @@ var preDirection = Vector2(0, 0)
 var trackingList = []
 var canShoot = true
 
+var perma_upgrade_attack_speed := 0.0
+var perma_upgrade_attack_damage := 0
 
 func _physics_process(_delta):
 	var direction = Vector2(player.position.x - self.position.x, player.position.y - self.position.y)
@@ -52,15 +54,18 @@ func shoot(closestEnemy):
 	var angle_to_enemy = direction_to_enemy.angle()
 	new_bullet.global_rotation = angle_to_enemy
 	self.add_child(new_bullet)
+	new_bullet.attack.attack_damage_increase += perma_upgrade_attack_damage
+	perma_upgrade_attack_speed /= 100
+	new_bullet.attack.attack_reset_time_multiplier -= perma_upgrade_attack_speed
+	new_bullet.attack.update_attack_damage()
 	canShoot = false
-	timer.start(reloadTime)
+	timer.start(reloadTime * new_bullet.attack.attack_reset_time_multiplier)
 
 
 func _on_range_body_entered(body):
 	if body.get("enemy"):
 		if !trackingList.has(body):
 			trackingList.append(body)
-
 
 func _on_timer_timeout():
 	canShoot = true

@@ -8,7 +8,7 @@ extends Node2D
 @onready var timer = $Timer
 @onready var hud = $CanvasLayer/Hud
 @onready var world = $World
-
+@onready var player = $World/Player
 var music_data = ["Music"]
 
 var gameTimer := 0:
@@ -19,6 +19,7 @@ var gameTimer := 0:
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	SharedFunctions.init_variables()
+	player.init_for_game()
 	audio_manager.play_music("BGM_battle", music_data)
 	timer.start(1) 
 	if Engine.time_scale != 1:

@@ -1,9 +1,7 @@
 extends Node2D
 
 @onready var scenery = $scenery
-
 @onready var player = $Player
-
 @onready var canvas_layer = $CanvasLayer
 @onready var main_menu = $"CanvasLayer/Main Menu"
 @onready var hud = $CanvasLayer/Hud
@@ -19,15 +17,28 @@ extends Node2D
 @onready var interact_icon_chest = $"Chest/Interact Icon"
 @onready var chest_menu = $CanvasLayer/chest_menu
 @onready var context_menu = $CanvasLayer/context_menu
-@onready var smith_menu = $CanvasLayer/smith_menu
+@onready var shop_menu = $CanvasLayer/shop_menu
+@onready var interact_icon_satyr = $"Satyr Steve/Interact Icon"
+@onready var timer = $Doorway_detection/Timer
+@onready var fade_box = $CanvasLayer/fade_box
+@onready var fade_timer = $CanvasLayer/fade_box/fade_timer
 
-var can_interact = true
-var sound_info = ["Npc Sounds"]
-var smith_button_info = ["Talk", "Buy/Sell", "Exit"]
-var seer_button_info = ["Talk", "Upgrades", "Exit"]
 var interacting_with := ""
 var interacted_with_already := []
+var can_interact = true
+var sound_info = ["Npc Sounds"]
 
+var smith_button_info = ["Talk", "Buy/Sell", "Exit"]
+var smith_shop_info = ["Smiffy's Shop", "weapons", "Smith"]
+
+var seer_button_info = ["Talk", "Upgrades", "Exit"]
+var seer_shop_info = ["Enhancements", "player upgrades", "Seer"]
+
+var satyr_button_info = ["Yes (Display Tutorial)", "No (Skip Tutorial)"]
+
+var exit_button_info = ["Yes", "No"]
+var fade_start
+var fade_count := 0
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player.init_for_hub()
@@ -47,6 +58,8 @@ func _process(delta):
 			seer_interactable_pressed()
 		elif interact_icon_chest.player_interactable:
 			chest_interactable_pressed()
+		elif interact_icon_satyr.player_interactable:
+			satyr_interactable_pressed()
 
 func start_game():
 	player.playable = true
@@ -69,11 +82,11 @@ func smith_interactable_pressed():
 		else:
 			var rng = randi_range(1, 3)
 			dialog_box.fetch_text("Smiffy", "intro", str(rng))
-		context_menu.init()
 		context_menu.set_visible(true)
 		context_menu.button1_text = smith_button_info[0]
 		context_menu.button2_text = smith_button_info[1]
 		context_menu.button3_text = smith_button_info[2]
+		context_menu.init()
 
 func seer_interactable_pressed():
 	if can_interact:
@@ -84,11 +97,11 @@ func seer_interactable_pressed():
 		#audio_manager.play_sound("interact", sound_info)
 		interact_icon_seer.set_visible(false)
 		
-		context_menu.init()
 		context_menu.set_visible(true)
 		context_menu.button1_text = seer_button_info[0]
 		context_menu.button2_text = seer_button_info[1]
 		context_menu.button3_text = seer_button_info[2]
+		context_menu.init()
 		dialog_box.speaker_name = "Seer"
 		dialog_box.init_box()
 		dialog_box.set_visible(true)
@@ -99,6 +112,30 @@ func seer_interactable_pressed():
 			var rng = randi_range(1, 3)
 			dialog_box.fetch_text("Seer", "intro", str(rng))
 
+func satyr_interactable_pressed():
+	if can_interact:
+		interacting_with = "Satyr Steve"
+		player.playable = false
+		can_interact = false
+		player.arrow_pointer.pointer_active = false
+		#audio_manager.play_sound("interact", sound_info)
+		interact_icon_seer.set_visible(false)
+		
+		context_menu.set_visible(true)
+		context_menu.button1_text = satyr_button_info[0]
+		context_menu.button3_text = satyr_button_info[1]
+		context_menu.init()
+		context_menu.button_2.set_visible(false)
+		dialog_box.speaker_name = "Satyr Steve"
+		dialog_box.init_box()
+		dialog_box.set_visible(true)
+		if "Satyr Steve" not in interacted_with_already:
+			dialog_box.fetch_text("Satyr Steve", "first_dialogue", "1")
+			interacted_with_already.append("Satyr Steve")
+		else:
+			var rng = randi_range(1, 3)
+			dialog_box.fetch_text("Satyr Steve", "intro", str(rng))
+			
 func chest_interactable_pressed():
 	if can_interact:
 		player.playable = false
@@ -115,22 +152,89 @@ func context_talk_button():
 		dialog_box.fetch_text("Seer", "hub_text", "2")
 	elif interacting_with == "Smith" && dialog_box.button_pressable:
 		dialog_box.fetch_text("Smiffy", "hub_text", "2")
+	elif interacting_with == "Satyr Steve" && dialog_box.button_pressable:
+		#commence tutoral
+		print("wahe")
+	elif interacting_with == "exit door"  && dialog_box.button_pressable:
+		fade_start = true
+		fade_timer.start(0.1)
 
 func context_merchant_button():
 	if interacting_with == "Seer":
-		pass
+		context_exit_button()
+		shop_menu.menu_info = seer_shop_info
+		shop_menu.init_listings()
+		shop_menu.set_visible(true)
 	elif interacting_with == "Smith":
 		context_exit_button()
-		smith_menu.set_visible(true)
+		shop_menu.menu_info = smith_shop_info
+		shop_menu.init_listings()
+		shop_menu.set_visible(true)
 
 # exit button just closes other ui elements
 func context_exit_button():
+	if interacting_with == "exit door":
+		player.playable = true
+		Input.action_press("ui_down")
+		timer.start(0.3)
+	else:
+		dialog_box.menu_closed = true
+		for node in canvas_layer.get_children():
+			if node.name == "Hud":
+				node.set_visible(true)
+			else:
+				node.set_visible(false)
+		player.playable = true
+		interacting_with = ""
+		can_interact = true
+
+
+func _on_doorway_detection_area_entered(area):
+	if area is HitboxComponent:
+		if area.get_parent().type == "Player":
+			interacting_with = "exit door"
+			player.playable = false
+			context_menu.set_visible(true)
+			context_menu.button1_text = exit_button_info[0]
+			context_menu.button3_text = exit_button_info[1]
+			context_menu.init()
+			context_menu.label.text = "Ready for a fight?"
+			context_menu.label.set_visible(true)
+			context_menu.button_2.set_visible(false)
+
+
+func _on_timer_timeout():
+	timer.stop()
 	dialog_box.menu_closed = true
 	for node in canvas_layer.get_children():
 		if node.name == "Hud":
 			node.set_visible(true)
 		else:
 			node.set_visible(false)
+	Input.action_release("ui_down")
 	player.playable = true
 	interacting_with = ""
 	can_interact = true
+
+
+
+func _on_fade_timer_timeout():
+	if fade_count > 20:
+		fade_timer.stop()
+		print("faded")
+		get_tree().change_scene_to_file("res://tscn/game.tscn")
+	else:
+		fade_count += 1
+		if fade_start:
+			player.playable = false
+			fade_start = false
+			for node in canvas_layer.get_children():
+				if node.name == "fade_box":
+					node.set_visible(true)
+				else:
+					node.set_visible(false)
+			fade_box.set_self_modulate(fade_box.get_self_modulate() + Color(1, 1, 1, 0.05))
+			fade_timer.start(0.1)
+		else:
+			fade_box.set_self_modulate(fade_box.get_self_modulate() + Color(1, 1, 1, 0.05))
+			fade_timer.start(0.1)

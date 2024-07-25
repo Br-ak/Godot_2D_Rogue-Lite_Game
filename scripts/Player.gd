@@ -1,7 +1,9 @@
 extends CharacterBody2D
 signal update_weapon_stats_signal(new_damage)
 
-var speed = 200  # speed in pixels/sec
+var starting_speed = 200  # speed in pixels/sec
+var speed
+
 const type = "Player"
 const staff_weapon = preload("res://tscn/melee_weapon.tscn")
 const magic_component_weapon = preload("res://tscn/magic_components_weapon.tscn")
@@ -25,7 +27,7 @@ var new_holstered_weapon
 @onready var swap_timer = $"Weapon/Swap Timer"
 @onready var scenery
 
-@onready var audio_manager
+@onready var audio_manager = self.get_tree().get_root().get_node("AudioManager")
 @onready var navigation_region_2d = $NavigationRegion2D
 @onready var timer = $NavigationRegion2D/Timer
 @onready var debug_timer = $"DEBUG TIMER"
@@ -33,6 +35,8 @@ var new_holstered_weapon
 @onready var game
 @onready var world
 @onready var mobs
+@onready var player_upgrades = StaticData.player_upgrades["upgrades"]
+@onready var weapon_data = StaticData.weapons["weapons"]
 
 var sound_info = ["Player Sounds"]
 var equipped_weapon
@@ -46,11 +50,20 @@ var sound_rng
 var sound_string = "move1"
 var sound_playable = true
 var player_levelup_xp := 100
+var equipped_weapon_upgrades = []
+var holstered_weapon_upgrades = []
 
 var debug_avail = true
 var location := "game"
 var playable := true
 var weapons_purchased = []
+
+var perma_upgrade_health := 0
+var perma_upgrade_speed := 0
+var perma_upgrade_damage := 0
+var perma_upgrade_attack_speed := 0
+var perma_upgrade_follower_damage := 0
+var perma_upgrade_follower_attack_speed := 0
 
 var player_exp := 0:
 	set(value):
@@ -84,6 +97,35 @@ var player_crystal := 0:
 
 func _ready():
 	anim.play("Side_Idle")
+	init_stats()
+
+func init_stats():
+	if perma_upgrade_health:
+		player_health += perma_upgrade_health
+		health_component.MAX_HEALTH = player_health
+		health_component.health = player_health
+	
+	speed = starting_speed + perma_upgrade_speed
+	
+	if equipped_weapon:
+		var attack_count = 0
+		for attacks in weapon_data[equipped_weapon.WEAPON_NAME]:
+			attack_count += 1
+		if attack_count > 0 && equipped_weapon.primary_attack is Attack: 
+			equipped_weapon.primary_attack.attack_damage_increase += perma_upgrade_damage
+			var temp = perma_upgrade_attack_speed / 100
+			equipped_weapon.primary_attack.attack_reset_time_multiplier -= temp
+		if attack_count > 1 && equipped_weapon.secondary_attack is Attack:
+			equipped_weapon.secondary_attack.attack_damage_increase += perma_upgrade_damage
+			var temp = perma_upgrade_attack_speed / 100
+			equipped_weapon.secondary_attack.attack_reset_time_multiplier -= temp
+	
+	if get_parent().has_node("Follower"):
+		var follower = get_parent().get_node("Follower")
+		follower.perma_upgrade_attack_speed = perma_upgrade_follower_attack_speed
+		follower.perma_upgrade_attack_damage = perma_upgrade_follower_damage
+
+
 
 func init_for_hub():
 	playable = false
@@ -91,25 +133,23 @@ func init_for_hub():
 	weapon = $Weapon
 	weapon.set_visible(false)
 	sound_timer = $"Sound Timer"
-	#arrow_pointer = $a
 	gameNode = get_parent()
 	hud = gameNode.get_node("CanvasLayer").get_node("Hud")
 	inventory_menu = gameNode.get_node("CanvasLayer").get_node("Inventory Menu")
 	swap_timer = $"Weapon/Swap Timer"
-	#scenery = get_parent().get_node("scenery")
 	audio_manager = self.get_tree().get_root().get_node("AudioManager")
 	navigation_region_2d = $NavigationRegion2D
 	world = self
 	location = "hub"
 	player_coins = 5000
-	player_crystal = 100
+	player_crystal = 200
 
 
 func init_for_game():
 	anim = $AnimatedSprite2D
 	weapon = $Weapon
 	sound_timer = $"Sound Timer"
-	arrow_pointer = $a
+	arrow_pointer = $arrow_pointer
 	gameNode = get_parent().get_parent()
 	hud = gameNode.get_node("CanvasLayer").get_node("Hud")
 	levelUpMenu = gameNode.get_node("CanvasLayer").get_node("Level Up Menu")
@@ -128,11 +168,15 @@ func init_for_game():
 	
 	if test_weapon_equipped == false:
 		test_weapon_equipped = true
-		new_active_weapon = magic_component_weapon.instantiate()
-		new_holstered_weapon = spell_book_weapon.instantiate()
-		weapon.call("add_child", new_active_weapon)
-		equipped_weapon = new_active_weapon
-		holstered_weapon = new_holstered_weapon
+		weapon_add("Empty Wizard's Staff", 1)
+		weapon_add("Old Spell Book", 2)
+#		new_active_weapon = magic_component_weapon.instantiate()
+#		new_holstered_weapon = spell_book_weapon.instantiate()
+#		weapon.call("add_child", new_active_weapon)
+#		weapon.call("add_child", new_holstered_weapon)
+#		new_holstered_weapon.set_visible(false)
+#		equipped_weapon = new_active_weapon
+#		holstered_weapon = new_holstered_weapon
 		inventory_menu.init_weapon_panels()
 		hud.weapon_swap.init()
 		weapon_swappable = true
@@ -252,31 +296,85 @@ func hurt():
 	health_component.INVINCIBLE = true
 	invincible_timer.start(invincible_timer_length)
 
-func weapon_add(weapon_type):
-	if weapon_type:
-		var new_equipped_weapon
-		if weapon_type == "Empty Wizard's Staff": new_equipped_weapon = staff_weapon.instantiate()
-		elif weapon_type == "Magical Components": new_equipped_weapon = magic_component_weapon.instantiate()
-		elif weapon_type == "Old Spell Book":     new_equipped_weapon = spell_book_weapon.instantiate()
-		elif weapon_type == "Wizard's Gun":       new_equipped_weapon = gun_weapon.instantiate()
-		weapon.call("add_child", new_equipped_weapon)
-		equipped_weapon = new_equipped_weapon
+func stat_upgrade(new_upgrade):
+	#print(new_upgrade)
+	var new_level = player_upgrades[new_upgrade]["current_level"]
+	
+	#
+	# player upgrades
+	#
+	if new_upgrade == "hp_up": perma_upgrade_health = player_upgrades[new_upgrade]["level"][str(new_level)]
+	elif new_upgrade == "damage_up": perma_upgrade_damage = player_upgrades[new_upgrade]["level"][str(new_level)]
+	elif new_upgrade == "attack_speed_up": perma_upgrade_attack_speed = player_upgrades[new_upgrade]["level"][str(new_level)]
+	elif new_upgrade == "speed_up": perma_upgrade_speed = player_upgrades[new_upgrade]["level"][str(new_level)]
+	#
+	# follower upgrades
+	#
+	elif new_upgrade == "follower_damage": perma_upgrade_follower_damage = player_upgrades[new_upgrade]["level"][str(new_level)]
+	elif new_upgrade == "follower_attack_speed": perma_upgrade_follower_attack_speed = player_upgrades[new_upgrade]["level"][str(new_level)]
+	#
+	# etc
+	#
+	
+	init_stats()
+
+func weapon_add(weapon_type, slot):
+	if weapon_type != null:
+		if slot == 1:
+			var new_equipped_weapon
+			if weapon_type == "Empty Wizard's Staff": new_equipped_weapon = staff_weapon.instantiate()
+			elif weapon_type == "Magical Components": new_equipped_weapon = magic_component_weapon.instantiate()
+			elif weapon_type == "Old Spell Book":     new_equipped_weapon = spell_book_weapon.instantiate()
+			elif weapon_type == "Wizard's Gun":       new_equipped_weapon = gun_weapon.instantiate()
+			weapon.call("add_child", new_equipped_weapon)
+			equipped_weapon = new_equipped_weapon
+		elif slot == 2:
+			var new_holstered_weapon
+			if weapon_type == "Empty Wizard's Staff": new_holstered_weapon = staff_weapon.instantiate()
+			elif weapon_type == "Magical Components": new_holstered_weapon = magic_component_weapon.instantiate()
+			elif weapon_type == "Old Spell Book":     new_holstered_weapon = spell_book_weapon.instantiate()
+			elif weapon_type == "Wizard's Gun":       new_holstered_weapon = gun_weapon.instantiate()
+			weapon.call("add_child", new_holstered_weapon)
+			holstered_weapon = new_holstered_weapon
+			holstered_weapon.set_visible(false)
 	else: print("Weapon Not Found!")
 
 func weapon_swap():
-	audio_manager.play_sound("hurt", sound_info)
+	
 	weapon_swappable = false
-	var new_weapon
-	if holstered_weapon:
+	
+	if holstered_weapon != null && equipped_weapon != null:
+		audio_manager.play_sound("hurt", sound_info)
 		var temp_weapon = equipped_weapon
-		var new_equipped_weapon = holstered_weapon.instantiate()
-		weapon.call("add_child", new_equipped_weapon)
-		equipped_weapon.queue_free()
+		var new_equipped_weapon = holstered_weapon
+		#weapon.call("add_child", new_equipped_weapon)
+		#equipped_weapon.queue_free()
 		equipped_weapon = new_equipped_weapon
+		equipped_weapon.set_visible(true)
 		holstered_weapon = temp_weapon
+		holstered_weapon.set_visible(false)
 		inventory_menu.swap_weapons()
 		hud.weapon_swap.init()
 		swap_timer.start(1)
+
+#if Input.is_action_pressed("weapon_swap") && weapon_swappable:
+#		weapon_swappable = false
+#		var new_weapon
+#		if equipped_weapon.WEAPON_NAME == "gun":
+#			new_weapon = melee_weapon
+#		elif equipped_weapon.WEAPON_NAME == "staff":
+#			new_weapon = ranged_weapon
+#
+#		var temp_weapon = equipped_weapon
+#		var new_equipped_weapon = new_weapon.instantiate()
+#		weapon.call("add_child", new_equipped_weapon)
+#		equipped_weapon.queue_free()
+#		equipped_weapon = new_equipped_weapon
+#		holstered_weapon = temp_weapon
+#		inventory_menu.swap_weapons()
+#		hud.weapon_swap.init()
+#		swap_timer.start(1)
+		
 
 func _on_i_frames_timeout():
 	health_component.INVINCIBLE = false
