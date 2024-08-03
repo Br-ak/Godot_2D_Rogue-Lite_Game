@@ -24,6 +24,7 @@ func _ready():
 	create_Controls_HSeparator()
 	populate_Keybinds()
 	populate_sound_settings()
+	
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(_delta):
@@ -31,8 +32,9 @@ func _process(_delta):
 
 func _on_exit_button_pressed():
 	## check for unsaved changes
-	get_parent().focus_gained()
-	#get_tree().change_scene_to_file("res://tscn/main_menu.tscn")
+	if get_parent().name == "Main Menu": get_parent().focus_gained()
+	else: 
+		get_parent().get_parent().focus_gained()
 
 func _on_apply_button_pressed():
 	

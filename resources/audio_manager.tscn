@@ -1,4 +1,4 @@
-[gd_scene load_steps=29 format=3 uid="uid://ck24ttfoawloe"]
+[gd_scene load_steps=32 format=3 uid="uid://ck24ttfoawloe"]
 
 [ext_resource type="Script" path="res://scripts/Audio Manager.gd" id="1_6oo87"]
 [ext_resource type="AudioStream" uid="uid://cgajfanjkfdei" path="res://assets/audio/Title Screen.ogg" id="2_pjrcy"]
@@ -13,9 +13,12 @@
 [ext_resource type="AudioStream" uid="uid://dp7kxmlfx4qg" path="res://assets/audio/death (5).wav" id="6_vncn7"]
 [ext_resource type="AudioStream" uid="uid://kkxokjjs7fcr" path="res://assets/audio/swipe.wav" id="7_puj16"]
 [ext_resource type="AudioStream" uid="uid://tdgmvd5fkp2j" path="res://assets/audio/toss.wav" id="8_ss8gg"]
+[ext_resource type="AudioStream" uid="uid://ck8q03ticqxui" path="res://assets/audio/16_human_walk_stone_1.wav" id="8_t8bnn"]
 [ext_resource type="AudioStream" uid="uid://baopvtr0cpm4t" path="res://assets/audio/hit (2).wav" id="9_63wlk"]
+[ext_resource type="AudioStream" uid="uid://bdgrhpgj0i0nj" path="res://assets/audio/16_human_walk_stone_2.wav" id="9_ulxk6"]
 [ext_resource type="AudioStream" uid="uid://c53idfv8m7krs" path="res://assets/audio/comp_charge.ogg" id="10_52mmw"]
 [ext_resource type="AudioStream" uid="uid://ugftw588w33y" path="res://assets/audio/comp_toss.ogg" id="10_e6il1"]
+[ext_resource type="AudioStream" uid="uid://wrnxlmbweqgr" path="res://assets/audio/16_human_walk_stone_3.wav" id="10_mti5t"]
 [ext_resource type="AudioStream" uid="uid://cnbv0ikucv0g1" path="res://assets/audio/comp_charge_tick.ogg" id="12_qnc2e"]
 [ext_resource type="AudioStream" uid="uid://b4pcsea3pi8ds" path="res://assets/audio/bigDeath.wav" id="12_wa88h"]
 [ext_resource type="AudioStream" uid="uid://bw4w8jplp144d" path="res://assets/audio/growl.wav" id="13_b5ygw"]
@@ -53,6 +56,15 @@ stream = ExtResource("4_6gp4p")
 
 [node name="move3" type="AudioStreamPlayer" parent="Player Sounds"]
 stream = ExtResource("5_y5ba8")
+
+[node name="move_stone_1" type="AudioStreamPlayer" parent="Player Sounds"]
+stream = ExtResource("8_t8bnn")
+
+[node name="move_stone_2" type="AudioStreamPlayer" parent="Player Sounds"]
+stream = ExtResource("9_ulxk6")
+
+[node name="move_stone_3" type="AudioStreamPlayer" parent="Player Sounds"]
+stream = ExtResource("10_mti5t")
 
 [node name="legacy move" type="AudioStreamPlayer" parent="Player Sounds"]
 stream = ExtResource("3_r2xl3")

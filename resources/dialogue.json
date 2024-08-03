@@ -41,7 +41,7 @@
 			"description":"blah blah blah", 
 			"portrait_icon_path":"res://assets/visual/npc/Satyr_Steve_portrait.png",
 			"first_dialogue":{
-				"1":"Oh, I don't recognize you... are you new here?",
+				"1":"Back already?",
 				"2":""
 			},
 			"intro":{
@@ -50,8 +50,25 @@
 				"3":"Did you already forget what to do?",
 			},
 			"tutorial_text":{
-				"1":"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.",
-				"2":"blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah blah",
+				"intro":"Alright, I'll go over the basics of this place.",
+				"seer_1":"This one over here is the Seer.",
+				"seer_2":"They can make you stronger if you give them these strange blue crystals. Dunno what they are but the Seer wants em.",
+				"blacksmith_1":"Thats the blacksmith over there, his name is Smiffy.",
+				"blacksmith_2":"You can trade coins to him in exchange for gear.",
+				"chest_1":"Anything you've purchased will be stored in this chest by the door if you want to use it later.",
+				"chest_2":"You've only got 2 arms so you probably can only take 2 weapons at a time.",
+				"exit_1":"That brings us to that door over there, it's the exit.",
+				"exit_2":"It don't work like no normal door. It'll transport you to another plane and you'll need to fight your way out.",
+				"game_1":"Once you're out there, you'll get attacked by strange creatures.",
+				"game_2":"Sometimes they'll drop some coins or crystals that'll be sent back here through some magic mumbo jumbo.",
+				"game_3":"After a while you'll get this feeling drawing you in a certain direction. It'll lead you to a big arena with a stone pillar.",
+				"gems_1":"Outside, you can get these gems that change the effects of your weapons.",
+				"gems_2":"You just drag slot them in and then BAM special powers.",
+				"gems_3":"If you look at them long enough you can learn more about what they do.",
+				"outro_1":"Whelp, thats about all I can help you with at the moment. Good luck to ya!",
+				"rude_exit":"Hmmm... Rude...",
+				"normal_exit":"Bye!",
+				"exit_without_weapon":"Hey! Don't go out there without a weapon! If you already have one grab it from your equipment chest, otherwise go buy one from Smiffy."
 			},
 		}
 	}

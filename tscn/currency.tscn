@@ -1,0 +1,20 @@
+[gd_scene load_steps=4 format=3 uid="uid://bgneqfm5t4bg2"]
+
+[ext_resource type="Script" path="res://tscn/currency.gd" id="1_eqeb0"]
+[ext_resource type="Texture2D" uid="uid://bspevf2b2hnmn" path="res://assets/visual/upgrades/currency_mana.png" id="2_lh1kg"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_pvbwm"]
+radius = 10.0471
+
+[node name="currency" type="Area2D"]
+scale = Vector2(0.322531, 0.322531)
+script = ExtResource("1_eqeb0")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+scale = Vector2(3.94962, 3.94962)
+shape = SubResource("CircleShape2D_pvbwm")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+texture = ExtResource("2_lh1kg")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

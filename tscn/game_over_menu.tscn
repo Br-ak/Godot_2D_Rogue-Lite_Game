@@ -16,7 +16,9 @@ layout_mode = 2
 offset_top = 1.0
 offset_right = 96.0
 offset_bottom = 27.0
+scale = Vector2(1.09501, 1)
 text = "Game Over!"
+horizontal_alignment = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 0
@@ -33,7 +35,7 @@ text = "View Stats"
 
 [node name="Menu" type="Button" parent="MarginContainer/VBoxContainer"]
 layout_mode = 2
-text = "Main Menu"
+text = "Back To Hub"
 
 [node name="Confirm" type="Label" parent="."]
 visible = false

@@ -1,7 +1,7 @@
 shader_type canvas_item;
 
 uniform float value : hint_range(0.0, 1.0);
-uniform vec2 blur_amount = vec2(0.005, 0.005);
+//uniform vec2 blur_amount = vec2(0.005, 0.005);
 
 void fragment() {
 	vec4 color = texture(TEXTURE, UV);

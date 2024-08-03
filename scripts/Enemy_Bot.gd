@@ -98,16 +98,30 @@ func death():
 	if follower:
 		follower.get("trackingList").erase(self) 
 	var rng = RandomNumberGenerator.new()
-	var xp_rng = rng.randi_range(0,100)
-	if xp_rng % 5 == 0 || boss: # 20% spawn rate for xp drop
-		spawnExp()
-	else:
-		var health_pot_rng = rng.randi_range(0,200)
-		if health_pot_rng % 5 == 0 || boss: # 20% spawn rate for health drop if no xp drop
+	var drop_rng = rng.randi_range(0,100)
+	if drop_rng < 15 or boss:
+		if boss:
+			spawnExp()
 			spawnHealthPotion()
+		drop_rng = rng.randi_range(0,100)
+		if drop_rng < 33:
+			spawnExp()
+		elif drop_rng < 66 && drop_rng > 33:
+			spawnHealthPotion()
+		elif drop_rng > 66:
+			spawnCurrency()
 	player.killCounter += 1
 	player.gain_exp(1)
+
+
+func spawnCurrency():
+	const CURRENCY = preload("res://tscn/currency.tscn")
+	var new_c = CURRENCY.instantiate()
+	new_c.global_position = self.global_position
 	
+	get_parent().call_deferred("add_child", new_c)
+
+
 
 func spawnExp():
 	const EXP = preload("res://tscn/exp.tscn")

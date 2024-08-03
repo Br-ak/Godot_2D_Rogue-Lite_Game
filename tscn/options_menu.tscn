@@ -31,6 +31,7 @@ layout_mode = 2
 tab_alignment = 1
 
 [node name="General" type="Panel" parent="AspectRatioContainer/TabContainer"]
+visible = false
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 
@@ -168,7 +169,6 @@ layout_mode = 2
 theme_override_constants/separation = 50
 
 [node name="Sound" type="Panel" parent="AspectRatioContainer/TabContainer"]
-visible = false
 custom_minimum_size = Vector2(500, 500)
 layout_mode = 2
 

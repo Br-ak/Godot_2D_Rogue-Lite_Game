@@ -51,6 +51,7 @@ func init_listings():
 			var new_menu_listing = menu_listing.instantiate()
 			# name, cost, description, seller, key, current amount
 			var pips_active = player_upgrades[player_upgrade]["current_level"]
+			
 			var listing_info = [player_upgrades[player_upgrade]["name"], player_upgrades[player_upgrade]["listing_cost"], 
 				player_upgrades[player_upgrade]["description"], "Seer", player_upgrade, pips_active] 
 			grid_container.call("add_child", new_menu_listing)
@@ -61,7 +62,7 @@ func init_listings():
 			new_menu_listing.init_listing()
 
 #handle listing button pressed
-func button_pressed(listing_info):
+func button_pressed(listing_info, num):
 	#listing exists
 	if listing_info[0] in listings:
 		temp_listing_info = listing_info
@@ -73,7 +74,9 @@ func button_pressed(listing_info):
 				# error message
 				pass
 		elif menu_info[1] == "player upgrades":
-			if player.player_crystal >= int(temp_listing_info[5]):
+			var index = str(temp_listing_info[5] + 1)
+			var cost = int(player_upgrades[str(temp_listing_info[4])]["listing_cost"][index])
+			if player.player_crystal >= cost:
 				init_confirmation_menu()
 			else:
 				# error message
@@ -112,17 +115,23 @@ func _on_yes_pressed():
 			node.button_pressed = false
 	if menu_info[1] == "weapons":
 		player.weapon_add(temp_listing_info[0], 1)
+		StaticData.player_info.equipped_weapon = temp_listing_info[0]
 		player.weapons_purchased.append(temp_listing_info[0])
+		StaticData.player_info.weapons_purchased.append(temp_listing_info[0])
 		player.player_coins -= int(temp_listing_info[1])
+		StaticData.player_info.currency.coin -= int(temp_listing_info[1])
 		weapon_swap_hud.init()
+		hub.weapon_equipped = true
 	elif menu_info[1] == "player upgrades":
 		player.stat_upgrade(temp_listing_info[4])
-		player.weapons_purchased.append(temp_listing_info[0])
+		player.skills_purchased.append(temp_listing_info[0])
+		StaticData.player_info.skills_purchased.append(temp_listing_info[0])
 		player.player_crystal -= int(new_cost)
-		
-		
+		StaticData.player_info.currency.crystal -= int(new_cost)
+	
 	nine_patch_rect.set_modulate(Color(1, 1, 1, 1))
 	confirmation_box.set_visible(false)
+	init_listings()
 
 func _on_no_pressed():
 	# nothing happens

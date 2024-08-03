@@ -1,7 +1,19 @@
-[gd_scene load_steps=3 format=3 uid="uid://cidfm1r366vwk"]
+[gd_scene load_steps=15 format=3 uid="uid://cidfm1r366vwk"]
 
 [ext_resource type="Script" path="res://Tutorial.gd" id="1_k2kj0"]
-[ext_resource type="PackedScene" uid="uid://c8gsfo2dklpxg" path="res://tscn/tutorial_panel.tscn" id="2_o66a1"]
+[ext_resource type="Texture2D" uid="uid://oj5s0xes1ums" path="res://assets/visual/misc/text_background_ninepatch.png" id="2_72ycl"]
+[ext_resource type="Texture2D" uid="uid://bspevf2b2hnmn" path="res://assets/visual/upgrades/currency_mana.png" id="3_1i2an"]
+[ext_resource type="Texture2D" uid="uid://cknuhcvfco2yj" path="res://assets/visual/misc/arrow_pointer.png" id="4_yvjon"]
+[ext_resource type="Texture2D" uid="uid://cvcfu34dgcruc" path="res://assets/visual/misc/seer_menu.png" id="5_vc7wk"]
+[ext_resource type="Texture2D" uid="uid://b7kv1m7p0k2ka" path="res://assets/visual/upgrades/currency_coin.png" id="6_24x7i"]
+[ext_resource type="Texture2D" uid="uid://clwfiwi8wmx7b" path="res://assets/visual/misc/smith_menu.png" id="7_mkmff"]
+[ext_resource type="Texture2D" uid="uid://c0gnfgjkgiw4h" path="res://assets/visual/misc/chest_menu.png" id="8_571g1"]
+[ext_resource type="Texture2D" uid="uid://colsqcmt25f0h" path="res://assets/visual/misc/weapon_swap_menu.png" id="9_d11c2"]
+[ext_resource type="Texture2D" uid="uid://dydx3m3bviiby" path="res://assets/visual/misc/enemies.png" id="10_oeu0x"]
+[ext_resource type="Texture2D" uid="uid://b0vd18w76vond" path="res://assets/visual/misc/health_potion.png" id="11_jkebh"]
+[ext_resource type="Texture2D" uid="uid://cpuuwy8v32cud" path="res://assets/visual/misc/arena.png" id="12_rksvy"]
+[ext_resource type="Texture2D" uid="uid://c54vqqxipsswd" path="res://assets/visual/misc/arena3.png" id="13_rofvl"]
+[ext_resource type="Texture2D" uid="uid://i47lyvqngtn0" path="res://assets/visual/misc/upgrade_menu.png" id="14_tmqkv"]
 
 [node name="Tutorial" type="Control"]
 layout_mode = 3
@@ -12,21 +24,722 @@ grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_k2kj0")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
-custom_minimum_size = Vector2(500, 0)
+[node name="Button" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(50, 50)
 layout_mode = 1
-anchors_preset = 5
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -241.0
+offset_top = -102.0
+offset_right = -191.0
+offset_bottom = -52.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Next"
+
+[node name="Timer" type="Timer" parent="Button"]
+
+[node name="Button2" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -373.0
+offset_top = 226.0
+offset_right = -323.0
+offset_bottom = 276.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Next"
+
+[node name="Button3" type="Button" parent="."]
+visible = false
+custom_minimum_size = Vector2(50, 50)
+layout_mode = 1
+anchors_preset = 6
+anchor_left = 1.0
+anchor_top = 0.5
+anchor_right = 1.0
+anchor_bottom = 0.5
+offset_left = -297.0
+offset_top = 226.0
+offset_right = -195.0
+offset_bottom = 276.0
+grow_horizontal = 0
+grow_vertical = 2
+text = "Exit Tutorial"
+
+[node name="exit timer" type="Timer" parent="Button3"]
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+process_mode = 1
+layout_mode = 1
+anchors_preset = 8
 anchor_left = 0.5
+anchor_top = 0.5
 anchor_right = 0.5
-offset_left = -50.0
-offset_right = 50.0
-offset_bottom = 158.0
+anchor_bottom = 0.5
+offset_left = -325.0
+offset_top = -302.0
+offset_right = 325.0
+offset_bottom = 148.0
 grow_horizontal = 2
-theme_override_constants/separation = 150
-alignment = 1
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
 
-[node name="HBoxContainer" parent="VBoxContainer" instance=ExtResource("2_o66a1")]
-layout_mode = 2
+[node name="T1" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 311.0
+offset_top = 28.0
+offset_right = 351.0
+offset_bottom = 68.0
 
-[node name="Button" type="Button" parent="VBoxContainer"]
-layout_mode = 2
+[node name="t_1_img" type="TextureRect" parent="T1"]
+layout_mode = 0
+offset_left = 595.0
+offset_top = 74.0
+offset_right = 635.0
+offset_bottom = 114.0
+scale = Vector2(2, 2)
+texture = ExtResource("3_1i2an")
+
+[node name="TextureRect" type="TextureRect" parent="T1/t_1_img"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = -13.0
+offset_right = 88.0
+offset_bottom = 27.0
+rotation = 0.537698
+scale = Vector2(0.436353, 0.738066)
+texture = ExtResource("4_yvjon")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="T1"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -1.0
+offset_right = 296.0
+offset_bottom = 249.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="TextureRect" type="TextureRect" parent="T1/NinePatchRect"]
+layout_mode = 0
+offset_left = 12.0
+offset_top = 10.0
+offset_right = 663.0
+offset_bottom = 565.0
+scale = Vector2(0.502646, 0.413816)
+texture = ExtResource("5_vc7wk")
+
+[node name="NinePatchRect2" type="NinePatchRect" parent="T1"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 155.0
+offset_top = 283.0
+offset_right = 555.0
+offset_bottom = 383.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_1_label" type="Label" parent="T1/NinePatchRect2"]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 396.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "You can spend blue crystals here to permantently upgrade your characters stats. This carries over beteween runs."
+autowrap_mode = 3
+
+[node name="T2" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 311.0
+offset_top = 28.0
+offset_right = 351.0
+offset_bottom = 68.0
+
+[node name="t_2_img" type="TextureRect" parent="T2"]
+layout_mode = 0
+offset_left = 595.0
+offset_top = 74.0
+offset_right = 635.0
+offset_bottom = 114.0
+scale = Vector2(2, 2)
+texture = ExtResource("6_24x7i")
+
+[node name="t_2_TextureRect" type="TextureRect" parent="T2/t_2_img"]
+layout_mode = 0
+offset_left = 29.0
+offset_top = -35.0
+offset_right = 69.0
+offset_bottom = 5.0
+rotation = 1.06414
+scale = Vector2(0.436353, 0.738066)
+texture = ExtResource("4_yvjon")
+
+[node name="t_2_NinePatchRect" type="NinePatchRect" parent="T2"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -1.0
+offset_right = 296.0
+offset_bottom = 249.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_2_TextureRect_2" type="TextureRect" parent="T2/t_2_NinePatchRect"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 12.0
+offset_right = 697.0
+offset_bottom = 574.0
+scale = Vector2(0.409365, 0.409365)
+texture = ExtResource("7_mkmff")
+
+[node name="t_2_NinePatchRect2" type="NinePatchRect" parent="T2"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 155.0
+offset_top = 283.0
+offset_right = 555.0
+offset_bottom = 383.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_2_label" type="Label" parent="T2/t_2_NinePatchRect2"]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 396.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "You can spend coins here to buy new equipment. These will be stored in your equipment chest and can be equipped before leaving the hub."
+autowrap_mode = 3
+
+[node name="T3" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 311.0
+offset_top = 28.0
+offset_right = 351.0
+offset_bottom = 68.0
+
+[node name="t_3_NinePatchRect" type="NinePatchRect" parent="T3"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -54.0
+offset_top = -1.0
+offset_right = 296.0
+offset_bottom = 249.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_3_TextureRect_2" type="TextureRect" parent="T3/t_3_NinePatchRect"]
+layout_mode = 0
+offset_left = 46.0
+offset_top = 12.0
+offset_right = 697.0
+offset_bottom = 574.0
+scale = Vector2(0.409365, 0.409365)
+texture = ExtResource("8_571g1")
+
+[node name="t_3_NinePatchRect3" type="NinePatchRect" parent="T3"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 333.0
+offset_top = 27.0
+offset_right = 533.0
+offset_bottom = 227.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_3_TextureRect_2" type="TextureRect" parent="T3/t_3_NinePatchRect3"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 210.0
+scale = Vector2(0.895, 0.895)
+texture = ExtResource("9_d11c2")
+
+[node name="Label" type="Label" parent="T3/t_3_NinePatchRect3"]
+layout_mode = 0
+offset_left = 47.0
+offset_top = 14.0
+offset_right = 188.0
+offset_bottom = 40.0
+text = "Equipped Weapon"
+
+[node name="Label2" type="Label" parent="T3/t_3_NinePatchRect3"]
+layout_mode = 0
+offset_left = 45.0
+offset_top = 159.0
+offset_right = 189.0
+offset_bottom = 185.0
+text = "Holstered Weapon"
+
+[node name="t_3_NinePatchRect2" type="NinePatchRect" parent="T3"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 43.0
+offset_top = 283.0
+offset_right = 443.0
+offset_bottom = 383.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_3_label" type="Label" parent="T3/t_3_NinePatchRect2"]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 396.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "You can select which slot you would like to equip the weapon to. 
+Currently you can hold 2 weapons."
+autowrap_mode = 3
+
+[node name="T4" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 311.0
+offset_top = 28.0
+offset_right = 351.0
+offset_bottom = 68.0
+
+[node name="t_4_NinePatchRect3" type="NinePatchRect" parent="T4"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 7.0
+offset_top = 7.0
+offset_right = 207.0
+offset_bottom = 207.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_4_TextureRect_2" type="TextureRect" parent="T4/t_4_NinePatchRect3"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 210.0
+offset_bottom = 210.0
+scale = Vector2(0.586868, 0.586868)
+texture = ExtResource("10_oeu0x")
+
+[node name="Label" type="Label" parent="T4/t_4_NinePatchRect3"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 171.0
+offset_right = 165.0
+offset_bottom = 197.0
+text = "Strange Creature"
+
+[node name="t_4_NinePatchRect5" type="NinePatchRect" parent="T4"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -41.0
+offset_top = 255.0
+offset_right = 109.0
+offset_bottom = 405.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_4_TextureRect_2" type="TextureRect" parent="T4/t_4_NinePatchRect5"]
+layout_mode = 0
+offset_left = 43.0
+offset_top = 41.0
+offset_right = 107.0
+offset_bottom = 105.0
+texture = ExtResource("11_jkebh")
+
+[node name="Label" type="Label" parent="T4/t_4_NinePatchRect5"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 120.0
+offset_right = 141.0
+offset_bottom = 146.0
+text = "Health Potion"
+horizontal_alignment = 1
+
+[node name="t_4_NinePatchRect4" type="NinePatchRect" parent="T4"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 288.0
+offset_top = 7.0
+offset_right = 488.0
+offset_bottom = 207.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_4_TextureRect_2" type="TextureRect" parent="T4/t_4_NinePatchRect4"]
+layout_mode = 0
+offset_left = 21.0
+offset_top = 22.0
+offset_right = 101.0
+offset_bottom = 102.0
+texture = ExtResource("6_24x7i")
+
+[node name="t_4_TextureRect_3" type="TextureRect" parent="T4/t_4_NinePatchRect4"]
+layout_mode = 0
+offset_left = 100.0
+offset_top = 85.0
+offset_right = 180.0
+offset_bottom = 165.0
+texture = ExtResource("3_1i2an")
+
+[node name="Label" type="Label" parent="T4/t_4_NinePatchRect4"]
+layout_mode = 0
+offset_left = 33.0
+offset_top = 171.0
+offset_right = 165.0
+offset_bottom = 197.0
+text = "Loot"
+horizontal_alignment = 1
+
+[node name="t_4_NinePatchRect2" type="NinePatchRect" parent="T4"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 135.0
+offset_top = 280.0
+offset_right = 535.0
+offset_bottom = 380.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_4_label" type="Label" parent="T4/t_4_NinePatchRect2"]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 396.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Enemies will occasionally drop health potions, among with other things that may aid your fight."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="T5" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 311.0
+offset_top = 28.0
+offset_right = 351.0
+offset_bottom = 68.0
+
+[node name="t_4_NinePatchRect3" type="NinePatchRect" parent="T5"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -69.0
+offset_top = -15.0
+offset_right = 263.02
+offset_bottom = 255.005
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_4_TextureRect_2" type="TextureRect" parent="T5/t_4_NinePatchRect3"]
+layout_mode = 0
+offset_left = 14.0
+offset_top = 13.0
+offset_right = 537.0
+offset_bottom = 431.0
+scale = Vector2(0.586868, 0.586868)
+texture = ExtResource("12_rksvy")
+
+[node name="t_4_NinePatchRect4" type="NinePatchRect" parent="T5"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 280.0
+offset_top = 37.0
+offset_right = 560.0
+offset_bottom = 287.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_4_TextureRect_2" type="TextureRect" parent="T5/t_4_NinePatchRect4"]
+layout_mode = 0
+offset_left = 9.0
+offset_top = 13.0
+offset_right = 594.0
+offset_bottom = 515.0
+scale = Vector2(0.448, 0.448)
+texture = ExtResource("13_rofvl")
+
+[node name="t_4_NinePatchRect2" type="NinePatchRect" parent="T5"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 42.0
+offset_top = 306.0
+offset_right = 442.0
+offset_bottom = 406.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_4_label" type="Label" parent="T5/t_4_NinePatchRect2"]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 396.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Interacting with the stone pillar will spawn a boss and seal off the arena until it is defeated."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="T6" type="Control" parent="."]
+visible = false
+anchors_preset = 0
+offset_left = 311.0
+offset_top = 28.0
+offset_right = 351.0
+offset_bottom = 68.0
+
+[node name="t_4_NinePatchRect3" type="NinePatchRect" parent="T6"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 39.0
+offset_top = -18.0
+offset_right = 439.0
+offset_bottom = 307.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_4_TextureRect_2" type="TextureRect" parent="T6/t_4_NinePatchRect3"]
+layout_mode = 0
+offset_left = 10.0
+offset_top = 10.0
+offset_right = 765.0
+offset_bottom = 613.0
+scale = Vector2(0.50156, 0.50156)
+texture = ExtResource("14_tmqkv")
+
+[node name="t_4_NinePatchRect2" type="NinePatchRect" parent="T6"]
+process_mode = 1
+self_modulate = Color(0.435294, 0.435294, 0.435294, 1)
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = 38.0
+offset_top = 312.0
+offset_right = 438.0
+offset_bottom = 412.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = ExtResource("2_72ycl")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="t_4_label" type="Label" parent="T6/t_4_NinePatchRect2"]
+custom_minimum_size = Vector2(390, 0)
+layout_mode = 0
+offset_left = 6.0
+offset_top = 11.0
+offset_right = 396.0
+offset_bottom = 89.0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+text = "Drag upgrades from the panel on the right into one of the sockets open on the weapon. Some weapons have multiple attacks to put upgrades in."
+vertical_alignment = 1
+autowrap_mode = 3
+
+[node name="pan_timer" type="Timer" parent="."]
+
+[connection signal="pressed" from="Button" to="." method="_on_button_pressed"]
+[connection signal="timeout" from="Button/Timer" to="." method="_on_timer_timeout"]
+[connection signal="pressed" from="Button2" to="." method="_on_button_pressed"]
+[connection signal="pressed" from="Button3" to="." method="_on_button_3_pressed"]
+[connection signal="timeout" from="Button3/exit timer" to="." method="_on_exit_timer_timeout"]
+[connection signal="timeout" from="pan_timer" to="." method="_on_pan_timer_timeout"]

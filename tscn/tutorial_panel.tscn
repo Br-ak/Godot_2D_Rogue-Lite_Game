@@ -1,12 +1,36 @@
-[gd_scene load_steps=3 format=3 uid="uid://c8gsfo2dklpxg"]
+[gd_scene load_steps=4 format=3 uid="uid://c8gsfo2dklpxg"]
 
 [ext_resource type="Script" path="res://scripts/tutorial_panel.gd" id="1_2t1f0"]
-[ext_resource type="Texture2D" uid="uid://dsd442we8f0dm" path="res://assets/visual/weapon/GUN_01_[square_frame]_01_V1.00.png" id="1_scdbt"]
+[ext_resource type="Texture2D" uid="uid://oj5s0xes1ums" path="res://assets/visual/misc/text_background_ninepatch.png" id="2_rwgf3"]
+[ext_resource type="Texture2D" uid="uid://vkqpx3sqap7p" path="res://assets/visual/misc/Screenshot 2024-07-25 151930.png" id="3_krsnx"]
 
 [node name="Control" type="Control"]
 layout_mode = 3
 anchors_preset = 0
 script = ExtResource("1_2t1f0")
+
+[node name="NinePatchRect" type="NinePatchRect" parent="."]
+self_modulate = Color(0.564706, 0.564706, 0.564706, 1)
+custom_minimum_size = Vector2(500, 200)
+layout_mode = 0
+offset_left = 58.0
+offset_top = 131.0
+offset_right = 558.0
+offset_bottom = 331.0
+texture = ExtResource("2_rwgf3")
+patch_margin_left = 7
+patch_margin_top = 9
+patch_margin_right = 8
+patch_margin_bottom = 7
+
+[node name="TextureRect2" type="TextureRect" parent="NinePatchRect"]
+layout_mode = 1
+offset_left = 16.0
+offset_top = 6.0
+offset_right = 516.0
+offset_bottom = 206.0
+texture = ExtResource("3_krsnx")
+expand_mode = 1
 
 [node name="HBoxContainer" type="HBoxContainer" parent="."]
 layout_mode = 0
@@ -17,7 +41,6 @@ alignment = 1
 [node name="TextureRect" type="TextureRect" parent="HBoxContainer"]
 custom_minimum_size = Vector2(128, 128)
 layout_mode = 2
-texture = ExtResource("1_scdbt")
 stretch_mode = 5
 
 [node name="Label" type="Label" parent="HBoxContainer"]

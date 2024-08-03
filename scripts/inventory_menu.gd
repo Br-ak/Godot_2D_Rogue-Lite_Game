@@ -36,6 +36,7 @@ func on_open():
 func init_weapon_panels():
 	if get_parent().get_parent().name == "Hub World": player = get_parent().get_parent().get_node("Player")
 	elif get_parent().get_parent().name == "Game": player = get_parent().get_parent().get_node("World").get_node("Player")
+	
 	var equipped_weapon_key = player.equipped_weapon.WEAPON_NAME
 	equipped_weapon_name = player.equipped_weapon.WEAPON_NAME
 	label_2.text = data[equipped_weapon_key]["name"]

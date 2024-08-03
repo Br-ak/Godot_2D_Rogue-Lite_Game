@@ -1,7 +1,8 @@
-[gd_scene load_steps=3 format=3 uid="uid://x0qah1ecl6l7"]
+[gd_scene load_steps=4 format=3 uid="uid://x0qah1ecl6l7"]
 
 [ext_resource type="Script" path="res://scripts/pause_menu.gd" id="1_fpac0"]
 [ext_resource type="PackedScene" uid="uid://ci0lr4vn5lccr" path="res://tscn/options_menu.tscn" id="2_wwoed"]
+[ext_resource type="PackedScene" uid="uid://nhb5hweq2yl7" path="res://tscn/save_menu.tscn" id="3_we6s3"]
 
 [node name="Pause Menu" type="Control"]
 layout_mode = 3
@@ -39,6 +40,10 @@ text = "Resume"
 layout_mode = 2
 text = "Options"
 
+[node name="save-load" type="Button" parent="AspectRatioContainer/Pause Menu Selections"]
+layout_mode = 2
+text = "Save/Load"
+
 [node name="Quit" type="Button" parent="AspectRatioContainer/Pause Menu Selections"]
 layout_mode = 2
 text = "Quit"
@@ -65,8 +70,13 @@ text = "No"
 visible = false
 layout_mode = 2
 
+[node name="save_menu" parent="AspectRatioContainer" instance=ExtResource("3_we6s3")]
+visible = false
+layout_mode = 2
+
 [connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/Resume" to="." method="_on_resume_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/Options" to="." method="_on_options_pressed"]
+[connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/save-load" to="." method="_on_saveload_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/Quit" to="." method="_on_quit_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/HBoxContainer/Yes" to="." method="_on_yes_pressed"]
 [connection signal="pressed" from="AspectRatioContainer/Pause Menu Selections/HBoxContainer/No" to="." method="_on_no_pressed"]

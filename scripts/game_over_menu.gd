@@ -23,7 +23,7 @@ func _on_menu_pressed():
 
 
 func _on_yes_pressed():
-	get_tree().change_scene_to_file("res://tscn/main_menu.tscn")
+	get_tree().change_scene_to_file("res://tscn/hub_world.tscn")
 	Engine.time_scale = 1
 
 

@@ -1,4 +1,4 @@
-[gd_scene load_steps=8 format=3 uid="uid://dt2xfuibf246d"]
+[gd_scene load_steps=10 format=3 uid="uid://dt2xfuibf246d"]
 
 [ext_resource type="Script" path="res://scripts/Game.gd" id="1_bkj1u"]
 [ext_resource type="PackedScene" uid="uid://dkt7sfuc2psyg" path="res://tscn/World.tscn" id="2_70odr"]
@@ -7,6 +7,14 @@
 [ext_resource type="PackedScene" uid="uid://h5o64r5rw0wu" path="res://tscn/Hud.tscn" id="5_0te5f"]
 [ext_resource type="PackedScene" uid="uid://co6r0ruevq3ni" path="res://tscn/level_up_menu.tscn" id="6_sdn3w"]
 [ext_resource type="PackedScene" uid="uid://3pqht14fayf" path="res://tscn/inventory_menu.tscn" id="7_8o5rw"]
+
+[sub_resource type="Gradient" id="Gradient_q5lwf"]
+offsets = PackedFloat32Array(0)
+colors = PackedColorArray(0, 0, 0, 1)
+
+[sub_resource type="GradientTexture1D" id="GradientTexture1D_ab558"]
+gradient = SubResource("Gradient_q5lwf")
+width = 100
 
 [node name="Game" type="Node2D"]
 script = ExtResource("1_bkj1u")
@@ -45,6 +53,17 @@ visible = false
 [node name="Inventory Menu" parent="CanvasLayer" instance=ExtResource("7_8o5rw")]
 visible = false
 
+[node name="fade_box" type="TextureRect" parent="CanvasLayer"]
+offset_left = -3600.0
+offset_top = -2327.0
+offset_right = -3344.0
+offset_bottom = -2287.0
+scale = Vector2(31.0789, 136.139)
+texture = SubResource("GradientTexture1D_ab558")
+
+[node name="fade_timer" type="Timer" parent="CanvasLayer/fade_box"]
+
 [node name="Timer" type="Timer" parent="."]
 
+[connection signal="timeout" from="CanvasLayer/fade_box/fade_timer" to="." method="_on_fade_timer_timeout"]
 [connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]

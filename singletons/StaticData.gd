@@ -1,5 +1,26 @@
 extends Node
 
+var player_info = {
+	location = null,
+	equipped_weapon = null,
+	holstered_weapon = null,
+	weapons_purchased = [],
+	weapon_upgrades = [],
+	skills_purchased = [],
+	currency = {
+		crystal = 500,
+		coin = 2000,
+	},
+	stat_upgrades = {
+		perma_upgrade_health = 0,
+		perma_upgrade_speed = 0,
+		perma_upgrade_attack_speed = 0,
+		perma_upgrade_follower_attack_speed = 0,
+		perma_upgrade_follower_damage = 0,
+	},
+}
+
+
 var upgrades = {}
 var keybinds = {}
 var sound_settings = {}
@@ -17,8 +38,13 @@ var player_upgrades_file_path = "res://resources/player_perma_upgrades.json"
 var weapon_stat_list = ["attack_damage", "attack_wait", "attack_hits", "attack_type", "attack_origin", "attack_pattern", "attack_pierce", 
 "attack_projectile_count", "attack_projectile_offset", "attack_reset_time", "attack_projectile_speed", "attack_range", "attack_base_damage",
 "attack_damage_increase", "attack_damage_multiplier", "attack_reset_time_multiplier", "WEAPON_NAME", "ATTACK_NUMBER", "attack_projectile_count_incerase"]
-
+var save_code_temp
 func _ready():
+	save_code_temp = save_data()
+	#save_code_temp = "eyJjdXJyZW5jeSI6eyJjb2luIjoxMCwiY3J5c3RhbCI6NTAwfSwiZXF1aXBwZWRfd2VhcG9uIjpudWxsLCJob2xzdGVyZWRfd2VhcG9uIjpudWxsLCJsb2NhdGlvbiI6bnVsbCwic2tpbGxzX3B1cmNoYXNlZCI6e30sInN0YXRfdXBncmFkZXMiOnsicGVybWFfdXBncmFkZV9hdHRhY2tfc3BlZWQiOjIsInBlcm1hX3VwZ3JhZGVfZm9sbG93ZXJfYXR0YWNrX3NwZWVkIjozLCJwZXJtYV91cGdyYWRlX2ZvbGxvd2VyX2RhbWFnZSI6NCwicGVybWFfdXBncmFkZV9oZWFsdGgiOjUwMCwicGVybWFfdXBncmFkZV9zcGVlZCI6NTAwfSwid2VhcG9uX3VwZ3JhZGVzIjp7fSwid2VhcG9uc19wdXJjaGFzZWQiOnt9fQ=="
+	#print("Save Code: ", save_code)
+
+	load_data(save_code_temp)
 	upgrades = load_json_file(upgrades_file_path)
 	keybinds = load_json_file(keybinds_file_path)
 	weapons = load_json_file(weapons_file_path)
@@ -55,8 +81,30 @@ func save_sound_data(key, value):
 func update_upgrade_level(key, value):
 #	print("key: ", key)
 #	print("value: ", value)
-	player_upgrades["upgrades"][key]["current_level"] = value
+	var player_upgrades_data = StaticData.player_upgrades["upgrades"]
+	player_upgrades_data[key]["current_level"] = value
 	var json = JSON.stringify(player_upgrades, "\t")
 	var file = FileAccess.open(player_upgrades_file_path, FileAccess.WRITE)
 	file.store_line(json)
 	file.close()
+
+func save_data():
+	return Marshalls.raw_to_base64(JSON.stringify(player_info).to_utf8_buffer())
+
+func load_data(save_code: String):
+	#print("Before Update: ", player_info)
+	var byte_array = Marshalls.base64_to_raw(save_code)
+	var json_string = byte_array.get_string_from_utf8()
+	var parsed_data = parse_json(save_code)
+	
+	if parsed_data != null:
+		for key in player_info.keys():
+			if parsed_data.has(key):
+				player_info[key] = parsed_data[key]
+		#print("After Update: ", player_info)
+		return true
+	else:
+		return false
+
+func parse_json(save_code: String):
+	return JSON.parse_string(Marshalls.base64_to_raw(save_code).get_string_from_utf8())

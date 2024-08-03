@@ -22,6 +22,8 @@ extends Node2D
 @onready var timer = $Doorway_detection/Timer
 @onready var fade_box = $CanvasLayer/fade_box
 @onready var fade_timer = $CanvasLayer/fade_box/fade_timer
+@onready var tutorial = $CanvasLayer/Tutorial
+@onready var parallax_background = $CanvasLayer/ParallaxBackground
 
 var interacting_with := ""
 var interacted_with_already := []
@@ -39,6 +41,9 @@ var satyr_button_info = ["Yes (Display Tutorial)", "No (Skip Tutorial)"]
 var exit_button_info = ["Yes", "No"]
 var fade_start
 var fade_count := 0
+var weapon_equipped := false
+var failed_exit = false
+var busy := false
 # Called when the node enters the scene tree for the first time.
 func _ready():
 	player.init_for_hub()
@@ -46,12 +51,14 @@ func _ready():
 		var hud_canvas = hud.get_node("AspectRatioContainer").get_node("CanvasLayer")
 		for node in hud_canvas.get_children():
 			node.set_visible(false)
-			if node.name == "Weapon Swap" || node.name == "Message Control" || node.name == "currency":
+			if node.name == "Weapon Swap" || node.name == "Message Control" || node.name == "currency" || node.name == "ParallaxBackground":
 				node.set_visible(true)
+			else: node.set_visible(false)
 
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _process(delta):
-	if Input.is_action_pressed("player_interact"):
+	if Input.is_action_pressed("player_interact") && !busy:
+		busy = true
 		if interact_icon_smith.player_interactable:
 			smith_interactable_pressed()
 		elif interact_icon_seer.player_interactable:
@@ -60,12 +67,26 @@ func _process(delta):
 			chest_interactable_pressed()
 		elif interact_icon_satyr.player_interactable:
 			satyr_interactable_pressed()
+	if Input.is_action_just_pressed("pause_game") && Engine.time_scale == 1 || Input.is_action_just_pressed("pause_game") && pause_menu.is_visible() && !busy: 
+		busy = true
+		pauseMenu()
+
+func pauseMenu():
+	main_menu.set_visible(false)
+	if pause_menu.is_visible():
+		pause_menu.set_visible(false)
+		player.playable = true
+		busy = false
+	else:
+		pause_menu.set_visible(true)
+		player.playable = false
+
 
 func start_game():
 	player.playable = true
 
 func smith_interactable_pressed():
-	if can_interact:
+	if can_interact && player.playable:
 		interacting_with = "Smith"
 		player.playable = false
 		can_interact = false
@@ -89,7 +110,7 @@ func smith_interactable_pressed():
 		context_menu.init()
 
 func seer_interactable_pressed():
-	if can_interact:
+	if can_interact && player.playable:
 		interacting_with = "Seer"
 		player.playable = false
 		can_interact = false
@@ -113,7 +134,7 @@ func seer_interactable_pressed():
 			dialog_box.fetch_text("Seer", "intro", str(rng))
 
 func satyr_interactable_pressed():
-	if can_interact:
+	if can_interact && player.playable:
 		interacting_with = "Satyr Steve"
 		player.playable = false
 		can_interact = false
@@ -137,7 +158,7 @@ func satyr_interactable_pressed():
 			dialog_box.fetch_text("Satyr Steve", "intro", str(rng))
 			
 func chest_interactable_pressed():
-	if can_interact:
+	if can_interact && player.playable:
 		player.playable = false
 		can_interact = false
 		interact_icon_chest.set_visible(false)
@@ -148,16 +169,33 @@ func _on_interact_timer_timeout():
 	can_interact = true
 
 func context_talk_button():
+	var rng = randi_range(1, 3)
 	if interacting_with == "Seer" && dialog_box.button_pressable:
-		dialog_box.fetch_text("Seer", "hub_text", "2")
+		dialog_box.fetch_text("Seer", "intro", str(rng))
 	elif interacting_with == "Smith" && dialog_box.button_pressable:
-		dialog_box.fetch_text("Smiffy", "hub_text", "2")
+		dialog_box.fetch_text("Smiffy", "intro", str(rng))
 	elif interacting_with == "Satyr Steve" && dialog_box.button_pressable:
 		#commence tutoral
 		print("wahe")
+		tutorial.init()
 	elif interacting_with == "exit door"  && dialog_box.button_pressable:
-		fade_start = true
-		fade_timer.start(0.1)
+		if !weapon_equipped:
+			context_menu.set_visible(true)
+			context_menu.button3_text = "Close"
+			context_menu.init()
+			context_menu.button_2.set_visible(false)
+			context_menu.button_1.set_visible(false)
+			dialog_box.speaker_name = "Satyr Steve"
+			dialog_box.init_box()
+			dialog_box.set_visible(true)
+			dialog_box.fetch_text("Satyr Steve", "tutorial_text", "exit_without_weapon")
+			interacting_with = "exit door"
+			failed_exit = true
+			context_exit_button()
+		else:
+			player.anim.play("Side_Idle")
+			fade_start = true
+			fade_timer.start(0.1)
 
 func context_merchant_button():
 	if interacting_with == "Seer":
@@ -180,13 +218,14 @@ func context_exit_button():
 	else:
 		dialog_box.menu_closed = true
 		for node in canvas_layer.get_children():
-			if node.name == "Hud":
+			if node.name == "Hud" || node.name == "ParallaxBackground":
 				node.set_visible(true)
 			else:
 				node.set_visible(false)
 		player.playable = true
 		interacting_with = ""
 		can_interact = true
+	busy = false
 
 
 func _on_doorway_detection_area_entered(area):
@@ -202,26 +241,29 @@ func _on_doorway_detection_area_entered(area):
 			context_menu.label.set_visible(true)
 			context_menu.button_2.set_visible(false)
 
-
+#doorway failed exit timer
 func _on_timer_timeout():
 	timer.stop()
-	dialog_box.menu_closed = true
+	#dialog_box.menu_closed = true
 	for node in canvas_layer.get_children():
-		if node.name == "Hud":
+		if node.name == "Hud" || node.name == "ParallaxBackground":
 			node.set_visible(true)
 		else:
 			node.set_visible(false)
+	if failed_exit:
+		dialog_box.set_visible(true)
+		context_menu.set_visible(true)
+		failed_exit = false
 	Input.action_release("ui_down")
-	player.playable = true
+	#player.playable = true
 	interacting_with = ""
 	can_interact = true
-
+	#dialog_box.set_visible(false)
 
 
 func _on_fade_timer_timeout():
 	if fade_count > 20:
 		fade_timer.stop()
-		print("faded")
 		get_tree().change_scene_to_file("res://tscn/game.tscn")
 	else:
 		fade_count += 1

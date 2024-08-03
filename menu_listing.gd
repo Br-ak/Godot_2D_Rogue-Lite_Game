@@ -3,8 +3,14 @@ extends Control
 @onready var menu_listing = $"."
 @onready var texture_rect_2 = $TextureRect2
 @onready var texture_rect = $TextureRect
-@onready var button = $TextureRect/Button
-@onready var upgrade_pips = $TextureRect/Button/upgrade_pips
+
+@onready var v_box_container = $TextureRect/VBoxContainer
+@onready var buttons = $TextureRect/VBoxContainer/buttons
+@onready var button = $TextureRect/VBoxContainer/buttons/Button
+@onready var button_2 = $TextureRect/VBoxContainer/buttons/Button2
+
+@onready var upgrade_pips = $TextureRect/upgrade_pips
+
 @onready var player = get_parent().get_parent().get_parent().get_parent().player
 @onready var label = $TextureRect/Label
 @onready var desc = $TextureRect/desc
@@ -21,11 +27,11 @@ var pips_active := 0
 var pip_empty = preload("res://assets/visual/upgrades/upgrade_pip_empty.png")
 var pip_filled = preload("res://assets/visual/upgrades/upgrade_pip_filled.png")
 
-@onready var pip_1 = $TextureRect/Button/upgrade_pips/TextureRect
-@onready var pip_2 = $TextureRect/Button/upgrade_pips/TextureRect2
-@onready var pip_3 = $TextureRect/Button/upgrade_pips/TextureRect3
-@onready var pip_4 = $TextureRect/Button/upgrade_pips/TextureRect4
-@onready var pip_5 = $TextureRect/Button/upgrade_pips/TextureRect5
+@onready var pip_1 = $TextureRect/upgrade_pips/TextureRect
+@onready var pip_2 = $TextureRect/upgrade_pips/TextureRect2
+@onready var pip_3 = $TextureRect/upgrade_pips/TextureRect3
+@onready var pip_4 = $TextureRect/upgrade_pips/TextureRect4
+@onready var pip_5 = $TextureRect/upgrade_pips/TextureRect5
 var pips = []
 
 
@@ -41,7 +47,7 @@ func init_listing():
 		if listing_info[3] == "Smith": 
 			currency_path = "res://assets/visual/upgrades/currency_coin.png"
 			button.text = listing_info[1]
-			if listing_info[0] in player.weapons_purchased:
+			if listing_info[0] in player.weapons_purchased || listing_info[0] in StaticData.player_info.weapons_purchased:
 				button.set_visible(false) 
 				sold_icon.set_visible(true)
 		elif listing_info[3] == "Seer": 
@@ -62,7 +68,8 @@ func _on_button_pressed():
 		var node = get_parent().get_parent().get_parent().get_parent()
 		if node.name == "shop_menu" || node.name == "chest_menu": 
 			button_pressed = true
-			node.button_pressed(listing_info)
+			node.button_pressed(listing_info, 1)
+			self.init_listing()
 
 func sold():
 	if listing_info[3] == "Smith":
@@ -78,4 +85,13 @@ func sold():
 		button.text = str(player_upgrades[listing_info[4]]["listing_cost"][str(pips_active + 1)])
 		if pips_active == 5:
 			button.set_visible(false)
+	self.init_listing()
 		
+
+
+func _on_button_2_pressed():
+	if button_pressed == false:
+		var node = get_parent().get_parent().get_parent().get_parent()
+		if node.name == "shop_menu" || node.name == "chest_menu": 
+			button_pressed = true
+			node.button_pressed(listing_info, 2)

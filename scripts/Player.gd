@@ -55,8 +55,9 @@ var holstered_weapon_upgrades = []
 
 var debug_avail = true
 var location := "game"
-var playable := true
+var playable = true
 var weapons_purchased = []
+var skills_purchased = []
 
 var perma_upgrade_health := 0
 var perma_upgrade_speed := 0
@@ -64,6 +65,7 @@ var perma_upgrade_damage := 0
 var perma_upgrade_attack_speed := 0
 var perma_upgrade_follower_damage := 0
 var perma_upgrade_follower_attack_speed := 0
+var health_total
 
 var player_exp := 0:
 	set(value):
@@ -80,30 +82,46 @@ var killCounter := 0:
 		killCounter = value
 		hud.killCounter = killCounter
 
-var player_health := 0:
+var player_health := 100:
 	set(value):
 		player_health = value
-		hud.playerHealth = player_health
+		if hud:
+			hud.HP_BAR_MAX = health_total
+			hud.playerHealth = player_health
 
 var player_coins := 0:
 	set(value):
 		player_coins = value
-		hud.player_coins = player_coins
+		if hud:
+			hud.player_coins = player_coins
 
 var player_crystal := 0:
 	set(value):
 		player_crystal = value
-		hud.player_crystal = player_crystal
+		if hud:
+			hud.player_crystal = player_crystal
 
 func _ready():
 	anim.play("Side_Idle")
 	init_stats()
 
 func init_stats():
+	for upgrade in player_upgrades:
+		var upgrade_level = player_upgrades[upgrade]["current_level"]
+		if upgrade_level != 0:
+			var upgrade_value = player_upgrades[upgrade]["level"][str(upgrade_level)]
+			if upgrade == "attack_speed_up": perma_upgrade_attack_speed = upgrade_value
+			elif upgrade == "damage_up": perma_upgrade_damage = upgrade_value
+			elif upgrade == "hp_up": perma_upgrade_health = upgrade_value
+			elif upgrade == "speed_up": perma_upgrade_speed = upgrade_value
+			elif upgrade == "follower_damage": perma_upgrade_follower_damage = upgrade_value
+			elif upgrade == "follower_attack_speed": perma_upgrade_follower_attack_speed = upgrade_value
+	
 	if perma_upgrade_health:
 		player_health += perma_upgrade_health
 		health_component.MAX_HEALTH = player_health
 		health_component.health = player_health
+	health_total = player_health
 	
 	speed = starting_speed + perma_upgrade_speed
 	
@@ -128,6 +146,9 @@ func init_stats():
 
 
 func init_for_hub():
+	StaticData.player_info.location = "hub"
+	
+	location = "hub"
 	playable = false
 	anim = $AnimatedSprite2D
 	weapon = $Weapon
@@ -140,12 +161,28 @@ func init_for_hub():
 	audio_manager = self.get_tree().get_root().get_node("AudioManager")
 	navigation_region_2d = $NavigationRegion2D
 	world = self
-	location = "hub"
-	player_coins = 5000
-	player_crystal = 200
+	
+	player_crystal = StaticData.player_info.currency.crystal
+	player_coins = StaticData.player_info.currency.coin
 
+func loaded_data():
+	if StaticData.player_info.equipped_weapon != null:
+		weapon_add(StaticData.player_info.equipped_weapon, 1)
+	if StaticData.player_info.holstered_weapon != null:
+		weapon_add(StaticData.player_info.holstered_weapon, 2)
+	
+	player_crystal = StaticData.player_info.currency.crystal
+	player_coins = StaticData.player_info.currency.coin
 
 func init_for_game():
+	StaticData.player_info.location = "game"
+	if StaticData.player_info.equipped_weapon != null:
+		weapon_add(StaticData.player_info.equipped_weapon, 1)
+	if StaticData.player_info.holstered_weapon != null:
+		weapon_add(StaticData.player_info.holstered_weapon, 2)
+		
+	
+	
 	anim = $AnimatedSprite2D
 	weapon = $Weapon
 	sound_timer = $"Sound Timer"
@@ -165,21 +202,11 @@ func init_for_game():
 	game = self.get_tree().get_root().get_node("Game")
 	world = game.get_node("World")
 	mobs = world.get_node("Mobs")
+	inventory_menu.init_weapon_panels()
+	hud.weapon_swap.init()
+	weapon_swappable = true
 	
-	if test_weapon_equipped == false:
-		test_weapon_equipped = true
-		weapon_add("Empty Wizard's Staff", 1)
-		weapon_add("Old Spell Book", 2)
-#		new_active_weapon = magic_component_weapon.instantiate()
-#		new_holstered_weapon = spell_book_weapon.instantiate()
-#		weapon.call("add_child", new_active_weapon)
-#		weapon.call("add_child", new_holstered_weapon)
-#		new_holstered_weapon.set_visible(false)
-#		equipped_weapon = new_active_weapon
-#		holstered_weapon = new_holstered_weapon
-		inventory_menu.init_weapon_panels()
-		hud.weapon_swap.init()
-		weapon_swappable = true
+
 
 
 func _physics_process(_delta):
@@ -204,7 +231,10 @@ func read_inputs():
 	
 	if direction && !audio_manager.sound_is_playing(sound_string, sound_info) && Engine.time_scale == 1 && sound_playable:
 		sound_rng = randi_range(1, 3)
-		sound_string = "move" + str(sound_rng)
+		if location == "hub":
+			sound_string = "move_stone_" + str(sound_rng)
+		else:
+			sound_string = "move" + str(sound_rng)
 		audio_manager.play_sound(sound_string, sound_info)
 		sound_playable = false
 		sound_timer.start(0.3)
@@ -277,8 +307,14 @@ func gain_health(value):
 	else:
 		health_component.health += value
 		player_health += value
-	
 
+func gain_currency(value, type):
+	if type == "coin": 
+		player_coins += value
+		StaticData.player_info.currency.coin += value
+	elif type == "crystal": 
+		player_crystal += value
+		StaticData.player_info.currency.crystal += value
 
 func level_up():
 	player_level += 1

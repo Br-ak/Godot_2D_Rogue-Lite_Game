@@ -25,9 +25,12 @@ var menu_closed := false
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	
 	init_box()
 
 func init_box():
+	if get_parent().get_parent().has_node("Player"):
+		get_parent().get_parent().get_node("Player").playable = false
 	menu_closed = false
 	message.text = ""
 	speaker.text = speaker_name
@@ -95,6 +98,7 @@ func _on_next_button_pressed():
 			close_dialogue()
 
 func close_dialogue():
+	
 	#dialog_box.set_visible(false)
 	if get_parent().get_parent().name == "Hub World":
 		get_parent().get_parent().can_interact = true

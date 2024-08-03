@@ -1,7 +1,7 @@
 {
 	"sound_settings": {
 		"master_volume": {
-			"assigned_volume": 0.381,
+			"assigned_volume": 1,
 			"defult_volume": 1,
 			"name": "Master Volume Slider"
 		},
@@ -11,12 +11,12 @@
 			"name": "Menu Volume Slider"
 		},
 		"music_volume": {
-			"assigned_volume": 0.207,
+			"assigned_volume": 1,
 			"defult_volume": 1,
 			"name": "Music Volume Slider"
 		},
 		"sfx_volume": {
-			"assigned_volume": 0.545,
+			"assigned_volume": 1,
 			"defult_volume": 1,
 			"name": "Sfx Volume Slider"
 		}

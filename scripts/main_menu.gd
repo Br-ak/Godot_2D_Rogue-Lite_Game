@@ -6,12 +6,14 @@ var music_data = ["Music"]
 @onready var options_menu = $"Options Menu"
 @onready var main_menu_selections = $"Main Menu Selections"
 var root
-
+var menu_closed := false
 
 @onready var blur_background = get_parent().get_node("blur_background")
 @onready var fadeout := false
 @onready var shader_value = blur_background.material.get_shader_parameter("value")
 @onready var fade_speed = 0.0005
+@onready var save_menu = $save_menu
+@onready var title = $title
 
 var start_pressed := false
 func _ready():
@@ -29,12 +31,14 @@ func _physics_process(delta):
 		close_menu()
 
 func close_menu():
-	root = get_parent().get_parent()
-	for node in self.get_children():
-		node.set_visible(false)
-	blur_background.set_visible(false)
-	if root.name == "Hub World" && root.has_method("start_game"):
-		root.start_game()
+	if !menu_closed:
+		root = get_parent().get_parent()
+		for node in self.get_children():
+			node.set_visible(false)
+		blur_background.set_visible(false)
+		if root.name == "Hub World" && root.has_method("start_game"):
+			root.start_game()
+		menu_closed = true
 
 func _on_start_button_pressed():
 	start_pressed = true
@@ -43,6 +47,7 @@ func _on_start_button_pressed():
 
 func _on_option_button_pressed():
 	main_menu_selections.set_visible(false)
+	title.set_visible(false)
 	options_menu.set_visible(true)
 	#get_tree().change_scene_to_file("res://tscn/options_menu.tscn")
 
@@ -54,6 +59,7 @@ func focus_gained():
 		if node.name != "Main Menu Selections":
 			node.set_visible(false)
 	main_menu_selections.set_visible(true)
+	title.set_visible(true)
 
 func _bind_user_keys():
 	for key in keybindList:
@@ -65,4 +71,8 @@ func _bind_user_keys():
 			InputMap.action_add_event(key, new_assigned_key)
 
 
-
+func _on_save_load_pressed():
+	for node in self.get_children():
+		if node.name != "save_menu":
+			node.set_visible(false)
+	save_menu.set_visible(true)

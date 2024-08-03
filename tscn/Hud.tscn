@@ -372,6 +372,7 @@ custom_minimum_size = Vector2(250, 0)
 layout_mode = 2
 theme_override_styles/background = SubResource("StyleBoxFlat_x7y1y")
 max_value = 0.0
+show_percentage = false
 
 [node name="Resource Bar" type="ProgressBar" parent="AspectRatioContainer/CanvasLayer/VBoxContainer"]
 visible = false
@@ -435,7 +436,7 @@ expand_mode = 2
 
 [node name="currency_gold" type="Label" parent="AspectRatioContainer/CanvasLayer/currency/HBoxContainer"]
 layout_mode = 2
-text = "Gold: "
+text = "Gold: 0"
 
 [node name="HBoxContainer2" type="HBoxContainer" parent="AspectRatioContainer/CanvasLayer/currency"]
 layout_mode = 2
@@ -447,4 +448,4 @@ expand_mode = 2
 
 [node name="currency_crystal" type="Label" parent="AspectRatioContainer/CanvasLayer/currency/HBoxContainer2"]
 layout_mode = 2
-text = "Crystal: "
+text = "Crystal: 0"
