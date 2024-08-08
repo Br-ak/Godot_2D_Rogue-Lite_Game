@@ -92,7 +92,6 @@ func save_data():
 	return Marshalls.raw_to_base64(JSON.stringify(player_info).to_utf8_buffer())
 
 func load_data(save_code: String):
-	#print("Before Update: ", player_info)
 	var byte_array = Marshalls.base64_to_raw(save_code)
 	var json_string = byte_array.get_string_from_utf8()
 	var parsed_data = parse_json(save_code)
@@ -101,7 +100,6 @@ func load_data(save_code: String):
 		for key in player_info.keys():
 			if parsed_data.has(key):
 				player_info[key] = parsed_data[key]
-		#print("After Update: ", player_info)
 		return true
 	else:
 		return false

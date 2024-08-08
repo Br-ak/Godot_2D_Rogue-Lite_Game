@@ -64,7 +64,7 @@
 			"name": "Follower Attack Speed Increase"
 		},
 		"follower_damage": {
-			"current_level": 0,
+			"current_level": 1,
 			"description": "Increases Follower Damage (+0.5 per level)",
 			"level": {
 				"0": 0,
@@ -85,7 +85,7 @@
 			"name": "Follower Damage Increase"
 		},
 		"hp_up": {
-			"current_level": 0,
+			"current_level": 1,
 			"description": "Increases Maximum HP (+10 per level)",
 			"level": {
 				"0": 0,
@@ -106,7 +106,7 @@
 			"name": "Health Increase"
 		},
 		"speed_up": {
-			"current_level": 0,
+			"current_level": 2,
 			"description": "Increases Movement Speed (+10 per level)",
 			"level": {
 				"0": 0,
