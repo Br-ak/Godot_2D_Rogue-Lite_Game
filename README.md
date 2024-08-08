@@ -18,11 +18,11 @@ Here are some short gifs to show off some of the game.
 ![Quick Demo](Demo_Open.gif)
 
 ## Hub Area
-The player starts in a hub area with 3 main npcs. 2 of those are merchants that the player can interact with to purchase equipment and permanant stat upgrades. 
+The player starts in a hub area with 3 main NPCs. 2 of them are merchants that the player can interact with to purchase equipment and permanent stat upgrades. 
 ![Quick Demo](Demo_Merchant.gif)
 
 ### Tutorial
-The last npc is a tutorial npc that explains the area and various mechanics and menus of the game. 
+The last NPC is a tutorial NPC that explains the area and various mechanics and menus of the game. 
 ![Quick Demo](Demo_Tutorial.gif)
 
 ## Combat
